@@ -1,0 +1,4 @@
+<div style="display: inline-block; max-width: 4.9rem; height: 1rem; text-align: center;">
+	<span v-if="processedType === CellType.Letter" :class="{ selected, highlighted }"> {{ processedCharacter }} </span>
+	<span class="symbols" v-if="processedType === CellType.Symbol" :class="{ selected, highlighted }"> {{ processedCharacter }} </span>
+</div>

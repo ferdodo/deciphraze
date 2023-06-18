@@ -1,0 +1,42 @@
+<cookies-panel>
+	<cookies-h1> Deciphraze </cookies-h1>
+
+	<div class="playground">
+
+		<cookies-p>
+			Déchiffrez le paragraphe suivant en associant les lettres aux bons symboles.
+		</cookies-p>
+	
+		<template v-for="word in words">
+			<div style="display: inline-block; margin-right: 0.9rem;">
+				<template v-for="f in word">
+					<fragment :character="f"></fragment>
+				</template>
+			</div>
+		</template>
+
+		<br>
+		<br>
+
+		<div>
+			<template v-for="l in alphabet">
+				<letter :character="l"></letter>
+			</template>
+		</div>
+
+		<br>
+
+		<div>
+			<template v-for="l in alphabetRandom">
+				<symbolComponent :character="l"></symbolComponent>
+			</template>
+		</div>
+	</div>
+
+	<div v-if="win">
+		<cookies-p style="text-align:center">
+			🎉 C'est gagné pour aujourd'hui ! 🥳 <br>
+			<cookies-button title="Copier dans le presse-papier" @click="share()"> Partager </cookies-button>
+		</cookies-p>
+	</div>
+</cookies-panel>
