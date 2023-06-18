@@ -1,0 +1,28 @@
+body {
+	background-color: tan;
+}
+
+div {
+	user-select: none;
+}
+
+@font-face {
+  font-family: "GlipervelzOrigy";
+  src: url("GlipervelzOrigy.ttf");
+}
+
+.symbols {
+	font-family: GlipervelzOrigy;
+}
+
+.highlighted {
+	color: white;
+}
+
+.selected {
+	color: blue;
+}
+
+.playground {
+	font-size: 2em;
+}
