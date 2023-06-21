@@ -1,3 +1,9 @@
 <div style="display: inline-block" @click="selectLetter">
-	<cell :selected="selected" :highlighted="highlighted" :type="cellType" :character="character"></cell>
+	<cell
+		:selected="selected"
+		:highlighted="highlighted"
+		:type="cellType"
+		:character="character"
+		:matched="matched">
+	</cell>
 </div>

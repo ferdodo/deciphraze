@@ -20,14 +20,16 @@ export const Cell = defineComponent({
 		character: {
 			type: String,
 			required: true
-		}
+		},
+		matched: Boolean
 	},
 	setup(props) {
 		const {
 			selected,
 			highlighted,
 			character,
-			type
+			type,
+			matched
 		} = toRefs(props);
 
 		if (props.type === undefined) {
@@ -55,7 +57,8 @@ export const Cell = defineComponent({
 			CellType,
 			selected,
 			highlighted,
-			processedCharacter
+			processedCharacter,
+			matched
 		};
 	},
 	render

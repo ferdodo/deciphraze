@@ -2,43 +2,65 @@ import { render } from "./template";
 import { defineComponent, ref } from "vue";
 import { Cell, CellType } from "../cell";
 import { symbolSelection$, selectSymbol$ } from "../../symbolSelection";
+import { letterSelection$ } from "../../letterSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
-import { playerCipher$ } from "../../playerCipher";
+import { playerCipher$, removePlayerCipherEntryByValue } from "../../playerCipher";
+import { characterEquals } from "../../characterEquals";
 
 export const SymbolComponent = defineComponent({
 	components: {
 		Cell
 	},
 	props: {
-		character: String
+		character: {
+			type: String,
+			required: true
+		}
 	},
 	setup(props) {
 		const selected = ref(false);
 		const highlighted = ref(false);
-
-		if (props.character === undefined) {
-			throw new Error("Character not found !");
-		}
-
+		const matched = ref(false);
+		let playerCipher: Map<string, string> = new Map();
 		const character = props.character;
 		const cellType = CellType.Symbol;
+		let symbolSelected: string | null = null;
 
-		playerCipher$.subscribe(function(playerCipher) {
+		playerCipher$.subscribe(function(value) {
+			playerCipher = value;
 			highlighted.value = [...playerCipher.values()].includes(normalizeWord(character).toUpperCase());
 		});
 
-		symbolSelection$.subscribe(function(symbolSelected) {
+		symbolSelection$.subscribe(function(value) {
+			symbolSelected = value;
+		
 			if (symbolSelected !== null) {
-				selected.value = normalizeWord(symbolSelected).toUpperCase()
-					=== normalizeWord(character).toUpperCase();
+				selected.value = characterEquals(symbolSelected, character);
 			} else {
 				selected.value = false;
 			}
 		});
 
+		letterSelection$.subscribe(function(letterSelected) {
+			if (letterSelected !== null) {
+				const decodedChar = playerCipher.get(letterSelected);
+
+				if (decodedChar !== undefined && characterEquals(decodedChar, character)) {
+					matched.value = true;
+				} else {
+					matched.value = false;
+				}
+			} else {
+				matched.value = false;
+			}
+		});
+
 		function selectSymbol() {
-			if (character !== undefined && isAlphabetic(character)) {
+			if (symbolSelected === normalizeWord(character).toUpperCase()) {
+				selectSymbol$.next(null);
+				removePlayerCipherEntryByValue(character);
+			} else if (isAlphabetic(character)) {
 				selectSymbol$.next(normalizeWord(character));
 			}
 		}
@@ -48,7 +70,8 @@ export const SymbolComponent = defineComponent({
 			character,
 			selected,
 			selectSymbol,
-			highlighted
+			highlighted,
+			matched
 		};
 	},
 	render
