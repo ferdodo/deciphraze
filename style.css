@@ -19,8 +19,14 @@ div {
 	color: white;
 }
 
+.matched {
+	color: #ff6400;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+}
+
 .selected {
-	color: blue;
+	color: #0064ff;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
 }
 
 .playground {
