@@ -2,7 +2,7 @@ import { render } from "./template";
 import { ref, defineComponent/*, PropType*/ } from "vue";
 import { Cell, CellType } from "../cell";
 import { letterSelection$, selectLetter$ } from "../../letterSelection";
-import { symbolSelection$ } from "../../symbolSelection";
+import { symbolSelection$, selectSymbol$ } from "../../symbolSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
 import { playerCipher$, removePlayerCipherEntryByLetter } from "../../playerCipher";
@@ -24,6 +24,7 @@ export const LetterComponent = defineComponent({
 		const highlighted = ref(false);
 		let playerCipher: Map<string, string> = new Map();
 		let letterSelected: string | null = null;
+		let symbolSelected: string | null = null;
 
 		if (character === undefined) {
 			throw new Error("Character not found !");
@@ -44,7 +45,9 @@ export const LetterComponent = defineComponent({
 			}
 		});
 
-		symbolSelection$.subscribe(function(symbolSelected) {
+		symbolSelection$.subscribe(function(value) {
+			symbolSelected = value;
+		
 			if (symbolSelected !== null) {
 				matched.value = false;
 			
@@ -67,6 +70,11 @@ export const LetterComponent = defineComponent({
 				selectLetter$.next(null);
 			} else if (isAlphabetic(character)) {
 				selectLetter$.next(normalizeWord(character));
+
+				if (symbolSelected) {
+					selectSymbol$.next(null);
+					selectLetter$.next(null);
+				}
 			}
 		}
 	

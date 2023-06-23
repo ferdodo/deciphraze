@@ -2,7 +2,7 @@ import { render } from "./template";
 import { defineComponent, ref } from "vue";
 import { Cell, CellType } from "../cell";
 import { symbolSelection$, selectSymbol$ } from "../../symbolSelection";
-import { letterSelection$ } from "../../letterSelection";
+import { letterSelection$, selectLetter$ } from "../../letterSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
 import { playerCipher$, removePlayerCipherEntryByValue } from "../../playerCipher";
@@ -26,6 +26,7 @@ export const SymbolComponent = defineComponent({
 		const character = props.character;
 		const cellType = CellType.Symbol;
 		let symbolSelected: string | null = null;
+		let letterSelected: string | null = null;
 
 		playerCipher$.subscribe(function(value) {
 			playerCipher = value;
@@ -42,7 +43,9 @@ export const SymbolComponent = defineComponent({
 			}
 		});
 
-		letterSelection$.subscribe(function(letterSelected) {
+		letterSelection$.subscribe(function(value) {
+			letterSelected = value;
+		
 			if (letterSelected !== null) {
 				const decodedChar = playerCipher.get(letterSelected);
 
@@ -62,6 +65,11 @@ export const SymbolComponent = defineComponent({
 				removePlayerCipherEntryByValue(character);
 			} else if (isAlphabetic(character)) {
 				selectSymbol$.next(normalizeWord(character));
+
+				if (letterSelected) {
+					selectSymbol$.next(null);
+					selectLetter$.next(null);
+				}
 			}
 		}
 	

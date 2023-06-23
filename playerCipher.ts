@@ -1,6 +1,6 @@
 import { Observable, Subject, share } from "rxjs";
-import { letterSelection$, selectLetter$, getLetterSelection } from "./letterSelection";
-import { symbolSelection$, selectSymbol$, getSymbolSelection } from "./symbolSelection";
+import { letterSelection$, getLetterSelection } from "./letterSelection";
+import { symbolSelection$, getSymbolSelection } from "./symbolSelection";
 import { characterEquals } from "./characterEquals";
 
 let playerCipher = new Map<string, string>();
@@ -36,15 +36,7 @@ export const playerCipher$ = new Observable<Map<string, string>>(function(subscr
 		letterSelection = letter;
 
 		if (letterSelection !== null && symbolSelection !== null) {
-			playerCipher = new Map(playerCipher)
-				.set(letterSelection, symbolSelection);
-
-
-			setTimeout(function() {
-				selectLetter$.next(null);
-				selectSymbol$.next(null);	
-			}, 1);
-
+			playerCipher.set(letterSelection, symbolSelection);
 			subscriber.next(playerCipher);
 		}
 	});
@@ -53,14 +45,7 @@ export const playerCipher$ = new Observable<Map<string, string>>(function(subscr
 		symbolSelection = sym;
 
 		if (letterSelection !== null && symbolSelection !== null) {
-			playerCipher = new Map(playerCipher)
-				.set(letterSelection, symbolSelection);
-
-			setTimeout(function() {
-				selectLetter$.next(null);
-				selectSymbol$.next(null);	
-			}, 1);
-
+			playerCipher.set(letterSelection, symbolSelection);
 			subscriber.next(playerCipher);
 		}
 	});
