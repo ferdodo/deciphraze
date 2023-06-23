@@ -7,7 +7,11 @@ export function getLetterSelection(): string | null {
 	return letterSelection;
 }
 
-export const selectLetter$ = new Subject<string | null>();
+const selectLetter$ = new Subject<string | null>();
+
+export function selectLetter(letter: string | null) {
+	selectLetter$.next(letter);
+}
 
 export const letterSelection$ = new Observable<string | null>(function(subscriber) {
 	selectLetter$.subscribe(function(letter) {

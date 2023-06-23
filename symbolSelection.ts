@@ -7,7 +7,11 @@ export function getSymbolSelection(): string | null {
 	return symbolSelection;
 }
 
-export const selectSymbol$ = new Subject<string | null>();
+const selectSymbol$ = new Subject<string | null>();
+
+export function selectSymbol(sym: string | null) {
+	selectSymbol$.next(sym);
+}
 
 export const symbolSelection$ = new Observable<string | null>(function(subscriber) {
 	selectSymbol$.subscribe(function(sym) {

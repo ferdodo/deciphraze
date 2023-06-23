@@ -1,8 +1,8 @@
 import { render } from "./template";
 import { defineComponent, ref } from "vue";
 import { Cell, CellType } from "../cell";
-import { symbolSelection$, selectSymbol$ } from "../../symbolSelection";
-import { letterSelection$, selectLetter$ } from "../../letterSelection";
+import { symbolSelection$, selectSymbol } from "../../symbolSelection";
+import { letterSelection$, selectLetter } from "../../letterSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
 import { playerCipher$, removePlayerCipherEntryByValue } from "../../playerCipher";
@@ -59,16 +59,16 @@ export const SymbolComponent = defineComponent({
 			}
 		});
 
-		function selectSymbol() {
+		function clickSelectSymbol() {
 			if (symbolSelected === normalizeWord(character).toUpperCase()) {
-				selectSymbol$.next(null);
+				selectSymbol(null);
 				removePlayerCipherEntryByValue(character);
 			} else if (isAlphabetic(character)) {
-				selectSymbol$.next(normalizeWord(character));
+				selectSymbol(normalizeWord(character));
 
 				if (letterSelected) {
-					selectSymbol$.next(null);
-					selectLetter$.next(null);
+					selectSymbol(null);
+					selectLetter(null);
 				}
 			}
 		}
@@ -77,7 +77,7 @@ export const SymbolComponent = defineComponent({
 			cellType,
 			character,
 			selected,
-			selectSymbol,
+			selectSymbol: clickSelectSymbol,
 			highlighted,
 			matched
 		};
