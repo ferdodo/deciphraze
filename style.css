@@ -1,5 +1,7 @@
 body {
 	background-color: tan;
+	background-image: url("background.jpg");
+	background-size: cover;
 }
 
 div {
