@@ -9,8 +9,7 @@ import { generateRandomAlphabet } from "./generateRandomAlphabet";
 import { letterFound } from "./letterFound";
 import { matchCount$ } from "./matchCount";
 import "cookies-ds";
-
-console.log(paragraphOfTheDay);
+import { paragraphOfYesterday } from "./paragraphOfYesterday";
 
 const app = createApp({
 	components: {
@@ -50,7 +49,8 @@ const app = createApp({
 			alphabet,
 			alphabetRandom,
 			win,
-			share
+			share,
+			paragraphOfYesterday
 		};
 	},
 	render
