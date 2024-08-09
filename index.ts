@@ -29,6 +29,13 @@ const app = createApp({
 		playerCipher$.subscribe(function() {
 			if ([...paragraphOfTheDay].every(letterFound)) {
 				win.value = true
+
+				//@ts-ignore
+				if (window.opener?.registerScore) {
+					//@ts-ignore
+					window.opener.registerScore("deciphraze", matchCount);
+					window.close();
+				}
 			}
 		});
 
