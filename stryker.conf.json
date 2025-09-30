@@ -4,8 +4,8 @@
 	"coverageAnalysis": "perTest",
 	"mutate": ["**/*.ts", "!**/*.test.ts", "!**/*.benchmark.ts"],
 	"thresholds": {
-		"high": 40,
-		"low": 35,
-		"break": 30
+		"high": 70,
+		"low": 65,
+		"break": 60
 	}
 }
