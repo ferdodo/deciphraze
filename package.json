@@ -1,16 +1,18 @@
 {
 	"scripts": {
-		"build": "exportcase check ./src && vitest run && stryker run && tsc && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
+		"build": "exportcase check ./src && vitest run && tsc && stryker run && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
 	},
 	"devDependencies": {
 		"@stryker-mutator/core": "^9.1.1",
 		"@stryker-mutator/vitest-runner": "^9.1.1",
+		"@testing-library/react": "^14.2.1",
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.0",
 		"crumbs-design-system": "^1.3.0",
 		"daily-prng": "^1.4.0",
 		"esbuild": "^0.17.19",
 		"exportcase": "^1.2.5",
+		"jsdom": "^24.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"rxjs": "^7.8.1",
