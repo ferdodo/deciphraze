@@ -2,11 +2,7 @@ import React, { useMemo } from "react";
 import { normalizeWord } from "../../normalizeWord";
 import { getEncodedCharacter } from "../../getEncodedCharacter";
 import { isAlphabetic } from "../../isAlphabetic";
-
-export enum CellType {
-	Letter,
-	Symbol,
-}
+import { CellType } from "./CellType";
 
 interface CellProps {
 	type: CellType;
@@ -66,4 +62,3 @@ export const Cell: React.FC<CellProps> = ({
 		</div>
 	);
 };
-

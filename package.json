@@ -1,16 +1,17 @@
 {
 	"scripts": {
-		"build": "esbuild --bundle index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap && tsc"
+		"build": "exportcase check ./src && tsc && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
 	},
 	"devDependencies": {
+		"@types/react": "^18.2.0",
+		"@types/react-dom": "^18.2.0",
 		"cookies-ds": "^1.0.8",
 		"esbuild": "^0.17.19",
-		"rxjs": "^7.8.1",
-		"seedrandom": "^3.0.5",
-		"typescript": "^5.1.3",
+		"exportcase": "^1.2.5",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"@types/react": "^18.2.0",
-		"@types/react-dom": "^18.2.0"
+		"rxjs": "^7.8.1",
+		"seedrandom": "^3.0.5",
+		"typescript": "^5.9.2"
 	}
 }

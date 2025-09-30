@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Cell, CellType } from "../cell";
-import { letterSelection$, selectLetter } from "../../letterSelection";
-import { symbolSelection$, selectSymbol } from "../../symbolSelection";
+import { Cell } from "../cell/Cell";
+import { CellType } from "../cell/CellType";
+import { letterSelection } from "../../letterSelection";
+import { symbolSelection } from "../../symbolSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
-import {
-	playerCipher$,
-	removePlayerCipherEntryByLetter,
-} from "../../playerCipher";
+import { playerCipher as playerCipherService } from "../../playerCipher";
 import { characterEquals } from "../../characterEquals";
 
 interface LetterComponentProps {
@@ -31,13 +29,18 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 	}
 
 	useEffect(() => {
-		const playerCipherSubscription = playerCipher$.subscribe(function (value) {
-			setPlayerCipher(value);
-			setHighlighted(value.has(normalizeWord(character).toUpperCase()));
-		});
+		const playerCipherSubscription =
+			playerCipherService.playerCipher$.subscribe(function (
+				value: Map<string, string>,
+			) {
+				setPlayerCipher(value);
+				setHighlighted(value.has(normalizeWord(character).toUpperCase()));
+			});
 
-		const letterSelectionSubscription = letterSelection$.subscribe(
-			function (value) {
+		const letterSelectionSubscription =
+			letterSelection.letterSelection$.subscribe(function (
+				value: string | null,
+			) {
 				setLetterSelected(value);
 
 				if (value !== null) {
@@ -45,11 +48,12 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 				} else {
 					setSelected(false);
 				}
-			},
-		);
+			});
 
-		const symbolSelectionSubscription = symbolSelection$.subscribe(
-			function (value) {
+		const symbolSelectionSubscription =
+			symbolSelection.symbolSelection$.subscribe(function (
+				value: string | null,
+			) {
 				setSymbolSelected(value);
 
 				if (value !== null) {
@@ -67,8 +71,7 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 				} else {
 					setMatched(false);
 				}
-			},
-		);
+			});
 
 		return () => {
 			playerCipherSubscription.unsubscribe();
@@ -81,14 +84,14 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 
 	const clickSelectLetter = () => {
 		if (letterSelected === normalizeWord(character).toUpperCase()) {
-			removePlayerCipherEntryByLetter(letterSelected);
-			selectLetter(null);
+			playerCipherService.removePlayerCipherEntryByLetter(letterSelected);
+			letterSelection.selectLetter(null);
 		} else if (isAlphabetic(character)) {
-			selectLetter(normalizeWord(character));
+			letterSelection.selectLetter(normalizeWord(character));
 
 			if (symbolSelected) {
-				selectSymbol(null);
-				selectLetter(null);
+				symbolSelection.selectSymbol(null);
+				letterSelection.selectLetter(null);
 			}
 		}
 	};
@@ -109,4 +112,3 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 		</div>
 	);
 };
-

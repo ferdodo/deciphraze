@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { paragraphOfTheDay } from "./paragraphOfTheDay";
-import { FragmentComponent } from "./components/fragment";
-import { LetterComponent } from "./components/letter";
-import { SymbolComponent } from "./components/symbol";
-import { playerCipher$ } from "./playerCipher";
+import { FragmentComponent } from "./components/fragment/FragmentComponent";
+import { LetterComponent } from "./components/letter/LetterComponent";
+import { SymbolComponent } from "./components/symbol/SymbolComponent";
+import { playerCipher } from "./playerCipher";
 import { generateRandomAlphabet } from "./generateRandomAlphabet";
 import { letterFound } from "./letterFound";
-import { matchCount$ } from "./matchCount";
+import { matchCount$ } from "./matchCount$";
 import "cookies-ds";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 
@@ -24,18 +24,20 @@ const App: React.FC = () => {
 			setMatchCount(value),
 		);
 
-		const playerCipherSubscription = playerCipher$.subscribe(function () {
-			if ([...paragraphOfTheDay].every(letterFound)) {
-				setWin(true);
+		const playerCipherSubscription = playerCipher.playerCipher$.subscribe(
+			function () {
+				if ([...paragraphOfTheDay].every(letterFound)) {
+					setWin(true);
 
-				//@ts-ignore
-				if (window.opener?.registerScore) {
 					//@ts-ignore
-					window.opener.registerScore("deciphraze", matchCount);
-					window.close();
+					if (window.opener?.registerScore) {
+						//@ts-ignore
+						window.opener.registerScore("deciphraze", matchCount);
+						window.close();
+					}
 				}
-			}
-		});
+			},
+		);
 
 		return () => {
 			matchCountSubscription.unsubscribe();
@@ -125,4 +127,3 @@ const App: React.FC = () => {
 const container = document.body;
 const root = createRoot(container);
 root.render(<App />);
-

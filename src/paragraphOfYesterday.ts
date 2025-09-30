@@ -1,9 +1,9 @@
-import { randomNumberForYesterday } from "./randomNumber";
+import { randomNumberForYesterday } from "./randomNumberForYesterday";
 import { ebook1 } from "./ebook1";
 
 export const paragraphOfYesterday = getParagraphOfTheYesterday();
 
-function getParagraphOfTheYesterday (): string {
+function getParagraphOfTheYesterday(): string {
 	const lines = ebook1.split(/\r\n|\r|\n/);
 	const lineCount = lines.length - 200;
 	const paragraphStartLine = randomNumberForYesterday(200, lineCount);

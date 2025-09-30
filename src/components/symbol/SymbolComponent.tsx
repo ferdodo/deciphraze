@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Cell, CellType } from "../cell";
-import { symbolSelection$, selectSymbol } from "../../symbolSelection";
-import { letterSelection$, selectLetter } from "../../letterSelection";
+import { Cell } from "../cell/Cell";
+import { CellType } from "../cell/CellType";
+import { symbolSelection } from "../../symbolSelection";
+import { letterSelection } from "../../letterSelection";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
-import {
-	playerCipher$,
-	removePlayerCipherEntryByValue,
-} from "../../playerCipher";
+import { playerCipher as playerCipherService } from "../../playerCipher";
 import { characterEquals } from "../../characterEquals";
 
 interface SymbolComponentProps {
@@ -29,15 +27,20 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 	const cellType = CellType.Symbol;
 
 	useEffect(() => {
-		const playerCipherSubscription = playerCipher$.subscribe(function (value) {
-			setPlayerCipher(value);
-			setHighlighted(
-				[...value.values()].includes(normalizeWord(character).toUpperCase()),
-			);
-		});
+		const playerCipherSubscription =
+			playerCipherService.playerCipher$.subscribe(function (
+				value: Map<string, string>,
+			) {
+				setPlayerCipher(value);
+				setHighlighted(
+					[...value.values()].includes(normalizeWord(character).toUpperCase()),
+				);
+			});
 
-		const symbolSelectionSubscription = symbolSelection$.subscribe(
-			function (value) {
+		const symbolSelectionSubscription =
+			symbolSelection.symbolSelection$.subscribe(function (
+				value: string | null,
+			) {
 				setSymbolSelected(value);
 
 				if (value !== null) {
@@ -45,11 +48,12 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 				} else {
 					setSelected(false);
 				}
-			},
-		);
+			});
 
-		const letterSelectionSubscription = letterSelection$.subscribe(
-			function (value) {
+		const letterSelectionSubscription =
+			letterSelection.letterSelection$.subscribe(function (
+				value: string | null,
+			) {
 				setLetterSelected(value);
 
 				if (value !== null) {
@@ -66,8 +70,7 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 				} else {
 					setMatched(false);
 				}
-			},
-		);
+			});
 
 		return () => {
 			playerCipherSubscription.unsubscribe();
@@ -78,14 +81,14 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 
 	const clickSelectSymbol = () => {
 		if (symbolSelected === normalizeWord(character).toUpperCase()) {
-			selectSymbol(null);
-			removePlayerCipherEntryByValue(character);
+			symbolSelection.selectSymbol(null);
+			playerCipherService.removePlayerCipherEntryByValue(character);
 		} else if (isAlphabetic(character)) {
-			selectSymbol(normalizeWord(character));
+			symbolSelection.selectSymbol(normalizeWord(character));
 
 			if (letterSelected) {
-				selectSymbol(null);
-				selectLetter(null);
+				symbolSelection.selectSymbol(null);
+				letterSelection.selectLetter(null);
 			}
 		}
 	};
@@ -106,4 +109,3 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 		</div>
 	);
 };
-
