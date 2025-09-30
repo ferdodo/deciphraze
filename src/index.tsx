@@ -8,7 +8,7 @@ import { playerCipher } from "./playerCipher";
 import { generateRandomAlphabet } from "./generateRandomAlphabet";
 import { letterFound } from "./letterFound";
 import { matchCount$ } from "./matchCount$";
-import "cookies-ds";
+import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 
 const App: React.FC = () => {
@@ -58,14 +58,13 @@ const App: React.FC = () => {
 	};
 
 	return (
-		<cookies-panel>
-			<cookies-h1> Deciphraze </cookies-h1>
+		<crumbs-panel panel-title="Deciphraze">
 
 			<div className="playground">
-				<cookies-p>
+				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
 					symboles.
-				</cookies-p>
+				</crumbs-p>
 
 				{words.map((word, wordIndex) => (
 					<div
@@ -98,29 +97,29 @@ const App: React.FC = () => {
 					))}
 				</div>
 
-				<cookies-p>
+				<crumbs-p>
 					<details style={{ marginTop: "5rem" }}>
 						<summary> Solution d'hier </summary>
 						{paragraphOfYesterday}
 					</details>
-				</cookies-p>
+				</crumbs-p>
 			</div>
 
 			{win && (
 				<div>
-					<cookies-p style={{ textAlign: "center" }}>
+					<crumbs-p style={{ textAlign: "center" }}>
 						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-						<cookies-button
+						<crumbs-button
 							title="Copier dans le presse-papier"
 							onClick={share}
 						>
 							{" "}
 							Partager{" "}
-						</cookies-button>
-					</cookies-p>
+						</crumbs-button>
+					</crumbs-p>
 				</div>
 			)}
-		</cookies-panel>
+		</crumbs-panel>
 	);
 };
 
