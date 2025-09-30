@@ -12,6 +12,11 @@ export function createSymbolSelection(): SymbolSelection {
 	const selectSymbol$ = new Subject<string | null>();
 
 	function selectSymbol(sym: string | null) {
+		if (sym !== null) {
+			symbolSelection = normalizeWord(sym).toUpperCase();
+		} else {
+			symbolSelection = null;
+		}
 		selectSymbol$.next(sym);
 	}
 
