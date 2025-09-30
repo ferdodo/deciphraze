@@ -9,8 +9,8 @@ div {
 }
 
 @font-face {
-  font-family: "GlipervelzOrigy";
-  src: url("GlipervelzOrigy.ttf");
+	font-family: "GlipervelzOrigy";
+	src: url("GlipervelzOrigy.ttf");
 }
 
 .symbols {
@@ -22,17 +22,20 @@ div {
 }
 
 .highlighted {
-	color: white;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px
+		1px 3px white;
 }
 
 .matched {
 	color: #ff6400;
-	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px
+		1px 3px white;
 }
 
 .selected {
 	color: #0064ff;
-	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px
+		1px 3px white;
 }
 
 .inputs {
@@ -41,4 +44,3 @@ div {
 	width: 3rem;
 	text-align: center;
 }
-
