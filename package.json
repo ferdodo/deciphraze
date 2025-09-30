@@ -1,17 +1,19 @@
 {
 	"scripts": {
-		"build": "exportcase check ./src && tsc && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
+		"build": "exportcase check ./src && vitest run && tsc && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.0",
+		"@vitest/ui": "^1.6.0",
 		"crumbs-design-system": "^1.3.0",
+		"daily-prng": "^1.4.0",
 		"esbuild": "^0.17.19",
 		"exportcase": "^1.2.5",
-		"daily-prng": "^1.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"rxjs": "^7.8.1",
-		"typescript": "^5.9.2"
+		"typescript": "^5.9.2",
+		"vitest": "^1.6.0"
 	}
 }
