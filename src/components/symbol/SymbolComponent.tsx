@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Cell } from "../cell/Cell";
-import { CellType } from "../cell/CellType";
+import type React from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useGameContext } from "../../contexts/useGameContext";
 import { selectSymbol } from "../../usecases/selectSymbol";
 import { normalizeWord } from "../../normalizeWord";
@@ -25,7 +24,6 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 		new Map(),
 	);
 
-	const cellType = CellType.Symbol;
 	const normalizedCharacter = useMemo(
 		() => normalizeWord(character).toUpperCase(),
 		[character],
@@ -33,17 +31,13 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 
 	useEffect(() => {
 		const playerCipherSubscription =
-			playerCipherService.playerCipher$.subscribe(function (
-				value: Map<string, string>,
-			) {
+			playerCipherService.playerCipher$.subscribe((value: Map<string, string>) => {
 				setPlayerCipher(value);
 				setHighlighted([...value.values()].includes(normalizedCharacter));
 			});
 
 		const symbolSelectionSubscription =
-			symbolSelection.symbolSelection$.subscribe(function (
-				value: string | null,
-			) {
+			symbolSelection.symbolSelection$.subscribe((value: string | null) => {
 				if (value !== null) {
 					setSelected(characterEquals(value, character));
 				} else {
@@ -52,9 +46,7 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 			});
 
 		const letterSelectionSubscription =
-			letterSelection.letterSelection$.subscribe(function (
-				value: string | null,
-			) {
+			letterSelection.letterSelection$.subscribe((value: string | null) => {
 				if (value !== null) {
 					const decodedChar = playerCipher.get(value);
 
@@ -82,6 +74,7 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 		playerCipherService,
 		letterSelection,
 		symbolSelection,
+		playerCipher.get,
 	]);
 
 	const clickSelectSymbol = () => {
@@ -94,18 +87,26 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 	};
 
 	return (
-		<div
+		<button
 			style={{ display: "inline-block" }}
 			className="inputs"
 			onClick={clickSelectSymbol}
+			type="button"
 		>
-			<Cell
-				type={cellType}
-				character={character}
-				selected={selected}
-				highlighted={highlighted}
-				matched={matched}
-			/>
-		</div>
+			<div
+				style={{
+					display: "inline-block",
+					maxWidth: "4.9rem",
+					height: "1rem",
+					textAlign: "center",
+				}}
+			>
+				<span
+					className={`symbols ${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
+				>
+					{character}
+				</span>
+			</div>
+		</button>
 	);
 };

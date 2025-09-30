@@ -1,9 +1,9 @@
 import { cipher } from "./cipher";
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export function getEncodedCharacter(character: string) {
-	const position = cipher.findIndex(c => character.toUpperCase() === c);
+	const position = cipher.indexOf(character.toUpperCase());
 
 	if (~position) {
 		return alphabet[position];

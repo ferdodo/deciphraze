@@ -15,8 +15,8 @@ export function createSymbolSelection(): SymbolSelection {
 		selectSymbol$.next(sym);
 	}
 
-	const symbolSelection$ = new Observable<string | null>(function (subscriber) {
-		selectSymbol$.subscribe(function (sym) {
+	const symbolSelection$ = new Observable<string | null>((subscriber) => {
+		selectSymbol$.subscribe((sym) => {
 			if (sym !== null) {
 				symbolSelection = normalizeWord(sym).toUpperCase();
 			} else {

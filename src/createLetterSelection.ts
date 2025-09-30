@@ -19,14 +19,14 @@ export function createLetterSelection(): LetterSelection {
 		selectLetter$.next(letter);
 	}
 
-	const letterSelection$ = new Observable<string | null>(function (subscriber) {
-		selectLetter$.subscribe(function () {
+	const letterSelection$ = new Observable<string | null>((subscriber) => {
+		selectLetter$.subscribe(() => {
 			subscriber.next(getLetterSelection());
 		});
 	});
 
 	// Subscribe to selectLetter$ to update the state
-	selectLetter$.subscribe(function (letter) {
+	selectLetter$.subscribe((letter) => {
 		if (letter !== null) {
 			setLetterSelection(normalizeWord(letter).toUpperCase());
 		} else {

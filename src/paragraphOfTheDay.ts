@@ -3,7 +3,7 @@ import { ebook1 } from "./ebook1";
 
 export const paragraphOfTheDay = getParagraphOfTheDay();
 
-function getParagraphOfTheDay (): string {
+function getParagraphOfTheDay(): string {
 	const lines = ebook1.split(/\r\n|\r|\n/);
 	const lineCount = lines.length - 200;
 	const paragraphStartLine = randomNumber(200, lineCount);

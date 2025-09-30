@@ -1,8 +1,9 @@
 {
 	"scripts": {
-		"build": "exportcase check ./src && vitest run && tsc && stryker run && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
+		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^2.2.4",
 		"@stryker-mutator/core": "^9.1.1",
 		"@stryker-mutator/vitest-runner": "^9.1.1",
 		"@testing-library/react": "^14.2.1",

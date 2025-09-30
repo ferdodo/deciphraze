@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Cell } from "../cell/Cell";
-import { CellType } from "../cell/CellType";
+import type React from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useGameContext } from "../../contexts/useGameContext";
 import { selectLetter } from "../../usecases/selectLetter";
 import { normalizeWord } from "../../normalizeWord";
@@ -36,17 +35,13 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 
 	useEffect(() => {
 		const playerCipherSubscription =
-			playerCipherService.playerCipher$.subscribe(function (
-				value: Map<string, string>,
-			) {
+			playerCipherService.playerCipher$.subscribe((value: Map<string, string>) => {
 				setPlayerCipher(value);
 				setHighlighted(value.has(normalizedCharacter));
 			});
 
 		const letterSelectionSubscription =
-			letterSelection.letterSelection$.subscribe(function (
-				value: string | null,
-			) {
+			letterSelection.letterSelection$.subscribe((value: string | null) => {
 				if (value !== null) {
 					setSelected(characterEquals(value, character));
 				} else {
@@ -55,9 +50,7 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 			});
 
 		const symbolSelectionSubscription =
-			symbolSelection.symbolSelection$.subscribe(function (
-				value: string | null,
-			) {
+			symbolSelection.symbolSelection$.subscribe((value: string | null) => {
 				if (value !== null) {
 					setMatched(false);
 
@@ -86,9 +79,9 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 		playerCipherService,
 		letterSelection,
 		symbolSelection,
+		playerCipher.entries,
 	]);
 
-	const cellType = CellType.Letter;
 
 	const clickSelectLetter = () => {
 		selectLetter(
@@ -100,18 +93,26 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 	};
 
 	return (
-		<div
+		<button
 			style={{ display: "inline-block" }}
 			className="inputs"
 			onClick={clickSelectLetter}
+			type="button"
 		>
-			<Cell
-				selected={selected}
-				highlighted={highlighted}
-				type={cellType}
-				character={character}
-				matched={matched}
-			/>
-		</div>
+			<div
+				style={{
+					display: "inline-block",
+					maxWidth: "4.9rem",
+					height: "1rem",
+					textAlign: "center",
+				}}
+			>
+				<span
+					className={`${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
+				>
+					{character}
+				</span>
+			</div>
+		</button>
 	);
 };

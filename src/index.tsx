@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
+import type React from "react";
+import { useState, useEffect, useMemo } from "react";
 import { createRoot } from "react-dom/client";
 import { paragraphOfTheDay } from "./paragraphOfTheDay";
 import { FragmentComponent } from "./components/fragment/FragmentComponent";
@@ -28,7 +29,7 @@ const GameApp: React.FC = () => {
 		);
 
 		const playerCipherSubscription = playerCipher.playerCipher$.subscribe(
-			function () {
+			() => {
 				if (
 					[...paragraphOfTheDay].every((letter) =>
 						letterFound(letter, playerCipher),
@@ -36,9 +37,7 @@ const GameApp: React.FC = () => {
 				) {
 					setWin(true);
 
-					//@ts-ignore
 					if (window.opener?.registerScore) {
-						//@ts-ignore
 						window.opener.registerScore("deciphraze", matchCount);
 						window.close();
 					}
@@ -55,8 +54,8 @@ const GameApp: React.FC = () => {
 	const share = () => {
 		const date = new Date();
 		const year = date.getFullYear();
-		const month = ("0" + (date.getMonth() + 1)).slice(-2);
-		const day = ("0" + date.getDate()).slice(-2);
+		const month = `0${date.getMonth() + 1}`.slice(-2);
+		const day = `0${date.getDate()}`.slice(-2);
 		const formattedDate = `${year}/${month}/${day}`;
 		let text = `Deciphraze ${formattedDate} - Puzzle réussi avec ${matchCount} associations de lettres.`;
 
@@ -74,12 +73,12 @@ const GameApp: React.FC = () => {
 
 				{words.map((word, wordIndex) => (
 					<div
-						key={wordIndex}
+						key={`word-${word.join("")}-${wordIndex}`}
 						style={{ display: "inline-block", marginRight: "0.9rem" }}
 					>
 						{word.map((f, fragmentIndex) => (
 							<FragmentComponent
-								key={`${wordIndex}-${fragmentIndex}`}
+								key={`${f}-${word.join("")}-${fragmentIndex}`}
 								character={f}
 							/>
 						))}
@@ -90,16 +89,16 @@ const GameApp: React.FC = () => {
 				<br />
 
 				<div>
-					{alphabet.map((l, index) => (
-						<LetterComponent key={index} character={l} />
+					{alphabet.map((l) => (
+						<LetterComponent key={l} character={l} />
 					))}
 				</div>
 
 				<br />
 
 				<div>
-					{alphabetRandom.map((l, index) => (
-						<SymbolComponent key={index} character={l} />
+					{alphabetRandom.map((l) => (
+						<SymbolComponent key={l} character={l} />
 					))}
 				</div>
 
@@ -115,7 +114,7 @@ const GameApp: React.FC = () => {
 				<div>
 					<crumbs-p style={{ textAlign: "center" }}>
 						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-						<crumbs-button title="Copier dans le presse-papier" onClick={share}>
+						<crumbs-button title="Copier dans le presse-papier" onClick={share} role="button">
 							{" "}
 							Partager{" "}
 						</crumbs-button>

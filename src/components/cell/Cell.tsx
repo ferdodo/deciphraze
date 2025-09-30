@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 import { normalizeWord } from "../../normalizeWord";
 import { getEncodedCharacter } from "../../getEncodedCharacter";
 import { isAlphabetic } from "../../isAlphabetic";

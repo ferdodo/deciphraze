@@ -4,7 +4,7 @@ import { characterEquals } from "./characterEquals";
 import type { PlayerCipher } from "./types/PlayerCipher";
 
 export function createPlayerCipher(): PlayerCipher {
-	let playerCipher = new Map<string, string>();
+	const playerCipher = new Map<string, string>();
 	const playerCipher$ = new Subject<Map<string, string>>();
 
 	function getPlayerCipher() {
