@@ -1,4 +1,5 @@
 import { Subject } from "rxjs";
+import { share } from "rxjs/operators";
 import { characterEquals } from "./characterEquals";
 import type { PlayerCipher } from "./types/PlayerCipher";
 
@@ -12,7 +13,7 @@ export function createPlayerCipher(): PlayerCipher {
 
 	const removePlayerCipherEntryByLetter = (removed: string) => {
 		playerCipher.delete(removed);
-		playerCipher$.next(playerCipher);
+		playerCipher$.next(new Map(playerCipher));
 	};
 
 	const removePlayerCipherEntryByValue = (removed: string) => {
@@ -25,7 +26,7 @@ export function createPlayerCipher(): PlayerCipher {
 
 	const addPlayerCipherEntry = (letter: string, symbol: string) => {
 		playerCipher.set(letter, symbol);
-		playerCipher$.next(playerCipher);
+		playerCipher$.next(new Map(playerCipher));
 	};
 
 	return {
@@ -33,6 +34,6 @@ export function createPlayerCipher(): PlayerCipher {
 		removePlayerCipherEntryByLetter,
 		removePlayerCipherEntryByValue,
 		addPlayerCipherEntry,
-		playerCipher$: playerCipher$.asObservable(),
+		playerCipher$: playerCipher$.asObservable().pipe(share()),
 	};
 }

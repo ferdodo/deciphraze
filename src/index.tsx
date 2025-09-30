@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { createRoot } from "react-dom/client";
 import { paragraphOfTheDay } from "./paragraphOfTheDay";
 import { FragmentComponent } from "./components/fragment/FragmentComponent";
@@ -17,7 +17,7 @@ const GameApp: React.FC = () => {
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-	const alphabetRandom = generateRandomAlphabet();
+	const alphabetRandom = useMemo(() => generateRandomAlphabet(), []);
 	const [win, setWin] = useState(false);
 	const [matchCount, setMatchCount] = useState(0);
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Cell } from "../cell/Cell";
 import { CellType } from "../cell/CellType";
 import { useGameContext } from "../../contexts/useGameContext";
@@ -29,13 +29,18 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 		throw new Error("Character not found !");
 	}
 
+	const normalizedCharacter = useMemo(
+		() => normalizeWord(character).toUpperCase(),
+		[character],
+	);
+
 	useEffect(() => {
 		const playerCipherSubscription =
 			playerCipherService.playerCipher$.subscribe(function (
 				value: Map<string, string>,
 			) {
 				setPlayerCipher(value);
-				setHighlighted(value.has(normalizeWord(character).toUpperCase()));
+				setHighlighted(value.has(normalizedCharacter));
 			});
 
 		const letterSelectionSubscription =
@@ -75,7 +80,13 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 			letterSelectionSubscription.unsubscribe();
 			symbolSelectionSubscription.unsubscribe();
 		};
-	}, [character, playerCipher]);
+	}, [
+		character,
+		normalizedCharacter,
+		playerCipherService,
+		letterSelection,
+		symbolSelection,
+	]);
 
 	const cellType = CellType.Letter;
 

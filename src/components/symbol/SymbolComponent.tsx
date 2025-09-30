@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Cell } from "../cell/Cell";
 import { CellType } from "../cell/CellType";
 import { useGameContext } from "../../contexts/useGameContext";
@@ -26,6 +26,10 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 	);
 
 	const cellType = CellType.Symbol;
+	const normalizedCharacter = useMemo(
+		() => normalizeWord(character).toUpperCase(),
+		[character],
+	);
 
 	useEffect(() => {
 		const playerCipherSubscription =
@@ -33,9 +37,7 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 				value: Map<string, string>,
 			) {
 				setPlayerCipher(value);
-				setHighlighted(
-					[...value.values()].includes(normalizeWord(character).toUpperCase()),
-				);
+				setHighlighted([...value.values()].includes(normalizedCharacter));
 			});
 
 		const symbolSelectionSubscription =
@@ -74,7 +76,13 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 			symbolSelectionSubscription.unsubscribe();
 			letterSelectionSubscription.unsubscribe();
 		};
-	}, [character, playerCipher]);
+	}, [
+		character,
+		normalizedCharacter,
+		playerCipherService,
+		letterSelection,
+		symbolSelection,
+	]);
 
 	const clickSelectSymbol = () => {
 		selectSymbol(
