@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Cell } from "../cell/Cell";
 import { CellType } from "../cell/CellType";
-import { playerCipher } from "../../playerCipher";
+import { useGameContext } from "../../contexts/useGameContext";
 import { normalizeWord } from "../../normalizeWord";
-import { letterSelection } from "../../letterSelection";
-import { symbolSelection } from "../../symbolSelection";
 import { characterEquals } from "../../characterEquals";
 
 interface FragmentComponentProps {
@@ -14,6 +12,7 @@ interface FragmentComponentProps {
 export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 	character,
 }) => {
+	const { playerCipher, letterSelection, symbolSelection } = useGameContext();
 	const [processedCharacter, setProcessedCharacter] = useState(character);
 	const [cellType, setCellType] = useState(CellType.Symbol);
 	const [matched, setMatched] = useState(false);

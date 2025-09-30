@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Cell } from "../cell/Cell";
 import { CellType } from "../cell/CellType";
-import { symbolSelection } from "../../symbolSelection";
-import { letterSelection } from "../../letterSelection";
+import { useGameContext } from "../../contexts/useGameContext";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
-import { playerCipher as playerCipherService } from "../../playerCipher";
 import { characterEquals } from "../../characterEquals";
 
 interface SymbolComponentProps {
@@ -15,6 +13,11 @@ interface SymbolComponentProps {
 export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 	character,
 }) => {
+	const {
+		playerCipher: playerCipherService,
+		letterSelection,
+		symbolSelection,
+	} = useGameContext();
 	const [selected, setSelected] = useState(false);
 	const [highlighted, setHighlighted] = useState(false);
 	const [matched, setMatched] = useState(false);

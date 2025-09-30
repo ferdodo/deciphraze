@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Cell } from "../cell/Cell";
 import { CellType } from "../cell/CellType";
-import { letterSelection } from "../../letterSelection";
-import { symbolSelection } from "../../symbolSelection";
+import { useGameContext } from "../../contexts/useGameContext";
 import { normalizeWord } from "../../normalizeWord";
 import { isAlphabetic } from "../../isAlphabetic";
-import { playerCipher as playerCipherService } from "../../playerCipher";
 import { characterEquals } from "../../characterEquals";
 
 interface LetterComponentProps {
@@ -15,6 +13,11 @@ interface LetterComponentProps {
 export const LetterComponent: React.FC<LetterComponentProps> = ({
 	character,
 }) => {
+	const {
+		playerCipher: playerCipherService,
+		letterSelection,
+		symbolSelection,
+	} = useGameContext();
 	const [selected, setSelected] = useState(false);
 	const [matched, setMatched] = useState(false);
 	const [highlighted, setHighlighted] = useState(false);

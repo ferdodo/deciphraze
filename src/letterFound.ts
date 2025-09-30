@@ -1,8 +1,8 @@
 import { isAlphabetic } from "./isAlphabetic";
-import { playerCipher } from "./playerCipher";
 import { normalizeWord } from "./normalizeWord";
+import type { PlayerCipher } from "./types/PlayerCipher";
 
-export function letterFound(letter: string) {
+export function letterFound(letter: string, playerCipher: PlayerCipher) {
 	if (!isAlphabetic(letter)) {
 		return true;
 	}

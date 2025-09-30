@@ -4,14 +4,16 @@ import { paragraphOfTheDay } from "./paragraphOfTheDay";
 import { FragmentComponent } from "./components/fragment/FragmentComponent";
 import { LetterComponent } from "./components/letter/LetterComponent";
 import { SymbolComponent } from "./components/symbol/SymbolComponent";
-import { playerCipher } from "./playerCipher";
+import { GameProvider } from "./providers/GameProvider";
+import { useGameContext } from "./contexts/useGameContext";
 import { generateRandomAlphabet } from "./generateRandomAlphabet";
 import { letterFound } from "./letterFound";
-import { matchCount$ } from "./matchCount$";
+import { createMatchCount$ } from "./createMatchCount$";
 import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 
-const App: React.FC = () => {
+const GameApp: React.FC = () => {
+	const { playerCipher } = useGameContext();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -20,13 +22,18 @@ const App: React.FC = () => {
 	const [matchCount, setMatchCount] = useState(0);
 
 	useEffect(() => {
+		const matchCount$ = createMatchCount$(playerCipher);
 		const matchCountSubscription = matchCount$.subscribe((value) =>
 			setMatchCount(value),
 		);
 
 		const playerCipherSubscription = playerCipher.playerCipher$.subscribe(
 			function () {
-				if ([...paragraphOfTheDay].every(letterFound)) {
+				if (
+					[...paragraphOfTheDay].every((letter) =>
+						letterFound(letter, playerCipher),
+					)
+				) {
 					setWin(true);
 
 					//@ts-ignore
@@ -43,7 +50,7 @@ const App: React.FC = () => {
 			matchCountSubscription.unsubscribe();
 			playerCipherSubscription.unsubscribe();
 		};
-	}, [matchCount]);
+	}, [matchCount, playerCipher]);
 
 	const share = () => {
 		const date = new Date();
@@ -59,7 +66,6 @@ const App: React.FC = () => {
 
 	return (
 		<crumbs-panel panel-title="Deciphraze">
-
 			<div className="playground">
 				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
@@ -109,10 +115,7 @@ const App: React.FC = () => {
 				<div>
 					<crumbs-p style={{ textAlign: "center" }}>
 						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-						<crumbs-button
-							title="Copier dans le presse-papier"
-							onClick={share}
-						>
+						<crumbs-button title="Copier dans le presse-papier" onClick={share}>
 							{" "}
 							Partager{" "}
 						</crumbs-button>
@@ -120,6 +123,14 @@ const App: React.FC = () => {
 				</div>
 			)}
 		</crumbs-panel>
+	);
+};
+
+const App: React.FC = () => {
+	return (
+		<GameProvider>
+			<GameApp />
+		</GameProvider>
 	);
 };
 
