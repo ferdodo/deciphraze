@@ -1,11 +1,11 @@
 import type React from "react";
 import { useState, useEffect } from "react";
-import { CellType } from "../../types/CellType";
-import { normalizeWord } from "../../normalizeWord";
-import { characterEquals } from "../../characterEquals";
-import { createLetterSelection } from "../../createLetterSelection";
-import { createPlayerCipher } from "../../createPlayerCipher";
-import { createSymbolSelection } from "../../createSymbolSelection";
+import { CellType } from "../types/CellType";
+import { normalizeWord } from "../normalizeWord";
+import { characterEquals } from "../characterEquals";
+import { createLetterSelection } from "../createLetterSelection";
+import { createPlayerCipher } from "../createPlayerCipher";
+import { createSymbolSelection } from "../createSymbolSelection";
 
 const letterSelection = createLetterSelection();
 const playerCipher = createPlayerCipher();

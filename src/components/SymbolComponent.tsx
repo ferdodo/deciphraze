@@ -1,9 +1,9 @@
 import type React from "react";
 import { useState, useEffect, useMemo } from "react";
-import { useGameContext } from "../../contexts/useGameContext";
-import { selectSymbol } from "../../usecases/selectSymbol";
-import { normalizeWord } from "../../normalizeWord";
-import { characterEquals } from "../../characterEquals";
+import { useGameContext } from "../contexts/useGameContext";
+import { selectSymbol } from "../usecases/selectSymbol";
+import { normalizeWord } from "../normalizeWord";
+import { characterEquals } from "../characterEquals";
 
 interface SymbolComponentProps {
 	character: string;
