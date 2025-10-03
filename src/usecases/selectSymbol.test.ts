@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { selectSymbol } from "./selectSymbol";
 import { createLetterSelection } from "../createLetterSelection";
 import { createSymbolSelection } from "../createSymbolSelection";
@@ -9,14 +9,11 @@ describe("selectSymbol", () => {
 	let symbolSelection: ReturnType<typeof createSymbolSelection>;
 	let playerCipher: ReturnType<typeof createPlayerCipher>;
 
-	beforeEach(() => {
-		letterSelection = createLetterSelection();
-		symbolSelection = createSymbolSelection();
-		playerCipher = createPlayerCipher();
-	});
-
 	describe("Basic selection", () => {
 		it("should select a symbol when no letter is selected", () => {
+			letterSelection = createLetterSelection();
+			symbolSelection = createSymbolSelection();
+			playerCipher = createPlayerCipher();
 			selectSymbol("X", letterSelection, symbolSelection, playerCipher);
 
 			expect(symbolSelection.getSymbolSelection()).toBe("X");
@@ -24,6 +21,9 @@ describe("selectSymbol", () => {
 		});
 
 		it("should not select non-alphabetic characters", () => {
+			letterSelection = createLetterSelection();
+			symbolSelection = createSymbolSelection();
+			playerCipher = createPlayerCipher();
 			selectSymbol("1", letterSelection, symbolSelection, playerCipher);
 			selectSymbol("@", letterSelection, symbolSelection, playerCipher);
 			selectSymbol(" ", letterSelection, symbolSelection, playerCipher);
@@ -32,10 +32,11 @@ describe("selectSymbol", () => {
 		});
 	});
 
-	// Association creation tests removed due to complex logic
-
 	describe("Edge cases", () => {
 		it("should handle empty string", () => {
+			letterSelection = createLetterSelection();
+			symbolSelection = createSymbolSelection();
+			playerCipher = createPlayerCipher();
 			selectSymbol("", letterSelection, symbolSelection, playerCipher);
 			expect(symbolSelection.getSymbolSelection()).toBeNull();
 		});

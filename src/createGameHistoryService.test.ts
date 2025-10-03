@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { createGameHistoryService } from "./createGameHistoryService";
 
 // Mock localStorage
@@ -24,12 +24,9 @@ Object.defineProperty(globalThis, "localStorage", {
 });
 
 describe("createGameHistoryService", () => {
-	beforeEach(() => {
-		localStorageMock.clear();
-	});
-
 	describe("Initialization", () => {
 		it("should create empty history when no saved data exists", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 			const history = historyService.getGameHistory();
 
@@ -37,7 +34,7 @@ describe("createGameHistoryService", () => {
 		});
 
 		it("should restore history from localStorage when saved data exists", () => {
-			// Préparer des données sauvegardées
+			localStorageMock.clear();
 			const savedData = [
 				["2024-01-15", ["A", "B", "C"]],
 				["2024-01-16", ["D", "E"]],
@@ -58,6 +55,7 @@ describe("createGameHistoryService", () => {
 
 	describe("setSession", () => {
 		it("should save session to localStorage", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 
 			historyService.setSession("2024-01-15", ["A", "B", "C"]);
@@ -69,12 +67,11 @@ describe("createGameHistoryService", () => {
 		});
 
 		it("should update existing session", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 
-			// Ajouter une session
 			historyService.setSession("2024-01-15", ["A", "B"]);
 
-			// Mettre à jour la même session
 			historyService.setSession("2024-01-15", ["A", "B", "C", "D"]);
 
 			const history = historyService.getGameHistory();
@@ -82,6 +79,7 @@ describe("createGameHistoryService", () => {
 		});
 
 		it("should handle multiple sessions", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 
 			historyService.setSession("2024-01-15", ["A", "B"]);
@@ -98,6 +96,7 @@ describe("createGameHistoryService", () => {
 
 	describe("Observable updates", () => {
 		it("should emit updates when setting sessions", async () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 			const updates: Map<string, string[]>[] = [];
 
@@ -107,7 +106,6 @@ describe("createGameHistoryService", () => {
 
 			historyService.setSession("2024-01-15", ["A", "B", "C"]);
 
-			// Attendre un tick pour que l'observable émette
 			await new Promise((resolve) => setTimeout(resolve, 0));
 
 			expect(updates.length).toBeGreaterThanOrEqual(1);
@@ -121,11 +119,10 @@ describe("createGameHistoryService", () => {
 
 	describe("Persistence across instances", () => {
 		it("should persist data across multiple service instances", () => {
-			// Premier instance
+			localStorageMock.clear();
 			const historyService1 = createGameHistoryService();
 			historyService1.setSession("2024-01-15", ["A", "B", "C"]);
 
-			// Deuxième instance (simule un rechargement de page)
 			const historyService2 = createGameHistoryService();
 			const history = historyService2.getGameHistory();
 
@@ -134,19 +131,19 @@ describe("createGameHistoryService", () => {
 		});
 
 		it("should handle corrupted localStorage data gracefully", () => {
-			// Simuler des données corrompues
+			localStorageMock.clear();
 			localStorageMock.setItem("deciphraze-game-history", "invalid-json");
 
 			const historyService = createGameHistoryService();
 			const history = historyService.getGameHistory();
 
-			// Devrait créer une Map vide en cas d'erreur
 			expect(history.size).toBe(0);
 		});
 	});
 
 	describe("Edge cases", () => {
 		it("should handle empty letters array", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 
 			historyService.setSession("2024-01-15", []);
@@ -156,6 +153,7 @@ describe("createGameHistoryService", () => {
 		});
 
 		it("should handle special characters in dates", () => {
+			localStorageMock.clear();
 			const historyService = createGameHistoryService();
 
 			historyService.setSession("2024-01-15", ["É", "À", "Ç"]);

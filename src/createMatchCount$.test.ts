@@ -1,15 +1,12 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { createMatchCount$ } from "./createMatchCount$";
 import { createPlayerCipher } from "./createPlayerCipher";
 
 describe("createMatchCount$", () => {
 	let playerCipher: ReturnType<typeof createPlayerCipher>;
 
-	beforeEach(() => {
-		playerCipher = createPlayerCipher();
-	});
-
 	it("should start with 0 matches", async () => {
+		playerCipher = createPlayerCipher();
 		const matchCount$ = createMatchCount$(playerCipher);
 
 		matchCount$.subscribe((count) => {
@@ -18,6 +15,7 @@ describe("createMatchCount$", () => {
 	});
 
 	it("should count matches when entries are added", async () => {
+		playerCipher = createPlayerCipher();
 		const matchCount$ = createMatchCount$(playerCipher);
 		let callCount = 0;
 
@@ -28,11 +26,11 @@ describe("createMatchCount$", () => {
 			}
 		});
 
-		// Add an entry to trigger the observable
 		playerCipher.addPlayerCipherEntry("A", "X");
 	});
 
 	it("should count multiple matches", async () => {
+		playerCipher = createPlayerCipher();
 		const matchCount$ = createMatchCount$(playerCipher);
 		let callCount = 0;
 
@@ -48,6 +46,7 @@ describe("createMatchCount$", () => {
 	});
 
 	it("should handle empty cipher", async () => {
+		playerCipher = createPlayerCipher();
 		const matchCount$ = createMatchCount$(playerCipher);
 
 		matchCount$.subscribe((count) => {
