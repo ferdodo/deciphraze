@@ -14,7 +14,7 @@ import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 
 const GameApp: React.FC = () => {
-	const { playerCipher } = useGameContext();
+	const { playerCipher, gameHistory } = useGameContext();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -37,6 +37,13 @@ const GameApp: React.FC = () => {
 				) {
 					setWin(true);
 
+					// Save the game session to history
+					const today = new Date().toISOString().split("T")[0];
+					const lettersFound = Array.from(
+						playerCipher.getPlayerCipher().keys(),
+					);
+					gameHistory.setSession(today, lettersFound);
+
 					if (window.opener?.registerScore) {
 						window.opener.registerScore("deciphraze", matchCount);
 						window.close();
@@ -49,7 +56,7 @@ const GameApp: React.FC = () => {
 			matchCountSubscription.unsubscribe();
 			playerCipherSubscription.unsubscribe();
 		};
-	}, [matchCount, playerCipher]);
+	}, [matchCount, playerCipher, gameHistory.setSession]);
 
 	const share = () => {
 		const date = new Date();
@@ -114,7 +121,11 @@ const GameApp: React.FC = () => {
 				<div>
 					<crumbs-p style={{ textAlign: "center" }}>
 						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-						<crumbs-button title="Copier dans le presse-papier" onClick={share} role="button">
+						<crumbs-button
+							title="Copier dans le presse-papier"
+							onClick={share}
+							role="button"
+						>
 							{" "}
 							Partager{" "}
 						</crumbs-button>

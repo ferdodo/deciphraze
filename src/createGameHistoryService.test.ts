@@ -63,7 +63,7 @@ describe("createGameHistoryService", () => {
 			historyService.setSession("2024-01-15", ["A", "B", "C"]);
 
 			const savedData = localStorageMock.getItem("deciphraze-game-history");
-			const parsedData = JSON.parse(savedData!);
+			const parsedData = JSON.parse(savedData || "[]");
 
 			expect(parsedData).toContainEqual(["2024-01-15", ["A", "B", "C"]]);
 		});

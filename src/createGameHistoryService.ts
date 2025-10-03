@@ -14,7 +14,7 @@ export function createGameHistoryService(): GameHistoryService {
 		gameHistory = savedData
 			? new Map(JSON.parse(savedData))
 			: new Map<string, string[]>();
-	} catch (error) {
+	} catch (_error) {
 		// En cas d'erreur de parsing JSON, créer une Map vide
 		gameHistory = new Map<string, string[]>();
 	}

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { GameContext } from "../contexts/GameContext";
 import { createLetterSelection } from "../createLetterSelection";
 import { createPlayerCipher } from "../createPlayerCipher";

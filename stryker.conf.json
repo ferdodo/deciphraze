@@ -2,7 +2,7 @@
 	"$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
 	"testRunner": "vitest",
 	"coverageAnalysis": "perTest",
-	"mutate": ["**/*.ts", "!**/*.test.ts", "!**/*.benchmark.ts"],
+	"mutate": ["./src/**/*.ts", "!./src/**/*.test.ts"],
 	"thresholds": {
 		"high": 70,
 		"low": 65,
