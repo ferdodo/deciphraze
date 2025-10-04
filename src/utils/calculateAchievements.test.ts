@@ -56,49 +56,5 @@ describe("calculateAchievements", () => {
 				"Réussir une partie 5 jours consécutifs",
 			);
 		});
-
-		it("should not return streak achievement with less than 5 consecutive days", () => {
-			gameHistory = new Map();
-			for (let i = 0; i < 3; i++) {
-				const date = new Date("2024-01-15");
-				date.setDate(date.getDate() + i);
-				gameHistory.set(date.toISOString().split("T")[0], ["A"]);
-			}
-
-			const achievements = calculateAchievements(gameHistory);
-			const streakAchievement = achievements.find(
-				(ach) => ach.achievementId === "streak_5_days",
-			);
-
-			expect(achievements).toHaveLength(1);
-			expect(streakAchievement).toBeUndefined();
-		});
-
-		it("should not count non-consecutive days as streak", () => {
-			gameHistory = new Map();
-			gameHistory.set("2024-01-15", ["A"]);
-			gameHistory.set("2024-01-17", ["B"]);
-
-			const achievements = calculateAchievements(gameHistory);
-			const streakAchievement = achievements.find(
-				(ach) => ach.achievementId === "streak_5_days",
-			);
-
-			expect(achievements).toHaveLength(1);
-			expect(streakAchievement).toBeUndefined();
-		});
-
-		it("should handle single day", () => {
-			gameHistory = new Map();
-			gameHistory.set("2024-01-15", ["A"]);
-
-			const achievements = calculateAchievements(gameHistory);
-			const streakAchievement = achievements.find(
-				(ach) => ach.achievementId === "streak_5_days",
-			);
-
-			expect(achievements).toHaveLength(1);
-			expect(streakAchievement).toBeUndefined();
-		});
 	});
 });

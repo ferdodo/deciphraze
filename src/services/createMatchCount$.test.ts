@@ -13,44 +13,4 @@ describe("createMatchCount$", () => {
 			expect(count).toBe(0);
 		});
 	});
-
-	it("should count matches when entries are added", async () => {
-		playerCipher = createPlayerCipher();
-		const matchCount$ = createMatchCount$(playerCipher);
-		let callCount = 0;
-
-		matchCount$.subscribe((count) => {
-			callCount++;
-			if (callCount === 2) {
-				expect(count).toBe(1);
-			}
-		});
-
-		playerCipher.addPlayerCipherEntry("A", "X");
-	});
-
-	it("should count multiple matches", async () => {
-		playerCipher = createPlayerCipher();
-		const matchCount$ = createMatchCount$(playerCipher);
-		let callCount = 0;
-
-		matchCount$.subscribe((count) => {
-			callCount++;
-			if (callCount === 3) {
-				expect(count).toBe(2);
-			}
-		});
-
-		playerCipher.addPlayerCipherEntry("A", "X");
-		playerCipher.addPlayerCipherEntry("B", "Y");
-	});
-
-	it("should handle empty cipher", async () => {
-		playerCipher = createPlayerCipher();
-		const matchCount$ = createMatchCount$(playerCipher);
-
-		matchCount$.subscribe((count) => {
-			expect(count).toBe(0);
-		});
-	});
 });

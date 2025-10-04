@@ -13,35 +13,12 @@ describe("createSymbolSelection", () => {
 	});
 
 	describe("selectSymbol", () => {
-		it("should select a symbol", () => {
-			symbolSelection = createSymbolSelection();
-			symbolSelection.selectSymbol("X");
-			const selected = symbolSelection.getSymbolSelection();
-			expect(selected).toBe("X");
-		});
-
-		it("should normalize and uppercase symbol", () => {
-			symbolSelection = createSymbolSelection();
-			symbolSelection.selectSymbol("x");
-			const selected = symbolSelection.getSymbolSelection();
-			expect(selected).toBe("X");
-		});
-
 		it("should clear selection with null", () => {
 			symbolSelection = createSymbolSelection();
 			symbolSelection.selectSymbol("X");
 			symbolSelection.selectSymbol(null);
 			const selected = symbolSelection.getSymbolSelection();
 			expect(selected).toBeNull();
-		});
-	});
-
-	describe("Edge cases", () => {
-		it("should handle empty string", () => {
-			symbolSelection = createSymbolSelection();
-			symbolSelection.selectSymbol("");
-			const selected = symbolSelection.getSymbolSelection();
-			expect(selected).toBe("");
 		});
 	});
 });

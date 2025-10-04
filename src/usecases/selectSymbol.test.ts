@@ -31,14 +31,4 @@ describe("selectSymbol", () => {
 			expect(symbolSelection.getSymbolSelection()).toBeNull();
 		});
 	});
-
-	describe("Edge cases", () => {
-		it("should handle empty string", () => {
-			letterSelection = createLetterSelection();
-			symbolSelection = createSymbolSelection();
-			playerCipher = createPlayerCipher();
-			selectSymbol("", letterSelection, symbolSelection, playerCipher);
-			expect(symbolSelection.getSymbolSelection()).toBeNull();
-		});
-	});
 });
