@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import type { PlayerCipher } from "./types/PlayerCipher";
+import type { PlayerCipher } from "../types/PlayerCipher";
 
 export const createMatchCount$ = (playerCipher: PlayerCipher) => {
 	const totalMatches = new Set();

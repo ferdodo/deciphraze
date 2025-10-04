@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { calculateAchievements } from "./calculateAchievements";
-import type { GameHistory } from "./types/GameHistory";
+import type { GameHistory } from "../types/GameHistory";
 
 describe("calculateAchievements", () => {
 	let gameHistory: GameHistory;

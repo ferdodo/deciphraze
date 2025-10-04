@@ -1,6 +1,6 @@
 import { Subject, Observable } from "rxjs";
-import { normalizeWord } from "./utils/normalizeWord";
-import type { SymbolSelection } from "./types/SymbolSelection";
+import { normalizeWord } from "../utils/normalizeWord";
+import type { SymbolSelection } from "../types/SymbolSelection";
 
 export function createSymbolSelection(): SymbolSelection {
 	let symbolSelection: string | null = null;

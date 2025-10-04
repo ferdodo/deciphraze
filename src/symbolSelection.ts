@@ -1,3 +1,3 @@
-import { createSymbolSelection } from "./createSymbolSelection";
+import { createSymbolSelection } from "./services/createSymbolSelection";
 
 export const symbolSelection = createSymbolSelection();

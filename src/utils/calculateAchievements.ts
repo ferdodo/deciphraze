@@ -1,7 +1,7 @@
-import type { GameHistory } from "./types/GameHistory";
-import type { Achievement } from "./types/Achievement";
-import type { FirstGameAchievement } from "./types/FirstGameAchievement";
-import type { Streak5DaysAchievement } from "./types/Streak5DaysAchievement";
+import type { GameHistory } from "../types/GameHistory";
+import type { Achievement } from "../types/Achievement";
+import type { FirstGameAchievement } from "../types/FirstGameAchievement";
+import type { Streak5DaysAchievement } from "../types/Streak5DaysAchievement";
 
 export function calculateAchievements(gameHistory: GameHistory): Achievement[] {
 	const sessions = Array.from(gameHistory.entries()).sort(([a], [b]) =>

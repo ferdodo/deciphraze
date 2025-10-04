@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
-import { characterEquals } from "./utils/characterEquals";
-import type { PlayerCipher } from "./types/PlayerCipher";
+import { characterEquals } from "../utils/characterEquals";
+import type { PlayerCipher } from "../types/PlayerCipher";
 
 export function createPlayerCipher(): PlayerCipher {
 	const playerCipher = new Map<string, string>();

@@ -9,7 +9,7 @@ import { GameProvider } from "./providers/GameProvider";
 import { useGameContext } from "./contexts/useGameContext";
 import { generateRandomAlphabet } from "./utils/generateRandomAlphabet";
 import { letterFound } from "./utils/letterFound";
-import { createMatchCount$ } from "./createMatchCount$";
+import { createMatchCount$ } from "./services/createMatchCount$";
 import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 

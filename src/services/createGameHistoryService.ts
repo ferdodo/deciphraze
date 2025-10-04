@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { GameHistory } from "./types/GameHistory";
-import type { GameHistoryService } from "./types/GameHistoryService";
+import type { GameHistory } from "../types/GameHistory";
+import type { GameHistoryService } from "../types/GameHistoryService";
 
 const STORAGE_KEY = "deciphraze-game-history";
 

@@ -1,3 +1,3 @@
-import { createLetterSelection } from "./createLetterSelection";
+import { createLetterSelection } from "./services/createLetterSelection";
 
 export const letterSelection = createLetterSelection();

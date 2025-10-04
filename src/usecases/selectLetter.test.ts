@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { selectLetter } from "./selectLetter";
-import { createLetterSelection } from "../createLetterSelection";
-import { createSymbolSelection } from "../createSymbolSelection";
-import { createPlayerCipher } from "../createPlayerCipher";
+import { createLetterSelection } from "../services/createLetterSelection";
+import { createSymbolSelection } from "../services/createSymbolSelection";
+import { createPlayerCipher } from "../services/createPlayerCipher";
 
 describe("selectLetter", () => {
 	let letterSelection: ReturnType<typeof createLetterSelection>;

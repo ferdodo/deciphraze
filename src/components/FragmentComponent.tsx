@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import type { CellType } from "../types/CellType";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
-import { createLetterSelection } from "../createLetterSelection";
-import { createPlayerCipher } from "../createPlayerCipher";
-import { createSymbolSelection } from "../createSymbolSelection";
+import { createLetterSelection } from "../services/createLetterSelection";
+import { createPlayerCipher } from "../services/createPlayerCipher";
+import { createSymbolSelection } from "../services/createSymbolSelection";
 
 const letterSelection = createLetterSelection();
 const playerCipher = createPlayerCipher();

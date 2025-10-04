@@ -1,9 +1,9 @@
 import type React from "react";
 import { GameContext } from "../contexts/GameContext";
-import { createLetterSelection } from "../createLetterSelection";
-import { createPlayerCipher } from "../createPlayerCipher";
-import { createSymbolSelection } from "../createSymbolSelection";
-import { createGameHistoryService } from "../createGameHistoryService";
+import { createLetterSelection } from "../services/createLetterSelection";
+import { createPlayerCipher } from "../services/createPlayerCipher";
+import { createSymbolSelection } from "../services/createSymbolSelection";
+import { createGameHistoryService } from "../services/createGameHistoryService";
 
 interface GameProviderProps {
 	children: React.ReactNode;
