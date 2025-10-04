@@ -2,8 +2,8 @@ import type React from "react";
 import { useState, useEffect, useMemo } from "react";
 import { useGameContext } from "../contexts/useGameContext";
 import { selectLetter } from "../usecases/selectLetter";
-import { normalizeWord } from "../normalizeWord";
-import { characterEquals } from "../characterEquals";
+import { normalizeWord } from "../utils/normalizeWord";
+import { characterEquals } from "../utils/characterEquals";
 
 interface LetterComponentProps {
 	character: string;
@@ -35,10 +35,12 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 
 	useEffect(() => {
 		const playerCipherSubscription =
-			playerCipherService.playerCipher$.subscribe((value: Map<string, string>) => {
-				setPlayerCipher(value);
-				setHighlighted(value.has(normalizedCharacter));
-			});
+			playerCipherService.playerCipher$.subscribe(
+				(value: Map<string, string>) => {
+					setPlayerCipher(value);
+					setHighlighted(value.has(normalizedCharacter));
+				},
+			);
 
 		const letterSelectionSubscription =
 			letterSelection.letterSelection$.subscribe((value: string | null) => {
@@ -81,7 +83,6 @@ export const LetterComponent: React.FC<LetterComponentProps> = ({
 		symbolSelection,
 		playerCipher.entries,
 	]);
-
 
 	const clickSelectLetter = () => {
 		selectLetter(

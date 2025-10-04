@@ -1,4 +1,4 @@
-import { randomNumber } from "./randomNumber";
+import { randomNumber } from "./utils/randomNumber";
 import { ebook1 } from "./ebook1";
 
 export const paragraphOfTheDay = getParagraphOfTheDay();

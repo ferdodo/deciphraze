@@ -2,8 +2,8 @@ import type React from "react";
 import { useState, useEffect, useMemo } from "react";
 import { useGameContext } from "../contexts/useGameContext";
 import { selectSymbol } from "../usecases/selectSymbol";
-import { normalizeWord } from "../normalizeWord";
-import { characterEquals } from "../characterEquals";
+import { normalizeWord } from "../utils/normalizeWord";
+import { characterEquals } from "../utils/characterEquals";
 
 interface SymbolComponentProps {
 	character: string;
@@ -31,10 +31,12 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 
 	useEffect(() => {
 		const playerCipherSubscription =
-			playerCipherService.playerCipher$.subscribe((value: Map<string, string>) => {
-				setPlayerCipher(value);
-				setHighlighted([...value.values()].includes(normalizedCharacter));
-			});
+			playerCipherService.playerCipher$.subscribe(
+				(value: Map<string, string>) => {
+					setPlayerCipher(value);
+					setHighlighted([...value.values()].includes(normalizedCharacter));
+				},
+			);
 
 		const symbolSelectionSubscription =
 			symbolSelection.symbolSelection$.subscribe((value: string | null) => {

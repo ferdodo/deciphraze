@@ -1,8 +1,8 @@
 import type React from "react";
 import { useMemo } from "react";
-import { normalizeWord } from "../normalizeWord";
-import { getEncodedCharacter } from "../getEncodedCharacter";
-import { isAlphabetic } from "../isAlphabetic";
+import { normalizeWord } from "../utils/normalizeWord";
+import { getEncodedCharacter } from "../utils/getEncodedCharacter";
+import { isAlphabetic } from "../utils/isAlphabetic";
 import { CellType } from "./CellType";
 
 interface CellProps {

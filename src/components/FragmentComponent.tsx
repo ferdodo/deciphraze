@@ -1,8 +1,8 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import { CellType } from "../types/CellType";
-import { normalizeWord } from "../normalizeWord";
-import { characterEquals } from "../characterEquals";
+import { normalizeWord } from "../utils/normalizeWord";
+import { characterEquals } from "../utils/characterEquals";
 import { createLetterSelection } from "../createLetterSelection";
 import { createPlayerCipher } from "../createPlayerCipher";
 import { createSymbolSelection } from "../createSymbolSelection";
@@ -12,7 +12,7 @@ const playerCipher = createPlayerCipher();
 const symbolSelection = createSymbolSelection();
 
 interface FragmentComponentProps {
-  character: string;
+	character: string;
 }
 
 export const FragmentComponent: React.FC<FragmentComponentProps> = ({
@@ -42,45 +42,50 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 			},
 		);
 
-		const letterSelectionSubscription = letterSelection.letterSelection$.subscribe(
-			(letterSelected: string | null) => {
-				if (cellType === CellType.Letter) {
-					if (letterSelected !== null) {
-						setMatched(characterEquals(processedCharacter, letterSelected));
-					} else {
-						setMatched(false);
-					}
-				}
-			},
-		);
-
-		const symbolSelectionSubscription = symbolSelection.symbolSelection$.subscribe(
-			(symbolSelected: string | null) => {
-				if (cellType === CellType.Symbol) {
-					if (symbolSelected !== null) {
-						setMatched(characterEquals(character, symbolSelected));
-					} else {
-						setMatched(false);
-					}
-				} else if (cellType === CellType.Letter) {
-					if (symbolSelected !== null) {
-						setMatched(false);
-
-						for (const [initialChar, decodedChar] of playerCipherMap.entries()) {
-							if (
-								characterEquals(initialChar, processedCharacter) &&
-								characterEquals(decodedChar, symbolSelected)
-							) {
-								setMatched(true);
-								break;
-							}
+		const letterSelectionSubscription =
+			letterSelection.letterSelection$.subscribe(
+				(letterSelected: string | null) => {
+					if (cellType === CellType.Letter) {
+						if (letterSelected !== null) {
+							setMatched(characterEquals(processedCharacter, letterSelected));
+						} else {
+							setMatched(false);
 						}
-					} else {
-						setMatched(false);
 					}
-				}
-			},
-		);
+				},
+			);
+
+		const symbolSelectionSubscription =
+			symbolSelection.symbolSelection$.subscribe(
+				(symbolSelected: string | null) => {
+					if (cellType === CellType.Symbol) {
+						if (symbolSelected !== null) {
+							setMatched(characterEquals(character, symbolSelected));
+						} else {
+							setMatched(false);
+						}
+					} else if (cellType === CellType.Letter) {
+						if (symbolSelected !== null) {
+							setMatched(false);
+
+							for (const [
+								initialChar,
+								decodedChar,
+							] of playerCipherMap.entries()) {
+								if (
+									characterEquals(initialChar, processedCharacter) &&
+									characterEquals(decodedChar, symbolSelected)
+								) {
+									setMatched(true);
+									break;
+								}
+							}
+						} else {
+							setMatched(false);
+						}
+					}
+				},
+			);
 
 		return () => {
 			playerCipherSubscription.unsubscribe();

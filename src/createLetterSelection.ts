@@ -1,5 +1,5 @@
 import { Subject, Observable } from "rxjs";
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "./utils/normalizeWord";
 import type { LetterSelection } from "./types/LetterSelection";
 
 export function createLetterSelection(): LetterSelection {

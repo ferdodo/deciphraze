@@ -1,8 +1,8 @@
 import type { LetterSelection } from "../types/LetterSelection";
 import type { SymbolSelection } from "../types/SymbolSelection";
 import type { PlayerCipher } from "../types/PlayerCipher";
-import { normalizeWord } from "../normalizeWord";
-import { isAlphabetic } from "../isAlphabetic";
+import { normalizeWord } from "../utils/normalizeWord";
+import { isAlphabetic } from "../utils/isAlphabetic";
 
 export const selectLetter = (
 	character: string,

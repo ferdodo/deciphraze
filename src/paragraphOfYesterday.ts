@@ -1,5 +1,5 @@
 import { ebook1 } from "./ebook1";
-import { randomNumberForYesterday } from "./randomNumberForYesterday";
+import { randomNumberForYesterday } from "./utils/randomNumberForYesterday";
 
 export const paragraphOfYesterday = getParagraphOfTheYesterday();
 
