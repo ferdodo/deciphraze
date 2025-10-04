@@ -7,5 +7,12 @@
 		"high": 70,
 		"low": 65,
 		"break": 60
+	},
+	"reporters": ["html", "json"],
+	"htmlReporter": {
+		"fileName": "public/stryker-report.html"
+	},
+	"jsonReporter": {
+		"fileName": "public/stryker-report.json"
 	}
 }
