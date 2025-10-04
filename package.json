@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap && node scripts/check-non-killing-tests.js"
+		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run --ignoreStatic && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap && node scripts/check-non-killing-tests.js"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",

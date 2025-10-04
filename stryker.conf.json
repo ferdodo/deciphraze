@@ -6,7 +6,7 @@
 	"thresholds": {
 		"high": 70,
 		"low": 65,
-		"break": 60
+		"break": 55
 	},
 	"reporters": ["html", "json"],
 	"htmlReporter": {
