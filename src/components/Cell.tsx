@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { normalizeWord } from "../utils/normalizeWord";
 import { getEncodedCharacter } from "../utils/getEncodedCharacter";
 import { isAlphabetic } from "../utils/isAlphabetic";
-import { CellType } from "./CellType";
+import type { CellType } from "../types/CellType";
 
 interface CellProps {
 	type: CellType;
@@ -29,11 +29,11 @@ export const Cell: React.FC<CellProps> = ({
 	}
 
 	const processedType = useMemo(() => {
-		return isAlphabetic(character) ? type : CellType.Letter;
+		return isAlphabetic(character) ? type : "letter";
 	}, [character, type]);
 
 	const processedCharacter = useMemo(() => {
-		return processedType === CellType.Letter
+		return processedType === "letter"
 			? character
 			: getEncodedCharacter(normalizeWord(character).toUpperCase());
 	}, [processedType, character]);
@@ -47,7 +47,7 @@ export const Cell: React.FC<CellProps> = ({
 				textAlign: "center",
 			}}
 		>
-			{processedType === CellType.Letter ? (
+			{processedType === "letter" ? (
 				<span
 					className={`${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
 				>

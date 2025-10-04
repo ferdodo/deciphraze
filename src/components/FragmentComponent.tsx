@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState, useEffect } from "react";
-import { CellType } from "../types/CellType";
+import type { CellType } from "../types/CellType";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
 import { createLetterSelection } from "../createLetterSelection";
@@ -19,7 +19,7 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 	character,
 }) => {
 	const [processedCharacter, setProcessedCharacter] = useState(character);
-	const [cellType, setCellType] = useState(CellType.Symbol);
+	const [cellType, setCellType] = useState<CellType>("symbol");
 	const [matched, setMatched] = useState(false);
 	const [playerCipherMap, setPlayerCipherMap] = useState<Map<string, string>>(
 		new Map(),
@@ -31,12 +31,12 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 				setPlayerCipherMap(value);
 				setMatched(false);
 				setProcessedCharacter(character);
-				setCellType(CellType.Symbol);
+				setCellType("symbol");
 
 				for (const [key, decodedValue] of value.entries()) {
 					if (characterEquals(character, decodedValue)) {
 						setProcessedCharacter(normalizeWord(key).toUpperCase());
-						setCellType(CellType.Letter);
+						setCellType("letter");
 					}
 				}
 			},
@@ -45,7 +45,7 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 		const letterSelectionSubscription =
 			letterSelection.letterSelection$.subscribe(
 				(letterSelected: string | null) => {
-					if (cellType === CellType.Letter) {
+					if (cellType === "letter") {
 						if (letterSelected !== null) {
 							setMatched(characterEquals(processedCharacter, letterSelected));
 						} else {
@@ -58,13 +58,13 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 		const symbolSelectionSubscription =
 			symbolSelection.symbolSelection$.subscribe(
 				(symbolSelected: string | null) => {
-					if (cellType === CellType.Symbol) {
+					if (cellType === "symbol") {
 						if (symbolSelected !== null) {
 							setMatched(characterEquals(character, symbolSelected));
 						} else {
 							setMatched(false);
 						}
-					} else if (cellType === CellType.Letter) {
+					} else if (cellType === "letter") {
 						if (symbolSelected !== null) {
 							setMatched(false);
 
@@ -95,9 +95,9 @@ export const FragmentComponent: React.FC<FragmentComponentProps> = ({
 	}, [character, cellType, processedCharacter, playerCipherMap]);
 
 	const clickSelectFragment = () => {
-		if (cellType === CellType.Letter) {
+		if (cellType === "letter") {
 			letterSelection.selectLetter(processedCharacter);
-		} else if (cellType === CellType.Symbol) {
+		} else if (cellType === "symbol") {
 			symbolSelection.selectSymbol(character);
 		}
 	};

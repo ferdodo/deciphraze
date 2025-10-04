@@ -1,4 +1,1 @@
-export enum CellType {
-	Letter = "letter",
-	Symbol = "symbol",
-}
+export type CellType = "letter" | "symbol";
