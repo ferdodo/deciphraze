@@ -30,5 +30,6 @@ describe("selectSymbol", () => {
 
 			expect(symbolSelection.getSymbolSelection()).toBeNull();
 		});
+
 	});
 });

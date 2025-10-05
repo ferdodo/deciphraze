@@ -1,8 +1,8 @@
 import type { Observable } from "rxjs";
-import type { GameHistory } from "./GameHistory";
+import type { GameSession } from "./GameSession";
 
 export interface GameHistoryService {
-	getGameHistory(): GameHistory;
-	gameHistory$: Observable<GameHistory>;
+	getGameHistory(): GameSession[];
+	gameHistory$: Observable<GameSession[]>;
 	setSession(date: string, lettersFound: string[]): void;
 }

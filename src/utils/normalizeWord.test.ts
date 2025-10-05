@@ -7,4 +7,5 @@ describe("normalizeWord", () => {
 		expect(normalizeWord("World")).toBe("world");
 		expect(normalizeWord("test")).toBe("test");
 	});
+
 });

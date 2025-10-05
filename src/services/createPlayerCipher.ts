@@ -17,10 +17,8 @@ export function createPlayerCipher(): PlayerCipher {
 	};
 
 	const removePlayerCipherEntryByValue = (removed: string) => {
-		for (const [key, value] of playerCipher) {
-			if (characterEquals(value, removed)) {
-				removePlayerCipherEntryByLetter(key);
-			}
+		for (const [key, _value] of Array.from(playerCipher.entries()).filter(([, value]) => characterEquals(value, removed))) {
+			removePlayerCipherEntryByLetter(key);
 		}
 	};
 

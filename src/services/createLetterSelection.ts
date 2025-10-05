@@ -3,35 +3,33 @@ import { normalizeWord } from "../utils/normalizeWord";
 import type { LetterSelection } from "../types/LetterSelection";
 
 export function createLetterSelection(): LetterSelection {
-	let letterSelection: string | null = null;
+	const selectLetter$ = new Subject<string | null>();
+	let currentSelection: string | null = null;
 
 	function getLetterSelection(): string | null {
-		return letterSelection;
+		return currentSelection;
 	}
 
 	function setLetterSelection(letter: string | null) {
-		letterSelection = letter;
-	}
-
-	const selectLetter$ = new Subject<string | null>();
-
-	function selectLetter(letter: string | null) {
+		currentSelection = letter;
 		selectLetter$.next(letter);
 	}
 
-	const letterSelection$ = new Observable<string | null>((subscriber) => {
-		selectLetter$.subscribe(() => {
-			subscriber.next(getLetterSelection());
-		});
-	});
-
-	// Subscribe to selectLetter$ to update the state
-	selectLetter$.subscribe((letter) => {
+	function selectLetter(letter: string | null) {
 		if (letter !== null) {
-			setLetterSelection(normalizeWord(letter).toUpperCase());
+			const normalizedLetter = normalizeWord(letter).toUpperCase();
+			currentSelection = normalizedLetter;
+			selectLetter$.next(normalizedLetter);
 		} else {
-			setLetterSelection(null);
+			currentSelection = null;
+			selectLetter$.next(null);
 		}
+	}
+
+	const letterSelection$ = new Observable<string | null>((subscriber) => {
+		selectLetter$.subscribe((letter) => {
+			subscriber.next(letter);
+		});
 	});
 
 	return {

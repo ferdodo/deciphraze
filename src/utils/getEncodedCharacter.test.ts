@@ -7,4 +7,11 @@ describe("getEncodedCharacter", () => {
 		expect(typeof result).toBe("string");
 		expect(result.length).toBe(1);
 	});
+
+
+	it("should handle special characters", () => {
+		const result = getEncodedCharacter("é");
+		expect(typeof result).toBe("string");
+		expect(result.length).toBe(1);
+	});
 });

@@ -6,4 +6,11 @@ describe("generateRandomAlphabet", () => {
 		const result = generateRandomAlphabet();
 		expect(result).toHaveLength(26);
 	});
+
+	it("should return different results on multiple calls", () => {
+		const result1 = generateRandomAlphabet();
+		const result2 = generateRandomAlphabet();
+		expect(result1).not.toEqual(result2);
+	});
+
 });

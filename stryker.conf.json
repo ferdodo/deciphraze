@@ -4,15 +4,18 @@
 	"coverageAnalysis": "perTest",
 	"mutate": ["./src/**/*.ts", "!./src/**/*.test.ts"],
 	"thresholds": {
-		"high": 70,
-		"low": 65,
-		"break": 55
+		"high": 80,
+		"low": 75,
+		"break": 75
 	},
-	"reporters": ["html", "json"],
+	"reporters": ["html", "json", "clear-text"],
 	"htmlReporter": {
 		"fileName": "public/stryker-report.html"
 	},
 	"jsonReporter": {
 		"fileName": "public/stryker-report.json"
+	},
+	"clearTextReporter": {
+		"reportMutants": true
 	}
 }

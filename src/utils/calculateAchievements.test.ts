@@ -16,8 +16,7 @@ describe("calculateAchievements", () => {
 
 	describe("First game achievement", () => {
 		it("should return first game achievement after playing once", () => {
-			gameHistory = new Map();
-			gameHistory.set("2024-01-15", ["A"]);
+			gameHistory = new Map([["2024-01-15", ["A"]]]);
 
 			const achievements = calculateAchievements(gameHistory);
 			const firstGameAchievement = achievements.find(
@@ -35,13 +34,13 @@ describe("calculateAchievements", () => {
 
 	describe("Streak achievement", () => {
 		it("should return streak achievement after 5 consecutive days", () => {
-			gameHistory = new Map();
-			const today = new Date();
-			for (let i = 0; i < 5; i++) {
-				const date = new Date(today);
-				date.setDate(date.getDate() - i);
-				gameHistory.set(date.toISOString().split("T")[0], ["A"]);
-			}
+			gameHistory = new Map([
+				["2024-01-15", ["A"]],
+				["2024-01-16", ["B"]],
+				["2024-01-17", ["C"]],
+				["2024-01-18", ["D"]],
+				["2024-01-19", ["E"]],
+			]);
 
 			const achievements = calculateAchievements(gameHistory);
 			const streakAchievement = achievements.find(
@@ -56,5 +55,6 @@ describe("calculateAchievements", () => {
 				"Réussir une partie 5 jours consécutifs",
 			);
 		});
+
 	});
 });

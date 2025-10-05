@@ -43,5 +43,6 @@ describe("selectLetter", () => {
 
 			expect(letterSelection.getLetterSelection()).toBeNull();
 		});
+
 	});
 });

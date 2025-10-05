@@ -29,5 +29,7 @@ describe("createPlayerCipher", () => {
 			expect(cipher.get("B")).toBe("Y");
 			expect(cipher.get("C")).toBeUndefined();
 		});
+
 	});
+
 });

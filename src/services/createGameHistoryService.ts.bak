@@ -1,16 +1,16 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { GameHistory } from "../types/GameHistory";
 import type { GameHistoryService } from "../types/GameHistoryService";
+import type { GameHistory } from "../types/GameHistory";
 
 const STORAGE_KEY = "deciphraze-game-history";
 
 export function createGameHistoryService(): GameHistoryService {
 	// Restaurer depuis localStorage ou créer une nouvelle Map
-	const savedData = localStorage.getItem(STORAGE_KEY);
 	let gameHistory: GameHistory;
 
 	try {
+		const savedData = localStorage.getItem(STORAGE_KEY);
 		gameHistory = savedData
 			? new Map(JSON.parse(savedData))
 			: new Map<string, string[]>();
@@ -20,9 +20,6 @@ export function createGameHistoryService(): GameHistoryService {
 	}
 	const gameHistory$ = new Subject<GameHistory>();
 
-	function getGameHistory(): GameHistory {
-		return new Map(gameHistory);
-	}
 
 	function saveToStorage() {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify([...gameHistory]));
@@ -38,7 +35,7 @@ export function createGameHistoryService(): GameHistoryService {
 	gameHistory$.next(new Map(gameHistory));
 
 	return {
-		getGameHistory,
+		getGameHistory: () => gameHistory,
 		gameHistory$: gameHistory$.asObservable().pipe(share()),
 		setSession,
 	};

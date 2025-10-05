@@ -3,32 +3,27 @@ import { normalizeWord } from "../utils/normalizeWord";
 import type { SymbolSelection } from "../types/SymbolSelection";
 
 export function createSymbolSelection(): SymbolSelection {
-	let symbolSelection: string | null = null;
+	const selectSymbol$ = new Subject<string | null>();
+	let currentSelection: string | null = null;
 
 	function getSymbolSelection(): string | null {
-		return symbolSelection;
+		return currentSelection;
 	}
-
-	const selectSymbol$ = new Subject<string | null>();
 
 	function selectSymbol(sym: string | null) {
 		if (sym !== null) {
-			symbolSelection = normalizeWord(sym).toUpperCase();
+			const normalizedSymbol = normalizeWord(sym).toUpperCase();
+			currentSelection = normalizedSymbol;
+			selectSymbol$.next(normalizedSymbol);
 		} else {
-			symbolSelection = null;
+			currentSelection = null;
+			selectSymbol$.next(null);
 		}
-		selectSymbol$.next(sym);
 	}
 
 	const symbolSelection$ = new Observable<string | null>((subscriber) => {
 		selectSymbol$.subscribe((sym) => {
-			if (sym !== null) {
-				symbolSelection = normalizeWord(sym).toUpperCase();
-			} else {
-				symbolSelection = null;
-			}
-
-			subscriber.next(symbolSelection);
+			subscriber.next(sym);
 		});
 	});
 
