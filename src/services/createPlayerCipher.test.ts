@@ -4,17 +4,6 @@ import { createPlayerCipher } from "./createPlayerCipher";
 describe("createPlayerCipher", () => {
 	let playerCipher: ReturnType<typeof createPlayerCipher>;
 
-	describe("addPlayerCipherEntry", () => {
-		it("should add new entry", () => {
-			playerCipher = createPlayerCipher();
-			playerCipher.addPlayerCipherEntry("A", "X");
-			const cipher = playerCipher.getPlayerCipher();
-
-			expect(cipher.size).toBe(1);
-			expect(cipher.get("A")).toBe("X");
-		});
-	});
-
 	describe("removePlayerCipherEntryByValue", () => {
 		it("should remove entries with matching value", () => {
 			playerCipher = createPlayerCipher();

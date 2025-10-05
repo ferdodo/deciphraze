@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { normalizeWord } from "../utils/normalizeWord";
 import { getEncodedCharacter } from "../utils/getEncodedCharacter";
 import { isAlphabetic } from "../utils/isAlphabetic";
+import { useGameContext } from "../contexts/useGameContext";
 import type { CellType } from "../types/CellType";
 
 interface CellProps {
@@ -20,6 +21,7 @@ export const Cell: React.FC<CellProps> = ({
 	character,
 	matched = false,
 }) => {
+	const { cipherService } = useGameContext();
 	if (type === undefined) {
 		throw new Error("Type not found !");
 	}
@@ -35,8 +37,8 @@ export const Cell: React.FC<CellProps> = ({
 	const processedCharacter = useMemo(() => {
 		return processedType === "letter"
 			? character
-			: getEncodedCharacter(normalizeWord(character).toUpperCase());
-	}, [processedType, character]);
+			: getEncodedCharacter(normalizeWord(character).toUpperCase(), cipherService.getCipher());
+	}, [processedType, character, cipherService]);
 
 	return (
 		<div
