@@ -2,4 +2,4 @@ services:
   frontend:
     build: .
     ports:
-      - "1111:80"
+      - "1111:1111"

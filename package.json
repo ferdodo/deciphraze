@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run --ignoreStatic && esbuild --bundle src/index.tsx --jsx=automatic --jsx-import-source=react --target=chrome80 --outfile=public/bundle.js --minify --tree-shaking=true --sourcemap && node scripts/check-non-killing-tests.js"
+		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run --ignoreStatic && node scripts/check-non-killing-tests.js && vite build",
+		"dev": "vite --host --port 1111"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
@@ -11,13 +12,13 @@
 		"@types/react-dom": "^18.2.0",
 		"crumbs-design-system": "^1.3.0",
 		"daily-prng": "^1.4.0",
-		"esbuild": "^0.17.19",
 		"exportcase": "^1.2.5",
 		"jsdom": "^24.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"rxjs": "^7.8.1",
 		"typescript": "^5.9.2",
+		"vite": "^7.1.9",
 		"vitest": "^3.2.4"
 	}
 }
