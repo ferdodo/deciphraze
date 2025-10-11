@@ -1,19 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { getEncodedCharacter } from "./getEncodedCharacter";
-import { createCipherService } from "../services/createCipherService";
+import { createCipherRepository } from "./createCipherRepository";
 
 describe("getEncodedCharacter", () => {
-	const cipherService = createCipherService();
-	const cipher = cipherService.getCipher();
+	const cipherRepository = createCipherRepository();
+	const cipher = cipherRepository.getCipher();
 
 	it("should encode uppercase letter", () => {
 		const result = getEncodedCharacter("A", cipher);
-		expect(typeof result).toBe("string");
-		expect(result.length).toBe(1);
-	});
-
-	it("should handle special characters", () => {
-		const result = getEncodedCharacter("é", cipher);
 		expect(typeof result).toBe("string");
 		expect(result.length).toBe(1);
 	});

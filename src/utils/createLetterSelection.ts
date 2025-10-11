@@ -1,8 +1,8 @@
 import { Subject, Observable } from "rxjs";
 import { normalizeWord } from "../utils/normalizeWord";
-import type { LetterSelection } from "../types/LetterSelection";
+import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
 
-export function createLetterSelection(): LetterSelection {
+export function createLetterSelection(): LetterSelectionRepository {
 	const selectLetter$ = new Subject<string | null>();
 	let currentSelection: string | null = null;
 

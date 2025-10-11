@@ -1,14 +1,14 @@
-import type { LetterSelection } from "../types/LetterSelection";
-import type { SymbolSelection } from "../types/SymbolSelection";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
+import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
+import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
 import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
 
 export const selectSymbol = (
 	character: string,
-	letterSelection: LetterSelection,
-	symbolSelection: SymbolSelection,
-	playerCipher: PlayerCipher,
+	letterSelection: LetterSelectionRepository,
+	symbolSelection: SymbolSelectionRepository,
+	playerCipher: PlayerCipherRepository,
 ) => {
 	if (!isAlphabetic(character)) {
 		return;

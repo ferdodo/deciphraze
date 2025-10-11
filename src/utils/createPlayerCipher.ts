@@ -1,9 +1,9 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
 import { characterEquals } from "../utils/characterEquals";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
 
-export function createPlayerCipher(): PlayerCipher {
+export function createPlayerCipher(): PlayerCipherRepository {
 	const playerCipher = new Map<string, string>();
 	const playerCipher$ = new Subject<Map<string, string>>();
 

@@ -1,14 +1,14 @@
 import { createContext } from "react";
-import type { LetterSelection } from "../types/LetterSelection";
-import type { PlayerCipher } from "../types/PlayerCipher";
-import type { SymbolSelection } from "../types/SymbolSelection";
-import type { CipherService } from "../types/CipherService";
+import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
+import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
+import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
+import type { CipherRepository } from "../types/CipherRepository";
 
 interface GameContextType {
-	letterSelection: LetterSelection;
-	playerCipher: PlayerCipher;
-	symbolSelection: SymbolSelection;
-	cipherService: CipherService;
+	letterSelectionRepository: LetterSelectionRepository;
+	playerCipherRepository: PlayerCipherRepository;
+	symbolSelectionRepository: SymbolSelectionRepository;
+	cipherRepository: CipherRepository;
 }
 
 export const GameContext = createContext<GameContextType | undefined>(

@@ -9,12 +9,13 @@ import { GameProvider } from "./providers/GameProvider";
 import { useGameContext } from "./contexts/useGameContext";
 import { generateRandomAlphabet } from "./utils/generateRandomAlphabet";
 import { letterFound } from "./utils/letterFound";
-import { createMatchCount$ } from "./services/createMatchCount$";
+import { createMatchCount$ } from "./utils/createMatchCount$";
 import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
+import "./styles/global.module.css";
 
 const GameApp: React.FC = () => {
-	const { playerCipher } = useGameContext();
+	const { playerCipherRepository } = useGameContext();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -23,16 +24,16 @@ const GameApp: React.FC = () => {
 	const [matchCount, setMatchCount] = useState(0);
 
 	useEffect(() => {
-		const matchCount$ = createMatchCount$(playerCipher);
+		const matchCount$ = createMatchCount$(playerCipherRepository);
 		const matchCountSubscription = matchCount$.subscribe((value) =>
 			setMatchCount(value),
 		);
 
-		const playerCipherSubscription = playerCipher.playerCipher$.subscribe(
+		const playerCipherSubscription = playerCipherRepository.playerCipher$.subscribe(
 			() => {
 				if (
 					[...paragraphOfTheDay].every((letter) =>
-						letterFound(letter, playerCipher),
+						letterFound(letter, playerCipherRepository),
 					)
 				) {
 					setWin(true);
@@ -49,7 +50,7 @@ const GameApp: React.FC = () => {
 			matchCountSubscription.unsubscribe();
 			playerCipherSubscription.unsubscribe();
 		};
-	}, [matchCount, playerCipher]);
+	}, [matchCount, playerCipherRepository]);
 
 	const share = () => {
 		const date = new Date();

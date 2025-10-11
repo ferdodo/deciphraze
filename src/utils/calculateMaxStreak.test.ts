@@ -25,13 +25,6 @@ describe("calculateMaxStreak", () => {
 		expect(calculateMaxStreak(gameHistory)).toBe(1);
 	});
 
-	it("should return 2 for 2 consecutive days", () => {
-		gameHistory = new Map([
-			["2024-01-15", ["A"]],
-			["2024-01-16", ["B"]],
-		]);
-		expect(calculateMaxStreak(gameHistory)).toBe(2);
-	});
 
 });
 

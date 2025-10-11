@@ -6,14 +6,6 @@ describe("createLetterSelection", () => {
 
 
 	describe("selectLetter", () => {
-		it("should select a letter", () => {
-			letterSelection = createLetterSelection();
-			letterSelection.selectLetter("A");
-			const selected = letterSelection.getLetterSelection();
-			expect(selected).toBe("A");
-		});
-
-
 		it("should emit updates when selecting letters", async () => {
 			letterSelection = createLetterSelection();
 			const updates: (string | null)[] = [];

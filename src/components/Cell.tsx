@@ -1,66 +1,40 @@
-import type React from "react";
-import { useMemo } from "react";
-import { normalizeWord } from "../utils/normalizeWord";
 import { getEncodedCharacter } from "../utils/getEncodedCharacter";
-import { isAlphabetic } from "../utils/isAlphabetic";
-import { useGameContext } from "../contexts/useGameContext";
+import { useCipher } from "../hooks/useCipher";
 import type { CellType } from "../types/CellType";
+import type { Cipher } from "../types/Cipher";
+import styles from "./Cell.module.css";
 
 interface CellProps {
 	type: CellType;
-	highlighted?: boolean;
-	selected?: boolean;
+	highlighted: boolean;
+	selected: boolean;
 	character: string;
-	matched?: boolean;
+	matched: boolean;
 }
 
-export const Cell: React.FC<CellProps> = ({
-	type,
-	highlighted = false,
-	selected = false,
-	character,
-	matched = false,
-}) => {
-	const { cipherService } = useGameContext();
-	if (type === undefined) {
-		throw new Error("Type not found !");
-	}
+export function Cell({ type, highlighted, selected, character, matched }: CellProps) {
+	const cipher: Cipher = useCipher();
+	const encoded = getEncodedCharacter(character, cipher);
 
-	if (character === undefined) {
-		throw new Error("Character not found !");
-	}
+	const letterClassName = [
+		selected ? styles.selected : "",
+		highlighted ? styles.highlighted : "",
+		matched ? styles.matched : "",
+	].join(" ");
 
-	const processedType = useMemo(() => {
-		return isAlphabetic(character) ? type : "letter";
-	}, [character, type]);
-
-	const processedCharacter = useMemo(() => {
-		return processedType === "letter"
-			? character
-			: getEncodedCharacter(normalizeWord(character).toUpperCase(), cipherService.getCipher());
-	}, [processedType, character, cipherService]);
+	const symbolClassName = [
+		styles.symbols,
+		selected ? styles.selected : "",
+		highlighted ? styles.highlighted : "",
+		matched ? styles.matched : "",
+	].join(" ");
 
 	return (
-		<div
-			style={{
-				display: "inline-block",
-				maxWidth: "4.9rem",
-				height: "1rem",
-				textAlign: "center",
-			}}
-		>
-			{processedType === "letter" ? (
-				<span
-					className={`${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
-				>
-					{processedCharacter}
-				</span>
+		<div className={styles.cell}>
+			{type === "letter" ? (
+				<span className={letterClassName}> {character} </span>
 			) : (
-				<span
-					className={`symbols ${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
-				>
-					{processedCharacter}
-				</span>
+				<span className={symbolClassName}> {encoded} </span>
 			)}
 		</div>
 	);

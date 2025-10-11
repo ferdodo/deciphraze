@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { letterFound } from "./letterFound";
-import { createPlayerCipher } from "../services/createPlayerCipher";
+import { createPlayerCipher } from "./createPlayerCipher";
 
 describe("letterFound", () => {
 

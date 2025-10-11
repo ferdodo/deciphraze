@@ -1,7 +1,7 @@
 import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
-import type { CipherService } from "../types/CipherService";
+import type { CipherRepository } from "../types/CipherRepository";
 
-export function createCipherService(): CipherService {
+export function createCipherRepository(): CipherRepository {
 	const cipher = generateRandomAlphabet();
 
 	return {

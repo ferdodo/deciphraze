@@ -1,83 +1,39 @@
-import type React from "react";
-import { useState, useEffect, useMemo } from "react";
-import { useGameContext } from "../contexts/useGameContext";
+import type { PlayerCipher } from "../types/PlayerCipher";
+import type { LetterSelection } from "../types/LetterSelection";
+import { usePlayerCipher } from "../hooks/usePlayerCipher";
+import { useLetterSelection } from "../hooks/useLetterSelection";
+import { usePlayerCipherService } from "../hooks/usePlayerCipherService";
+import { useLetterSelectionService } from "../hooks/useLetterSelectionService";
+import { useSymbolSelectionService } from "../hooks/useSymbolSelectionService";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
+import { isSymbolMatched } from "../utils/isSymbolMatched";
+import styles from "./SymbolComponent.module.css";
+import { useSymbolSelection } from "../hooks/useSymbolSelection";
 
 interface SymbolComponentProps {
 	character: string;
 }
 
-export const SymbolComponent: React.FC<SymbolComponentProps> = ({
-	character,
-}) => {
-	const {
-		playerCipher: playerCipherService,
-		letterSelection,
-		symbolSelection,
-	} = useGameContext();
-	const [selected, setSelected] = useState(false);
-	const [highlighted, setHighlighted] = useState(false);
-	const [matched, setMatched] = useState(false);
-	const [playerCipher, setPlayerCipher] = useState<Map<string, string>>(
-		new Map(),
-	);
+export function SymbolComponent({ character }: SymbolComponentProps) {
+	const playerCipherMap: PlayerCipher = usePlayerCipher();
+	const selectedLetter: LetterSelection = useLetterSelection();
+	const playerCipherService = usePlayerCipherService();
+	const letterSelection = useLetterSelectionService();
+	const symbolSelection = useSymbolSelectionService();
+	const selectedSymbol = useSymbolSelection();
+	const normalizedCharacter = normalizeWord(character).toUpperCase();
+	const matched = isSymbolMatched(character, selectedLetter, playerCipherMap);
+    const highlighted = [...playerCipherMap.values()].includes(normalizedCharacter);
+	const selected = characterEquals(selectedSymbol ?? '', character);
 
-	const normalizedCharacter = useMemo(
-		() => normalizeWord(character).toUpperCase(),
-		[character],
-	);
-
-	useEffect(() => {
-		const playerCipherSubscription =
-			playerCipherService.playerCipher$.subscribe(
-				(value: Map<string, string>) => {
-					setPlayerCipher(value);
-					setHighlighted([...value.values()].includes(normalizedCharacter));
-				},
-			);
-
-		const symbolSelectionSubscription =
-			symbolSelection.symbolSelection$.subscribe((value: string | null) => {
-				if (value !== null) {
-					setSelected(characterEquals(value, character));
-				} else {
-					setSelected(false);
-				}
-			});
-
-		const letterSelectionSubscription =
-			letterSelection.letterSelection$.subscribe((value: string | null) => {
-				if (value !== null) {
-					const decodedChar = playerCipher.get(value);
-
-					if (
-						decodedChar !== undefined &&
-						characterEquals(decodedChar, character)
-					) {
-						setMatched(true);
-					} else {
-						setMatched(false);
-					}
-				} else {
-					setMatched(false);
-				}
-			});
-
-		return () => {
-			playerCipherSubscription.unsubscribe();
-			symbolSelectionSubscription.unsubscribe();
-			letterSelectionSubscription.unsubscribe();
-		};
-	}, [
-		character,
-		normalizedCharacter,
-		playerCipherService,
-		letterSelection,
-		symbolSelection,
-		playerCipher.get,
-	]);
+	const spanClassName = [
+		styles.symbols,
+		selected ? styles.selected : "",
+		highlighted ? styles.highlighted : "",
+		matched ? styles.matched : "",
+	].join(" ");
 
 	const clickSelectSymbol = () => {
 		selectSymbol(
@@ -90,22 +46,12 @@ export const SymbolComponent: React.FC<SymbolComponentProps> = ({
 
 	return (
 		<button
-			style={{ display: "inline-block" }}
-			className="inputs"
+			className={styles.inputs}
 			onClick={clickSelectSymbol}
 			type="button"
 		>
-			<div
-				style={{
-					display: "inline-block",
-					maxWidth: "4.9rem",
-					height: "1rem",
-					textAlign: "center",
-				}}
-			>
-				<span
-					className={`symbols ${selected ? "selected" : ""} ${highlighted ? "highlighted" : ""} ${matched ? "matched" : ""}`}
-				>
+			<div className={styles.symbolContainer}>
+				<span className={spanClassName}>
 					{character}
 				</span>
 			</div>

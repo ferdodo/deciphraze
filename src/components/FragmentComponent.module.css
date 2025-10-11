@@ -1,0 +1,23 @@
+/* FragmentComponent.module.css */
+
+.fragment {
+	font-size: clamp(1rem, 4vw, 2rem);
+	display: inline-block;
+}
+
+.matched {
+	color: #ff6400;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+}
+
+.letter {
+	/* Styles pour la lettre */
+}
+
+.symbol {
+	/* Styles pour le symbole */
+}
+
+.symbols {
+	font-family: GlipervelzOrigy, serif;
+}

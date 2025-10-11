@@ -41,8 +41,8 @@ function rebuild {
 	echo "╰────────────────────────────╯"
 	set +e
     trap - SIGINT
-	docker compose down -v --remove-orphans -t 1
 	set -e
+	at-least-3GB-free-space
 	docker compose up -d --build
 	print_startup
     trap rebuild SIGINT

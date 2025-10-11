@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
 
-export const createMatchCount$ = (playerCipher: PlayerCipher) => {
+export const createMatchCount$ = (playerCipher: PlayerCipherRepository) => {
 	return new Observable<number>((subscriber) => {
 		playerCipher.playerCipher$.subscribe((playerCipherMap: Map<string, string>) => {
 			const totalMatches = new Set();

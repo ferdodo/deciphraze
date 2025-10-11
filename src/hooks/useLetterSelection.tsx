@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "../contexts/useGameContext";
+import type { LetterSelection } from "../types/LetterSelection";
 
-export const useLetterSelection = () => {
-	const { letterSelection } = useGameContext();
-	const [letterSelected, setLetterSelected] = useState<string | null>(null);
+export const useLetterSelection = (): LetterSelection => {
+	const { letterSelectionRepository } = useGameContext();
+	const [selectedLetter, setSelectedLetter] = useState<LetterSelection>(null);
 
 	useEffect(() => {
-		const subscription = letterSelection.letterSelection$.subscribe((value) => {
-			setLetterSelected(value);
+		const subscription = letterSelectionRepository.letterSelection$.subscribe((value: LetterSelection) => {
+			setSelectedLetter(value);
 		});
 
-		return () => subscription.unsubscribe();
-	}, [letterSelection]);
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, [letterSelectionRepository]);
 
-	return {
-		letterSelected,
-		letterSelection,
-	};
+	return selectedLetter;
 };

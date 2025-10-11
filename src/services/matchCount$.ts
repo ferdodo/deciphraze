@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { createPlayerCipher } from "./createPlayerCipher";
+import { createPlayerCipher } from "../utils/createPlayerCipher";
 
 const playerCipher = createPlayerCipher();
 

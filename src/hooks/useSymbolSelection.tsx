@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "../contexts/useGameContext";
+import type { SymbolSelection } from "../types/SymbolSelection";
 
-export const useSymbolSelection = () => {
-	const { symbolSelection } = useGameContext();
-	const [symbolSelected, setSymbolSelected] = useState<string | null>(null);
+export const useSymbolSelection = (): SymbolSelection => {
+	const { symbolSelectionRepository } = useGameContext();
+	const [selectedSymbol, setSelectedSymbol] = useState<SymbolSelection>(null);
 
 	useEffect(() => {
-		const subscription = symbolSelection.symbolSelection$.subscribe((value) => {
-			setSymbolSelected(value);
+		const subscription = symbolSelectionRepository.symbolSelection$.subscribe((value: SymbolSelection) => {
+			setSelectedSymbol(value);
 		});
 
-		return () => subscription.unsubscribe();
-	}, [symbolSelection]);
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, [symbolSelectionRepository]);
 
-	return {
-		symbolSelected,
-		symbolSelection,
-	};
+	return selectedSymbol;
 };

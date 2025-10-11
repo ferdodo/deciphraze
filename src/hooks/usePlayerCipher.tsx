@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "../contexts/useGameContext";
+import type { PlayerCipher } from "../types/PlayerCipher";
 
-export const usePlayerCipher = () => {
-	const { playerCipher } = useGameContext();
-	const [playerCipherMap, setPlayerCipherMap] = useState<Map<string, string>>(
-		new Map(),
-	);
+export const usePlayerCipher = (): PlayerCipher => {
+	const { playerCipherRepository } = useGameContext();
+	const [playerCipherMap, setPlayerCipherMap] = useState<PlayerCipher>(new Map());
 
 	useEffect(() => {
-		const subscription = playerCipher.playerCipher$.subscribe((value) => {
+		const subscription = playerCipherRepository.playerCipher$.subscribe((value: PlayerCipher) => {
 			setPlayerCipherMap(value);
 		});
 
-		return () => subscription.unsubscribe();
-	}, [playerCipher]);
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, [playerCipherRepository]);
 
-	return {
-		playerCipherMap,
-		playerCipher,
-	};
+	return playerCipherMap;
 };

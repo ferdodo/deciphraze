@@ -1,8 +1,8 @@
 import { Subject, Observable } from "rxjs";
 import { normalizeWord } from "../utils/normalizeWord";
-import type { SymbolSelection } from "../types/SymbolSelection";
+import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
 
-export function createSymbolSelection(): SymbolSelection {
+export function createSymbolSelection(): SymbolSelectionRepository {
 	const selectSymbol$ = new Subject<string | null>();
 	let currentSelection: string | null = null;
 
