@@ -1,72 +1,34 @@
 import type React from "react";
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { createRoot } from "react-dom/client";
 import { paragraphOfTheDay } from "./paragraphOfTheDay";
 import { FragmentComponent } from "./components/FragmentComponent";
 import { LetterComponent } from "./components/LetterComponent";
 import { SymbolComponent } from "./components/SymbolComponent";
 import { GameProvider } from "./providers/GameProvider";
-import { useGameContext } from "./contexts/useGameContext";
 import { generateRandomAlphabet } from "./utils/generateRandomAlphabet";
-import { letterFound } from "./utils/letterFound";
-import { createMatchCount$ } from "./utils/createMatchCount$";
+import { useMatchCount } from "./hooks/useMatchCount";
+import { useWin } from "./hooks/useWin";
+import { share } from "./utils/share";
 import "crumbs-design-system";
 import { paragraphOfYesterday } from "./paragraphOfYesterday";
 import "./styles/global.module.css";
 
 const GameApp: React.FC = () => {
-	const { playerCipherRepository } = useGameContext();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 	const alphabetRandom = useMemo(() => generateRandomAlphabet(), []);
-	const [win, setWin] = useState(false);
-	const [matchCount, setMatchCount] = useState(0);
+	const win = useWin();
+	const matchCount = useMatchCount();
 
-	useEffect(() => {
-		const matchCount$ = createMatchCount$(playerCipherRepository);
-		const matchCountSubscription = matchCount$.subscribe((value) =>
-			setMatchCount(value),
-		);
-
-		const playerCipherSubscription = playerCipherRepository.playerCipher$.subscribe(
-			() => {
-				if (
-					[...paragraphOfTheDay].every((letter) =>
-						letterFound(letter, playerCipherRepository),
-					)
-				) {
-					setWin(true);
-
-					if (window.opener?.registerScore) {
-						window.opener.registerScore("deciphraze", matchCount);
-						window.close();
-					}
-				}
-			},
-		);
-
-		return () => {
-			matchCountSubscription.unsubscribe();
-			playerCipherSubscription.unsubscribe();
-		};
-	}, [matchCount, playerCipherRepository]);
-
-	const share = () => {
-		const date = new Date();
-		const year = date.getFullYear();
-		const month = `0${date.getMonth() + 1}`.slice(-2);
-		const day = `0${date.getDate()}`.slice(-2);
-		const formattedDate = `${year}/${month}/${day}`;
-		let text = `Deciphraze ${formattedDate} - Puzzle réussi avec ${matchCount} associations de lettres.`;
-
-		text += `\n\nhttps://ferdodo.github.io/deciphraze`;
-		navigator.clipboard.writeText(text);
+	const handleShare = () => {
+		share(matchCount);
 	};
 
 	return (
 		<crumbs-panel panel-title="Deciphraze">
-			<div className="playground">
+			<div>
 				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
 					symboles.
@@ -117,11 +79,10 @@ const GameApp: React.FC = () => {
 						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
 						<crumbs-button
 							title="Copier dans le presse-papier"
-							onClick={share}
+							onClick={handleShare}
 							role="button"
 						>
-							{" "}
-							Partager{" "}
+							Partager
 						</crumbs-button>
 					</crumbs-p>
 				</div>
