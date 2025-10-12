@@ -2,10 +2,10 @@ import type { PlayerCipher } from "../types/PlayerCipher";
 import type { LetterSelection } from "../types/LetterSelection";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useLetterSelection } from "../hooks/useLetterSelection";
-import { usePlayerCipherService } from "../hooks/usePlayerCipherService";
-import { useLetterSelectionService } from "../hooks/useLetterSelectionService";
+import { usePlayerCipherRepository } from "../hooks/usePlayerCipherRepository";
+import { useLetterSelectionRepository } from "../hooks/useLetterSelectionRepository";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";
-import { useSymbolSelectionService } from "../hooks/useSymbolSelectionService";
+import { useSymbolSelectionRepository } from "../hooks/useSymbolSelectionRepository";
 import { selectLetter } from "../usecases/selectLetter";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
@@ -19,10 +19,10 @@ interface LetterComponentProps {
 export function LetterComponent({ character }: LetterComponentProps) {
 	const playerCipher: PlayerCipher = usePlayerCipher();
 	const selectedLetter: LetterSelection = useLetterSelection();
-	const playerCipherService = usePlayerCipherService();
-	const letterSelection = useLetterSelectionService();
+	const playerCipherRepository = usePlayerCipherRepository();
+	const letterSelectionRepository = useLetterSelectionRepository();
 	const selectedSymbol = useSymbolSelection();
-	const symbolSelection = useSymbolSelectionService();
+	const symbolSelectionRepository = useSymbolSelectionRepository();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
 	const highlighted = playerCipher.has(normalizedCharacter);
 	const selected = characterEquals(selectedLetter ?? '', character);
@@ -35,7 +35,7 @@ export function LetterComponent({ character }: LetterComponentProps) {
 	].join(" ");
 	
 	const clickSelectLetter = () => {
-		selectLetter(character, letterSelection, symbolSelection, playerCipherService);
+		selectLetter(character, letterSelectionRepository, symbolSelectionRepository, playerCipherRepository);
 	};
 
 	return (
