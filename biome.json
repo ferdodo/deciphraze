@@ -16,6 +16,9 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"nursery":  {
+				"useExplicitType": "error"
+			},
 			"suspicious": {
 				"noExplicitAny": "error"
 			},

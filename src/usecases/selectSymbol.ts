@@ -9,7 +9,7 @@ export const selectSymbol = (
 	letterSelection: LetterSelectionRepository,
 	symbolSelection: SymbolSelectionRepository,
 	playerCipher: PlayerCipherRepository,
-) => {
+): void => {
 	if (!isAlphabetic(character)) {
 		return;
 	}
@@ -20,7 +20,7 @@ export const selectSymbol = (
 
 	// Si on clique sur le même symbole, on le désélectionne
 	if (currentSymbol === normalizedCharacter) {
-		playerCipher.removePlayerCipherEntryByValue(character);
+		playerCipher.removePlayerCipherEntryByValue(normalizedCharacter);
 		symbolSelection.selectSymbol(null);
 		return;
 	}

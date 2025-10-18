@@ -1,1 +1,1 @@
-export type PlayerCipher = Map<string, string>;
+export type PlayerCipher = Record<string, string>;

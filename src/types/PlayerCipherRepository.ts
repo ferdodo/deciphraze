@@ -1,9 +1,10 @@
 import type { Observable } from "rxjs";
+import type { PlayerCipher } from "./PlayerCipher";
 
 export interface PlayerCipherRepository {
-	getPlayerCipher(): Map<string, string>;
+	getPlayerCipher(): PlayerCipher;
 	removePlayerCipherEntryByLetter(removed: string): void;
 	removePlayerCipherEntryByValue(removed: string): void;
 	addPlayerCipherEntry(letter: string, symbol: string): void;
-	playerCipher$: Observable<Map<string, string>>;
+	playerCipher$: Observable<PlayerCipher>;
 }

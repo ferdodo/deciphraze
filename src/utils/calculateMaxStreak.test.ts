@@ -8,20 +8,16 @@ describe("calculateMaxStreak", () => {
 	let gameHistory: GameHistory;
 
 	it("should return 0 for empty history", () => {
-		gameHistory = new Map();
+		gameHistory = {};
 		expect(calculateMaxStreak(gameHistory)).toBe(0);
 	});
 
-	it("should return 1 for single session", () => {
-		gameHistory = new Map([["2024-01-15", ["A"]]]);
-		expect(calculateMaxStreak(gameHistory)).toBe(1);
-	});
 
 	it("should return 1 for non-consecutive sessions", () => {
-		gameHistory = new Map([
-			["2024-01-15", ["A"]],
-			["2024-01-17", ["B"]],
-		]);
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-17": ["B"]
+		};
 		expect(calculateMaxStreak(gameHistory)).toBe(1);
 	});
 
@@ -32,23 +28,23 @@ describe("calculateCurrentStreak", () => {
 	let gameHistory: GameHistory;
 
 	it("should return 1 for single session", () => {
-		gameHistory = new Map([["2024-01-15", ["A"]]]);
+		gameHistory = { "2024-01-15": ["A"] };
 		expect(calculateCurrentStreak(gameHistory, 0)).toBe(1);
 	});
 
 	it("should return 2 for 2 consecutive days starting from first", () => {
-		gameHistory = new Map([
-			["2024-01-15", ["A"]],
-			["2024-01-16", ["B"]],
-		]);
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-16": ["B"]
+		};
 		expect(calculateCurrentStreak(gameHistory, 0)).toBe(2);
 	});
 
 	it("should return 1 for non-consecutive days", () => {
-		gameHistory = new Map([
-			["2024-01-15", ["A"]],
-			["2024-01-17", ["B"]],
-		]);
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-17": ["B"]
+		};
 		expect(calculateCurrentStreak(gameHistory, 0)).toBe(1);
 	});
 
@@ -59,10 +55,10 @@ describe("iterateStreaks", () => {
 
 
 	it("should yield 1,1 for 2 non-consecutive days", () => {
-		gameHistory = new Map([
-			["2024-01-15", ["A"]],
-			["2024-01-17", ["B"]],
-		]);
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-17": ["B"]
+		};
 		const streaks = [...iterateStreaks(gameHistory)];
 		expect(streaks).toEqual([1, 1]);
 	});

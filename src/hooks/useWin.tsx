@@ -9,13 +9,15 @@ export const useWin = (): boolean => {
 
 	useEffect(() => {
 		const playerCipherSubscription = playerCipherRepository.playerCipher$.subscribe(
-			() => {
+			(playerCipher) => {
 				if (
 					[...paragraphOfTheDay].every((letter) =>
-						letterFound(letter, playerCipherRepository),
+						letterFound(letter, playerCipher),
 					)
 				) {
 					setWin(true);
+				} else {
+					setWin(false);
 				}
 			},
 		);

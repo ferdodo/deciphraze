@@ -17,4 +17,12 @@ describe("getEncodedCharacter", () => {
 		const result = getEncodedCharacter("A", customCipher);
 		expect(result).toBe("Z"); // A is at position 25 in cipher, so returns alphabet[25] = Z
 	});
+
+	it("should return original character when not found in cipher", () => {
+		const customCipher = ["B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "A"];
+		const result = getEncodedCharacter("1", customCipher); // Non-alphabetic character
+		expect(result).toBe("1"); // Should return original character when not found
+	});
+
+
 });

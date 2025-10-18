@@ -1,16 +1,6 @@
 import { createContext } from "react";
-import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
-import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
-import type { CipherRepository } from "../types/CipherRepository";
+import type { GameContextType } from "../types/GameContextType";
 
-interface GameContextType {
-	letterSelectionRepository: LetterSelectionRepository;
-	playerCipherRepository: PlayerCipherRepository;
-	symbolSelectionRepository: SymbolSelectionRepository;
-	cipherRepository: CipherRepository;
-}
-
-export const GameContext = createContext<GameContextType | undefined>(
+export const GameContext: React.Context<GameContextType | undefined> = createContext<GameContextType | undefined>(
 	undefined,
 );

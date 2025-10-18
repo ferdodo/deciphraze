@@ -4,7 +4,7 @@ import type { PlayerCipher } from "../types/PlayerCipher";
 
 export const usePlayerCipher = (): PlayerCipher => {
 	const { playerCipherRepository } = useGameContext();
-	const [playerCipherMap, setPlayerCipherMap] = useState<PlayerCipher>(new Map());
+	const [playerCipherMap, setPlayerCipherMap] = useState<PlayerCipher>({});
 
 	useEffect(() => {
 		const subscription = playerCipherRepository.playerCipher$.subscribe((value: PlayerCipher) => {

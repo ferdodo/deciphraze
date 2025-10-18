@@ -12,7 +12,7 @@ interface CellProps {
 	matched: boolean;
 }
 
-export function Cell({ type, highlighted, selected, character, matched }: CellProps) {
+export function Cell({ type, highlighted, selected, character, matched }: CellProps): JSX.Element {
 	const cipher: Cipher = useCipher();
 	const encoded = getEncodedCharacter(character, cipher);
 

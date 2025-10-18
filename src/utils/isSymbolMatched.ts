@@ -8,12 +8,9 @@ export const isSymbolMatched = (
 	playerCipherMap: PlayerCipher
 ): boolean => {
 	if (selectedLetter !== null) {
-		const decodedChar = playerCipherMap.get(selectedLetter);
+		const decodedChar = playerCipherMap[selectedLetter];
 
-		if (
-			decodedChar !== undefined &&
-			characterEquals(decodedChar, character)
-		) {
+		if (decodedChar !== undefined && characterEquals(decodedChar, character)) {
 			return true;
 		}
 	}

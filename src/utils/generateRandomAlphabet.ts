@@ -1,6 +1,10 @@
 import { randomNumber } from "./randomNumber";
 
-export function generateRandomAlphabet() {
+export function generateRandomAlphabet(isDev: boolean = false): string[] {
+	if (isDev) {
+		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+	}
+
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 	const cipher = [];
 

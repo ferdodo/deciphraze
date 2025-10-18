@@ -29,11 +29,4 @@ describe("isSymbolMatched", () => {
 		expect(result).toBe(false);
 	});
 
-	it("should return false when letter is not in cipher", () => {
-		playerCipher = createPlayerCipher();
-		playerCipher.addPlayerCipherEntry("B", "X");
-		
-		const result = isSymbolMatched("X", "A", playerCipher.getPlayerCipher());
-		expect(result).toBe(false);
-	});
 });

@@ -1,7 +1,7 @@
 import { randomNumber } from "./utils/randomNumber";
-import { ebook1 } from "./ebook1";
+import { ebook1 } from "./constants/ebook1";
 
-export const paragraphOfTheDay = getParagraphOfTheDay();
+export const paragraphOfTheDay: string = getParagraphOfTheDay();
 
 function getParagraphOfTheDay(): string {
 	const lines = ebook1.split(/\r\n|\r|\n/);

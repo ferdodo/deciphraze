@@ -9,7 +9,7 @@ export const selectLetter = (
 	letterSelection: LetterSelectionRepository,
 	symbolSelection: SymbolSelectionRepository,
 	playerCipher: PlayerCipherRepository,
-) => {
+): void => {
 	if (!isAlphabetic(character)) {
 		return;
 	}

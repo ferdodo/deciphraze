@@ -1,1 +1,3 @@
-export type GameHistory = Map<string, string[]>;
+export interface GameHistory {
+	[date: string]: string[];
+}

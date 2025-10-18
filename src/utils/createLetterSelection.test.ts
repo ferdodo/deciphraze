@@ -2,36 +2,19 @@ import { describe, it, expect } from "vitest";
 import { createLetterSelection } from "./createLetterSelection";
 
 describe("createLetterSelection", () => {
-	let letterSelection: ReturnType<typeof createLetterSelection>;
+	describe("localStorage persistence", () => {
+		it("should load from localStorage on initialization", () => {
+			localStorage.setItem("deciphraze_letter_selection", '"D"');
+			const newLetterSelection = createLetterSelection();
+			expect(newLetterSelection.getLetterSelection()).toBe("D");
+		});
 
 
-	describe("selectLetter", () => {
-		it("should emit updates when selecting letters", async () => {
-			letterSelection = createLetterSelection();
-			const updates: (string | null)[] = [];
-
-			letterSelection.letterSelection$.subscribe((selected) => {
-				updates.push(selected);
-			});
-
-			letterSelection.selectLetter("A");
-
-			await new Promise((resolve) => setTimeout(resolve, 0));
-
-			expect(updates.length).toBeGreaterThanOrEqual(1);
-			expect(updates[updates.length - 1]).toBe("A");
+		it("should handle invalid localStorage data", () => {
+			localStorage.setItem("deciphraze_letter_selection", "invalid json");
+			const newLetterSelection = createLetterSelection();
+			expect(newLetterSelection.getLetterSelection()).toBeNull();
 		});
 
 	});
-
-	describe("setLetterSelection", () => {
-		it("should set letter selection directly", () => {
-			letterSelection = createLetterSelection();
-			letterSelection.setLetterSelection("B");
-			const selected = letterSelection.getLetterSelection();
-			expect(selected).toBe("B");
-		});
-
-	});
-
 });

@@ -30,7 +30,7 @@ describe("selectLetter", () => {
 			selectLetter("A", letterSelection, symbolSelection, playerCipher);
 
 			expect(letterSelection.getLetterSelection()).toBeNull();
-			expect(playerCipher.getPlayerCipher().has("A")).toBe(false);
+			expect(playerCipher.getPlayerCipher().A).toBeUndefined();
 		});
 
 		it("should not select non-alphabetic characters", () => {

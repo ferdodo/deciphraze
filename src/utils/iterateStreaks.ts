@@ -3,13 +3,13 @@ import type { GameHistory } from "../types/GameHistory";
 export function* iterateStreaks(
 	gameHistory: GameHistory,
 ): IterableIterator<number> {
-	if (gameHistory.size === 0) {
-		return;
-	}
-
-	const sessions = Array.from(gameHistory.entries())
+	const sessions = Object.entries(gameHistory)
 		.map(([winAt, lettersFound]) => ({ winAt, lettersFound }))
 		.sort((a, b) => a.winAt.localeCompare(b.winAt));
+
+	if (sessions.length === 0) {
+		return;
+	}
 
 	let currentStreak = 1;
 

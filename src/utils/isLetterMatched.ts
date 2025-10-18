@@ -10,7 +10,7 @@ export const isLetterMatched = (
 	playerCipher: PlayerCipher
 ): boolean => {
 	if (selectedSymbol !== null) {
-		for (const [initialChar, decodedChar] of playerCipher.entries()) {
+		for (const [initialChar, decodedChar] of Object.entries(playerCipher)) {
 			if (
 				characterEquals(initialChar, character) &&
 				characterEquals(decodedChar, selectedSymbol)

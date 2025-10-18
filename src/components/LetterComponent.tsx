@@ -16,7 +16,7 @@ interface LetterComponentProps {
 	character: string;
 }
 
-export function LetterComponent({ character }: LetterComponentProps) {
+export function LetterComponent({ character }: LetterComponentProps): JSX.Element {
 	const playerCipher: PlayerCipher = usePlayerCipher();
 	const selectedLetter: LetterSelection = useLetterSelection();
 	const playerCipherRepository = usePlayerCipherRepository();
@@ -24,7 +24,7 @@ export function LetterComponent({ character }: LetterComponentProps) {
 	const selectedSymbol = useSymbolSelection();
 	const symbolSelectionRepository = useSymbolSelectionRepository();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
-	const highlighted = playerCipher.has(normalizedCharacter);
+	const highlighted = normalizedCharacter in playerCipher;
 	const selected = characterEquals(selectedLetter ?? '', character);
 	const matched = isLetterMatched(character, selectedLetter, selectedSymbol, playerCipher);
 
@@ -34,7 +34,7 @@ export function LetterComponent({ character }: LetterComponentProps) {
 		matched ? styles.matched : "",
 	].join(" ");
 	
-	const clickSelectLetter = () => {
+	const clickSelectLetter = (): void => {
 		selectLetter(character, letterSelectionRepository, symbolSelectionRepository, playerCipherRepository);
 	};
 

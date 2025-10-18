@@ -8,7 +8,7 @@ interface FragmentComponentProps {
 	character: string;
 }
 
-export function FragmentComponent({ character }: FragmentComponentProps) {
+export function FragmentComponent({ character }: FragmentComponentProps): JSX.Element {
 	const playerCipher = usePlayerCipher();
 	const cellType = computeCellType(character, playerCipher);
 	const sanitizedCharacter = useSanitizedCharacter(character);
@@ -19,7 +19,7 @@ export function FragmentComponent({ character }: FragmentComponentProps) {
 			{cellType === "letter" ? (
 				<span className={styles.letter}>{sanitizedCharacter}</span>
 			) : (
-				<span className={`${styles.symbol} ${styles.symbols}`}>{character}</span>
+				<span className={`${styles.symbol} ${styles.symbols}`}>{character.toUpperCase()}</span>
 			)}
 		</span>
 	);

@@ -2,21 +2,32 @@ import { describe, it, expect } from "vitest";
 import { createPlayerCipher } from "./createPlayerCipher";
 
 describe("createPlayerCipher", () => {
-	let playerCipher: ReturnType<typeof createPlayerCipher>;
 
 	describe("removePlayerCipherEntryByValue", () => {
 		it("should remove entries with matching value", () => {
-			playerCipher = createPlayerCipher();
+			const playerCipher = createPlayerCipher();
 			playerCipher.addPlayerCipherEntry("A", "X");
 			playerCipher.addPlayerCipherEntry("B", "Y");
 			playerCipher.addPlayerCipherEntry("C", "X");
 			playerCipher.removePlayerCipherEntryByValue("X");
 			const cipher = playerCipher.getPlayerCipher();
 
-			expect(cipher.size).toBe(1);
-			expect(cipher.get("A")).toBeUndefined();
-			expect(cipher.get("B")).toBe("Y");
-			expect(cipher.get("C")).toBeUndefined();
+			expect(Object.keys(cipher)).toHaveLength(1);
+			expect(cipher.A).toBeUndefined();
+			expect(cipher.B).toBe("Y");
+			expect(cipher.C).toBeUndefined();
+		});
+
+	});
+
+	describe("localStorage persistence", () => {
+
+		it("should load from localStorage on initialization", () => {
+			localStorage.setItem("deciphraze_player_cipher", '{"B":"Y"}');
+			const newPlayerCipher = createPlayerCipher();
+			const cipher = newPlayerCipher.getPlayerCipher();
+			
+			expect(cipher.B).toBe("Y");
 		});
 
 	});

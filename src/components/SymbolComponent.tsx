@@ -16,7 +16,7 @@ interface SymbolComponentProps {
 	character: string;
 }
 
-export function SymbolComponent({ character }: SymbolComponentProps) {
+export function SymbolComponent({ character }: SymbolComponentProps): JSX.Element {
 	const playerCipherMap: PlayerCipher = usePlayerCipher();
 	const selectedLetter: LetterSelection = useLetterSelection();
 	const playerCipherRepository = usePlayerCipherRepository();
@@ -25,7 +25,7 @@ export function SymbolComponent({ character }: SymbolComponentProps) {
 	const selectedSymbol = useSymbolSelection();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
 	const matched = isSymbolMatched(character, selectedLetter, playerCipherMap);
-    const highlighted = [...playerCipherMap.values()].includes(normalizedCharacter);
+    const highlighted = Object.values(playerCipherMap).includes(normalizedCharacter);
 	const selected = characterEquals(selectedSymbol ?? '', character);
 
 	const spanClassName = [
@@ -35,7 +35,7 @@ export function SymbolComponent({ character }: SymbolComponentProps) {
 		matched ? styles.matched : "",
 	].join(" ");
 
-	const clickSelectSymbol = () => {
+	const clickSelectSymbol = (): void => {
 		selectSymbol(
 			character,
 			letterSelectionRepository,
@@ -52,7 +52,7 @@ export function SymbolComponent({ character }: SymbolComponentProps) {
 		>
 			<div className={styles.symbolContainer}>
 				<span className={spanClassName}>
-					{character}
+					{character.toUpperCase()}
 				</span>
 			</div>
 		</button>

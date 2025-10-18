@@ -8,7 +8,7 @@ export const computeCellType = (character: string, playerCipherMap: PlayerCipher
 		return "letter";
 	}
 	
-	for (const [, decodedValue] of playerCipherMap.entries()) {
+	for (const [, decodedValue] of Object.entries(playerCipherMap)) {
 		if (characterEquals(character, decodedValue)) {
 			return "letter";
 		}

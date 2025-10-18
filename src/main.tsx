@@ -1,10 +1,11 @@
 import type React from "react";
 import { useMemo } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 import { paragraphOfTheDay } from "./paragraphOfTheDay";
 import { FragmentComponent } from "./components/FragmentComponent";
 import { LetterComponent } from "./components/LetterComponent";
 import { SymbolComponent } from "./components/SymbolComponent";
+import { AchievementsComponent } from "./components/AchievementsComponent";
 import { GameProvider } from "./providers/GameProvider";
 import { generateRandomAlphabet } from "./utils/generateRandomAlphabet";
 import { useMatchCount } from "./hooks/useMatchCount";
@@ -18,11 +19,14 @@ const GameApp: React.FC = () => {
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-	const alphabetRandom = useMemo(() => generateRandomAlphabet(), []);
+	const alphabetRandom = useMemo(() => {
+		const CHEAT_MODE = true;
+		return generateRandomAlphabet(CHEAT_MODE);
+	}, []);
 	const win = useWin();
 	const matchCount = useMatchCount();
 
-	const handleShare = () => {
+	const handleShare = (): void => {
 		share(matchCount);
 	};
 
@@ -71,6 +75,8 @@ const GameApp: React.FC = () => {
 						{paragraphOfYesterday}
 					</details>
 				</crumbs-p>
+
+				<AchievementsComponent />
 			</div>
 
 			{win && (
@@ -99,6 +105,6 @@ const App: React.FC = () => {
 	);
 };
 
-const container = document.body;
-const root = createRoot(container);
+const container: HTMLElement = document.body;
+const root: Root = createRoot(container);
 root.render(<App />);

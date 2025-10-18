@@ -1,25 +1,24 @@
 import type { GameHistory } from "../types/GameHistory";
-import type { Achievement } from "../types/Achievement";
+import type { AllAchievements } from "../types/AllAchievements";
 import { calculateMaxStreak } from "./calculateMaxStreak";
+import { calculateCurrentStreak } from "./calculateCurrentStreak";
+import { defaultAchievements } from "../constants/defaultAchievements";
 
-export function calculateAchievements(gameHistory: GameHistory): Achievement[] {
-	const achievements: Achievement[] = [];
-
-	if (gameHistory.size > 0) {
-		achievements.push({
-			achievementId: "first_game",
-			name: "Premier pas",
-			description: "Jouer votre première partie",
-		});
-	}
-
-	if (calculateMaxStreak(gameHistory) >= 5) {
-		achievements.push({
-			achievementId: "streak_5_days",
-			name: "Série de 5 jours",
-			description: "Réussir une partie 5 jours consécutifs",
-		});
-	}
+export function calculateAchievements(gameHistory: GameHistory): AllAchievements {
+	const achievements: AllAchievements = {
+		firstGame: {
+			...defaultAchievements.firstGame,
+			unlocked: Object.keys(gameHistory).length > 0
+		},
+		streak5Days: {
+			...defaultAchievements.streak5Days,
+			unlocked: calculateMaxStreak(gameHistory) >= 5,
+			progress: {
+				current: calculateCurrentStreak(gameHistory, 0),
+				target: 5
+			}
+		}
+	};
 
 	return achievements;
 }

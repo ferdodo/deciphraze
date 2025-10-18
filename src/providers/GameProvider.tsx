@@ -4,22 +4,28 @@ import { createLetterSelection } from "../utils/createLetterSelection";
 import { createPlayerCipher } from "../utils/createPlayerCipher";
 import { createSymbolSelection } from "../utils/createSymbolSelection";
 import { createCipherRepository } from "../utils/createCipherRepository";
+import { createGameHistoryRepository } from "../utils/createGameHistoryRepository";
+import { createAchievementRepository } from "../utils/createAchievementRepository";
 
 interface GameProviderProps {
 	children: React.ReactNode;
 }
 
-export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
+export const GameProvider: React.FC<GameProviderProps> = ({ children }: GameProviderProps) => {
 	const letterSelection = createLetterSelection();
 	const playerCipher = createPlayerCipher();
 	const symbolSelection = createSymbolSelection();
 	const cipherRepository = createCipherRepository();
+	const gameHistoryRepository = createGameHistoryRepository();
+	const achievementRepository = createAchievementRepository();
 
 	const value = {
 		letterSelectionRepository: letterSelection,
 		playerCipherRepository: playerCipher,
 		symbolSelectionRepository: symbolSelection,
 		cipherRepository: cipherRepository,
+		gameHistoryRepository: gameHistoryRepository,
+		achievementRepository: achievementRepository,
 	};
 
 	return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

@@ -9,7 +9,7 @@ export const computeSanitizedCharacter = (
 	cellType: CellType
 ): string => {
 	if (cellType === "letter") {
-		for (const [key, decodedValue] of playerCipherMap.entries()) {
+		for (const [key, decodedValue] of Object.entries(playerCipherMap)) {
 			if (characterEquals(character, decodedValue)) {
 				return normalizeWord(key).toUpperCase();
 			}
