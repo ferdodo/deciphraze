@@ -7,4 +7,5 @@ describe("randomNumberForYesterday", () => {
 		expect(result).toBeGreaterThanOrEqual(5);
 		expect(result).toBeLessThan(10);
 	});
+
 });
