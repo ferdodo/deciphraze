@@ -44,6 +44,9 @@ function rebuild {
 	set -e
 	at-least-3GB-free-space
 	docker compose up -d --build
+	
+	docker cp deciphraze-frontend-1:/deciphraze/stryker-incremental.json .
+	
 	print_startup
     trap rebuild SIGINT
 	set +e
@@ -64,6 +67,9 @@ setup_pre_commit_hook
 at-least-3GB-free-space
 trap rebuild SIGINT
 docker compose up -d --build
+
+docker cp deciphraze-frontend-1:/deciphraze/stryker-incremental.json .
+
 print_startup
 set +e
 
