@@ -1,7 +1,7 @@
 import type { AllAchievements } from "../types/AllAchievements";
 
 export const defaultAchievements: AllAchievements = {
-	computedAtDate: new Date().toISOString(),
+	computedAtDate: "2024-01-01T00:00:00.000Z",
 	achievements: {
 		firstGame: {
 			achievementId: "first_game",

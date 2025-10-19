@@ -2,28 +2,19 @@ import type { GameHistory } from "../types/GameHistory";
 import type { AllAchievements } from "../types/AllAchievements";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
-import { defaultAchievements } from "../constants/defaultAchievements";
+import { createAllAchievements } from "../factories/createAllAchievements";
 
 export function calculateAchievements(gameHistory: GameHistory): AllAchievements {
-	const computedAtDate = new Date().toISOString();
-	
-	const achievements: AllAchievements = {
-		computedAtDate,
-		achievements: {
-			firstGame: {
-				...defaultAchievements.achievements.firstGame,
-				unlocked: Object.keys(gameHistory).length > 0
-			},
-			streak5Days: {
-				...defaultAchievements.achievements.streak5Days,
-				unlocked: calculateMaxStreak(gameHistory) >= 5,
-				progress: {
-					current: calculateCurrentStreak(gameHistory, 0),
-					target: 5
-				}
-			}
-		}
+	const firstGameUnlocked = Object.keys(gameHistory).length > 0;
+	const streak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
+	const streak5DaysProgress = {
+		current: calculateCurrentStreak(gameHistory, 0),
+		target: 5 as const
 	};
 
-	return achievements;
+	return createAllAchievements(
+		firstGameUnlocked,
+		streak5DaysUnlocked,
+		streak5DaysProgress
+	);
 }
