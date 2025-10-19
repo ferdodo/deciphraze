@@ -7,20 +7,23 @@ describe("createAchievementRepository", () => {
 	it("should save and load achievements", () => {
 		const repository = createAchievementRepository();
 		const achievements: AllAchievements = {
-			firstGame: {
-				achievementId: "first_game",
-				name: "Premier pas",
-				description: "Jouer votre première partie",
-				unlocked: true
-			},
-			streak5Days: {
-				achievementId: "streak_5_days",
-				name: "Série de 5 jours",
-				description: "Réussir une partie 5 jours consécutifs",
-				unlocked: false,
-				progress: {
-					current: 0,
-					target: 5
+			computedAtDate: "2024-01-01T00:00:00.000Z",
+			achievements: {
+				firstGame: {
+					achievementId: "first_game",
+					name: "Premier pas",
+					description: "Jouer votre première partie",
+					unlocked: true
+				},
+				streak5Days: {
+					achievementId: "streak_5_days",
+					name: "Série de 5 jours",
+					description: "Réussir une partie 5 jours consécutifs",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 5
+					}
 				}
 			}
 		};
@@ -37,8 +40,9 @@ describe("createAchievementRepository", () => {
 		const achievements = repository.loadAchievements();
 		
 		expect(achievements).toBeDefined();
-		expect(achievements.firstGame).toBeDefined();
-		expect(achievements.streak5Days).toBeDefined();
+		expect(achievements.computedAtDate).toBeDefined();
+		expect(achievements.achievements.firstGame).toBeDefined();
+		expect(achievements.achievements.streak5Days).toBeDefined();
 	});
 
 
@@ -48,8 +52,9 @@ describe("createAchievementRepository", () => {
 		const achievements = repository.loadAchievements();
 		
 		expect(achievements).toBeDefined();
-		expect(achievements.firstGame).toBeDefined();
-		expect(achievements.streak5Days).toBeDefined();
+		expect(achievements.computedAtDate).toBeDefined();
+		expect(achievements.achievements.firstGame).toBeDefined();
+		expect(achievements.achievements.streak5Days).toBeDefined();
 	});
 
 

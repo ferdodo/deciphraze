@@ -22,18 +22,21 @@ describe("registerWinnedGame", () => {
 
 		const achievementRepo: AchievementRepository = {
 			loadAchievements: () => ({
-				firstGame: {
-					achievementId: "first_game",
-					name: "Premier pas",
-					description: "Jouer votre première partie",
-					unlocked: false
-				},
-				streak5Days: {
-					achievementId: "streak_5_days",
-					name: "Série de 5 jours",
-					description: "Réussir une partie 5 jours consécutifs",
-					unlocked: false,
-					progress: { current: 0, target: 5 }
+				computedAtDate: "2024-01-01T00:00:00.000Z",
+				achievements: {
+					firstGame: {
+						achievementId: "first_game",
+						name: "Premier pas",
+						description: "Jouer votre première partie",
+						unlocked: false
+					},
+					streak5Days: {
+						achievementId: "streak_5_days",
+						name: "Série de 5 jours",
+						description: "Réussir une partie 5 jours consécutifs",
+						unlocked: false,
+						progress: { current: 0, target: 5 }
+					}
 				}
 			}),
 		saveAchievements: (achievements: AllAchievements) => {
@@ -55,7 +58,7 @@ describe("registerWinnedGame", () => {
 		expect(addSessionCalled).toBe(true);
 		expect(saveAchievementsCalled).toBe(true);
 		expect(savedAchievements).toBeDefined();
-		expect(savedAchievements?.firstGame.unlocked).toBe(true);
+		expect(savedAchievements?.achievements.firstGame.unlocked).toBe(true);
 	});
 
 
@@ -78,18 +81,21 @@ describe("registerWinnedGame", () => {
 		let savedAchievements: AllAchievements | undefined;
 		const achievementRepoWithTracking: AchievementRepository = {
 			loadAchievements: () => ({
-				firstGame: {
-					achievementId: "first_game",
-					name: "Premier pas",
-					description: "Jouer votre première partie",
-					unlocked: false
-				},
-				streak5Days: {
-					achievementId: "streak_5_days",
-					name: "Série de 5 jours",
-					description: "Réussir une partie 5 jours consécutifs",
-					unlocked: false,
-					progress: { current: 0, target: 5 }
+				computedAtDate: "2024-01-01T00:00:00.000Z",
+				achievements: {
+					firstGame: {
+						achievementId: "first_game",
+						name: "Premier pas",
+						description: "Jouer votre première partie",
+						unlocked: false
+					},
+					streak5Days: {
+						achievementId: "streak_5_days",
+						name: "Série de 5 jours",
+						description: "Réussir une partie 5 jours consécutifs",
+						unlocked: false,
+						progress: { current: 0, target: 5 }
+					}
 				}
 			}),
 		saveAchievements: (achievements: AllAchievements) => {
@@ -106,7 +112,7 @@ describe("registerWinnedGame", () => {
 		registerWinnedGame(gameSession, achievementRepoWithTracking, gameHistoryRepo);
 
 		expect(savedAchievements).toBeDefined();
-		expect(savedAchievements?.firstGame.unlocked).toBe(true);
-		expect(savedAchievements?.streak5Days.unlocked).toBe(true);
+		expect(savedAchievements?.achievements.firstGame.unlocked).toBe(true);
+		expect(savedAchievements?.achievements.streak5Days.unlocked).toBe(true);
 	});
 });

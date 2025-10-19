@@ -10,8 +10,9 @@ describe("calculateAchievements", () => {
 			gameHistory = {};
 			const achievements = calculateAchievements(gameHistory);
 
-			expect(achievements.firstGame.unlocked).toBe(false);
-			expect(achievements.streak5Days.unlocked).toBe(false);
+			expect(achievements.computedAtDate).toBeDefined();
+			expect(achievements.achievements.firstGame.unlocked).toBe(false);
+			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 		});
 	});
 
@@ -27,11 +28,12 @@ describe("calculateAchievements", () => {
 
 			const achievements = calculateAchievements(gameHistory);
 
-			expect(achievements.firstGame.unlocked).toBe(true);
-			expect(achievements.streak5Days.unlocked).toBe(true);
-			expect(achievements.streak5Days.achievementId).toBe("streak_5_days");
-			expect(achievements.streak5Days.name).toBe("Série de 5 jours");
-			expect(achievements.streak5Days.description).toBe(
+			expect(achievements.computedAtDate).toBeDefined();
+			expect(achievements.achievements.firstGame.unlocked).toBe(true);
+			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
+			expect(achievements.achievements.streak5Days.achievementId).toBe("streak_5_days");
+			expect(achievements.achievements.streak5Days.name).toBe("Série de 5 jours");
+			expect(achievements.achievements.streak5Days.description).toBe(
 				"Réussir une partie 5 jours consécutifs",
 			);
 		});

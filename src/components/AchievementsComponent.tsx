@@ -11,43 +11,43 @@ export const AchievementsComponent: React.FC = () => {
 			<div className={styles.achievementsList}>
 				{/* Premier pas */}
 				<div 
-					key={achievements.firstGame.achievementId} 
-					className={`${styles.achievement} ${achievements.firstGame.unlocked ? styles.unlocked : styles.locked}`}
+					key={achievements.achievements.firstGame.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.firstGame.unlocked ? styles.unlocked : styles.locked}`}
 				>
 					<div className={styles.achievementIcon}>
-						{achievements.firstGame.unlocked ? "🏆" : "🔒"}
+						{achievements.achievements.firstGame.unlocked ? "🏆" : "🔒"}
 					</div>
 					<div className={styles.achievementContent}>
-						<div className={styles.achievementName}>{achievements.firstGame.name}</div>
+						<div className={styles.achievementName}>{achievements.achievements.firstGame.name}</div>
 						<div className={styles.achievementDescription}>
-							{achievements.firstGame.description}
+							{achievements.achievements.firstGame.description}
 						</div>
 					</div>
 				</div>
 
 				{/* Série de 5 jours */}
 				<div 
-					key={achievements.streak5Days.achievementId} 
-					className={`${styles.achievement} ${achievements.streak5Days.unlocked ? styles.unlocked : styles.locked}`}
+					key={achievements.achievements.streak5Days.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.streak5Days.unlocked ? styles.unlocked : styles.locked}`}
 				>
 					<div className={styles.achievementIcon}>
-						{achievements.streak5Days.unlocked ? "🏆" : "🔒"}
+						{achievements.achievements.streak5Days.unlocked ? "🏆" : "🔒"}
 					</div>
 					<div className={styles.achievementContent}>
-						<div className={styles.achievementName}>{achievements.streak5Days.name}</div>
+						<div className={styles.achievementName}>{achievements.achievements.streak5Days.name}</div>
 						<div className={styles.achievementDescription}>
-							{achievements.streak5Days.description}
+							{achievements.achievements.streak5Days.description}
 						</div>
-						{!achievements.streak5Days.unlocked && achievements.streak5Days.progress.current > 0 && (
+						{!achievements.achievements.streak5Days.unlocked && achievements.achievements.streak5Days.progress.current > 0 && (
 							<div className={styles.progressContainer}>
 								<div className={styles.progressBar}>
 									<div 
 										className={styles.progressFill}
-										style={{ width: `${(achievements.streak5Days.progress.current / achievements.streak5Days.progress.target) * 100}%` }}
+										style={{ width: `${(achievements.achievements.streak5Days.progress.current / achievements.achievements.streak5Days.progress.target) * 100}%` }}
 									></div>
 								</div>
 								<div className={styles.progressText}>
-									{achievements.streak5Days.progress.current}/{achievements.streak5Days.progress.target} jours
+									{achievements.achievements.streak5Days.progress.current}/{achievements.achievements.streak5Days.progress.target} jours
 								</div>
 							</div>
 						)}
