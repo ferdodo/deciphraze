@@ -1,8 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { of } from "rxjs";
 import { registerWinnedGame } from "./registerWinnedGame";
+import { createAchievementRepositoryMock } from "../mocks/createAchievementRepositoryMock";
 import type { GameSession } from "../types/GameSession";
-import type { AchievementRepository } from "../types/AchievementRepository";
 import type { GameHistoryRepository } from "../types/GameHistoryRepository";
 import type { GameHistory } from "../types/GameHistory";
 import type { AllAchievements } from "../types/AllAchievements";
@@ -20,31 +19,13 @@ describe("registerWinnedGame", () => {
 		let saveAchievementsCalled = false;
 		let savedAchievements: AllAchievements | undefined;
 
-		const achievementRepo: AchievementRepository = {
-			loadAchievements: () => ({
-				computedAtDate: "2024-01-01T00:00:00.000Z",
-				achievements: {
-					firstGame: {
-						achievementId: "first_game",
-						name: "Premier pas",
-						description: "Jouer votre première partie",
-						unlocked: false
-					},
-					streak5Days: {
-						achievementId: "streak_5_days",
-						name: "Série de 5 jours",
-						description: "Réussir une partie 5 jours consécutifs",
-						unlocked: false,
-						progress: { current: 0, target: 5 }
-					}
-				}
-			}),
-		saveAchievements: (achievements: AllAchievements) => {
-			saveAchievementsCalled = true;
-			savedAchievements = achievements;
-		},
-			achievements$: of({} as AllAchievements)
-		};
+		const achievementRepo = createAchievementRepositoryMock(
+			undefined,
+			(achievements: AllAchievements) => {
+				saveAchievementsCalled = true;
+				savedAchievements = achievements;
+			}
+		);
 
 		const gameHistoryRepo: GameHistoryRepository = {
 			getHistory: () => ({ "2024-01-15": ["A", "B"] }),
@@ -79,30 +60,12 @@ describe("registerWinnedGame", () => {
 		};
 
 		let savedAchievements: AllAchievements | undefined;
-		const achievementRepoWithTracking: AchievementRepository = {
-			loadAchievements: () => ({
-				computedAtDate: "2024-01-01T00:00:00.000Z",
-				achievements: {
-					firstGame: {
-						achievementId: "first_game",
-						name: "Premier pas",
-						description: "Jouer votre première partie",
-						unlocked: false
-					},
-					streak5Days: {
-						achievementId: "streak_5_days",
-						name: "Série de 5 jours",
-						description: "Réussir une partie 5 jours consécutifs",
-						unlocked: false,
-						progress: { current: 0, target: 5 }
-					}
-				}
-			}),
-		saveAchievements: (achievements: AllAchievements) => {
-			savedAchievements = achievements;
-		},
-			achievements$: of({} as AllAchievements)
-		};
+		const achievementRepoWithTracking = createAchievementRepositoryMock(
+			undefined,
+			(achievements: AllAchievements) => {
+				savedAchievements = achievements;
+			}
+		);
 
 		const gameSession: GameSession = {
 			winAt: "2024-01-15",
