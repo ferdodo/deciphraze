@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { createSymbolSelection } from "./createSymbolSelection";
 
 describe("createSymbolSelection", () => {
-
 	it("should select a symbol", () => {
 		const symbolSelection = createSymbolSelection();
 		symbolSelection.selectSymbol("X");
