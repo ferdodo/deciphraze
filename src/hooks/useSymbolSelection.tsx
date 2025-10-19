@@ -4,7 +4,7 @@ import type { SymbolSelection } from "../types/SymbolSelection";
 
 export const useSymbolSelection = (): SymbolSelection => {
 	const { symbolSelectionRepository } = useGameContext();
-	const [selectedSymbol, setSelectedSymbol] = useState<SymbolSelection>(null);
+	const [selectedSymbol, setSelectedSymbol] = useState<SymbolSelection>(symbolSelectionRepository.getSymbolSelection());
 
 	useEffect(() => {
 		const subscription = symbolSelectionRepository.symbolSelection$.subscribe((value: SymbolSelection) => {
