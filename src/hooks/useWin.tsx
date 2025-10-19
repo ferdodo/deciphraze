@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePlayerCipherRepository } from "./usePlayerCipherRepository";
-import { letterFound } from "../utils/letterFound";
+import { isWin } from "../utils/isWin";
 import { paragraphOfTheDay } from "../paragraphOfTheDay";
 
 export const useWin = (): boolean => {
@@ -10,15 +10,7 @@ export const useWin = (): boolean => {
 	useEffect(() => {
 		const playerCipherSubscription = playerCipherRepository.playerCipher$.subscribe(
 			(playerCipher) => {
-				if (
-					[...paragraphOfTheDay].every((letter) =>
-						letterFound(letter, playerCipher),
-					)
-				) {
-					setWin(true);
-				} else {
-					setWin(false);
-				}
+				setWin(isWin(playerCipher, paragraphOfTheDay));
 			},
 		);
 
