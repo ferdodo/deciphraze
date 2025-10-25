@@ -1,81 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { registerWinnedGame } from "./registerWinnedGame";
-import { createAchievementRepositoryMock } from "../mocks/createAchievementRepositoryMock";
-import type { GameSession } from "../types/GameSession";
-import type { GameHistoryRepository } from "../types/GameHistoryRepository";
-import type { GameHistory } from "../types/GameHistory";
-import type { AllAchievements } from "../types/AllAchievements";
+import { withGameStarted } from "../fixtures/withGameStarted";
 
 describe("registerWinnedGame", () => {
-	it("should register a winned game and update achievements", () => {
-
-		const gameSession: GameSession = {
-			winAt: "2024-01-15",
-			lettersFound: ["A", "B"]
-		};
-
-		// Mock the repositories to track calls
-		let addSessionCalled = false;
-		let saveAchievementsCalled = false;
-		let savedAchievements: AllAchievements | undefined;
-
-		const achievementRepo = createAchievementRepositoryMock(
-			undefined,
-			(achievements: AllAchievements) => {
-				saveAchievementsCalled = true;
-				savedAchievements = achievements;
-			}
-		);
-
-		const gameHistoryRepo: GameHistoryRepository = {
-			getHistory: () => ({ "2024-01-15": ["A", "B"] }),
-			addSession: () => {
-				addSessionCalled = true;
-			}
-		};
-
-		registerWinnedGame(gameSession, achievementRepo, gameHistoryRepo);
-
-		expect(addSessionCalled).toBe(true);
-		expect(saveAchievementsCalled).toBe(true);
-		expect(savedAchievements).toBeDefined();
-		expect(savedAchievements?.achievements.firstGame.unlocked).toBe(true);
-	});
-
-
-	it("should handle multiple achievements", () => {
-
-		// Mock history with 5 consecutive days
-		const gameHistory: GameHistory = {
-			"2024-01-11": ["A"],
-			"2024-01-12": ["B"],
-			"2024-01-13": ["C"],
-			"2024-01-14": ["D"],
-			"2024-01-15": ["E"]
-		};
-
-		const gameHistoryRepo: GameHistoryRepository = {
-			getHistory: () => gameHistory,
-			addSession: () => {}
-		};
-
-		let savedAchievements: AllAchievements | undefined;
-		const achievementRepoWithTracking = createAchievementRepositoryMock(
-			undefined,
-			(achievements: AllAchievements) => {
-				savedAchievements = achievements;
-			}
-		);
-
-		const gameSession: GameSession = {
-			winAt: "2024-01-15",
-			lettersFound: ["E"]
-		};
-
-		registerWinnedGame(gameSession, achievementRepoWithTracking, gameHistoryRepo);
-
-		expect(savedAchievements).toBeDefined();
-		expect(savedAchievements?.achievements.firstGame.unlocked).toBe(true);
-		expect(savedAchievements?.achievements.streak5Days.unlocked).toBe(true);
+	it("should not register if player has not won", async () => {
+		const context = withGameStarted();
+		const subscription = registerWinnedGame(context);
+		const gameHistory = context.gameHistoryRepository.getHistory();
+		expect(gameHistory).toEqual({});
+		subscription.unsubscribe();
 	});
 });

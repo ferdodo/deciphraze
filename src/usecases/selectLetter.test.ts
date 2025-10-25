@@ -14,7 +14,11 @@ describe("selectLetter", () => {
 			letterSelection = createLetterSelection();
 			symbolSelection = createSymbolSelection();
 			playerCipher = createPlayerCipher();
-			selectLetter("A", letterSelection, symbolSelection, playerCipher);
+			selectLetter("A", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
 
 			expect(letterSelection.getLetterSelection()).toBe("A");
 			expect(symbolSelection.getSymbolSelection()).toBeNull();
@@ -27,7 +31,11 @@ describe("selectLetter", () => {
 			letterSelection.selectLetter("A");
 			playerCipher.addPlayerCipherEntry("A", "X");
 
-			selectLetter("A", letterSelection, symbolSelection, playerCipher);
+			selectLetter("A", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
 
 			expect(letterSelection.getLetterSelection()).toBeNull();
 			expect(playerCipher.getPlayerCipher().A).toBeUndefined();
@@ -37,9 +45,21 @@ describe("selectLetter", () => {
 			letterSelection = createLetterSelection();
 			symbolSelection = createSymbolSelection();
 			playerCipher = createPlayerCipher();
-			selectLetter("1", letterSelection, symbolSelection, playerCipher);
-			selectLetter("@", letterSelection, symbolSelection, playerCipher);
-			selectLetter(" ", letterSelection, symbolSelection, playerCipher);
+			selectLetter("1", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
+			selectLetter("@", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
+			selectLetter(" ", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
 
 			expect(letterSelection.getLetterSelection()).toBeNull();
 		});

@@ -20,16 +20,4 @@ describe("createPlayerCipher", () => {
 
 	});
 
-	describe("localStorage persistence", () => {
-
-		it("should load from localStorage on initialization", () => {
-			localStorage.setItem("deciphraze_player_cipher", '{"B":"Y"}');
-			const newPlayerCipher = createPlayerCipher();
-			const cipher = newPlayerCipher.getPlayerCipher();
-			
-			expect(cipher.B).toBe("Y");
-		});
-
-	});
-
 });

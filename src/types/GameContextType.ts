@@ -4,6 +4,8 @@ import type { SymbolSelectionRepository } from "./SymbolSelectionRepository";
 import type { CipherRepository } from "./CipherRepository";
 import type { GameHistoryRepository } from "./GameHistoryRepository";
 import type { AchievementRepository } from "./AchievementRepository";
+import type { ParagraphOfTheDayRepository } from "./ParagraphOfTheDayRepository";
+import type { DayRepository } from "./DayRepository";
 
 export interface GameContextType {
 	letterSelectionRepository: LetterSelectionRepository;
@@ -12,4 +14,6 @@ export interface GameContextType {
 	cipherRepository: CipherRepository;
 	gameHistoryRepository: GameHistoryRepository;
 	achievementRepository: AchievementRepository;
+	paragraphOfTheDayRepository: ParagraphOfTheDayRepository;
+	dayRepository: DayRepository;
 }

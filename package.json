@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build": "biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run --ignoreStatic --incremental --incrementalFile stryker-incremental.json && node scripts/check-non-killing-tests.js && vite build",
+		"build": "tsc --noEmit && biome ci ./src && exportcase check ./src && vitest run && tsc && stryker run --ignoreStatic --incremental --incrementalFile stryker-incremental.json && node scripts/check-non-killing-tests.js && vite build",
 		"dev": "vite --host --port 1111"
 	},
 	"devDependencies": {

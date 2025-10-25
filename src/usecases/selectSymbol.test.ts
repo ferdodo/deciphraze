@@ -12,7 +12,11 @@ describe("selectSymbol", () => {
 			const letterSelection = createLetterSelectionRepositoryMock();
 			const symbolSelection = createSymbolSelectionRepositoryMock();
 			const playerCipher = createPlayerCipherRepositoryMock();
-			selectSymbol("X", letterSelection, symbolSelection, playerCipher);
+			selectSymbol("X", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
 
 			expect(symbolSelection.getSymbolSelection()).toBe("X");
 			expect(letterSelection.getLetterSelection()).toBeNull();
@@ -22,8 +26,16 @@ describe("selectSymbol", () => {
 			const letterSelection = createLetterSelectionRepositoryMock();
 			const symbolSelection = createSymbolSelectionRepositoryMock();
 			const playerCipher = createPlayerCipherRepositoryMock();
-			selectSymbol("1", letterSelection, symbolSelection, playerCipher);
-			selectSymbol("0", letterSelection, symbolSelection, playerCipher);
+			selectSymbol("1", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
+			selectSymbol("0", {
+				letterSelectionRepository: letterSelection,
+				symbolSelectionRepository: symbolSelection,
+				playerCipherRepository: playerCipher,
+			});
 
 			expect(symbolSelection.getSymbolSelection()).toBeNull();
 		});

@@ -1,22 +1,34 @@
-import type { GameSession } from "../types/GameSession";
-import type { AchievementRepository } from "../types/AchievementRepository";
-import type { GameHistoryRepository } from "../types/GameHistoryRepository";
+import type { Subscription } from "rxjs";
+import { filter } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
+import { isWin } from "../utils/isWin";
+import { createGameSession } from "../utils/createGameSession";
+import type { PlayerCipher } from "../types/PlayerCipher";
+import { GameContextType } from "../types/GameContextType";
 
-export function registerWinnedGame(
-	gameSession: GameSession,
-	achievementRepository: AchievementRepository,
-	gameHistoryRepository: GameHistoryRepository
-): void {
-	// 1. Sauvegarder la nouvelle partie
-	gameHistoryRepository.addSession(gameSession);
-	
-	// 2. Récupérer l'historique complet
-	const fullHistory = gameHistoryRepository.getHistory();
-	
-	// 3. Calculer les nouveaux achievements
-	const newAchievements = calculateAchievements(fullHistory);
-	
-	// 4. Sauvegarder les achievements
-	achievementRepository.saveAchievements(newAchievements);
+export function registerWinnedGame({
+	dayRepository,
+	paragraphOfTheDayRepository,
+	playerCipherRepository,
+	gameHistoryRepository,
+	achievementRepository,
+}: GameContextType): Subscription {
+	const day = dayRepository.getDay();
+	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
+
+	return playerCipherRepository.playerCipher$.pipe(
+		filter((playerCipher: PlayerCipher) => isWin(playerCipher, paragraphOfTheDay))
+	).subscribe((playerCipher: Record<string, string>) => {
+		const gameHistory = gameHistoryRepository.getHistory();
+
+		if (gameHistory[day]) {
+			return;
+		}
+
+		const gameSession = createGameSession(day, paragraphOfTheDay, playerCipher);
+		gameHistoryRepository.addSession(gameSession);
+		const fullHistory = gameHistoryRepository.getHistory();
+		const newAchievements = calculateAchievements(fullHistory);
+		achievementRepository.saveAchievements(newAchievements);
+	});
 }

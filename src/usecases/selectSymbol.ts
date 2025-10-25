@@ -1,38 +1,35 @@
-import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
-import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
 import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
+import type { SelectionContext } from "../types/SelectionContext";
 
 export const selectSymbol = (
 	character: string,
-	letterSelection: LetterSelectionRepository,
-	symbolSelection: SymbolSelectionRepository,
-	playerCipher: PlayerCipherRepository,
+    {
+		letterSelectionRepository,
+		symbolSelectionRepository,
+		playerCipherRepository,
+	}: SelectionContext,
 ): void => {
 	if (!isAlphabetic(character)) {
 		return;
 	}
 
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
-	const currentLetter = letterSelection.getLetterSelection();
-	const currentSymbol = symbolSelection.getSymbolSelection();
+	const currentLetter = letterSelectionRepository.getLetterSelection();
+	const currentSymbol = symbolSelectionRepository.getSymbolSelection();
 
-	// Si on clique sur le même symbole, on le désélectionne
 	if (currentSymbol === normalizedCharacter) {
-		playerCipher.removePlayerCipherEntryByValue(normalizedCharacter);
-		symbolSelection.selectSymbol(null);
+		playerCipherRepository.removePlayerCipherEntryByValue(normalizedCharacter);
+		symbolSelectionRepository.selectSymbol(null);
 		return;
 	}
 
-	// Si une lettre est déjà sélectionnée, créer l'association
 	if (currentLetter !== null) {
-		playerCipher.addPlayerCipherEntry(currentLetter, normalizedCharacter);
-		letterSelection.selectLetter(null);
-		symbolSelection.selectSymbol(null);
+		playerCipherRepository.addPlayerCipherEntry(currentLetter, normalizedCharacter);
+		letterSelectionRepository.selectLetter(null);
+		symbolSelectionRepository.selectSymbol(null);
 		return;
 	}
 
-	// Sinon, juste sélectionner le symbole
-	symbolSelection.selectSymbol(normalizedCharacter);
+	symbolSelectionRepository.selectSymbol(normalizedCharacter);
 };

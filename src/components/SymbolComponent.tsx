@@ -36,12 +36,11 @@ export function SymbolComponent({ character }: SymbolComponentProps): JSX.Elemen
 	].join(" ");
 
 	const clickSelectSymbol = (): void => {
-		selectSymbol(
-			character,
+		selectSymbol(character, {
 			letterSelectionRepository,
 			symbolSelectionRepository,
 			playerCipherRepository,
-		);
+		});
 	};
 
 	return (

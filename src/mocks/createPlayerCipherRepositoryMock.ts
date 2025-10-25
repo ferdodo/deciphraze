@@ -1,8 +1,8 @@
 import { BehaviorSubject } from "rxjs";
 import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
 
-export const createPlayerCipherRepositoryMock = (): PlayerCipherRepository => {
-	const playerCipherSubject = new BehaviorSubject<Record<string, string>>({});
+export const createPlayerCipherRepositoryMock = (initialCipher: Record<string, string> = {}): PlayerCipherRepository & { playerCipherSubject: BehaviorSubject<Record<string, string>> } => {
+	const playerCipherSubject = new BehaviorSubject<Record<string, string>>(initialCipher);
 	
 	return {
 		getPlayerCipher: () => playerCipherSubject.value,
@@ -26,6 +26,7 @@ export const createPlayerCipherRepositoryMock = (): PlayerCipherRepository => {
 			currentCipher[letter] = symbol;
 			playerCipherSubject.next(currentCipher);
 		},
-		playerCipher$: playerCipherSubject.asObservable()
+		playerCipher$: playerCipherSubject.asObservable(),
+		playerCipherSubject // Expose the subject for testing
 	};
 };

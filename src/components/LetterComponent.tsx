@@ -35,7 +35,11 @@ export function LetterComponent({ character }: LetterComponentProps): JSX.Elemen
 	].join(" ");
 	
 	const clickSelectLetter = (): void => {
-		selectLetter(character, letterSelectionRepository, symbolSelectionRepository, playerCipherRepository);
+		selectLetter(character, {
+			letterSelectionRepository,
+			symbolSelectionRepository,
+			playerCipherRepository,
+		});
 	};
 
 	return (
