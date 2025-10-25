@@ -8,6 +8,7 @@ export function createGameSession(
 	playerCipher: PlayerCipher
 ): GameSession {
 	const lettersFound = [...paragraphOfTheDay]
+		.filter(letter => letter.match(/[a-zA-Z]/)) // Seulement les lettres alphabétiques
 		.filter(letter => letterFound(letter, playerCipher))
 		.filter((letter, index, array) => array.indexOf(letter) === index);
 

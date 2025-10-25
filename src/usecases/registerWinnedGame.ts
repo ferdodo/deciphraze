@@ -1,5 +1,5 @@
 import type { Subscription } from "rxjs";
-import { filter } from "rxjs/operators";
+import { filter, startWith } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
@@ -17,6 +17,7 @@ export function registerWinnedGame({
 	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
 
 	return playerCipherRepository.playerCipher$.pipe(
+		startWith(playerCipherRepository.getPlayerCipher()),
 		filter((playerCipher: PlayerCipher) => isWin(playerCipher, paragraphOfTheDay))
 	).subscribe((playerCipher: Record<string, string>) => {
 		const gameHistory = gameHistoryRepository.getHistory();
