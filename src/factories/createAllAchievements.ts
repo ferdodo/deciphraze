@@ -5,6 +5,7 @@ export function createAllAchievements(
 	firstGameUnlocked: boolean = false,
 	streak5DaysUnlocked: boolean = false,
 	streak5DaysProgress: { current: number; target: 5 } = { current: 0, target: 5 },
+	firstLetterAUnlocked: boolean = false,
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -18,6 +19,10 @@ export function createAllAchievements(
 				...defaultAchievements.achievements.streak5Days,
 				unlocked: streak5DaysUnlocked,
 				progress: streak5DaysProgress
+			},
+			firstLetterA: {
+				...defaultAchievements.achievements.firstLetterA,
+				unlocked: firstLetterAUnlocked
 			}
 		}
 	};

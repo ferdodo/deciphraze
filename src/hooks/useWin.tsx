@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { usePlayerCipherRepository } from "./usePlayerCipherRepository";
 import { isWin } from "../utils/isWin";
-import { paragraphOfTheDay } from "../paragraphOfTheDay";
+import { useGameContext } from "../contexts/useGameContext";
 
 export const useWin = (): boolean => {
-	const playerCipherRepository = usePlayerCipherRepository();
+	const { playerCipherRepository, paragraphOfTheDayRepository } = useGameContext();
+	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
 	const [win, setWin] = useState(false);
 
 	useEffect(() => {
@@ -17,7 +17,7 @@ export const useWin = (): boolean => {
 		return () => {
 			playerCipherSubscription.unsubscribe();
 		};
-	}, [playerCipherRepository]);
+	}, [playerCipherRepository, paragraphOfTheDay]);
 
 	return win;
 };

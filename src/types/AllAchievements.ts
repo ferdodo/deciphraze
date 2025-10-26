@@ -17,5 +17,11 @@ export interface AllAchievements {
 				target: 5;
 			};
 		};
+		firstLetterA: {
+			achievementId: "first_letter_a";
+			name: "Commencer par A";
+			description: "Trouver la lettre A en premier";
+			unlocked: boolean;
+		};
 	};
 }

@@ -1,10 +1,10 @@
 import type { Subscription } from "rxjs";
-import { filter, startWith } from "rxjs/operators";
+import { filter } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
 import type { PlayerCipher } from "../types/PlayerCipher";
-import { GameContextType } from "../types/GameContextType";
+import type { GameContextType } from "../types/GameContextType";
 
 export function registerWinnedGame({
 	dayRepository,
@@ -12,24 +12,19 @@ export function registerWinnedGame({
 	playerCipherRepository,
 	gameHistoryRepository,
 	achievementRepository,
+	discoveryOrderRepository,
 }: GameContextType): Subscription {
 	const day = dayRepository.getDay();
 	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
 
 	return playerCipherRepository.playerCipher$.pipe(
-		startWith(playerCipherRepository.getPlayerCipher()),
 		filter((playerCipher: PlayerCipher) => isWin(playerCipher, paragraphOfTheDay))
-	).subscribe((playerCipher: Record<string, string>) => {
-		const gameHistory = gameHistoryRepository.getHistory();
-
-		if (gameHistory[day]) {
-			return;
-		}
-
-		const gameSession = createGameSession(day, paragraphOfTheDay, playerCipher);
+	).subscribe(() => {
+		const gameSession = createGameSession(day, discoveryOrderRepository);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
-		const newAchievements = calculateAchievements(fullHistory);
+		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);
+		const newAchievements = calculateAchievements(fullHistory, discoveryOrder);
 		achievementRepository.saveAchievements(newAchievements);
 	});
 }

@@ -1,19 +1,14 @@
-import type { PlayerCipher } from "../types/PlayerCipher";
 import type { GameSession } from "../types/GameSession";
-import { letterFound } from "./letterFound";
+import type { DiscoveryOrderRepository } from "../types/DiscoveryOrderRepository";
 
 export function createGameSession(
 	day: string,
-	paragraphOfTheDay: string,
-	playerCipher: PlayerCipher
+	discoveryOrderRepository: DiscoveryOrderRepository,
 ): GameSession {
-	const lettersFound = [...paragraphOfTheDay]
-		.filter(letter => letter.match(/[a-zA-Z]/)) // Seulement les lettres alphabétiques
-		.filter(letter => letterFound(letter, playerCipher))
-		.filter((letter, index, array) => array.indexOf(letter) === index);
+	const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);
 
 	return {
 		winAt: day,
-		lettersFound: lettersFound
+		lettersFound: discoveryOrder
 	};
 }

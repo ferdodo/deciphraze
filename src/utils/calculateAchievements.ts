@@ -1,20 +1,25 @@
 import type { GameHistory } from "../types/GameHistory";
 import type { AllAchievements } from "../types/AllAchievements";
+import type { DiscoveryOrder } from "../types/DiscoveryOrder";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
+import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
 
-export function calculateAchievements(gameHistory: GameHistory): AllAchievements {
+export function calculateAchievements(gameHistory: GameHistory, discoveryOrder: DiscoveryOrder): AllAchievements {
 	const firstGameUnlocked = Object.keys(gameHistory).length > 0;
 	const streak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
 	const streak5DaysProgress = {
 		current: calculateCurrentStreak(gameHistory, 0),
 		target: 5 as const
 	};
+	
+	const firstLetterAUnlocked = isFirstLetterFoundA(discoveryOrder);
 
 	return createAllAchievements(
 		firstGameUnlocked,
 		streak5DaysUnlocked,
-		streak5DaysProgress
+		streak5DaysProgress,
+		firstLetterAUnlocked
 	);
 }

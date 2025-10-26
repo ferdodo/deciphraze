@@ -6,7 +6,7 @@ import type { PlayerCipher } from "../types/PlayerCipher";
 
 
 export function createPlayerCipher(): PlayerCipherRepository {
-	let playerCipher: PlayerCipher = {};
+	const playerCipher: PlayerCipher = {};
 
 	const playerCipherSubject = new BehaviorSubject<PlayerCipher>({ ...playerCipher });
 

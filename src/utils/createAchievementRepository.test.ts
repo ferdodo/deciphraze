@@ -24,6 +24,12 @@ describe("createAchievementRepository", () => {
 						current: 0,
 						target: 5
 					}
+				},
+				firstLetterA: {
+					achievementId: "first_letter_a",
+					name: "Commencer par A",
+					description: "Trouver la lettre A en premier",
+					unlocked: false
 				}
 			}
 		};
@@ -43,6 +49,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.computedAtDate).toBeDefined();
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
+		expect(achievements.achievements.firstLetterA).toBeDefined();
 	});
 
 
@@ -55,6 +62,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.computedAtDate).toBeDefined();
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
+		expect(achievements.achievements.firstLetterA).toBeDefined();
 	});
 
 

@@ -1,5 +1,5 @@
 import type React from "react";
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { paragraphOfTheDay } from "../paragraphOfTheDay";
 import { FragmentComponent } from "./FragmentComponent";
 import { LetterComponent } from "./LetterComponent";
@@ -10,16 +10,8 @@ import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { share } from "../utils/share";
 import { paragraphOfYesterday } from "../paragraphOfYesterday";
-import { registerWinnedGame } from "../usecases/registerWinnedGame";
-import { useGameContext } from "../contexts/useGameContext";
 
 const Game: React.FC = () => {
-	const context = useGameContext();
-
-    useEffect(() => {
-        registerWinnedGame(context);
-    }, [context]);
-
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

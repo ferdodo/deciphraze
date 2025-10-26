@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { calculateAchievements } from "./calculateAchievements";
 import type { GameHistory } from "../types/GameHistory";
+import type { DiscoveryOrder } from "../types/DiscoveryOrder";
 
 describe("calculateAchievements", () => {
 	let gameHistory: GameHistory;
@@ -8,7 +9,8 @@ describe("calculateAchievements", () => {
 	describe("Empty history", () => {
 		it("should return no achievements", () => {
 			gameHistory = {};
-			const achievements = calculateAchievements(gameHistory);
+			const discoveryOrder: DiscoveryOrder = [];
+			const achievements = calculateAchievements(gameHistory, discoveryOrder);
 
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
@@ -25,8 +27,9 @@ describe("calculateAchievements", () => {
 				"2024-01-18": ["D"],
 				"2024-01-19": ["E"]
 			};
+			const discoveryOrder: DiscoveryOrder = ["A", "B", "C", "D", "E"];
 
-			const achievements = calculateAchievements(gameHistory);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder);
 
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(true);

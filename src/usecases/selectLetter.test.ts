@@ -1,68 +1,35 @@
 import { describe, it, expect } from "vitest";
 import { selectLetter } from "./selectLetter";
-import { createLetterSelection } from "../utils/createLetterSelection";
-import { createSymbolSelection } from "../utils/createSymbolSelection";
-import { createPlayerCipher } from "../utils/createPlayerCipher";
+import { withGameStarted } from "../fixtures/withGameStarted";
 
 describe("selectLetter", () => {
-	let letterSelection: ReturnType<typeof createLetterSelection>;
-	let symbolSelection: ReturnType<typeof createSymbolSelection>;
-	let playerCipher: ReturnType<typeof createPlayerCipher>;
 
 	describe("Basic selection", () => {
 		it("should select a letter when no symbol is selected", () => {
-			letterSelection = createLetterSelection();
-			symbolSelection = createSymbolSelection();
-			playerCipher = createPlayerCipher();
-			selectLetter("A", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-
-			expect(letterSelection.getLetterSelection()).toBe("A");
-			expect(symbolSelection.getSymbolSelection()).toBeNull();
+			const [cleanup, context] = withGameStarted();
+			selectLetter("A", context);
+			expect(context.letterSelectionRepository.getLetterSelection()).toBe("A");
+			expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
+			cleanup();
 		});
 
 		it("should deselect letter if already selected", () => {
-			letterSelection = createLetterSelection();
-			symbolSelection = createSymbolSelection();
-			playerCipher = createPlayerCipher();
-			letterSelection.selectLetter("A");
-			playerCipher.addPlayerCipherEntry("A", "X");
-
-			selectLetter("A", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-
-			expect(letterSelection.getLetterSelection()).toBeNull();
-			expect(playerCipher.getPlayerCipher().A).toBeUndefined();
+			const [cleanup, context] = withGameStarted();
+			context.letterSelectionRepository.selectLetter("A");
+			context.playerCipherRepository.addPlayerCipherEntry("A", "X");
+			selectLetter("A", context);
+			expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
+			expect(context.playerCipherRepository.getPlayerCipher().A).toBeUndefined();
+			cleanup();
 		});
 
 		it("should not select non-alphabetic characters", () => {
-			letterSelection = createLetterSelection();
-			symbolSelection = createSymbolSelection();
-			playerCipher = createPlayerCipher();
-			selectLetter("1", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-			selectLetter("@", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-			selectLetter(" ", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-
-			expect(letterSelection.getLetterSelection()).toBeNull();
+			const [cleanup, context] = withGameStarted();
+			selectLetter("1", context);
+			selectLetter("@", context);
+			selectLetter(" ", context);
+			expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
+			cleanup();
 		});
-
 	});
 });

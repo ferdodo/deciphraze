@@ -1,44 +1,23 @@
 import { describe, it, expect } from "vitest";
 import { selectSymbol } from "./selectSymbol";
-import {
-	createLetterSelectionRepositoryMock,
-	createSymbolSelectionRepositoryMock,
-	createPlayerCipherRepositoryMock
-} from "../mocks";
+import { withGameStarted } from "../fixtures/withGameStarted";
 
 describe("selectSymbol", () => {
 	describe("Basic selection", () => {
 		it("should select a symbol when no letter is selected", () => {
-			const letterSelection = createLetterSelectionRepositoryMock();
-			const symbolSelection = createSymbolSelectionRepositoryMock();
-			const playerCipher = createPlayerCipherRepositoryMock();
-			selectSymbol("X", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-
-			expect(symbolSelection.getSymbolSelection()).toBe("X");
-			expect(letterSelection.getLetterSelection()).toBeNull();
+			const [cleanup, context] = withGameStarted();
+			selectSymbol("X", context);
+			expect(context.symbolSelectionRepository.getSymbolSelection()).toBe("X");
+			expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
+			cleanup();
 		});
 
 		it("should not select non-alphabetic characters", () => {
-			const letterSelection = createLetterSelectionRepositoryMock();
-			const symbolSelection = createSymbolSelectionRepositoryMock();
-			const playerCipher = createPlayerCipherRepositoryMock();
-			selectSymbol("1", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-			selectSymbol("0", {
-				letterSelectionRepository: letterSelection,
-				symbolSelectionRepository: symbolSelection,
-				playerCipherRepository: playerCipher,
-			});
-
-			expect(symbolSelection.getSymbolSelection()).toBeNull();
+			const [cleanup, context] = withGameStarted();
+			selectSymbol("1", context);
+			selectSymbol("0", context);
+			expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
+			cleanup();
 		});
-
 	});
 });

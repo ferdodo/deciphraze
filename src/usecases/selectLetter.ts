@@ -1,15 +1,16 @@
 import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
-import { SelectionContext } from "../types/SelectionContext";
+import type { GameContextType } from "../types/GameContextType";
 
 export const selectLetter = (
 	character: string,
-    {
+	context: GameContextType,
+): void => {
+	const {
 		letterSelectionRepository,
 		symbolSelectionRepository,
 		playerCipherRepository,
-	}: SelectionContext,
-): void => {
+	} = context;
 	if (!isAlphabetic(character)) {
 		return;
 	}
