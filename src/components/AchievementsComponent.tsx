@@ -85,6 +85,22 @@ export const AchievementsComponent: React.FC = () => {
 						</div>
 					</div>
 				</div>
+
+				{/* Alpha et Omega */}
+				<div 
+					key={achievements.achievements.alphaAndOmega.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.alphaAndOmega.unlocked ? styles.unlocked : styles.locked}`}
+				>
+					<div className={styles.achievementIcon}>
+						{achievements.achievements.alphaAndOmega.unlocked ? "🏆" : "🔒"}
+					</div>
+					<div className={styles.achievementContent}>
+						<div className={styles.achievementName}>{achievements.achievements.alphaAndOmega.name}</div>
+						<div className={styles.achievementDescription}>
+							{achievements.achievements.alphaAndOmega.description}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

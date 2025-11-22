@@ -29,5 +29,11 @@ export interface AllAchievements {
 			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre";
 			unlocked: boolean;
 		};
+		alphaAndOmega: {
+			achievementId: "alpha_and_omega";
+			name: "Alpha et Omega";
+			description: "Trouver respectivement la première lettre en premier et la dernière en dernier";
+			unlocked: boolean;
+		};
 	};
 }

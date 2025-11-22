@@ -36,6 +36,12 @@ describe("createAchievementRepository", () => {
 					name: "D'un trait",
 					description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
 					unlocked: false
+				},
+				alphaAndOmega: {
+					achievementId: "alpha_and_omega",
+					name: "Alpha et Omega",
+					description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
+					unlocked: false
 				}
 			}
 		};
@@ -57,6 +63,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
+		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 	});
 
 
@@ -71,6 +78,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
+		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 	});
 
 

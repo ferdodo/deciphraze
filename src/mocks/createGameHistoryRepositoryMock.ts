@@ -3,7 +3,7 @@ import type { GameHistory } from "../types/GameHistory";
 import type { GameSession } from "../types/GameSession";
 
 export function createGameHistoryRepositoryMock(): GameHistoryRepository {
-	let gameHistory: GameHistory = {};
+	const gameHistory: GameHistory = {};
 
 	function getHistory(): GameHistory {
 		return gameHistory;

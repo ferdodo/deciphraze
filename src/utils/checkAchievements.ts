@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { AllAchievements } from "../types/AllAchievements";
 import { backupInvalidData } from "./backupInvalidData";
+import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 
 const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 	computedAtDate: z.string(),
@@ -32,6 +33,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			name: z.literal("D'un trait"),
 			description: z.literal("Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre"),
 			unlocked: z.boolean()
+		}),
+		alphaAndOmega: z.object({
+			achievementId: z.literal("alpha_and_omega"),
+			name: z.literal("Alpha et Omega"),
+			description: z.literal("Trouver respectivement la première lettre en premier et la dernière en dernier"),
+			unlocked: z.boolean()
 		})
 	})
 });
@@ -46,6 +53,8 @@ export function checkAchievements(data: unknown): AllAchievements {
 			userAgent: navigator.userAgent,
 			provenance: "checkAchievements",
 		});
+
+		backupAndClearLocalStorage();
 
 		throw new Error(`Invalid achievements structure`);
 	}

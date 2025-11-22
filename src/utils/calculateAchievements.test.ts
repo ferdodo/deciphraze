@@ -17,6 +17,7 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 		});
 	});
 
@@ -88,5 +89,60 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 		});
 
+	});
+
+	describe("Alpha and Omega achievement", () => {
+		it("should unlock when first and last letters match", () => {
+			gameHistory = {
+				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
+			expect(achievements.achievements.alphaAndOmega.achievementId).toBe("alpha_and_omega");
+			expect(achievements.achievements.alphaAndOmega.name).toBe("Alpha et Omega");
+			expect(achievements.achievements.alphaAndOmega.description).toBe(
+				"Trouver respectivement la première lettre en premier et la dernière en dernier",
+			);
+		});
+
+		it("should not unlock when first letter does not match", () => {
+			gameHistory = {
+				"2024-01-15": ["E", "L", "L", "O", "W", "O", "R", "L", "D"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["E", "L", "L", "O", "W", "O", "R", "L", "D"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
+		});
+
+		it("should not unlock when last letter does not match", () => {
+			gameHistory = {
+				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
+		});
+
+		it("should ignore punctuation when finding first and last letters", () => {
+			gameHistory = {
+				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"];
+			const paragraphOfTheDay = "!Hello world!";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
+		});
 	});
 });

@@ -9,12 +9,6 @@ describe("isWordFoundInOrder", () => {
 		expect(isWordFoundInOrder(paragraph, discoveryOrder)).toBe(false);
 	});
 
-	it("should return true when a word of 5+ letters is found in order", () => {
-		const paragraph = "Hello world";
-		const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O"];
-		expect(isWordFoundInOrder(paragraph, discoveryOrder)).toBe(true);
-	});
-
 	it("should ignore punctuation and case", () => {
 		const paragraph = "Hello, world!";
 		const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O"];
