@@ -23,5 +23,11 @@ export interface AllAchievements {
 			description: "Trouver la lettre A en premier";
 			unlocked: boolean;
 		};
+		wordInOrder: {
+			achievementId: "word_in_order";
+			name: "D'un trait";
+			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre";
+			unlocked: boolean;
+		};
 	};
 }

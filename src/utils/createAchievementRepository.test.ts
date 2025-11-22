@@ -30,6 +30,12 @@ describe("createAchievementRepository", () => {
 					name: "Commencer par A",
 					description: "Trouver la lettre A en premier",
 					unlocked: false
+				},
+				wordInOrder: {
+					achievementId: "word_in_order",
+					name: "D'un trait",
+					description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
+					unlocked: false
 				}
 			}
 		};
@@ -50,6 +56,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
+		expect(achievements.achievements.wordInOrder).toBeDefined();
 	});
 
 
@@ -63,6 +70,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
+		expect(achievements.achievements.wordInOrder).toBeDefined();
 	});
 
 

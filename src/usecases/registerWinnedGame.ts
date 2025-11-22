@@ -24,7 +24,7 @@ export function registerWinnedGame({
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
 		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);
-		const newAchievements = calculateAchievements(fullHistory, discoveryOrder);
+		const newAchievements = calculateAchievements(fullHistory, discoveryOrder, paragraphOfTheDay);
 		achievementRepository.saveAchievements(newAchievements);
 	});
 }

@@ -26,6 +26,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			name: z.literal("Commencer par A"),
 			description: z.literal("Trouver la lettre A en premier"),
 			unlocked: z.boolean()
+		}),
+		wordInOrder: z.object({
+			achievementId: z.literal("word_in_order"),
+			name: z.literal("D'un trait"),
+			description: z.literal("Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre"),
+			unlocked: z.boolean()
 		})
 	})
 });

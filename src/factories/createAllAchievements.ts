@@ -6,6 +6,7 @@ export function createAllAchievements(
 	streak5DaysUnlocked: boolean = false,
 	streak5DaysProgress: { current: number; target: 5 } = { current: 0, target: 5 },
 	firstLetterAUnlocked: boolean = false,
+	wordInOrderUnlocked: boolean = false,
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -23,6 +24,10 @@ export function createAllAchievements(
 			firstLetterA: {
 				...defaultAchievements.achievements.firstLetterA,
 				unlocked: firstLetterAUnlocked
+			},
+			wordInOrder: {
+				...defaultAchievements.achievements.wordInOrder,
+				unlocked: wordInOrderUnlocked
 			}
 		}
 	};

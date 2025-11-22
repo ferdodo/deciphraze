@@ -5,8 +5,13 @@ import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
+import { isWordFoundInOrder } from "./isWordFoundInOrder";
 
-export function calculateAchievements(gameHistory: GameHistory, discoveryOrder: DiscoveryOrder): AllAchievements {
+export function calculateAchievements(
+	gameHistory: GameHistory,
+	discoveryOrder: DiscoveryOrder,
+	paragraphOfTheDay: string
+): AllAchievements {
 	const firstGameUnlocked = Object.keys(gameHistory).length > 0;
 	const streak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
 	const streak5DaysProgress = {
@@ -15,11 +20,13 @@ export function calculateAchievements(gameHistory: GameHistory, discoveryOrder: 
 	};
 	
 	const firstLetterAUnlocked = isFirstLetterFoundA(discoveryOrder);
+	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
 
 	return createAllAchievements(
 		firstGameUnlocked,
 		streak5DaysUnlocked,
 		streak5DaysProgress,
-		firstLetterAUnlocked
+		firstLetterAUnlocked,
+		wordInOrderUnlocked
 	);
 }

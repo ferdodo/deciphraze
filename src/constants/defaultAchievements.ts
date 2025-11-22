@@ -24,6 +24,12 @@ export const defaultAchievements: AllAchievements = {
 			name: "Commencer par A",
 			description: "Trouver la lettre A en premier",
 			unlocked: false
+		},
+		wordInOrder: {
+			achievementId: "word_in_order",
+			name: "D'un trait",
+			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
+			unlocked: false
 		}
 	}
 };
