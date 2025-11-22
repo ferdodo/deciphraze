@@ -10,7 +10,7 @@
 		"@testing-library/react": "^14.2.1",
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.0",
-		"crumbs-design-system": "^1.3.0",
+		"crumbs-design-system": "^1.4.0",
 		"daily-prng": "^1.4.0",
 		"exportcase": "^1.2.5",
 		"jsdom": "^24.0.0",

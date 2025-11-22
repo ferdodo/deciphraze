@@ -16,5 +16,9 @@ declare namespace JSX {
 			React.ButtonHTMLAttributes<HTMLButtonElement>,
 			HTMLButtonElement
 		>;
+		"crumbs-nav": React.DetailedHTMLProps<
+			React.HTMLAttributes<HTMLElement>,
+			HTMLElement
+		>;
 	}
 }

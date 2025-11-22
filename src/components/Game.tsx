@@ -29,8 +29,10 @@ const Game: React.FC = () => {
 	};
 
 	return (
-		<crumbs-panel panel-title="Deciphraze">
-			<div>
+		<div style={{display: "grid", height: "100vh"}}>
+		<crumbs-nav style={{ flexGrow: "1" }}>
+			<crumbs-p slot="title-1">Jouer</crumbs-p>
+			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100vh - 14.5rem)" }}>
 				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
 					symboles.
@@ -67,31 +69,35 @@ const Game: React.FC = () => {
 					))}
 				</div>
 
+				{win && (
+					<div>
+						<crumbs-p style={{ textAlign: "center" }}>
+							🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
+							<crumbs-button
+								title="Copier dans le presse-papier"
+								onClick={handleShare}
+								role="button"
+							>
+								Partager
+							</crumbs-button>
+						</crumbs-p>
+					</div>
+				)}
+			</crumbs-panel>
+
+			<crumbs-p slot="title-2">Solution d'hier</crumbs-p>
+			<crumbs-panel slot="content-2" panel-title="Solution d'hier" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
 				<crumbs-p>
-					<details style={{ marginTop: "5rem" }}>
-						<summary> Solution d'hier </summary>
-						{paragraphOfYesterday}
-					</details>
+					{paragraphOfYesterday}
 				</crumbs-p>
+			</crumbs-panel>
 
+			<crumbs-p slot="title-3">Succès</crumbs-p>
+			<crumbs-panel slot="content-3" panel-title="Succès" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
 				<AchievementsComponent />
-			</div>
-
-			{win && (
-				<div>
-					<crumbs-p style={{ textAlign: "center" }}>
-						🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-						<crumbs-button
-							title="Copier dans le presse-papier"
-							onClick={handleShare}
-							role="button"
-						>
-							Partager
-						</crumbs-button>
-					</crumbs-p>
-				</div>
-			)}
-		</crumbs-panel>
+			</crumbs-panel>
+		</crumbs-nav>
+		</div>
 	);
 };
 
