@@ -9,7 +9,7 @@ export const AchievementsComponent: React.FC = () => {
 		<div className={styles.achievementsContainer}>
 			<h3 className={styles.title}>🏆 Succès</h3>
 			<div className={styles.achievementsList}>
-				{/* Premier pas */}
+				{/* Preambule */}
 				<div 
 					key={achievements.achievements.firstGame.achievementId} 
 					className={`${styles.achievement} ${achievements.achievements.firstGame.unlocked ? styles.unlocked : styles.locked}`}

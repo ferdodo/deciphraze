@@ -11,7 +11,7 @@ describe("createAchievementRepository", () => {
 			achievements: {
 				firstGame: {
 					achievementId: "first_game",
-					name: "Premier pas",
+					name: "Preambule",
 					description: "Jouer votre première partie",
 					unlocked: true
 				},

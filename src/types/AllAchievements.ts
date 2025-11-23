@@ -3,7 +3,7 @@ export interface AllAchievements {
 	achievements: {
 		firstGame: {
 			achievementId: "first_game";
-			name: "Premier pas";
+			name: "Preambule";
 			description: "Jouer votre première partie";
 			unlocked: boolean;
 		};

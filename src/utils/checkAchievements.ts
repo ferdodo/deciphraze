@@ -8,7 +8,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 	achievements: z.object({
 		firstGame: z.object({
 			achievementId: z.literal("first_game"),
-			name: z.literal("Premier pas"),
+			name: z.literal("Preambule"),
 			description: z.literal("Jouer votre première partie"),
 			unlocked: z.boolean()
 		}),
