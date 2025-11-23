@@ -86,7 +86,7 @@ export const AchievementsComponent: React.FC = () => {
 					</div>
 				</div>
 
-				{/* D'un trait */}
+				{/* Signature */}
 				<div 
 					key={achievements.achievements.wordInOrder.achievementId} 
 					className={`${styles.achievement} ${achievements.achievements.wordInOrder.unlocked ? styles.unlocked : styles.locked}`}

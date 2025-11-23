@@ -33,7 +33,7 @@ describe("createAchievementRepository", () => {
 				},
 				wordInOrder: {
 					achievementId: "word_in_order",
-					name: "D'un trait",
+					name: "Signature",
 					description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
 					unlocked: false
 				},

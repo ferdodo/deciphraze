@@ -60,7 +60,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.wordInOrder.unlocked).toBe(true);
 			expect(achievements.achievements.wordInOrder.achievementId).toBe("word_in_order");
-			expect(achievements.achievements.wordInOrder.name).toBe("D'un trait");
+			expect(achievements.achievements.wordInOrder.name).toBe("Signature");
 			expect(achievements.achievements.wordInOrder.description).toBe(
 				"Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
 			);
