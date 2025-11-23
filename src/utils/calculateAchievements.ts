@@ -7,6 +7,7 @@ import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
 import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
+import { isFirstLetterFoundQ } from "./isFirstLetterFoundQ";
 
 export function calculateAchievements(
 	gameHistory: GameHistory,
@@ -23,6 +24,7 @@ export function calculateAchievements(
 	const firstLetterAUnlocked = isFirstLetterFoundA(discoveryOrder);
 	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
 	const alphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
+	const firstLetterQUnlocked = isFirstLetterFoundQ(discoveryOrder);
 
 	return createAllAchievements(
 		firstGameUnlocked,
@@ -30,6 +32,7 @@ export function calculateAchievements(
 		streak5DaysProgress,
 		firstLetterAUnlocked,
 		wordInOrderUnlocked,
-		alphaAndOmegaUnlocked
+		alphaAndOmegaUnlocked,
+		firstLetterQUnlocked
 	);
 }

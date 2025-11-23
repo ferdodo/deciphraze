@@ -42,6 +42,12 @@ describe("createAchievementRepository", () => {
 					name: "Alpha et Omega",
 					description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
 					unlocked: false
+				},
+				firstLetterQ: {
+					achievementId: "first_letter_q",
+					name: "Commencer par Q",
+					description: "Trouver la lettre Q en premier",
+					unlocked: false
 				}
 			}
 		};
@@ -64,6 +70,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstLetterA).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
+		expect(achievements.achievements.firstLetterQ).toBeDefined();
 	});
 
 
@@ -79,6 +86,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstLetterA).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
+		expect(achievements.achievements.firstLetterQ).toBeDefined();
 	});
 
 

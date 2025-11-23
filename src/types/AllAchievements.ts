@@ -35,5 +35,11 @@ export interface AllAchievements {
 			description: "Trouver respectivement la première lettre en premier et la dernière en dernier";
 			unlocked: boolean;
 		};
+		firstLetterQ: {
+			achievementId: "first_letter_q";
+			name: "Commencer par Q";
+			description: "Trouver la lettre Q en premier";
+			unlocked: boolean;
+		};
 	};
 }

@@ -8,6 +8,7 @@ export function createAllAchievements(
 	firstLetterAUnlocked: boolean = false,
 	wordInOrderUnlocked: boolean = false,
 	alphaAndOmegaUnlocked: boolean = false,
+	firstLetterQUnlocked: boolean = false,
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -33,6 +34,10 @@ export function createAllAchievements(
 			alphaAndOmega: {
 				...defaultAchievements.achievements.alphaAndOmega,
 				unlocked: alphaAndOmegaUnlocked
+			},
+			firstLetterQ: {
+				...defaultAchievements.achievements.firstLetterQ,
+				unlocked: firstLetterQUnlocked
 			}
 		}
 	};

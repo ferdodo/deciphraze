@@ -13,6 +13,7 @@ describe("createAllAchievements", () => {
 		expect(achievements.achievements.firstLetterA.unlocked).toBe(false);
 		expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 		expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
+		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 	});
 
 });

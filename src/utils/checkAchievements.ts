@@ -39,6 +39,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			name: z.literal("Alpha et Omega"),
 			description: z.literal("Trouver respectivement la première lettre en premier et la dernière en dernier"),
 			unlocked: z.boolean()
+		}),
+		firstLetterQ: z.object({
+			achievementId: z.literal("first_letter_q"),
+			name: z.literal("Commencer par Q"),
+			description: z.literal("Trouver la lettre Q en premier"),
+			unlocked: z.boolean()
 		})
 	})
 });

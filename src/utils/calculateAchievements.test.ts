@@ -18,6 +18,7 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
+			expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		});
 	});
 
@@ -143,6 +144,37 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
 
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
+		});
+	});
+
+	describe("First letter Q achievement", () => {
+		it("should unlock when first letter discovered is Q", () => {
+			gameHistory = {
+				"2024-01-15": ["Q", "U", "E", "S", "T"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["Q", "U", "E", "S", "T"];
+			const paragraphOfTheDay = "Quest test";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterQ.achievementId).toBe("first_letter_q");
+			expect(achievements.achievements.firstLetterQ.name).toBe("Commencer par Q");
+			expect(achievements.achievements.firstLetterQ.description).toBe(
+				"Trouver la lettre Q en premier",
+			);
+		});
+
+		it("should not unlock when first letter discovered is not Q", () => {
+			gameHistory = {
+				"2024-01-15": ["A", "Q", "U", "E", "S", "T"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["A", "Q", "U", "E", "S", "T"];
+			const paragraphOfTheDay = "Aquest test";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		});
 	});
 });

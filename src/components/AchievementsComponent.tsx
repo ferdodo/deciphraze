@@ -70,6 +70,22 @@ export const AchievementsComponent: React.FC = () => {
 					</div>
 				</div>
 
+				{/* Commencer par Q */}
+				<div 
+					key={achievements.achievements.firstLetterQ.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.firstLetterQ.unlocked ? styles.unlocked : styles.locked}`}
+				>
+					<div className={styles.achievementIcon}>
+						{achievements.achievements.firstLetterQ.unlocked ? "🏆" : "🔒"}
+					</div>
+					<div className={styles.achievementContent}>
+						<div className={styles.achievementName}>{achievements.achievements.firstLetterQ.name}</div>
+						<div className={styles.achievementDescription}>
+							{achievements.achievements.firstLetterQ.description}
+						</div>
+					</div>
+				</div>
+
 				{/* D'un trait */}
 				<div 
 					key={achievements.achievements.wordInOrder.achievementId} 

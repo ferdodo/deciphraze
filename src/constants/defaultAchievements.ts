@@ -36,6 +36,12 @@ export const defaultAchievements: AllAchievements = {
 			name: "Alpha et Omega",
 			description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
 			unlocked: false
+		},
+		firstLetterQ: {
+			achievementId: "first_letter_q",
+			name: "Commencer par Q",
+			description: "Trouver la lettre Q en premier",
+			unlocked: false
 		}
 	}
 };
