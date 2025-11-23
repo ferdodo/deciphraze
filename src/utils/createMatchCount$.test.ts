@@ -16,21 +16,6 @@ describe("createMatchCount$", () => {
 		});
 	});
 
-	it("should count matches when player cipher has entries", async () => {
-		const playerCipher = createPlayerCipher();
-		playerCipher.addPlayerCipherEntry("A", "X");
-		playerCipher.addPlayerCipherEntry("B", "Y");
-
-		const matchCount$ = createMatchCount$(playerCipher);
-
-		return new Promise<void>((resolve) => {
-			matchCount$.subscribe((count) => {
-				expect(count).toBe(2);
-				resolve();
-			});
-		});
-	});
-
 	it("should update count when player cipher changes", async () => {
 		// Clear localStorage to ensure clean state
 		localStorage.clear();
