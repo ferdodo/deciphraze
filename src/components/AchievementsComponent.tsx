@@ -134,7 +134,7 @@ export const AchievementsComponent: React.FC = () => {
 					</div>
 				</div>
 
-				{/* Alpha et Omega */}
+				{/* Synthèse */}
 				<div 
 					key={achievements.achievements.alphaAndOmega.achievementId} 
 					className={`${styles.achievement} ${achievements.achievements.alphaAndOmega.unlocked ? styles.unlocked : styles.locked}`}

@@ -51,7 +51,7 @@ describe("createAchievementRepository", () => {
 				},
 				alphaAndOmega: {
 					achievementId: "alpha_and_omega",
-					name: "Alpha et Omega",
+					name: "Synthèse",
 					description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
 					unlocked: false
 				},

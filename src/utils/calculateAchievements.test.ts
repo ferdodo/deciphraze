@@ -167,7 +167,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
 			expect(achievements.achievements.alphaAndOmega.achievementId).toBe("alpha_and_omega");
-			expect(achievements.achievements.alphaAndOmega.name).toBe("Alpha et Omega");
+			expect(achievements.achievements.alphaAndOmega.name).toBe("Synthèse");
 			expect(achievements.achievements.alphaAndOmega.description).toBe(
 				"Trouver respectivement la première lettre en premier et la dernière en dernier",
 			);
