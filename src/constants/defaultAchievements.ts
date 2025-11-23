@@ -25,6 +25,12 @@ export const defaultAchievements: AllAchievements = {
 			description: "Trouver la lettre A en premier",
 			unlocked: false
 		},
+		firstLetterE: {
+			achievementId: "first_letter_e",
+			name: "Commencer par E",
+			description: "Trouver la lettre E en premier",
+			unlocked: false
+		},
 		wordInOrder: {
 			achievementId: "word_in_order",
 			name: "Signature",

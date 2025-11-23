@@ -5,6 +5,7 @@ import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
+import { isFirstLetterFoundE } from "./isFirstLetterFoundE";
 import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { isFirstLetterFoundQ } from "./isFirstLetterFoundQ";
@@ -22,6 +23,7 @@ export function calculateAchievements(
 	};
 	
 	const firstLetterAUnlocked = isFirstLetterFoundA(discoveryOrder);
+	const firstLetterEUnlocked = isFirstLetterFoundE(discoveryOrder);
 	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
 	const alphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
 	const firstLetterQUnlocked = isFirstLetterFoundQ(discoveryOrder);
@@ -31,6 +33,7 @@ export function calculateAchievements(
 		streak5DaysUnlocked,
 		streak5DaysProgress,
 		firstLetterAUnlocked,
+		firstLetterEUnlocked,
 		wordInOrderUnlocked,
 		alphaAndOmegaUnlocked,
 		firstLetterQUnlocked

@@ -23,6 +23,12 @@ export interface AllAchievements {
 			description: "Trouver la lettre A en premier";
 			unlocked: boolean;
 		};
+		firstLetterE: {
+			achievementId: "first_letter_e";
+			name: "Commencer par E";
+			description: "Trouver la lettre E en premier";
+			unlocked: boolean;
+		};
 		wordInOrder: {
 			achievementId: "word_in_order";
 			name: "Signature";

@@ -28,6 +28,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			description: z.literal("Trouver la lettre A en premier"),
 			unlocked: z.boolean()
 		}),
+		firstLetterE: z.object({
+			achievementId: z.literal("first_letter_e"),
+			name: z.literal("Commencer par E"),
+			description: z.literal("Trouver la lettre E en premier"),
+			unlocked: z.boolean()
+		}),
 		wordInOrder: z.object({
 			achievementId: z.literal("word_in_order"),
 			name: z.literal("Signature"),

@@ -6,6 +6,7 @@ export function createAllAchievements(
 	streak5DaysUnlocked: boolean = false,
 	streak5DaysProgress: { current: number; target: 5 } = { current: 0, target: 5 },
 	firstLetterAUnlocked: boolean = false,
+	firstLetterEUnlocked: boolean = false,
 	wordInOrderUnlocked: boolean = false,
 	alphaAndOmegaUnlocked: boolean = false,
 	firstLetterQUnlocked: boolean = false,
@@ -26,6 +27,10 @@ export function createAllAchievements(
 			firstLetterA: {
 				...defaultAchievements.achievements.firstLetterA,
 				unlocked: firstLetterAUnlocked
+			},
+			firstLetterE: {
+				...defaultAchievements.achievements.firstLetterE,
+				unlocked: firstLetterEUnlocked
 			},
 			wordInOrder: {
 				...defaultAchievements.achievements.wordInOrder,

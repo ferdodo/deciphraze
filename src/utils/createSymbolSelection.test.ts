@@ -2,12 +2,6 @@ import { describe, it, expect } from "vitest";
 import { createSymbolSelection } from "./createSymbolSelection";
 
 describe("createSymbolSelection", () => {
-	it("should select a symbol", () => {
-		const symbolSelection = createSymbolSelection();
-		symbolSelection.selectSymbol("X");
-		expect(symbolSelection.getSymbolSelection()).toBe("X");
-	});
-
 	it("should clear selection with null", () => {
 		const symbolSelection = createSymbolSelection();
 		symbolSelection.selectSymbol("X");

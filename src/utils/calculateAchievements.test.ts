@@ -16,6 +16,7 @@ describe("calculateAchievements", () => {
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
+			expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
 			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
@@ -46,6 +47,37 @@ describe("calculateAchievements", () => {
 			);
 		});
 
+	});
+
+	describe("First letter E achievement", () => {
+		it("should unlock when first letter discovered is E", () => {
+			gameHistory = {
+				"2024-01-15": ["E", "B", "C"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["E", "B", "C"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterE.achievementId).toBe("first_letter_e");
+			expect(achievements.achievements.firstLetterE.name).toBe("Commencer par E");
+			expect(achievements.achievements.firstLetterE.description).toBe(
+				"Trouver la lettre E en premier",
+			);
+		});
+
+		it("should not unlock when first letter discovered is not E", () => {
+			gameHistory = {
+				"2024-01-15": ["B", "E", "C"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["B", "E", "C"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
+		});
 	});
 
 	describe("Word in order achievement", () => {

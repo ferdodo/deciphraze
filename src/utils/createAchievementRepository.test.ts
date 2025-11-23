@@ -31,6 +31,12 @@ describe("createAchievementRepository", () => {
 					description: "Trouver la lettre A en premier",
 					unlocked: false
 				},
+				firstLetterE: {
+					achievementId: "first_letter_e",
+					name: "Commencer par E",
+					description: "Trouver la lettre E en premier",
+					unlocked: false
+				},
 				wordInOrder: {
 					achievementId: "word_in_order",
 					name: "Signature",
@@ -68,6 +74,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
+		expect(achievements.achievements.firstLetterE).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();
@@ -84,6 +91,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.firstGame).toBeDefined();
 		expect(achievements.achievements.streak5Days).toBeDefined();
 		expect(achievements.achievements.firstLetterA).toBeDefined();
+		expect(achievements.achievements.firstLetterE).toBeDefined();
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();

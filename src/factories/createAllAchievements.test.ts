@@ -11,6 +11,7 @@ describe("createAllAchievements", () => {
 		expect(achievements.achievements.streak5Days.progress.current).toBe(0);
 		expect(achievements.achievements.streak5Days.progress.target).toBe(5);
 		expect(achievements.achievements.firstLetterA.unlocked).toBe(false);
+		expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
 		expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 		expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
