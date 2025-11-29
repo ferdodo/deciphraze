@@ -16,9 +16,17 @@
 	text-align: center;
 }
 
+.achievementsCounter {
+	text-align: center;
+	font-size: 1rem;
+	color: #b8860b;
+	margin-bottom: 1rem;
+	font-weight: bold;
+}
+
 .achievementsList {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns: repeat(2, 1fr);
 	gap: 1rem;
 }
 
