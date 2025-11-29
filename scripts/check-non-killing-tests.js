@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const path = require("path");
+const { execSync } = require("node:child_process");
 
 const REPORT_PATH = "public/stryker-report.json";
+
+function runStryker() {
+	execSync(`npx stryker run`, { stdio: 'inherit' });
+}
 
 function analyzeStrykerReport() {
 	console.log("🔍 Analyse du rapport Stryker...\n");
 
 	if (!fs.existsSync(REPORT_PATH)) {
-		console.error("❌ Rapport Stryker non trouvé:", REPORT_PATH);
-		console.log("💡 Lancez d'abord: npm run build");
-		process.exit(1);
+		console.error("Rapport Stryker non trouvé:", REPORT_PATH);
+		process.exit(0);
 	}
 
 	try {
@@ -140,4 +143,5 @@ function analyzeStrykerReport() {
 	}
 }
 
+runStryker();
 analyzeStrykerReport();

@@ -1,0 +1,19 @@
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /deciphraze/src
+        - action: rebuild
+          path: ./package.json
+    ports:
+      - "1111:1111"
+
+  verify:
+    build:
+      context: .
+      target: verify

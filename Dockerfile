@@ -1,9 +1,13 @@
-FROM node
+FROM node AS base
 WORKDIR /deciphraze
 COPY package.json .
-RUN npm config set maxsockets 1
 RUN npm install
 RUN npm audit --audit-level=critical
 COPY . .
-RUN npm run build
-CMD npm run dev
+
+FROM base AS dev
+CMD ["npm", "run", "dev"]
+
+FROM base AS verify
+RUN npm run verify
+CMD ["sleep", "infinity"]

@@ -4,7 +4,7 @@ interface BackupEntry {
 }
 
 const BACKUP_STORAGE_KEY = "deciphraze_invalid_data_backups";
-
+//
 export function backupInvalidData(invalidData: string, metadata: Record<string, string>): void {
 	try {
 		const existingBackups = localStorage.getItem(BACKUP_STORAGE_KEY);
