@@ -3,9 +3,7 @@
 .achievementsContainer {
 	margin-top: 2rem;
 	padding: 1rem;
-	background: rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .title {
@@ -20,14 +18,16 @@
 	text-align: center;
 	font-size: 1rem;
 	color: #b8860b;
-	margin-bottom: 1rem;
+	margin-top: 1rem;
 	font-weight: bold;
 }
 
 .achievementsList {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
 	gap: 1rem;
+	align-items: stretch;
 }
 
 .achievement {
@@ -35,30 +35,12 @@
 	align-items: center;
 	gap: 0.75rem;
 	padding: 0.75rem;
-	background: rgba(255, 255, 255, 0.05);
-	border-radius: 6px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
 	transition: all 0.2s ease;
-}
-
-.achievement:hover {
-	background: rgba(255, 255, 255, 0.1);
-	transform: translateY(-1px);
-}
-
-.achievement.unlocked {
-	background: rgba(255, 215, 0, 0.1);
-	border-color: rgba(255, 215, 0, 0.3);
-}
-
-.achievement.unlocked:hover {
-	background: rgba(255, 215, 0, 0.15);
 }
 
 .achievement.locked {
 	opacity: 0.6;
-	background: rgba(128, 128, 128, 0.1);
-	border-color: rgba(128, 128, 128, 0.2);
+	filter: grayscale(50%);
 }
 
 .achievementIcon {
@@ -89,8 +71,7 @@
 .progressBar {
 	width: 100%;
 	height: 8px;
-	background-color: #e0e0e0;
-	border-radius: 4px;
+	background: #e0e0e0;
 	overflow: hidden;
 	margin-bottom: 0.25rem;
 }

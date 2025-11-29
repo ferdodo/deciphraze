@@ -29,10 +29,6 @@ export const AchievementsComponent: React.FC = () => {
 
 	return (
 		<div className={styles.achievementsContainer}>
-			<h3 className={styles.title}>🏆 Succès</h3>
-			<div className={styles.achievementsCounter}>
-				{unlockedCount}/{TOTAL_ACHIEVEMENTS} succès débloqués
-			</div>
 			<div className={styles.achievementsList}>
 				{achievementsList.map((achievement) => (
 					<div 
@@ -67,6 +63,9 @@ export const AchievementsComponent: React.FC = () => {
 						</div>
 					</div>
 				))}
+			</div>
+			<div className={styles.achievementsCounter}>
+				{unlockedCount}/{TOTAL_ACHIEVEMENTS} succès débloqués
 			</div>
 		</div>
 	);
