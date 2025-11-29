@@ -70,6 +70,16 @@ describe("createAchievementRepository", () => {
 						current: 0,
 						target: 1000
 					}
+				},
+				completeAlphabet: {
+					achievementId: "complete_alphabet",
+					name: "Alphabet complet",
+					description: "Trouver toutes les lettres de l'alphabet",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 26
+					}
 				}
 			}
 		};
@@ -96,6 +106,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();
 		expect(achievements.achievements.words1000).toBeDefined();
+		expect(achievements.achievements.completeAlphabet).toBeDefined();
 	});
 
 
@@ -115,6 +126,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();
 		expect(achievements.achievements.words1000).toBeDefined();
+		expect(achievements.achievements.completeAlphabet).toBeDefined();
 	});
 
 

@@ -327,4 +327,69 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.words1000.progress.current).toBe(1000);
 		});
 	});
+
+	describe("Complete alphabet achievement", () => {
+		it("should unlock when all 26 letters are found across multiple games", () => {
+			const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+			gameHistory = {
+				"2024-01-15": alphabet.slice(0, 13),
+				"2024-01-16": alphabet.slice(13)
+			};
+			const discoveryOrder: DiscoveryOrder = ["A"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);
+			expect(achievements.achievements.completeAlphabet.achievementId).toBe("complete_alphabet");
+			expect(achievements.achievements.completeAlphabet.name).toBe("Alphabet complet");
+			expect(achievements.achievements.completeAlphabet.description).toBe(
+				"Trouver toutes les lettres de l'alphabet",
+			);
+			expect(achievements.achievements.completeAlphabet.progress.current).toBe(26);
+			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+		});
+
+		it("should not unlock when only some letters are found", () => {
+			gameHistory = {
+				"2024-01-15": ["A", "B", "C", "D", "E"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["A"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
+			expect(achievements.achievements.completeAlphabet.progress.current).toBe(5);
+			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+		});
+
+		it("should count unique letters across multiple games", () => {
+			gameHistory = {
+				"2024-01-15": ["A", "B", "C"],
+				"2024-01-16": ["D", "E", "F"],
+				"2024-01-17": ["A", "B", "C"] // Doublons
+			};
+			const discoveryOrder: DiscoveryOrder = ["A"];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
+			expect(achievements.achievements.completeAlphabet.progress.current).toBe(6);
+			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+		});
+
+		it("should return progress 0 when history is empty", () => {
+			gameHistory = {};
+			const discoveryOrder: DiscoveryOrder = [];
+			const paragraphOfTheDay = "Hello world";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
+			expect(achievements.achievements.completeAlphabet.progress.current).toBe(0);
+			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+		});
+	});
 });

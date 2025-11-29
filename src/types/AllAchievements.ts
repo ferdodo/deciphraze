@@ -63,5 +63,15 @@ export interface AllAchievements {
 				target: 1000;
 			};
 		};
+		completeAlphabet: {
+			achievementId: "complete_alphabet";
+			name: "Alphabet complet";
+			description: "Trouver toutes les lettres de l'alphabet";
+			unlocked: boolean;
+			progress: {
+				current: number;
+				target: 26;
+			};
+		};
 	};
 }

@@ -11,6 +11,7 @@ import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { isFirstLetterFoundQ } from "./isFirstLetterFoundQ";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
+import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 
 export function calculateAchievements(
 	gameHistory: GameHistory,
@@ -37,6 +38,7 @@ export function calculateAchievements(
 		current: totalWordsFound,
 		target: 1000 as const
 	};
+	const { unlocked: completeAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
 
 	return createAllAchievements(
 		firstGameUnlocked,
@@ -49,6 +51,8 @@ export function calculateAchievements(
 		alphaAndOmegaUnlocked,
 		firstLetterQUnlocked,
 		words1000Unlocked,
-		words1000Progress
+		words1000Progress,
+		completeAlphabetUnlocked,
+		completeAlphabetProgress
 	);
 }

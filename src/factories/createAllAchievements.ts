@@ -13,6 +13,8 @@ export function createAllAchievements(
 	firstLetterQUnlocked: boolean = false,
 	words1000Unlocked: boolean = false,
 	words1000Progress: { current: number; target: 1000 } = { current: 0, target: 1000 },
+	completeAlphabetUnlocked: boolean = false,
+	completeAlphabetProgress: { current: number; target: 26 } = { current: 0, target: 26 },
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -55,6 +57,11 @@ export function createAllAchievements(
 				...defaultAchievements.achievements.words1000,
 				unlocked: words1000Unlocked,
 				progress: words1000Progress
+			},
+			completeAlphabet: {
+				...defaultAchievements.achievements.completeAlphabet,
+				unlocked: completeAlphabetUnlocked,
+				progress: completeAlphabetProgress
 			}
 		}
 	};

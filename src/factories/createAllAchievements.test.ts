@@ -16,6 +16,9 @@ describe("createAllAchievements", () => {
 		expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 		expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
+		expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
+		expect(achievements.achievements.completeAlphabet.progress.current).toBe(0);
+		expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
 	});
 
 });

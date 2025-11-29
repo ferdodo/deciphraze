@@ -178,6 +178,35 @@ export const AchievementsComponent: React.FC = () => {
 						)}
 					</div>
 				</div>
+
+				{/* Alphabet complet */}
+				<div 
+					key={achievements.achievements.completeAlphabet.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.completeAlphabet.unlocked ? styles.unlocked : styles.locked}`}
+				>
+					<div className={styles.achievementIcon}>
+						{achievements.achievements.completeAlphabet.unlocked ? "🏆" : "🔒"}
+					</div>
+					<div className={styles.achievementContent}>
+						<div className={styles.achievementName}>{achievements.achievements.completeAlphabet.name}</div>
+						<div className={styles.achievementDescription}>
+							{achievements.achievements.completeAlphabet.description}
+						</div>
+						{!achievements.achievements.completeAlphabet.unlocked && achievements.achievements.completeAlphabet.progress.current > 0 && (
+							<div className={styles.progressContainer}>
+								<div className={styles.progressBar}>
+									<div 
+										className={styles.progressFill}
+										style={{ width: `${(achievements.achievements.completeAlphabet.progress.current / achievements.achievements.completeAlphabet.progress.target) * 100}%` }}
+									></div>
+								</div>
+								<div className={styles.progressText}>
+									{achievements.achievements.completeAlphabet.progress.current}/{achievements.achievements.completeAlphabet.progress.target} lettres
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

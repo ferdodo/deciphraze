@@ -67,6 +67,16 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 				current: z.number(),
 				target: z.literal(1000)
 			})
+		}),
+		completeAlphabet: z.object({
+			achievementId: z.literal("complete_alphabet"),
+			name: z.literal("Alphabet complet"),
+			description: z.literal("Trouver toutes les lettres de l'alphabet"),
+			unlocked: z.boolean(),
+			progress: z.object({
+				current: z.number(),
+				target: z.literal(26)
+			})
 		})
 	})
 });
