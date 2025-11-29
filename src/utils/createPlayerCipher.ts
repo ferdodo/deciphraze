@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
-import { characterEquals } from "../utils/characterEquals";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
+import { characterEquals } from "./characterEquals";
+import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
 import type { PlayerCipher } from "../types/PlayerCipher";
 
 
@@ -41,3 +41,4 @@ export function createPlayerCipher(): PlayerCipherRepository {
 		playerCipher$: playerCipherSubject.asObservable().pipe(share()),
 	};
 }
+

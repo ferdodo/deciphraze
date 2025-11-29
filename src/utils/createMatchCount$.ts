@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
+import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
 
 export const createMatchCount$ = (playerCipher: PlayerCipherRepository): BehaviorSubject<number> => {
 	const matchCountSubject = new BehaviorSubject<number>(0);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useGameContext } from "../contexts/useGameContext";
+import { useGameContext } from "./useGameContext";
 import type { PlayerCipher } from "../types/PlayerCipher";
 
 export const usePlayerCipher = (): PlayerCipher => {

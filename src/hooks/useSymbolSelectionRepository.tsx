@@ -1,5 +1,5 @@
-import { useGameContext } from "../contexts/useGameContext";
-import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
+import { useGameContext } from "./useGameContext";
+import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
 
 export const useSymbolSelectionRepository = (): SymbolSelectionRepository => {
 	const { symbolSelectionRepository } = useGameContext();

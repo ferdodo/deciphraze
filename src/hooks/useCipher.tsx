@@ -1,4 +1,4 @@
-import { useGameContext } from "../contexts/useGameContext";
+import { useGameContext } from "./useGameContext";
 import type { Cipher } from "../types/Cipher";
 
 export const useCipher = (): Cipher => {

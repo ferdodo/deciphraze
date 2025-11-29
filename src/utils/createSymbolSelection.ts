@@ -1,6 +1,6 @@
 import { BehaviorSubject } from "rxjs";
-import { normalizeWord } from "../utils/normalizeWord";
-import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
+import { normalizeWord } from "./normalizeWord";
+import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
 import type { SymbolSelection } from "../types/SymbolSelection";
 
 export function createSymbolSelection(): SymbolSelectionRepository {
@@ -29,3 +29,4 @@ export function createSymbolSelection(): SymbolSelectionRepository {
 		symbolSelection$: symbolSelectionSubject.asObservable(),
 	};
 }
+

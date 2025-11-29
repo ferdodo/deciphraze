@@ -3,7 +3,6 @@ import { createStatisticsRepository } from "./createStatisticsRepository";
 import type { Statistics } from "../types/Statistics";
 
 describe("createStatisticsRepository", () => {
-
 	it("should create repository with default statistics when localStorage is empty", () => {
 		localStorage.clear();
 		const repository = createStatisticsRepository();

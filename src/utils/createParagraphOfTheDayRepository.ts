@@ -1,4 +1,4 @@
-import type { ParagraphOfTheDayRepository } from "../types/ParagraphOfTheDayRepository";
+import type { ParagraphOfTheDayRepository } from "../repositories/ParagraphOfTheDayRepository";
 import { paragraphOfTheDay } from "../paragraphOfTheDay";
 
 export function createParagraphOfTheDayRepository(): ParagraphOfTheDayRepository {
@@ -8,3 +8,4 @@ export function createParagraphOfTheDayRepository(): ParagraphOfTheDayRepository
 		}
 	};
 }
+

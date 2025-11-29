@@ -1,9 +1,9 @@
-import type { GameContextType } from "../types/GameContextType";
+import type { GameContext } from "../contexts/GameContext";
 import { selectLetter } from "../usecases/selectLetter";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { normalizeWord } from "../utils/normalizeWord";
 
-export function asPlayerFinishGameStartingWithLetter(context: GameContextType, firstLetter: string): void {
+export function asPlayerFinishGameStartingWithLetter(context: GameContext, firstLetter: string): void {
 	const cipher = context.cipherRepository.getCipher();
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 	const normalizedFirstLetter = normalizeWord(firstLetter).toUpperCase();

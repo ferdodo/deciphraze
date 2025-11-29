@@ -1,5 +1,5 @@
 import type { GameSession } from "../types/GameSession";
-import type { DiscoveryOrderRepository } from "../types/DiscoveryOrderRepository";
+import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import { countWordsInParagraph } from "./countWordsInParagraph";
 
 export function createGameSession(

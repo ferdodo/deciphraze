@@ -4,7 +4,7 @@ import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
 import type { PlayerCipher } from "../types/PlayerCipher";
-import type { GameContextType } from "../types/GameContextType";
+import type { GameContext } from "../contexts/GameContext";
 
 export function registerWinnedGame({
 	dayRepository,
@@ -13,12 +13,15 @@ export function registerWinnedGame({
 	gameHistoryRepository,
 	achievementRepository,
 	discoveryOrderRepository,
-}: GameContextType): Subscription {
+}: GameContext): Subscription {
 	const day = dayRepository.getDay();
 	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
 
 	return playerCipherRepository.playerCipher$.pipe(
-		filter((playerCipher: PlayerCipher) => isWin(playerCipher, paragraphOfTheDay))
+		filter((playerCipher: PlayerCipher) => {
+			const gameHistory = gameHistoryRepository.getHistory();
+			return isWin(playerCipher, paragraphOfTheDay, gameHistory, day);
+		})
 	).subscribe(() => {
 		const gameSession = createGameSession(day, discoveryOrderRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);

@@ -1,4 +1,4 @@
-import type { ParagraphOfTheDayRepository } from "../types/ParagraphOfTheDayRepository";
+import type { ParagraphOfTheDayRepository } from "../repositories/ParagraphOfTheDayRepository";
 
 export function createParagraphOfTheDayRepositoryMock(): ParagraphOfTheDayRepository {
 	return {

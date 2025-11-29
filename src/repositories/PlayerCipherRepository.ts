@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { PlayerCipher } from "./PlayerCipher";
+import type { PlayerCipher } from "../types/PlayerCipher";
 
 export interface PlayerCipherRepository {
 	getPlayerCipher(): PlayerCipher;
@@ -8,3 +8,4 @@ export interface PlayerCipherRepository {
 	addPlayerCipherEntry(letter: string, symbol: string): void;
 	playerCipher$: Observable<PlayerCipher>;
 }
+

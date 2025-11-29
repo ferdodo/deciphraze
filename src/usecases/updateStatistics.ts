@@ -2,16 +2,17 @@ import type { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import { isWin } from "../utils/isWin";
 import type { PlayerCipher } from "../types/PlayerCipher";
-import type { GameContextType } from "../types/GameContextType";
+import type { GameContext } from "../contexts/GameContext";
 import { countWordsInParagraph } from "../utils/countWordsInParagraph";
 
-export function updateStatistics(context: GameContextType): Subscription {
+export function updateStatistics(context: GameContext): Subscription {
 	const {
 		playerCipherRepository,
 		paragraphOfTheDayRepository,
 		dayRepository,
 		statisticsRepository,
 		discoveryOrderRepository,
+		gameHistoryRepository,
 	} = context;
 
 	let lastWinDate: string | null = null;
@@ -19,7 +20,9 @@ export function updateStatistics(context: GameContextType): Subscription {
 	return playerCipherRepository.playerCipher$.pipe(
 		filter((playerCipher: PlayerCipher) => {
 			const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
-			return isWin(playerCipher, paragraphOfTheDay);
+			const currentDay = dayRepository.getDay();
+			const gameHistory = gameHistoryRepository.getHistory();
+			return isWin(playerCipher, paragraphOfTheDay, gameHistory, currentDay);
 		})
 	).subscribe(() => {
 		const currentDay = dayRepository.getDay();

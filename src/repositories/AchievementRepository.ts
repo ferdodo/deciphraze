@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { AllAchievements } from "./AllAchievements";
+import type { AllAchievements } from "../types/AllAchievements";
 
 export interface AchievementRepository {
 	loadAchievements(): AllAchievements;

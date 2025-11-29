@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { Statistics } from "./Statistics";
+import type { Statistics } from "../types/Statistics";
 
 export interface StatisticsRepository {
 	getStatistics(): Statistics;

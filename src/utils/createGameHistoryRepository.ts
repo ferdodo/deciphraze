@@ -1,4 +1,4 @@
-import type { GameHistoryRepository } from "../types/GameHistoryRepository";
+import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
 import type { GameHistory } from "../types/GameHistory";
 import type { GameSession } from "../types/GameSession";
 import { checkGameHistory } from "./checkGameHistory";
@@ -26,3 +26,4 @@ export function createGameHistoryRepository(): GameHistoryRepository {
 
 	return { getHistory, addSession };
 }
+

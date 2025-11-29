@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
+import type { LetterSelectionRepository } from "../repositories/LetterSelectionRepository";
 
 export const createLetterSelectionRepositoryMock = (): LetterSelectionRepository => {
 	const letterSelectionSubject = new BehaviorSubject<string | null>(null);

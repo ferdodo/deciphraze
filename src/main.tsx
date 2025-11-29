@@ -1,16 +1,16 @@
 import type React from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { Game } from "./components/Game";
-import { GameProvider } from "./providers/GameProvider";
+import { GameContextProvider } from "./contexts/GameContextProvider";
 import "crumbs-design-system";
 import "./styles/global.module.css";
 
 
 const App: React.FC = () => {
 	return (
-		<GameProvider>
+		<GameContextProvider>
 			<Game />
-		</GameProvider>
+		</GameContextProvider>
 	);
 };
 

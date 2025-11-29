@@ -1,5 +1,5 @@
-import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
-import type { CipherRepository } from "../types/CipherRepository";
+import { generateRandomAlphabet } from "./generateRandomAlphabet";
+import type { CipherRepository } from "../repositories/CipherRepository";
 
 export function createCipherRepository(): CipherRepository {
 	const cipher = generateRandomAlphabet();
@@ -8,3 +8,4 @@ export function createCipherRepository(): CipherRepository {
 		getCipher: () => cipher,
 	};
 }
+

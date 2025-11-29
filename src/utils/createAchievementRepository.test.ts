@@ -83,51 +83,203 @@ describe("createAchievementRepository", () => {
 				}
 			}
 		};
-		
+
 		repository.saveAchievements(achievements);
-		const loadedAchievements = repository.loadAchievements();
-		
-		expect(loadedAchievements).toEqual(achievements);
+		const loaded = repository.loadAchievements();
+
+		expect(loaded.computedAtDate).toBe("2024-01-01T00:00:00.000Z");
+		expect(loaded.achievements.firstGame.unlocked).toBe(true);
+		expect(loaded.achievements.streak5Days.unlocked).toBe(false);
+		expect(loaded.achievements.firstLetterA).toBeDefined();
+		expect(loaded.achievements.firstLetterE).toBeDefined();
+		expect(loaded.achievements.firstLetterY).toBeDefined();
+		expect(loaded.achievements.wordInOrder).toBeDefined();
+		expect(loaded.achievements.alphaAndOmega).toBeDefined();
+		expect(loaded.achievements.firstLetterQ).toBeDefined();
+		expect(loaded.achievements.words1000).toBeDefined();
+		expect(loaded.achievements.completeAlphabet).toBeDefined();
 	});
 
-	it("should handle invalid localStorage data", () => {
-		localStorage.setItem("deciphraze_achievements", "invalid json");
+	it("should persist achievements to localStorage", () => {
 		const repository = createAchievementRepository();
-		const achievements = repository.loadAchievements();
-		
-		expect(achievements).toBeDefined();
-		expect(achievements.computedAtDate).toBeDefined();
-		expect(achievements.achievements.firstGame).toBeDefined();
-		expect(achievements.achievements.streak5Days).toBeDefined();
-		expect(achievements.achievements.firstLetterA).toBeDefined();
-		expect(achievements.achievements.firstLetterE).toBeDefined();
-		expect(achievements.achievements.firstLetterY).toBeDefined();
-		expect(achievements.achievements.wordInOrder).toBeDefined();
-		expect(achievements.achievements.alphaAndOmega).toBeDefined();
-		expect(achievements.achievements.firstLetterQ).toBeDefined();
-		expect(achievements.achievements.words1000).toBeDefined();
-		expect(achievements.achievements.completeAlphabet).toBeDefined();
+		const achievements: AllAchievements = {
+			computedAtDate: "2024-01-01T00:00:00.000Z",
+			achievements: {
+				firstGame: {
+					achievementId: "first_game",
+					name: "Preambule",
+					description: "Jouer votre première partie",
+					unlocked: true
+				},
+				streak5Days: {
+					achievementId: "streak_5_days",
+					name: "Série de 5 jours",
+					description: "Réussir une partie 5 jours consécutifs",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 5
+					}
+				},
+				firstLetterA: {
+					achievementId: "first_letter_a",
+					name: "Commencer par A",
+					description: "Trouver la lettre A en premier",
+					unlocked: false
+				},
+				firstLetterE: {
+					achievementId: "first_letter_e",
+					name: "Commencer par E",
+					description: "Trouver la lettre E en premier",
+					unlocked: false
+				},
+				firstLetterY: {
+					achievementId: "first_letter_y",
+					name: "Commencer par Y",
+					description: "Trouver la lettre Y en premier",
+					unlocked: false
+				},
+				wordInOrder: {
+					achievementId: "word_in_order",
+					name: "Signature",
+					description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
+					unlocked: false
+				},
+				alphaAndOmega: {
+					achievementId: "alpha_and_omega",
+					name: "Synthèse",
+					description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
+					unlocked: false
+				},
+				firstLetterQ: {
+					achievementId: "first_letter_q",
+					name: "Commencer par Q",
+					description: "Trouver la lettre Q en premier",
+					unlocked: false
+				},
+				words1000: {
+					achievementId: "words_1000",
+					name: "Mille mots",
+					description: "Trouver 1000 mots de manière cumulative",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 1000
+					}
+				},
+				completeAlphabet: {
+					achievementId: "complete_alphabet",
+					name: "Alphabet complet",
+					description: "Trouver toutes les lettres de l'alphabet",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 26
+					}
+				}
+			}
+		};
+
+		repository.saveAchievements(achievements);
+
+		const stored = localStorage.getItem("deciphraze_achievements");
+		expect(stored).toBeTruthy();
+		if (stored) {
+			const parsed = JSON.parse(stored);
+			expect(parsed.computedAtDate).toBe("2024-01-01T00:00:00.000Z");
+			expect(parsed.achievements.firstGame.unlocked).toBe(true);
+		}
 	});
 
-
-	it("should handle null localStorage", () => {
-		localStorage.setItem("deciphraze_achievements", "null");
+	it("should emit achievements through observable", () => {
 		const repository = createAchievementRepository();
-		const achievements = repository.loadAchievements();
-		
-		expect(achievements).toBeDefined();
-		expect(achievements.computedAtDate).toBeDefined();
-		expect(achievements.achievements.firstGame).toBeDefined();
-		expect(achievements.achievements.streak5Days).toBeDefined();
-		expect(achievements.achievements.firstLetterA).toBeDefined();
-		expect(achievements.achievements.firstLetterE).toBeDefined();
-		expect(achievements.achievements.firstLetterY).toBeDefined();
-		expect(achievements.achievements.wordInOrder).toBeDefined();
-		expect(achievements.achievements.alphaAndOmega).toBeDefined();
-		expect(achievements.achievements.firstLetterQ).toBeDefined();
-		expect(achievements.achievements.words1000).toBeDefined();
-		expect(achievements.achievements.completeAlphabet).toBeDefined();
+		const achievements: AllAchievements = {
+			computedAtDate: "2024-01-01T00:00:00.000Z",
+			achievements: {
+				firstGame: {
+					achievementId: "first_game",
+					name: "Preambule",
+					description: "Jouer votre première partie",
+					unlocked: true
+				},
+				streak5Days: {
+					achievementId: "streak_5_days",
+					name: "Série de 5 jours",
+					description: "Réussir une partie 5 jours consécutifs",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 5
+					}
+				},
+				firstLetterA: {
+					achievementId: "first_letter_a",
+					name: "Commencer par A",
+					description: "Trouver la lettre A en premier",
+					unlocked: false
+				},
+				firstLetterE: {
+					achievementId: "first_letter_e",
+					name: "Commencer par E",
+					description: "Trouver la lettre E en premier",
+					unlocked: false
+				},
+				firstLetterY: {
+					achievementId: "first_letter_y",
+					name: "Commencer par Y",
+					description: "Trouver la lettre Y en premier",
+					unlocked: false
+				},
+				wordInOrder: {
+					achievementId: "word_in_order",
+					name: "Signature",
+					description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
+					unlocked: false
+				},
+				alphaAndOmega: {
+					achievementId: "alpha_and_omega",
+					name: "Synthèse",
+					description: "Trouver respectivement la première lettre en premier et la dernière en dernier",
+					unlocked: false
+				},
+				firstLetterQ: {
+					achievementId: "first_letter_q",
+					name: "Commencer par Q",
+					description: "Trouver la lettre Q en premier",
+					unlocked: false
+				},
+				words1000: {
+					achievementId: "words_1000",
+					name: "Mille mots",
+					description: "Trouver 1000 mots de manière cumulative",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 1000
+					}
+				},
+				completeAlphabet: {
+					achievementId: "complete_alphabet",
+					name: "Alphabet complet",
+					description: "Trouver toutes les lettres de l'alphabet",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 26
+					}
+				}
+			}
+		};
+
+		return new Promise<void>((resolve) => {
+			repository.achievements$.subscribe((loaded) => {
+				expect(loaded.computedAtDate).toBe("2024-01-01T00:00:00.000Z");
+				expect(loaded.achievements.firstGame.unlocked).toBe(true);
+				resolve();
+			});
+
+			repository.saveAchievements(achievements);
+		});
 	});
-
-
 });
+

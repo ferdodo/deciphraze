@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import type { SymbolSelectionRepository } from "../types/SymbolSelectionRepository";
+import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
 
 export const createSymbolSelectionRepositoryMock = (): SymbolSelectionRepository => {
 	const symbolSelectionSubject = new BehaviorSubject<string | null>(null);

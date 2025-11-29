@@ -1,9 +1,9 @@
-import type { GameContextType } from "../types/GameContextType";
+import type { GameContext } from "../contexts/GameContext";
 import { selectLetter } from "../usecases/selectLetter";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { characterEquals } from "../utils/characterEquals";
 
-export function asPlayerAssociateOneGoodLetter(context: GameContextType): void {
+export function asPlayerAssociateOneGoodLetter(context: GameContext): void {
 	const { playerCipherRepository } = context;
 	const playerCipher = playerCipherRepository.getPlayerCipher();
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

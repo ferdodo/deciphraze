@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { StatisticsRepository } from "../types/StatisticsRepository";
+import type { StatisticsRepository } from "../repositories/StatisticsRepository";
 import type { Statistics } from "../types/Statistics";
 
 const STATISTICS_STORAGE_KEY = "deciphraze_statistics";

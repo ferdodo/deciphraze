@@ -1,9 +1,9 @@
 import type { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
-import type { GameContextType } from "../types/GameContextType";
+import type { GameContext } from "../contexts/GameContext";
 import { characterEquals } from "../utils/characterEquals";
 
-export function registerDiscoveryOrder(context: GameContextType): Subscription {
+export function registerDiscoveryOrder(context: GameContext): Subscription {
 	const {
         discoveryOrderRepository,
         dayRepository,

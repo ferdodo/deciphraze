@@ -1,5 +1,5 @@
-import { useGameContext } from "../contexts/useGameContext";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
+import { useGameContext } from "./useGameContext";
+import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
 
 export const usePlayerCipherRepository = (): PlayerCipherRepository => {
 	const { playerCipherRepository } = useGameContext();

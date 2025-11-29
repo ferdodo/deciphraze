@@ -39,3 +39,12 @@
 	color: #ff6400;
 	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
 }
+
+.gameWon {
+	opacity: 0.5;
+}
+
+.inputs:disabled {
+	cursor: default;
+	opacity: 0.5;
+}

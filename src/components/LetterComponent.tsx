@@ -3,12 +3,13 @@ import type { LetterSelection } from "../types/LetterSelection";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useLetterSelection } from "../hooks/useLetterSelection";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";
+import { useWin } from "../hooks/useWin";
 import { selectLetter } from "../usecases/selectLetter";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
 import { isLetterMatched } from "../utils/isLetterMatched";
 import styles from "./LetterComponent.module.css";
-import { useGameContext } from "../contexts/useGameContext";
+import { useGameContext } from "../hooks/useGameContext";
 
 interface LetterComponentProps {
 	character: string;
@@ -19,6 +20,7 @@ export function LetterComponent({ character }: LetterComponentProps): JSX.Elemen
 	const selectedLetter: LetterSelection = useLetterSelection();
 	const selectedSymbol = useSymbolSelection();
 	const context = useGameContext();
+	const win = useWin();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
 	const highlighted = normalizedCharacter in playerCipher;
 	const selected = characterEquals(selectedLetter ?? '', character);
@@ -28,6 +30,7 @@ export function LetterComponent({ character }: LetterComponentProps): JSX.Elemen
 		selected ? styles.selected : "",
 		highlighted ? styles.highlighted : "",
 		matched ? styles.matched : "",
+		win ? styles.gameWon : "",
 	].join(" ");
 	
 	const clickSelectLetter = (): void => {
@@ -38,7 +41,8 @@ export function LetterComponent({ character }: LetterComponentProps): JSX.Elemen
 		<button
 			className={styles.inputs}
 			onClick={clickSelectLetter}
-			type="button">
+			type="button"
+			disabled={win}>
 			<div className={styles.letterContainer}>
 				<span className={spanClassName}>
 					{character}

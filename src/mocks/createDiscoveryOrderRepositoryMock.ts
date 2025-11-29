@@ -1,4 +1,4 @@
-import type { DiscoveryOrderRepository } from "../types/DiscoveryOrderRepository";
+import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { DiscoveryOrder } from "../types/DiscoveryOrder";
 
 export function createDiscoveryOrderRepositoryMock(): DiscoveryOrderRepository {

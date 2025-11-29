@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import type { PlayerCipherRepository } from "../types/PlayerCipherRepository";
+import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
 
 export const createPlayerCipherRepositoryMock = (initialCipher: Record<string, string> = {}): PlayerCipherRepository & { playerCipherSubject: BehaviorSubject<Record<string, string>> } => {
 	const playerCipherSubject = new BehaviorSubject<Record<string, string>>(initialCipher);

@@ -1,4 +1,4 @@
-import type { DiscoveryOrderRepository } from "../types/DiscoveryOrderRepository";
+import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { DiscoveryOrder } from "../types/DiscoveryOrder";
 
 const DISCOVERY_ORDER_STORAGE_KEY = "deciphraze_discovery_order";
@@ -46,3 +46,4 @@ export function createDiscoveryOrderRepository(): DiscoveryOrderRepository {
 		addLetterToDiscoveryOrder
 	};
 }
+

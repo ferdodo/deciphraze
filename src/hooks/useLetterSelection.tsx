@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useGameContext } from "../contexts/useGameContext";
+import { useGameContext } from "./useGameContext";
 import type { LetterSelection } from "../types/LetterSelection";
 
 export const useLetterSelection = (): LetterSelection => {

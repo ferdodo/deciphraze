@@ -1,5 +1,5 @@
-import { useGameContext } from "../contexts/useGameContext";
-import type { LetterSelectionRepository } from "../types/LetterSelectionRepository";
+import { useGameContext } from "./useGameContext";
+import type { LetterSelectionRepository } from "../repositories/LetterSelectionRepository";
 
 export const useLetterSelectionRepository = (): LetterSelectionRepository => {
 	const { letterSelectionRepository } = useGameContext();

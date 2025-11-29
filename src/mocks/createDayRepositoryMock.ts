@@ -1,4 +1,4 @@
-import type { DayRepository } from "../types/DayRepository";
+import type { DayRepository } from "../repositories/DayRepository";
 
 export function createDayRepositoryMock(): DayRepository {
 	return {
