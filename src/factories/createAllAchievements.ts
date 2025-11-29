@@ -11,6 +11,8 @@ export function createAllAchievements(
 	wordInOrderUnlocked: boolean = false,
 	alphaAndOmegaUnlocked: boolean = false,
 	firstLetterQUnlocked: boolean = false,
+	words1000Unlocked: boolean = false,
+	words1000Progress: { current: number; target: 1000 } = { current: 0, target: 1000 },
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -48,6 +50,11 @@ export function createAllAchievements(
 			firstLetterQ: {
 				...defaultAchievements.achievements.firstLetterQ,
 				unlocked: firstLetterQUnlocked
+			},
+			words1000: {
+				...defaultAchievements.achievements.words1000,
+				unlocked: words1000Unlocked,
+				progress: words1000Progress
 			}
 		}
 	};

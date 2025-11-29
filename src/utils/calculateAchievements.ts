@@ -10,6 +10,7 @@ import { isFirstLetterFoundY } from "./isFirstLetterFoundY";
 import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { isFirstLetterFoundQ } from "./isFirstLetterFoundQ";
+import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
 
 export function calculateAchievements(
 	gameHistory: GameHistory,
@@ -29,6 +30,13 @@ export function calculateAchievements(
 	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
 	const alphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
 	const firstLetterQUnlocked = isFirstLetterFoundQ(discoveryOrder);
+	
+	const totalWordsFound = calculateTotalWordsFound(gameHistory);
+	const words1000Unlocked = totalWordsFound >= 1000;
+	const words1000Progress = {
+		current: totalWordsFound,
+		target: 1000 as const
+	};
 
 	return createAllAchievements(
 		firstGameUnlocked,
@@ -39,6 +47,8 @@ export function calculateAchievements(
 		firstLetterYUnlocked,
 		wordInOrderUnlocked,
 		alphaAndOmegaUnlocked,
-		firstLetterQUnlocked
+		firstLetterQUnlocked,
+		words1000Unlocked,
+		words1000Progress
 	);
 }

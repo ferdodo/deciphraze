@@ -20,7 +20,7 @@ export function createGameHistoryRepository(): GameHistoryRepository {
 	}
 
 	function addSession(session: GameSession): void {
-		gameHistory[session.winAt] = session.lettersFound;
+		gameHistory[session.winAt] = session;
 		localStorage.setItem(GAME_HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
 	}
 

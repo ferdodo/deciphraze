@@ -13,7 +13,11 @@ export function createAchievementRepository(): AchievementRepository {
 
 	try {
 		const stored: string = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY) ?? "";
-		achievements = checkAchievements(JSON.parse(stored));
+		if (stored === "" || stored === "null") {
+			achievements = defaultAchievements;
+		} else {
+			achievements = checkAchievements(JSON.parse(stored));
+		}
 	} catch (_error) {
 		achievements = defaultAchievements;
 	}

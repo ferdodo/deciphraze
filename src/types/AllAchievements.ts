@@ -53,5 +53,15 @@ export interface AllAchievements {
 			description: "Trouver la lettre Q en premier";
 			unlocked: boolean;
 		};
+		words1000: {
+			achievementId: "words_1000";
+			name: "Mille mots";
+			description: "Trouver 1000 mots de manière cumulative";
+			unlocked: boolean;
+			progress: {
+				current: number;
+				target: 1000;
+			};
+		};
 	};
 }

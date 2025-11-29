@@ -10,7 +10,7 @@ export function createGameHistoryRepositoryMock(): GameHistoryRepository {
 	}
 
 	function addSession(session: GameSession): void {
-		gameHistory[session.winAt] = session.lettersFound;
+		gameHistory[session.winAt] = session;
 	}
 
 	return { getHistory, addSession };

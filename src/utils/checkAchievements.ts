@@ -57,6 +57,16 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			name: z.literal("Commencer par Q"),
 			description: z.literal("Trouver la lettre Q en premier"),
 			unlocked: z.boolean()
+		}),
+		words1000: z.object({
+			achievementId: z.literal("words_1000"),
+			name: z.literal("Mille mots"),
+			description: z.literal("Trouver 1000 mots de manière cumulative"),
+			unlocked: z.boolean(),
+			progress: z.object({
+				current: z.number(),
+				target: z.literal(1000)
+			})
 		})
 	})
 });

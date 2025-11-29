@@ -60,6 +60,16 @@ describe("createAchievementRepository", () => {
 					name: "Commencer par Q",
 					description: "Trouver la lettre Q en premier",
 					unlocked: false
+				},
+				words1000: {
+					achievementId: "words_1000",
+					name: "Mille mots",
+					description: "Trouver 1000 mots de manière cumulative",
+					unlocked: false,
+					progress: {
+						current: 0,
+						target: 1000
+					}
 				}
 			}
 		};
@@ -85,6 +95,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();
+		expect(achievements.achievements.words1000).toBeDefined();
 	});
 
 
@@ -103,6 +114,7 @@ describe("createAchievementRepository", () => {
 		expect(achievements.achievements.wordInOrder).toBeDefined();
 		expect(achievements.achievements.alphaAndOmega).toBeDefined();
 		expect(achievements.achievements.firstLetterQ).toBeDefined();
+		expect(achievements.achievements.words1000).toBeDefined();
 	});
 
 

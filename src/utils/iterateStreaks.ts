@@ -1,10 +1,11 @@
 import type { GameHistory } from "../types/GameHistory";
+import { getLettersFoundFromHistoryEntry } from "./getLettersFoundFromHistoryEntry";
 
 export function* iterateStreaks(
 	gameHistory: GameHistory,
 ): IterableIterator<number> {
 	const sessions = Object.entries(gameHistory)
-		.map(([winAt, lettersFound]) => ({ winAt, lettersFound }))
+		.map(([winAt, entry]) => ({ winAt, lettersFound: getLettersFoundFromHistoryEntry(entry) }))
 		.sort((a, b) => a.winAt.localeCompare(b.winAt));
 
 	if (sessions.length === 0) {

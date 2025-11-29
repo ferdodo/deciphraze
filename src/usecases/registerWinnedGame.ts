@@ -20,7 +20,7 @@ export function registerWinnedGame({
 	return playerCipherRepository.playerCipher$.pipe(
 		filter((playerCipher: PlayerCipher) => isWin(playerCipher, paragraphOfTheDay))
 	).subscribe(() => {
-		const gameSession = createGameSession(day, discoveryOrderRepository);
+		const gameSession = createGameSession(day, discoveryOrderRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
 		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);

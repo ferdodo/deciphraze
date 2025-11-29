@@ -1,8 +1,9 @@
 import type { GameHistory } from "../types/GameHistory";
+import { getLettersFoundFromHistoryEntry } from "./getLettersFoundFromHistoryEntry";
 
 export function calculateCurrentStreak(gameHistory: GameHistory, startIndex: number): number {
 	const sessions = Object.entries(gameHistory)
-		.map(([winAt, lettersFound]) => ({ winAt, lettersFound }))
+		.map(([winAt, entry]) => ({ winAt, lettersFound: getLettersFoundFromHistoryEntry(entry) }))
 		.sort((a, b) => a.winAt.localeCompare(b.winAt));
 
 	if (sessions.length === 0) {

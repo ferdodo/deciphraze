@@ -149,6 +149,35 @@ export const AchievementsComponent: React.FC = () => {
 						</div>
 					</div>
 				</div>
+
+				{/* Mille mots */}
+				<div 
+					key={achievements.achievements.words1000.achievementId} 
+					className={`${styles.achievement} ${achievements.achievements.words1000.unlocked ? styles.unlocked : styles.locked}`}
+				>
+					<div className={styles.achievementIcon}>
+						{achievements.achievements.words1000.unlocked ? "🏆" : "🔒"}
+					</div>
+					<div className={styles.achievementContent}>
+						<div className={styles.achievementName}>{achievements.achievements.words1000.name}</div>
+						<div className={styles.achievementDescription}>
+							{achievements.achievements.words1000.description}
+						</div>
+						{!achievements.achievements.words1000.unlocked && achievements.achievements.words1000.progress.current > 0 && (
+							<div className={styles.progressContainer}>
+								<div className={styles.progressBar}>
+									<div 
+										className={styles.progressFill}
+										style={{ width: `${(achievements.achievements.words1000.progress.current / achievements.achievements.words1000.progress.target) * 100}%` }}
+									></div>
+								</div>
+								<div className={styles.progressText}>
+									{achievements.achievements.words1000.progress.current}/{achievements.achievements.words1000.progress.target} mots
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

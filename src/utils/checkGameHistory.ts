@@ -1,9 +1,20 @@
 import { z } from "zod";
 import type { GameHistory } from "../types/GameHistory";
+import type { GameSession } from "../types/GameSession";
 import { backupInvalidData } from "./backupInvalidData";
 import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 
-const GameHistorySchema: z.ZodType<GameHistory> = z.record(z.string(), z.array(z.string()));
+// Schema pour accepter soit string[] (ancien format) soit GameSession (nouveau format)
+const GameHistoryValueSchema: z.ZodType<string[] | GameSession> = z.union([
+	z.array(z.string()),
+	z.object({
+		winAt: z.string(),
+		lettersFound: z.array(z.string()),
+		wordsFound: z.number().optional()
+	})
+]);
+
+const GameHistorySchema: z.ZodType<GameHistory> = z.record(z.string(), GameHistoryValueSchema);
 
 export function checkGameHistory(data: unknown): GameHistory {
 	try {
