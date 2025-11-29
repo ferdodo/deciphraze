@@ -7,6 +7,7 @@ import type { AchievementRepository } from "./AchievementRepository";
 import type { ParagraphOfTheDayRepository } from "./ParagraphOfTheDayRepository";
 import type { DayRepository } from "./DayRepository";
 import type { DiscoveryOrderRepository } from "./DiscoveryOrderRepository";
+import type { StatisticsRepository } from "./StatisticsRepository";
 
 export interface GameContextType {
 	letterSelectionRepository: LetterSelectionRepository;
@@ -18,4 +19,5 @@ export interface GameContextType {
 	paragraphOfTheDayRepository: ParagraphOfTheDayRepository;
 	dayRepository: DayRepository;
 	discoveryOrderRepository: DiscoveryOrderRepository;
+	statisticsRepository: StatisticsRepository;
 }

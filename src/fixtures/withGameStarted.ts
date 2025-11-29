@@ -8,6 +8,7 @@ import { createGameHistoryRepositoryMock } from "../mocks/createGameHistoryRepos
 import { createParagraphOfTheDayRepositoryMock } from "../mocks/createParagraphOfTheDayRepositoryMock";
 import { createDayRepositoryMock } from "../mocks/createDayRepositoryMock";
 import { createDiscoveryOrderRepositoryMock } from "../mocks/createDiscoveryOrderRepositoryMock";
+import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 
 export function withGameStarted(): [() => void, GameContextType] {
@@ -21,6 +22,7 @@ export function withGameStarted(): [() => void, GameContextType] {
         paragraphOfTheDayRepository: createParagraphOfTheDayRepositoryMock(),
         dayRepository: createDayRepositoryMock(),
         discoveryOrderRepository: createDiscoveryOrderRepositoryMock(),
+        statisticsRepository: createStatisticsRepository(),
     };
 
     const cleanup = initializeGameSideEffects(context);

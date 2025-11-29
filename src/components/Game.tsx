@@ -5,6 +5,7 @@ import { FragmentComponent } from "./FragmentComponent";
 import { LetterComponent } from "./LetterComponent";
 import { SymbolComponent } from "./SymbolComponent";
 import { AchievementsComponent } from "./AchievementsComponent";
+import { StatisticsComponent } from "./StatisticsComponent";
 import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
@@ -95,6 +96,11 @@ const Game: React.FC = () => {
 			<crumbs-p slot="title-3">Succès</crumbs-p>
 			<crumbs-panel slot="content-3" panel-title="Succès" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
 				<AchievementsComponent />
+			</crumbs-panel>
+
+			<crumbs-p slot="title-4">Statistiques</crumbs-p>
+			<crumbs-panel slot="content-4" panel-title="Statistiques" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
+				<StatisticsComponent />
 			</crumbs-panel>
 		</crumbs-nav>
 		</div>

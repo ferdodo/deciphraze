@@ -24,9 +24,9 @@ describe("backupAndClearLocalStorage", () => {
 		expect(backupKey).not.toBeNull();
 		if (backupKey) {
 			const backupData = JSON.parse(localStorage.getItem(backupKey) || "{}");
-			expect(backupData["deciphraze_achievements"]).toBe('{"test": "data"}');
-			expect(backupData["deciphraze_game_history"]).toBe('{"2024-01-01": ["A"]}');
-			expect(backupData["deciphraze_discovery_order"]).toBe('{"2024-01-01": ["A", "B"]}');
+			expect(backupData.deciphraze_achievements).toBe('{"test": "data"}');
+			expect(backupData.deciphraze_game_history).toBe('{"2024-01-01": ["A"]}');
+			expect(backupData.deciphraze_discovery_order).toBe('{"2024-01-01": ["A", "B"]}');
 		}
 	});
 
@@ -50,7 +50,7 @@ describe("backupAndClearLocalStorage", () => {
 		if (backupKey) {
 			const backupData = JSON.parse(localStorage.getItem(backupKey) || "{}");
 			expect(backupData[existingBackupKey]).toBeUndefined();
-			expect(backupData["deciphraze_invalid_data_backups"]).toBeUndefined();
+			expect(backupData.deciphraze_invalid_data_backups).toBeUndefined();
 		}
 
 		// Vérifier que les clés de backup existantes n'ont pas été supprimées

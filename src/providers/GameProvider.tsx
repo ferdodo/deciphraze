@@ -10,6 +10,7 @@ import { createAchievementRepository } from "../utils/createAchievementRepositor
 import { createParagraphOfTheDayRepository } from "../utils/createParagraphOfTheDayRepository";
 import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
+import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 
 interface GameProviderProps {
@@ -26,6 +27,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }: GameProv
 	const paragraphOfTheDayRepository = createParagraphOfTheDayRepository();
 	const dayRepository = createDayRepository();
 	const discoveryOrderRepository = createDiscoveryOrderRepository();
+	const statisticsRepository = createStatisticsRepository();
 
 	const value = useMemo(() => ({
 		letterSelectionRepository: letterSelection,
@@ -37,6 +39,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }: GameProv
 		paragraphOfTheDayRepository: paragraphOfTheDayRepository,
 		dayRepository: dayRepository,
 		discoveryOrderRepository: discoveryOrderRepository,
+		statisticsRepository: statisticsRepository,
 	}), [
 		letterSelection,
 		playerCipher,
@@ -47,6 +50,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }: GameProv
 		paragraphOfTheDayRepository,
 		dayRepository,
 		discoveryOrderRepository,
+		statisticsRepository,
 	]);
 
 	// Initialiser les effets de bord du jeu
