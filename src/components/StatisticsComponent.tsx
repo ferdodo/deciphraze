@@ -60,7 +60,7 @@ export const StatisticsComponent: React.FC = () => {
 
 				{/* Date de la première partie */}
 				<div className={styles.statistic}>
-					<div className={styles.statisticIcon}>🎯</div>
+					<div className={styles.statisticIcon}>🌱</div>
 					<div className={styles.statisticContent}>
 						<div className={styles.statisticName}>Première partie</div>
 						<div className={styles.statisticValue}>{formatDate(statistics.firstGameDate)}</div>
