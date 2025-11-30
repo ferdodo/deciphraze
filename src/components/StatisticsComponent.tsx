@@ -19,7 +19,6 @@ export const StatisticsComponent: React.FC = () => {
 
 	return (
 		<div className={styles.statisticsContainer}>
-			<h3 className={styles.title}>📊 Statistiques</h3>
 			<div className={styles.statisticsList}>
 				{/* Nombre total de parties */}
 				<div className={styles.statistic}>
@@ -47,9 +46,10 @@ export const StatisticsComponent: React.FC = () => {
 						<div className={styles.statisticValue}>
 							{preferredLetters.length > 0 ? (
 								preferredLetters.map((item, index) => (
-									<div key={item.letter} style={{ marginBottom: index < preferredLetters.length - 1 ? "0.5rem" : "0" }}>
-										{item.letter} : {item.score.toFixed(1)}
-									</div>
+									<span key={item.letter}>
+										{item.letter}
+										{index < preferredLetters.length - 1 ? ", " : ""}
+									</span>
 								))
 							) : (
 								<div>Aucune statistique disponible</div>
