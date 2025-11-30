@@ -1,12 +1,22 @@
 #!/usr/bin/env node
-
-const fs = require("fs");
-const { execSync } = require("node:child_process");
+import fs from "node:fs";
+import { execSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 const REPORT_PATH = "public/stryker-report.json";
 
-function runStryker() {
-	execSync(`npx stryker run`, { stdio: 'inherit' });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function getFilesToMutate() {
+	const scriptPath = join(__dirname, "print-files-to-be-mutated.mjs");
+	const result = execSync(`node ${scriptPath}`, { stdio: "pipe", encoding: "utf8" });
+	return result.toString().split("\n").filter(Boolean);
+}
+
+function getTestFilePathFromSourceFile(sourceFile) {
+	return sourceFile.replace(/\.ts$/, ".test.ts");
 }
 
 function analyzeStrykerReport() {
@@ -18,6 +28,11 @@ function analyzeStrykerReport() {
 	}
 
 	try {
+		const filesToMutate = getFilesToMutate();
+		const testFilesToCheck = new Set(
+			filesToMutate.map((file) => getTestFilePathFromSourceFile(file)),
+		);
+
 		const reportContent = fs.readFileSync(REPORT_PATH, "utf8");
 		const report = JSON.parse(reportContent);
 
@@ -89,14 +104,45 @@ function analyzeStrykerReport() {
 			}
 		});
 
-		const nonKillingTests = Array.from(allTestIds).filter(
+		const allNonKillingTests = Array.from(allTestIds).filter(
 			(testId) => !testKillCount.has(testId) || testKillCount.get(testId) === 0,
+		);
+
+		// Filtrer les tests pour ne garder que ceux correspondant aux fichiers à muter
+		const relevantTestIds = Array.from(allTestIds).filter((testId) => {
+			const testInfo = testMap.get(testId);
+			if (!testInfo) return false;
+			return testFilesToCheck.has(testInfo.file);
+		});
+
+		// Filtrer les tests non-killing pour ne garder que ceux correspondant aux fichiers à muter
+		const nonKillingTests = allNonKillingTests.filter((testId) => {
+			const testInfo = testMap.get(testId);
+			if (!testInfo) return false;
+			return testFilesToCheck.has(testInfo.file);
+		});
+
+		const relevantKillingTestIds = Array.from(allKillingTestIds).filter(
+			(testId) => {
+				const testInfo = testMap.get(testId);
+				if (!testInfo) return false;
+				return testFilesToCheck.has(testInfo.file);
+			},
 		);
 
 		console.log("\n📊 COMPARAISON:");
 		console.log(`   - Nombre total de tests: ${allTestIds.size}`);
 		console.log(`   - Nombre de tests qui tuent: ${allKillingTestIds.size}`);
-		console.log(`   - Tests non-killing: ${nonKillingTests.length}`);
+		console.log(`   - Tests non-killing (tous): ${allNonKillingTests.length}`);
+		console.log(
+			`   - Tests pertinents (fichiers mutés): ${relevantTestIds.length}`,
+		);
+		console.log(
+			`   - Tests qui tuent (fichiers mutés): ${relevantKillingTestIds.length}`,
+		);
+		console.log(
+			`   - Tests non-killing (fichiers mutés): ${nonKillingTests.length}`,
+		);
 
 		if (nonKillingTests.length > 0) {
 			console.log("\n🚨 TESTS NON-KILLING DÉTECTÉS:");
@@ -116,12 +162,13 @@ function analyzeStrykerReport() {
 
 			console.log(`\n📊 Résumé:`);
 			console.log(`   - Tests non-killing: ${nonKillingTests.length}`);
-			console.log(
-				`   - Tests efficaces: ${allTestIds.size - nonKillingTests.length}`,
-			);
-			console.log(
-				`   - Taux d'efficacité: ${Math.round(((allTestIds.size - nonKillingTests.length) / allTestIds.size) * 100)}%`,
-			);
+			const effectiveTests = relevantTestIds.length - nonKillingTests.length;
+			console.log(`   - Tests efficaces: ${effectiveTests}`);
+			const efficiencyRate =
+				relevantTestIds.length > 0
+					? Math.round((effectiveTests / relevantTestIds.length) * 100)
+					: 100;
+			console.log(`   - Taux d'efficacité: ${efficiencyRate}%`);
 
 			console.log("\n💡 Recommandations:");
 			console.log("   - Vérifiez que ces tests couvrent bien le code");
@@ -131,9 +178,10 @@ function analyzeStrykerReport() {
 			console.log("\n❌ ÉCHEC: Des tests non-killing ont été détectés");
 			process.exit(1);
 		} else {
-			console.log("\n✅ SUCCÈS: Tous les tests tuent au moins un mutant");
+			const effectiveTests = relevantTestIds.length;
+			console.log("\n✅ SUCCÈS: Tous les tests pertinents tuent au moins un mutant");
 			console.log(
-				`📊 Taux d'efficacité: 100% (${allTestIds.size} tests efficaces)`,
+				`📊 Taux d'efficacité: 100% (${effectiveTests} test${effectiveTests > 1 ? "s" : ""} efficace${effectiveTests > 1 ? "s" : ""})`,
 			);
 			process.exit(0);
 		}
@@ -143,5 +191,4 @@ function analyzeStrykerReport() {
 	}
 }
 
-runStryker();
 analyzeStrykerReport();

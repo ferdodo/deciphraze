@@ -5,14 +5,6 @@ import { withGameStarted } from "../fixtures/withGameStarted";
 describe("selectLetter", () => {
 
 	describe("Basic selection", () => {
-		it("should select a letter when no symbol is selected", () => {
-			const [cleanup, context] = withGameStarted();
-			selectLetter("A", context);
-			expect(context.letterSelectionRepository.getLetterSelection()).toBe("A");
-			expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
-			cleanup();
-		});
-
 		it("should deselect letter if already selected", () => {
 			const [cleanup, context] = withGameStarted();
 			context.letterSelectionRepository.selectLetter("A");

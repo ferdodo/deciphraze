@@ -1,36 +1,14 @@
 import { execSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
-async function getCurrentStagedFiles() {
-	const result = execSync('git diff --cached --name-only', { stdio: 'pipe' });
-	return result.toString().split('\n').filter(Boolean);
-}
-
-async function getUnstagedFiles() {
-	const result = execSync('git diff --name-only', { stdio: 'pipe' });
-	return result.toString().split('\n').filter(Boolean);
-}
-
-async function getModifiedFilesInLastCommit() {
-	const result = execSync('git diff HEAD^ --name-only', { stdio: 'pipe' });
-	return result.toString().split('\n').filter(Boolean);
-}
-
-async function getFilesToMutate() {
-	return Promise.all(
-		[getCurrentStagedFiles(), getUnstagedFiles(), getModifiedFilesInLastCommit()]
-	).then(([stagedFiles, unstagedFiles, lastCommitFiles]) => {
-		const modifiedFiles = new Set([...stagedFiles, ...unstagedFiles]);
-
-		if (modifiedFiles.size === 0) {
-			modifiedFiles.add(...lastCommitFiles);
-		}
-
-		return [...modifiedFiles].filter(v => v.endsWith('.ts') && !v.includes('test.ts'));
-	});
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function runMutation() {
-	const filesToMutate = await getFilesToMutate();
+	const scriptPath = join(__dirname, 'print-files-to-be-mutated.mjs');
+	const result = execSync(`node ${scriptPath}`, { stdio: 'pipe', encoding: 'utf8' });
+	const filesToMutate = result.toString().split('\n').filter(Boolean);
 
 	if (filesToMutate.length === 0) {
 		console.log('No files to mutate');

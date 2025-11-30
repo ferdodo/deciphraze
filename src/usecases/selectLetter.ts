@@ -14,11 +14,11 @@ export const selectLetter = (
 		paragraphOfTheDayRepository,
 	} = context;
 	
-	// Vérifier si la partie est gagnée avant toute action
 	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
 	const playerCipher = playerCipherRepository.getPlayerCipher();
 	const currentDay = context.dayRepository.getDay();
 	const gameHistory = context.gameHistoryRepository.getHistory();
+
 	if (isWin(playerCipher, paragraphOfTheDay, gameHistory, currentDay)) {
 		return;
 	}

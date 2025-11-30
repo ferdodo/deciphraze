@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"build": "vite build",
-		"verify": "tsc --noEmit && biome ci ./src && exportcase check ./src && vitest run && node ./scripts/run-mutation.mjs",
+		"verify": "tsc --noEmit && biome ci ./src && exportcase check ./src && vitest run && node ./scripts/run-mutation.mjs && node ./scripts/check-non-killing-tests.mjs",
 		"dev": "vite --host --port 1111"
 	},
 	"devDependencies": {
