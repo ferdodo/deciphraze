@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { iterateStreaks } from "./iterateStreaks";
-import type { GameHistory } from "../types/GameHistory";
+import type { GameHistory } from "../entities/GameHistory";
 
 describe("calculateMaxStreak", () => {
 	let gameHistory: GameHistory;

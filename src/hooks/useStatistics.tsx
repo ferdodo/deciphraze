@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { Statistics } from "../types/Statistics";
+import type { Statistics } from "../entities/Statistics";
 
 export const useStatistics = (): Statistics => {
 	const { statisticsRepository } = useGameContext();

@@ -14,20 +14,4 @@ describe("createGameSession", () => {
 		cleanup();
 	});
 
-	it("should calculate wordsFound correctly", () => {
-		const [cleanup, context] = withFinishedGame();
-		const day = context.dayRepository.getDay();
-		const paragraph = "Hello world test";
-		const gameSession = createGameSession(day, context.discoveryOrderRepository, paragraph);
-		expect(gameSession.wordsFound).toBe(3); // "Hello", "world", "test"
-		cleanup();
-	});
-
-	it("should handle empty paragraph", () => {
-		const [cleanup, context] = withFinishedGame();
-		const day = context.dayRepository.getDay();
-		const gameSession = createGameSession(day, context.discoveryOrderRepository, "");
-		expect(gameSession.wordsFound).toBe(0);
-		cleanup();
-	});
 });

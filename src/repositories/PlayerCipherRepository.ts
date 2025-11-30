@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipher } from "../entities/PlayerCipher";
 
 export interface PlayerCipherRepository {
 	getPlayerCipher(): PlayerCipher;

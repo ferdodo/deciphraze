@@ -1,6 +1,6 @@
 import { z } from "zod";
-import type { GameHistory } from "../types/GameHistory";
-import type { GameSession } from "../types/GameSession";
+import type { GameHistory } from "../entities/GameHistory";
+import type { GameSession } from "../entities/GameSession";
 import { backupInvalidData } from "./backupInvalidData";
 import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 

@@ -1,4 +1,4 @@
-import type { GameHistory } from "../types/GameHistory";
+import type { GameHistory } from "../entities/GameHistory";
 import { iterateStreaks } from "./iterateStreaks";
 
 export function calculateMaxStreak(gameHistory: GameHistory): number {

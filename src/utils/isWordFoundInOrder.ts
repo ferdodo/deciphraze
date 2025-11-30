@@ -1,4 +1,4 @@
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 
 export function isWordFoundInOrder(paragraph: string, discoveryOrder: DiscoveryOrder): boolean {
 	// Extraire tous les mots du paragraphe (ignorer la ponctuation)

@@ -1,7 +1,7 @@
 import { characterEquals } from "./characterEquals";
-import type { PlayerCipher } from "../types/PlayerCipher";
-import type { LetterSelection } from "../types/LetterSelection";
-import type { SymbolSelection } from "../types/SymbolSelection";
+import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { LetterSelection } from "../entities/LetterSelection";
+import type { SymbolSelection } from "../entities/SymbolSelection";
 import type { CellType } from "../types/CellType";
 
 export const computeCellMatchesCurrentSelection = (

@@ -3,3 +3,4 @@ export type GameSession = {
 	lettersFound: string[];
 	wordsFound?: number;
 };
+

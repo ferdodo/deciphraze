@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
 import type { AchievementRepository } from "../repositories/AchievementRepository";
-import type { AllAchievements } from "../types/AllAchievements";
+import type { AllAchievements } from "../entities/AllAchievements";
 import { defaultAchievements } from "../constants/defaultAchievements";
 import { checkAchievements } from "./checkAchievements";
 

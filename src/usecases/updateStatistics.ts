@@ -1,7 +1,7 @@
 import type { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import { isWin } from "../utils/isWin";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
 import { countWordsInParagraph } from "../utils/countWordsInParagraph";
 

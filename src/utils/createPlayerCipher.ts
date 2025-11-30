@@ -2,7 +2,7 @@ import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
 import { characterEquals } from "./characterEquals";
 import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipher } from "../entities/PlayerCipher";
 
 
 export function createPlayerCipher(): PlayerCipherRepository {

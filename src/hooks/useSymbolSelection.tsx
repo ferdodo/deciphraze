@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { SymbolSelection } from "../types/SymbolSelection";
+import type { SymbolSelection } from "../entities/SymbolSelection";
 
 export const useSymbolSelection = (): SymbolSelection => {
 	const { symbolSelectionRepository } = useGameContext();

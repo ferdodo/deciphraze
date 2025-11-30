@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { PlayerCipher } from "../types/PlayerCipher";
+import type { PlayerCipher } from "../entities/PlayerCipher";
 
 export const usePlayerCipher = (): PlayerCipher => {
 	const { playerCipherRepository } = useGameContext();

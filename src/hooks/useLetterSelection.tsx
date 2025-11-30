@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { LetterSelection } from "../types/LetterSelection";
+import type { LetterSelection } from "../entities/LetterSelection";
 
 export const useLetterSelection = (): LetterSelection => {
 	const { letterSelectionRepository } = useGameContext();

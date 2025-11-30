@@ -1,6 +1,6 @@
-import type { GameHistory } from "../types/GameHistory";
-import type { AllAchievements } from "../types/AllAchievements";
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { GameHistory } from "../entities/GameHistory";
+import type { AllAchievements } from "../entities/AllAchievements";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";

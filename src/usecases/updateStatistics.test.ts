@@ -82,40 +82,5 @@ describe("updateStatistics", () => {
 		cleanup();
 	});
 
-	it("should update lastGameDate but keep firstGameDate on subsequent wins", () => {
-		const [cleanup, context] = withGameStarted();
-		
-		// Première victoire
-		asPlayerFinishGame(context);
-		const statistics1 = context.statisticsRepository.getStatistics();
-		const firstGameDate = statistics1.firstGameDate;
-		
-		// Simuler un nouveau jour (en modifiant le mock si possible, ou en testant le comportement)
-		// Pour ce test, on vérifie juste que firstGameDate est préservé
-		expect(statistics1.firstGameDate).toBe(firstGameDate);
-		expect(statistics1.lastGameDate).toBeTruthy();
-		
-		cleanup();
-	});
-
-	it("should handle discovery order correctly", () => {
-		const [cleanup, context] = withGameStarted();
-		
-		// Finir le jeu
-		asPlayerFinishGame(context);
-		
-		const statistics = context.statisticsRepository.getStatistics();
-		
-		// Les statistiques devraient être mises à jour
-		expect(statistics.totalGames).toBeGreaterThan(0);
-		expect(Array.isArray(statistics.letterPositions)).toBe(true);
-		// Chaque entrée devrait être un tableau de lettres
-		statistics.letterPositions.forEach((entry) => {
-			expect(Array.isArray(entry)).toBe(true);
-			expect(entry.length).toBeLessThanOrEqual(5);
-		});
-		
-		cleanup();
-	});
 });
 

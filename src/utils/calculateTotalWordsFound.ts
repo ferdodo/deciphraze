@@ -1,4 +1,4 @@
-import type { GameHistory } from "../types/GameHistory";
+import type { GameHistory } from "../entities/GameHistory";
 import { getWordsFoundFromHistoryEntry } from "./getWordsFoundFromHistoryEntry";
 
 export function calculateTotalWordsFound(gameHistory: GameHistory): number {

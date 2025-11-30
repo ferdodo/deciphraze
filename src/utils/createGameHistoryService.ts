@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
 import type { GameHistoryService } from "../types/GameHistoryService";
-import type { GameSession } from "../types/GameSession";
+import type { GameSession } from "../entities/GameSession";
 
 export function createGameHistoryService(): GameHistoryService {
 	const gameHistory: GameSession[] = [];

@@ -1,4 +1,4 @@
-import type { GameSession } from "../types/GameSession";
+import type { GameSession } from "../entities/GameSession";
 
 // Fonction utilitaire pour extraire le nombre de mots trouvés (gère la rétrocompatibilité)
 export function getWordsFoundFromHistoryEntry(entry: string[] | GameSession): number {

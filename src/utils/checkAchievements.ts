@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { AllAchievements } from "../types/AllAchievements";
+import type { AllAchievements } from "../entities/AllAchievements";
 import { backupInvalidData } from "./backupInvalidData";
 import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 

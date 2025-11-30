@@ -1,4 +1,4 @@
-import type { GameSession } from "../types/GameSession";
+import type { GameSession } from "../entities/GameSession";
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import { countWordsInParagraph } from "./countWordsInParagraph";
 

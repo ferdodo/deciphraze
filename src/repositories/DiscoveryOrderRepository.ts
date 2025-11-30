@@ -1,4 +1,4 @@
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 
 export interface DiscoveryOrderRepository {
 	getDiscoveryOrder(date: string): DiscoveryOrder;

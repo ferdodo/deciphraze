@@ -1,5 +1,5 @@
-import type { PlayerCipher } from "../types/PlayerCipher";
-import type { GameHistory } from "../types/GameHistory";
+import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { GameHistory } from "../entities/GameHistory";
 import { characterEquals } from "./characterEquals";
 import { isAlphabetic } from "./isAlphabetic";
 import { normalizeWord } from "./normalizeWord";

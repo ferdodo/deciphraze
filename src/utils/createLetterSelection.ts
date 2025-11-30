@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { normalizeWord } from "./normalizeWord";
 import type { LetterSelectionRepository } from "../repositories/LetterSelectionRepository";
-import type { LetterSelection } from "../types/LetterSelection";
+import type { LetterSelection } from "../entities/LetterSelection";
 
 export function createLetterSelection(): LetterSelectionRepository {
 	let currentSelection: LetterSelection = null;

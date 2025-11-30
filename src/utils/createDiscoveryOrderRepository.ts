@@ -1,5 +1,5 @@
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 
 const DISCOVERY_ORDER_STORAGE_KEY = "deciphraze_discovery_order";
 

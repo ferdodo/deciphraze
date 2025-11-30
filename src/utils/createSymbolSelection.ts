@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { normalizeWord } from "./normalizeWord";
 import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
-import type { SymbolSelection } from "../types/SymbolSelection";
+import type { SymbolSelection } from "../entities/SymbolSelection";
 
 export function createSymbolSelection(): SymbolSelectionRepository {
 	let currentSelection: SymbolSelection = null;

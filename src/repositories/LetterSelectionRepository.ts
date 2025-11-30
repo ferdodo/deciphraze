@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { LetterSelection } from "../types/LetterSelection";
+import type { LetterSelection } from "../entities/LetterSelection";
 
 export interface LetterSelectionRepository {
 	getLetterSelection(): LetterSelection;

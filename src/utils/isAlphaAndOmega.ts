@@ -1,4 +1,4 @@
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 
 export function isAlphaAndOmega(paragraph: string, discoveryOrder: DiscoveryOrder): boolean {
 	if (discoveryOrder.length === 0) {

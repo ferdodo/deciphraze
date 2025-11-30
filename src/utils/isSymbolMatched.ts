@@ -1,6 +1,6 @@
 import { characterEquals } from "./characterEquals";
-import type { PlayerCipher } from "../types/PlayerCipher";
-import type { LetterSelection } from "../types/LetterSelection";
+import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { LetterSelection } from "../entities/LetterSelection";
 
 export const isSymbolMatched = (
 	character: string,

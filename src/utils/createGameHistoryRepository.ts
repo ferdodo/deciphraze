@@ -1,6 +1,6 @@
 import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
-import type { GameHistory } from "../types/GameHistory";
-import type { GameSession } from "../types/GameSession";
+import type { GameHistory } from "../entities/GameHistory";
+import type { GameSession } from "../entities/GameSession";
 import { checkGameHistory } from "./checkGameHistory";
 
 const GAME_HISTORY_STORAGE_KEY = "deciphraze_game_history";

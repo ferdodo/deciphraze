@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { AllAchievements } from "../types/AllAchievements";
+import type { AllAchievements } from "../entities/AllAchievements";
 
 export const useAchievements = (): AllAchievements => {
 	const { achievementRepository } = useGameContext();

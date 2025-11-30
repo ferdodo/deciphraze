@@ -1,4 +1,4 @@
-import type { GameHistory } from "../types/GameHistory";
+import type { GameHistory } from "../entities/GameHistory";
 import { getLettersFoundFromHistoryEntry } from "./getLettersFoundFromHistoryEntry";
 
 export function calculateCurrentStreak(gameHistory: GameHistory, startIndex: number): number {

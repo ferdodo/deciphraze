@@ -1,5 +1,5 @@
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
-import type { DiscoveryOrder } from "../types/DiscoveryOrder";
+import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 
 export function createDiscoveryOrderRepositoryMock(): DiscoveryOrderRepository {
 	const discoveryOrders: Record<string, DiscoveryOrder> = {};

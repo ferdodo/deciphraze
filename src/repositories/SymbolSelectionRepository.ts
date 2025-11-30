@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { SymbolSelection } from "../types/SymbolSelection";
+import type { SymbolSelection } from "../entities/SymbolSelection";
 
 export interface SymbolSelectionRepository {
 	getSymbolSelection(): SymbolSelection;
