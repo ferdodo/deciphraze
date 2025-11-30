@@ -14,7 +14,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		streak5Days: z.object({
 			achievementId: z.literal("streak_5_days"),
-			name: z.literal("Série de 5 jours"),
+			name: z.literal("Momentum"),
 			description: z.literal("Réussir une partie 5 jours consécutifs"),
 			unlocked: z.boolean(),
 			progress: z.object({
@@ -24,13 +24,13 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		firstLetterA: z.object({
 			achievementId: z.literal("first_letter_a"),
-			name: z.literal("Commencer par A"),
+			name: z.literal("Alpha"),
 			description: z.literal("Trouver la lettre A en premier"),
 			unlocked: z.boolean()
 		}),
 		firstLetterE: z.object({
 			achievementId: z.literal("first_letter_e"),
-			name: z.literal("Commencer par E"),
+			name: z.literal("Élémentaire"),
 			description: z.literal("Trouver la lettre E en premier"),
 			unlocked: z.boolean()
 		}),
@@ -60,7 +60,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		words1000: z.object({
 			achievementId: z.literal("words_1000"),
-			name: z.literal("Mille mots"),
+			name: z.literal("Scribe"),
 			description: z.literal("Trouver 1000 mots de manière cumulative"),
 			unlocked: z.boolean(),
 			progress: z.object({

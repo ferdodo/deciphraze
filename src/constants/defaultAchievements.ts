@@ -11,7 +11,7 @@ export const defaultAchievements: AllAchievements = {
 		},
 		streak5Days: {
 			achievementId: "streak_5_days",
-			name: "Série de 5 jours",
+			name: "Momentum",
 			description: "Réussir une partie 5 jours consécutifs",
 			unlocked: false,
 			progress: {
@@ -21,13 +21,13 @@ export const defaultAchievements: AllAchievements = {
 		},
 		firstLetterA: {
 			achievementId: "first_letter_a",
-			name: "Commencer par A",
+			name: "Alpha",
 			description: "Trouver la lettre A en premier",
 			unlocked: false
 		},
 		firstLetterE: {
 			achievementId: "first_letter_e",
-			name: "Commencer par E",
+			name: "Élémentaire",
 			description: "Trouver la lettre E en premier",
 			unlocked: false
 		},
@@ -57,7 +57,7 @@ export const defaultAchievements: AllAchievements = {
 		},
 		words1000: {
 			achievementId: "words_1000",
-			name: "Mille mots",
+			name: "Scribe",
 			description: "Trouver 1000 mots de manière cumulative",
 			unlocked: false,
 			progress: {

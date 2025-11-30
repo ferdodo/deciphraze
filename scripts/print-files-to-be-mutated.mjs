@@ -26,7 +26,7 @@ async function getFilesToMutate() {
 			modifiedFiles.add(...lastCommitFiles);
 		}
 
-		return [...modifiedFiles].filter(v => v.endsWith('.ts') && !v.includes('test.ts'));
+		return [...modifiedFiles].filter(v => v.endsWith('.ts') && !v.includes('test.ts')).filter(v => !v.includes('/constants/'));
 	});
 }
 

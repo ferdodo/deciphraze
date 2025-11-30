@@ -73,7 +73,7 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstGame.unlocked).toBe(true);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
 			expect(achievements.achievements.streak5Days.achievementId).toBe("streak_5_days");
-			expect(achievements.achievements.streak5Days.name).toBe("Série de 5 jours");
+			expect(achievements.achievements.streak5Days.name).toBe("Momentum");
 			expect(achievements.achievements.streak5Days.description).toBe(
 				"Réussir une partie 5 jours consécutifs",
 			);
@@ -93,7 +93,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterE.achievementId).toBe("first_letter_e");
-			expect(achievements.achievements.firstLetterE.name).toBe("Commencer par E");
+			expect(achievements.achievements.firstLetterE.name).toBe("Élémentaire");
 			expect(achievements.achievements.firstLetterE.description).toBe(
 				"Trouver la lettre E en premier",
 			);
@@ -259,7 +259,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.words1000.unlocked).toBe(true);
 			expect(achievements.achievements.words1000.achievementId).toBe("words_1000");
-			expect(achievements.achievements.words1000.name).toBe("Mille mots");
+			expect(achievements.achievements.words1000.name).toBe("Scribe");
 			expect(achievements.achievements.words1000.description).toBe(
 				"Trouver 1000 mots de manière cumulative",
 			);
