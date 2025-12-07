@@ -30,7 +30,7 @@ const Game: React.FC = () => {
 	};
 
 	return (
-		<div style={{display: "grid", height: "100vh"}}>
+		<div style={{display: "grid", height: "100svh"}}>
 		<crumbs-nav style={{ flexGrow: "1" }}>
 			<crumbs-p slot="title-1">Jouer</crumbs-p>
 			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100vh - 14.5rem)" }}>
