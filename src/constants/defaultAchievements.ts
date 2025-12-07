@@ -5,7 +5,7 @@ export const defaultAchievements: AllAchievements = {
 	achievements: {
 		firstGame: {
 			achievementId: "first_game",
-			name: "Preambule",
+			name: "Préambule",
 			description: "Jouer votre première partie",
 			unlocked: false
 		},
@@ -51,7 +51,7 @@ export const defaultAchievements: AllAchievements = {
 		},
 		firstLetterQ: {
 			achievementId: "first_letter_q",
-			name: "Commencer par Q",
+			name: "Qualifié",
 			description: "Trouver la lettre Q en premier",
 			unlocked: false
 		},

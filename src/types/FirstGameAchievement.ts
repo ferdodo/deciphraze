@@ -1,5 +1,5 @@
 export interface FirstGameAchievement {
 	achievementId: "first_game";
-	name: "Preambule";
+	name: "Préambule";
 	description: "Jouer votre première partie";
 }

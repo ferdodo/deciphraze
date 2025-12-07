@@ -3,7 +3,7 @@ export interface AllAchievements {
 	achievements: {
 		firstGame: {
 			achievementId: "first_game";
-			name: "Preambule";
+			name: "Préambule";
 			description: "Jouer votre première partie";
 			unlocked: boolean;
 		};
@@ -49,7 +49,7 @@ export interface AllAchievements {
 		};
 		firstLetterQ: {
 			achievementId: "first_letter_q";
-			name: "Commencer par Q";
+			name: "Qualifié";
 			description: "Trouver la lettre Q en premier";
 			unlocked: boolean;
 		};
