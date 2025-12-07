@@ -283,7 +283,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);
 			expect(achievements.achievements.completeAlphabet.achievementId).toBe("complete_alphabet");
-			expect(achievements.achievements.completeAlphabet.name).toBe("Alphabet complet");
+			expect(achievements.achievements.completeAlphabet.name).toBe("Lettré");
 			expect(achievements.achievements.completeAlphabet.description).toBe(
 				"Trouver toutes les lettres de l'alphabet",
 			);

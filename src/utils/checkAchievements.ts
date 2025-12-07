@@ -24,7 +24,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		firstLetterA: z.object({
 			achievementId: z.literal("first_letter_a"),
-			name: z.literal("Alpha"),
+			name: z.literal("Aperçu"),
 			description: z.literal("Trouver la lettre A en premier"),
 			unlocked: z.boolean()
 		}),
@@ -70,7 +70,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		completeAlphabet: z.object({
 			achievementId: z.literal("complete_alphabet"),
-			name: z.literal("Alphabet complet"),
+			name: z.literal("Lettré"),
 			description: z.literal("Trouver toutes les lettres de l'alphabet"),
 			unlocked: z.boolean(),
 			progress: z.object({

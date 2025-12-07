@@ -19,7 +19,7 @@ export interface AllAchievements {
 		};
 		firstLetterA: {
 			achievementId: "first_letter_a";
-			name: "Alpha";
+			name: "Aperçu";
 			description: "Trouver la lettre A en premier";
 			unlocked: boolean;
 		};
@@ -65,7 +65,7 @@ export interface AllAchievements {
 		};
 		completeAlphabet: {
 			achievementId: "complete_alphabet";
-			name: "Alphabet complet";
+			name: "Lettré";
 			description: "Trouver toutes les lettres de l'alphabet";
 			unlocked: boolean;
 			progress: {

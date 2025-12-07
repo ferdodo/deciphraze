@@ -12,7 +12,7 @@ describe("checkAchievements", () => {
 		expect(result.computedAtDate).toBe(validData.computedAtDate);
 		expect(result.achievements.firstGame.name).toBe("Préambule");
 		expect(result.achievements.streak5Days.name).toBe("Momentum");
-		expect(result.achievements.firstLetterA.name).toBe("Alpha");
+		expect(result.achievements.firstLetterA.name).toBe("Aperçu");
 		expect(result.achievements.firstLetterE.name).toBe("Élémentaire");
 		expect(result.achievements.words1000.name).toBe("Scribe");
 	});
