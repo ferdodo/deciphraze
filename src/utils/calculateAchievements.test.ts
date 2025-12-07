@@ -36,7 +36,7 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterY.achievementId).toBe("first_letter_y");
-			expect(achievements.achievements.firstLetterY.name).toBe("Commencer par Y");
+			expect(achievements.achievements.firstLetterY.name).toBe("Mythique");
 			expect(achievements.achievements.firstLetterY.description).toBe(
 				"Trouver la lettre Y en premier",
 			);

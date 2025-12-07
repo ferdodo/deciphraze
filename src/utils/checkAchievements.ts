@@ -36,7 +36,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		firstLetterY: z.object({
 			achievementId: z.literal("first_letter_y"),
-			name: z.literal("Commencer par Y"),
+			name: z.literal("Mythique"),
 			description: z.literal("Trouver la lettre Y en premier"),
 			unlocked: z.boolean()
 		}),

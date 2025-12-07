@@ -33,7 +33,7 @@ export const defaultAchievements: AllAchievements = {
 		},
 		firstLetterY: {
 			achievementId: "first_letter_y",
-			name: "Commencer par Y",
+			name: "Mythique",
 			description: "Trouver la lettre Y en premier",
 			unlocked: false
 		},
