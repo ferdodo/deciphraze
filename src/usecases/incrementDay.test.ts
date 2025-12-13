@@ -19,14 +19,49 @@ describe("incrementDay", () => {
 		cleanup();
 	});
 
-	it("should handle month change correctly", () => {
+	it("should reset discovery order for the new day", () => {
 		const [cleanup, context] = withGameStarted();
-		// Set to last day of a month (e.g., January 31)
-		context.dayRepository.setDay("2024-01-31");
+		const initialDay = context.dayRepository.getDay();
+		
+		// Ajouter des lettres à l'ordre de découverte du jour initial
+		context.discoveryOrderRepository.addLetterToDiscoveryOrder(initialDay, "A");
+		context.discoveryOrderRepository.addLetterToDiscoveryOrder(initialDay, "B");
+		
+		expect(context.discoveryOrderRepository.getDiscoveryOrder(initialDay).length).toBe(2);
+		
+		// Incrémenter le jour
 		incrementDay(context);
 		const newDay = context.dayRepository.getDay();
 		
-		expect(newDay).toBe("2024-02-01");
+		// L'ordre de découverte du nouveau jour devrait être vide
+		expect(context.discoveryOrderRepository.getDiscoveryOrder(newDay)).toEqual([]);
+		
+		cleanup();
+	});
+
+	it("should reset selections and playerCipher for development mode", () => {
+		const [cleanup, context] = withGameStarted();
+		
+		// Sélectionner une lettre et un symbole
+		context.letterSelectionRepository.selectLetter("A");
+		context.symbolSelectionRepository.selectSymbol("X");
+		
+		// Ajouter des entrées au playerCipher
+		context.playerCipherRepository.addPlayerCipherEntry("A", "X");
+		context.playerCipherRepository.addPlayerCipherEntry("B", "Y");
+		
+		expect(context.letterSelectionRepository.getLetterSelection()).toBe("A");
+		expect(context.symbolSelectionRepository.getSymbolSelection()).toBe("X");
+		expect(Object.keys(context.playerCipherRepository.getPlayerCipher()).length).toBe(2);
+		
+		// Incrémenter le jour
+		incrementDay(context);
+		
+		// Les sélections et le playerCipher devraient être réinitialisés
+		expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
+		expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
+		expect(Object.keys(context.playerCipherRepository.getPlayerCipher()).length).toBe(0);
+		
 		cleanup();
 	});
 });

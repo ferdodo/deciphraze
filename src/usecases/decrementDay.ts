@@ -7,5 +7,15 @@ export const decrementDay = (context: GameContext): void => {
 	date.setDate(date.getDate() - 1);
 	const newDay = formatDate(date);
 	context.dayRepository.setDay(newDay);
+	context.discoveryOrderRepository.setDiscoveryOrder(newDay, []);
+	
+	// Réinitialiser l'état du jeu pour le mode développement
+	context.letterSelectionRepository.selectLetter(null);
+	context.symbolSelectionRepository.selectSymbol(null);
+	
+	const playerCipher = context.playerCipherRepository.getPlayerCipher();
+	Object.keys(playerCipher).forEach((letter) => {
+		context.playerCipherRepository.removePlayerCipherEntryByLetter(letter);
+	});
 };
 

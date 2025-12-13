@@ -1,16 +1,23 @@
 import { describe, it, expect } from "vitest";
+import { firstValueFrom } from "rxjs";
+import { skip } from "rxjs/operators";
 import { createGameHistoryRepository } from "./createGameHistoryRepository";
+import type { GameSession } from "../entities/GameSession";
 
 describe("createGameHistoryRepository", () => {
+
 	it("should create repository instance", () => {
+		localStorage.clear();
 		const repository = createGameHistoryRepository();
 		
 		expect(repository).toBeDefined();
 		expect(typeof repository.getHistory).toBe("function");
 		expect(typeof repository.addSession).toBe("function");
+		expect(repository.gameHistory$).toBeDefined();
 	});
 
 	it("should return empty history by default", () => {
+		localStorage.clear();
 		const repository = createGameHistoryRepository();
 		const history = repository.getHistory();
 		
@@ -18,16 +25,51 @@ describe("createGameHistoryRepository", () => {
 		expect(Object.keys(history)).toHaveLength(0);
 	});
 
+	it("should add a session and retrieve it", () => {
+		localStorage.clear();
+		const repository = createGameHistoryRepository();
+		const session: GameSession = {
+			winAt: "2024-01-15",
+			lettersFound: ["A", "B", "C"],
+			wordsFound: 10
+		};
+		
+		repository.addSession(session);
+		const history = repository.getHistory();
+		
+		expect(history["2024-01-15"]).toEqual(session);
+		expect(Object.keys(history)).toHaveLength(1);
+	});
 
-	it("should handle null localStorage", () => {
-		localStorage.setItem("deciphraze_game_history", "null");
+	it("should load existing history from localStorage", () => {
+		localStorage.clear();
+		const existingHistory = {
+			"2024-01-15": {
+				winAt: "2024-01-15",
+				lettersFound: ["A", "B", "C"]
+			}
+		};
+		localStorage.setItem("deciphraze_game_history", JSON.stringify(existingHistory));
+		
 		const repository = createGameHistoryRepository();
 		const history = repository.getHistory();
 		
-		expect(history).toEqual({});
-		expect(Object.keys(history)).toHaveLength(0);
+		expect(history["2024-01-15"]).toEqual(existingHistory["2024-01-15"]);
 	});
 
-
+	it("should emit history changes through gameHistory$", async () => {
+		localStorage.clear();
+		const repository = createGameHistoryRepository();
+		const session: GameSession = {
+			winAt: "2024-01-15",
+			lettersFound: ["A", "B"]
+		};
+		
+		const historyPromise = firstValueFrom(repository.gameHistory$.pipe(skip(1)));
+		repository.addSession(session);
+		
+		const history = await historyPromise;
+		expect(history["2024-01-15"]).toEqual(session);
+	});
 });
 

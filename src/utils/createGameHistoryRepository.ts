@@ -1,3 +1,5 @@
+import { BehaviorSubject } from "rxjs";
+import { share } from "rxjs/operators";
 import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
 import type { GameHistory } from "../entities/GameHistory";
 import type { GameSession } from "../entities/GameSession";
@@ -15,15 +17,22 @@ export function createGameHistoryRepository(): GameHistoryRepository {
 		gameHistory = {};
 	}
 
+	const gameHistorySubject = new BehaviorSubject<GameHistory>({ ...gameHistory });
+
 	function getHistory(): GameHistory {
-		return gameHistory;
+		return { ...gameHistory };
 	}
 
 	function addSession(session: GameSession): void {
 		gameHistory[session.winAt] = session;
 		localStorage.setItem(GAME_HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+		gameHistorySubject.next({ ...gameHistory });
 	}
 
-	return { getHistory, addSession };
+	return {
+		getHistory,
+		addSession,
+		gameHistory$: gameHistorySubject.asObservable().pipe(share()),
+	};
 }
 
