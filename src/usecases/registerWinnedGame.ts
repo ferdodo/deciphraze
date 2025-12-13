@@ -1,4 +1,5 @@
 import type { Subscription } from "rxjs";
+import { combineLatest } from "rxjs";
 import { filter } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
@@ -14,15 +15,17 @@ export function registerWinnedGame({
 	achievementRepository,
 	discoveryOrderRepository,
 }: GameContext): Subscription {
-	const day = dayRepository.getDay();
-	const paragraphOfTheDay = getParagraphOfTheDay(day);
-
-	return playerCipherRepository.playerCipher$.pipe(
-		filter((playerCipher: PlayerCipher) => {
+	return combineLatest([
+		playerCipherRepository.playerCipher$,
+		dayRepository.observeDay(),
+	]).pipe(
+		filter(([playerCipher, day]: [PlayerCipher, string]) => {
+			const paragraphOfTheDay = getParagraphOfTheDay(day);
 			const gameHistory = gameHistoryRepository.getHistory();
 			return isWin(playerCipher, paragraphOfTheDay, gameHistory, day);
 		})
-	).subscribe(() => {
+	).subscribe(([, day]: [PlayerCipher, string]) => {
+		const paragraphOfTheDay = getParagraphOfTheDay(day);
 		const gameSession = createGameSession(day, discoveryOrderRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
