@@ -9,8 +9,12 @@ import { StatisticsComponent } from "./StatisticsComponent";
 import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
+import { useDay } from "../hooks/useDay";
+import { useGameContext } from "../hooks/useGameContext";
 import { share } from "../utils/share";
 import { paragraphOfYesterday } from "../paragraphOfYesterday";
+import { incrementDay } from "../usecases/incrementDay";
+import { decrementDay } from "../usecases/decrementDay";
 
 const Game: React.FC = () => {
 	const separatedWords = paragraphOfTheDay.split(" ");
@@ -24,9 +28,19 @@ const Game: React.FC = () => {
 
 	const win = useWin();
 	const matchCount = useMatchCount();
+	const currentDay = useDay();
+	const context = useGameContext();
 
 	const handleShare = (): void => {
 		share(matchCount);
+	};
+
+	const handleIncrementDay = (): void => {
+		incrementDay(context);
+	};
+
+	const handleDecrementDay = (): void => {
+		decrementDay(context);
 	};
 
 	return (
@@ -101,6 +115,30 @@ const Game: React.FC = () => {
 			<crumbs-p slot="title-4">Statistiques</crumbs-p>
 			<crumbs-panel slot="content-4" panel-title="Statistiques" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
 				<StatisticsComponent />
+			</crumbs-panel>
+
+			<crumbs-p slot="title-5">Développement</crumbs-p>
+			<crumbs-panel slot="content-5" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
+				<crumbs-p>
+					Date actuelle : {currentDay}
+				</crumbs-p>
+				<br />
+				<div style={{ display: "flex", gap: "1rem" }}>
+					<crumbs-button
+						title="Jour précédent"
+						onClick={handleDecrementDay}
+						role="button"
+					>
+						← Jour précédent
+					</crumbs-button>
+					<crumbs-button
+						title="Jour suivant"
+						onClick={handleIncrementDay}
+						role="button"
+					>
+						Jour suivant →
+					</crumbs-button>
+				</div>
 			</crumbs-panel>
 		</crumbs-nav>
 		</div>
