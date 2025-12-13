@@ -1,11 +1,12 @@
 import type { GameContext } from "../contexts/GameContext";
 import { isWin } from "../utils/isWin";
+import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
 import { asPlayerAssociateOneGoodLetter } from "./asPlayerAssociateOneGoodLetter";
 
 export function asPlayerFinishGame(context: GameContext): void {
-	const { playerCipherRepository, paragraphOfTheDayRepository, gameHistoryRepository, dayRepository } = context;
-	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
+	const { playerCipherRepository, gameHistoryRepository, dayRepository } = context;
 	const currentDay = dayRepository.getDay();
+	const paragraphOfTheDay = getParagraphOfTheDay(currentDay);
 	const gameHistory = gameHistoryRepository.getHistory();
 	let playerCipher = playerCipherRepository.getPlayerCipher();
 

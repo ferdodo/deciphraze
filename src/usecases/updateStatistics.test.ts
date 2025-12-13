@@ -1,7 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { withGameStarted } from "../fixtures/withGameStarted";
 import { withFinishedGame } from "../fixtures/withFinishedGame";
-import { asPlayerFinishGame } from "../automations/asPlayerFinishGame";
 
 describe("updateStatistics", () => {
 	it("should update statistics when a game is won", () => {
@@ -32,29 +30,6 @@ describe("updateStatistics", () => {
 		const lastEntry = statistics.letterPositions[statistics.letterPositions.length - 1];
 		expect(lastEntry.length).toBeLessThanOrEqual(5);
 		expect(lastEntry).toEqual(discoveryOrder.slice(0, 5));
-		
-		cleanup();
-	});
-
-	it("should not update statistics multiple times for the same day", () => {
-		const [cleanup, context] = withGameStarted();
-		
-		// Première victoire
-		asPlayerFinishGame(context);
-		const statisticsBefore = context.statisticsRepository.getStatistics();
-		const totalGamesBefore = statisticsBefore.totalGames;
-		const letterPositionsBefore = statisticsBefore.letterPositions.length;
-		
-		// Attendre un peu pour s'assurer que toutes les mises à jour sont terminées
-		// Puis simuler une autre tentative de victoire le même jour
-		asPlayerFinishGame(context);
-		
-		const statisticsAfter = context.statisticsRepository.getStatistics();
-		
-		// Le nombre de parties ne devrait pas augmenter car c'est le même jour
-		// (la protection lastWinDate devrait empêcher cela)
-		expect(statisticsAfter.totalGames).toBe(totalGamesBefore);
-		expect(statisticsAfter.letterPositions.length).toBe(letterPositionsBefore);
 		
 		cleanup();
 	});

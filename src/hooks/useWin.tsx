@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { isWin } from "../utils/isWin";
 import { useGameContext } from "./useGameContext";
+import { useParagraphOfTheDay } from "./useParagraphOfTheDay";
+import { useDay } from "./useDay";
 
 export const useWin = (): boolean => {
-	const { playerCipherRepository, paragraphOfTheDayRepository, gameHistoryRepository, dayRepository } = useGameContext();
-	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
-	const currentDay = dayRepository.getDay();
+	const { playerCipherRepository, gameHistoryRepository } = useGameContext();
+	const paragraphOfTheDay = useParagraphOfTheDay();
+	const currentDay = useDay();
 	
 	// Vérifier l'état initial
 	const initialPlayerCipher = playerCipherRepository.getPlayerCipher();

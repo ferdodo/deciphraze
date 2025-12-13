@@ -4,10 +4,8 @@ import { gameContext } from "./gameContext";
 import { createLetterSelection } from "../utils/createLetterSelection";
 import { createPlayerCipher } from "../utils/createPlayerCipher";
 import { createSymbolSelection } from "../utils/createSymbolSelection";
-import { createCipherRepository } from "../utils/createCipherRepository";
 import { createGameHistoryRepository } from "../utils/createGameHistoryRepository";
 import { createAchievementRepository } from "../utils/createAchievementRepository";
-import { createParagraphOfTheDayRepository } from "../utils/createParagraphOfTheDayRepository";
 import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
@@ -22,10 +20,8 @@ export function GameContextProvider({ children }: GameContextProviderProps): JSX
 		letterSelectionRepository: createLetterSelection(),
 		playerCipherRepository: createPlayerCipher(),
 		symbolSelectionRepository: createSymbolSelection(),
-		cipherRepository: createCipherRepository(),
 		gameHistoryRepository: createGameHistoryRepository(),
 		achievementRepository: createAchievementRepository(),
-		paragraphOfTheDayRepository: createParagraphOfTheDayRepository(),
 		dayRepository: createDayRepository(),
 		discoveryOrderRepository: createDiscoveryOrderRepository(),
 		statisticsRepository: createStatisticsRepository(),

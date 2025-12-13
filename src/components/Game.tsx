@@ -1,6 +1,5 @@
 import type React from "react";
 import { useMemo } from "react";
-import { paragraphOfTheDay } from "../paragraphOfTheDay";
 import { FragmentComponent } from "./FragmentComponent";
 import { LetterComponent } from "./LetterComponent";
 import { SymbolComponent } from "./SymbolComponent";
@@ -11,25 +10,28 @@ import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";
+import { useParagraphOfYesterday } from "../hooks/useParagraphOfYesterday";
+import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { share } from "../utils/share";
-import { paragraphOfYesterday } from "../paragraphOfYesterday";
 import { incrementDay } from "../usecases/incrementDay";
 import { decrementDay } from "../usecases/decrementDay";
 
 const Game: React.FC = () => {
+	const paragraphOfTheDay = useParagraphOfTheDay();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+	const currentDay = useDay();
+	const context = useGameContext();
 
 	const alphabetRandom = useMemo(() => {
 		const CHEAT_MODE = true;
-		return generateRandomAlphabet(CHEAT_MODE);
-	}, []);
+		return generateRandomAlphabet(currentDay, CHEAT_MODE);
+	}, [currentDay]);
 
 	const win = useWin();
 	const matchCount = useMatchCount();
-	const currentDay = useDay();
-	const context = useGameContext();
+	const paragraphOfYesterday = useParagraphOfYesterday();
 
 	const handleShare = (): void => {
 		share(matchCount);

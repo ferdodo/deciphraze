@@ -1,11 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { randomNumberForYesterday } from "./randomNumberForYesterday";
+import { generateRandomNumberFromDay } from "./generateRandomNumberFromDay";
 
-describe("randomNumberForYesterday", () => {
+describe("generateRandomNumberFromDay", () => {
 	it("should return a number within the specified range", () => {
-		const result = randomNumberForYesterday(5, 10);
+		const result = generateRandomNumberFromDay(5, 10, "2024-01-15");
 		expect(result).toBeGreaterThanOrEqual(5);
 		expect(result).toBeLessThan(10);
 	});
 
 });
+

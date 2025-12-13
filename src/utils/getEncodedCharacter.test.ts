@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { getEncodedCharacter } from "./getEncodedCharacter";
-import { createCipherRepository } from "./createCipherRepository";
+import { generateRandomAlphabet } from "./generateRandomAlphabet";
 
 describe("getEncodedCharacter", () => {
-	const cipherRepository = createCipherRepository();
-	const cipher = cipherRepository.getCipher();
+	const testDate = "2024-01-01";
+	const cipher = generateRandomAlphabet(testDate);
 
 	it("should encode uppercase letter", () => {
 		const result = getEncodedCharacter("A", cipher);

@@ -1,6 +1,7 @@
 import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
 import { isWin } from "../utils/isWin";
+import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
 import type { GameContext } from "../contexts/GameContext";
 
 export const selectSymbol = (
@@ -11,14 +12,15 @@ export const selectSymbol = (
 		letterSelectionRepository,
 		symbolSelectionRepository,
 		playerCipherRepository,
-		paragraphOfTheDayRepository,
+		dayRepository,
+		gameHistoryRepository,
 	} = context;
 	
 	// Vérifier si la partie est gagnée avant toute action
-	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
+	const currentDay = dayRepository.getDay();
+	const paragraphOfTheDay = getParagraphOfTheDay(currentDay);
 	const playerCipher = playerCipherRepository.getPlayerCipher();
-	const currentDay = context.dayRepository.getDay();
-	const gameHistory = context.gameHistoryRepository.getHistory();
+	const gameHistory = gameHistoryRepository.getHistory();
 	if (isWin(playerCipher, paragraphOfTheDay, gameHistory, currentDay)) {
 		return;
 	}

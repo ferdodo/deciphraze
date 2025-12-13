@@ -1,10 +1,11 @@
 import { BehaviorSubject } from "rxjs";
 import type { Observable } from "rxjs";
 import type { DayRepository } from "../repositories/DayRepository";
-import { getCurrentDate } from "./getCurrentDate";
+import { formatDate } from "./formatDate";
 
 export function createDayRepository(): DayRepository {
-	const currentDate = getCurrentDate();
+	const now = new Date();
+	const currentDate = formatDate(now);
 	const daySubject = new BehaviorSubject<string>(currentDate);
 
 	function getDay(): string {

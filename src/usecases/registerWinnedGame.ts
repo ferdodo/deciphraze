@@ -3,19 +3,19 @@ import { filter } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
+import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
 
 export function registerWinnedGame({
 	dayRepository,
-	paragraphOfTheDayRepository,
 	playerCipherRepository,
 	gameHistoryRepository,
 	achievementRepository,
 	discoveryOrderRepository,
 }: GameContext): Subscription {
 	const day = dayRepository.getDay();
-	const paragraphOfTheDay = paragraphOfTheDayRepository.getParagraphOfTheDay();
+	const paragraphOfTheDay = getParagraphOfTheDay(day);
 
 	return playerCipherRepository.playerCipher$.pipe(
 		filter((playerCipher: PlayerCipher) => {
