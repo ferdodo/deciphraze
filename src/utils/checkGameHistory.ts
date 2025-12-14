@@ -10,7 +10,8 @@ const GameHistoryValueSchema: z.ZodType<string[] | GameSession> = z.union([
 	z.object({
 		winAt: z.string(),
 		lettersFound: z.array(z.string()),
-		wordsFound: z.number().optional()
+		wordsFound: z.number().optional(),
+		hasErrors: z.boolean().optional()
 	})
 ]);
 

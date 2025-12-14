@@ -6,6 +6,7 @@ import type { AchievementRepository } from "../repositories/AchievementRepositor
 import type { DayRepository } from "../repositories/DayRepository";
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { StatisticsRepository } from "../repositories/StatisticsRepository";
+import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
 
 export interface GameContext {
 	letterSelectionRepository: LetterSelectionRepository;
@@ -16,4 +17,5 @@ export interface GameContext {
 	dayRepository: DayRepository;
 	discoveryOrderRepository: DiscoveryOrderRepository;
 	statisticsRepository: StatisticsRepository;
+	associationHistoryRepository: AssociationHistoryRepository;
 }

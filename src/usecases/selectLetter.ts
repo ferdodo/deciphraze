@@ -2,6 +2,7 @@ import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
 import { isWin } from "../utils/isWin";
 import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
+import { characterEquals } from "../utils/characterEquals";
 import type { GameContext } from "../contexts/GameContext";
 
 export const selectLetter = (
@@ -14,6 +15,7 @@ export const selectLetter = (
 		playerCipherRepository,
 		dayRepository,
 		gameHistoryRepository,
+		associationHistoryRepository,
 	} = context;
 	
 	const currentDay = dayRepository.getDay();
@@ -40,7 +42,9 @@ export const selectLetter = (
 	}
 
 	if (currentSymbol !== null) {
+		const isCorrect = characterEquals(normalizedCharacter, currentSymbol);
 		playerCipherRepository.addPlayerCipherEntry(normalizedCharacter, currentSymbol);
+		associationHistoryRepository.addAssociation(currentDay, normalizedCharacter, currentSymbol, isCorrect);
 		letterSelectionRepository.selectLetter(null);
 		symbolSelectionRepository.selectSymbol(null);
 		return;

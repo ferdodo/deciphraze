@@ -2,6 +2,7 @@ import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
 import { isWin } from "../utils/isWin";
 import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
+import { characterEquals } from "../utils/characterEquals";
 import type { GameContext } from "../contexts/GameContext";
 
 export const selectSymbol = (
@@ -14,6 +15,7 @@ export const selectSymbol = (
 		playerCipherRepository,
 		dayRepository,
 		gameHistoryRepository,
+		associationHistoryRepository,
 	} = context;
 	
 	// Vérifier si la partie est gagnée avant toute action
@@ -40,7 +42,9 @@ export const selectSymbol = (
 	}
 
 	if (currentLetter !== null) {
+		const isCorrect = characterEquals(currentLetter, normalizedCharacter);
 		playerCipherRepository.addPlayerCipherEntry(currentLetter, normalizedCharacter);
+		associationHistoryRepository.addAssociation(currentDay, currentLetter, normalizedCharacter, isCorrect);
 		letterSelectionRepository.selectLetter(null);
 		symbolSelectionRepository.selectSymbol(null);
 		return;

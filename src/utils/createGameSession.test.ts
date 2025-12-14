@@ -7,7 +7,7 @@ describe("createGameSession", () => {
 	it("should remove duplicate letters", () => {
 		const [cleanup, context] = withFinishedGame();
 		const day = context.dayRepository.getDay();
-		const gameSession = createGameSession(day, context.discoveryOrderRepository, "Hello world");
+		const gameSession = createGameSession(day, context.discoveryOrderRepository, context.associationHistoryRepository, "Hello world");
 		expect(gameSession.winAt).toBe(day);
 		const uniqueLetters = [...new Set(gameSession.lettersFound)];
 		expect(gameSession.lettersFound).toEqual(uniqueLetters);

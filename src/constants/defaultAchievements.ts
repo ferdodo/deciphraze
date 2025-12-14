@@ -74,6 +74,12 @@ export const defaultAchievements: AllAchievements = {
 				current: 0,
 				target: 26
 			}
+		},
+		paleographer: {
+			achievementId: "paleographer",
+			name: "Paléographe",
+			description: "Compléter une partie sans erreur d'association",
+			unlocked: false
 		}
 	}
 };

@@ -77,6 +77,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 				current: z.number(),
 				target: z.literal(26)
 			})
+		}),
+		paleographer: z.object({
+			achievementId: z.literal("paleographer"),
+			name: z.literal("Paléographe"),
+			description: z.literal("Compléter une partie sans erreur d'association"),
+			unlocked: z.boolean()
 		})
 	})
 });

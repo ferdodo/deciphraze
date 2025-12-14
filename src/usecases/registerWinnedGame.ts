@@ -14,6 +14,7 @@ export function registerWinnedGame({
 	gameHistoryRepository,
 	achievementRepository,
 	discoveryOrderRepository,
+	associationHistoryRepository,
 }: GameContext): Subscription {
 	return combineLatest([
 		playerCipherRepository.playerCipher$,
@@ -26,7 +27,7 @@ export function registerWinnedGame({
 		})
 	).subscribe(([, day]: [PlayerCipher, string]) => {
 		const paragraphOfTheDay = getParagraphOfTheDay(day);
-		const gameSession = createGameSession(day, discoveryOrderRepository, paragraphOfTheDay);
+		const gameSession = createGameSession(day, discoveryOrderRepository, associationHistoryRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
 		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);

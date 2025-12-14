@@ -73,6 +73,12 @@ export interface AllAchievements {
 				target: 26;
 			};
 		};
+		paleographer: {
+			achievementId: "paleographer";
+			name: "Paléographe";
+			description: "Compléter une partie sans erreur d'association";
+			unlocked: boolean;
+		};
 	};
 }
 

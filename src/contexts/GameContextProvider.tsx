@@ -9,6 +9,7 @@ import { createAchievementRepository } from "../utils/createAchievementRepositor
 import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
+import { createAssociationHistoryRepository } from "../utils/createAssociationHistoryRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 
 interface GameContextProviderProps {
@@ -25,6 +26,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): JSX
 		dayRepository: createDayRepository(),
 		discoveryOrderRepository: createDiscoveryOrderRepository(),
 		statisticsRepository: createStatisticsRepository(),
+		associationHistoryRepository: createAssociationHistoryRepository(),
 	}), []);
 
 	// Initialiser les effets de bord du jeu

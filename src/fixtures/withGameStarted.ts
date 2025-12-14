@@ -6,6 +6,7 @@ import { createAchievementRepositoryMock } from "../mocks/createAchievementRepos
 import { createGameHistoryRepositoryMock } from "../mocks/createGameHistoryRepositoryMock";
 import { createDayRepositoryMock } from "../mocks/createDayRepositoryMock";
 import { createDiscoveryOrderRepositoryMock } from "../mocks/createDiscoveryOrderRepositoryMock";
+import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 
@@ -20,6 +21,7 @@ export function withGameStarted(): [() => void, GameContextType] {
         dayRepository,
         discoveryOrderRepository: createDiscoveryOrderRepositoryMock(),
         statisticsRepository: createStatisticsRepository(),
+        associationHistoryRepository: createAssociationHistoryRepositoryMock(),
     };
 
     const cleanup = initializeGameSideEffects(context);

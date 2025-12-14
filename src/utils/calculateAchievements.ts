@@ -36,6 +36,16 @@ export function calculateAchievements(
 		target: 500 as const
 	};
 	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
+	
+	// Vérifier s'il existe au moins une partie sans erreur
+	const calculatedPaleographerUnlocked = Object.values(gameHistory).some((entry) => {
+		// Pour la rétrocompatibilité, si hasErrors n'est pas défini, considérer comme sans erreur
+		if (typeof entry === "object" && "hasErrors" in entry) {
+			return entry.hasErrors === false || entry.hasErrors === undefined;
+		}
+		// Les anciennes entrées (string[]) sont considérées comme sans erreur pour la rétrocompatibilité
+		return true;
+	});
 
 	// Préserver les succès déjà débloqués
 	const firstGameUnlocked = existingAchievements?.achievements.firstGame.unlocked || calculatedFirstGameUnlocked;
@@ -48,6 +58,7 @@ export function calculateAchievements(
 	const firstLetterQUnlocked = existingAchievements?.achievements.firstLetterQ.unlocked || calculatedFirstLetterQUnlocked;
 	const words1000Unlocked = existingAchievements?.achievements.words1000.unlocked || calculatedWords1000Unlocked;
 	const completeAlphabetUnlocked = existingAchievements?.achievements.completeAlphabet.unlocked || calculatedCompleteAlphabetUnlocked;
+	const paleographerUnlocked = existingAchievements?.achievements.paleographer.unlocked || calculatedPaleographerUnlocked;
 
 	return createAllAchievements(
 		firstGameUnlocked,
@@ -62,6 +73,7 @@ export function calculateAchievements(
 		words1000Unlocked,
 		words1000Progress,
 		completeAlphabetUnlocked,
-		completeAlphabetProgress
+		completeAlphabetProgress,
+		paleographerUnlocked
 	);
 }

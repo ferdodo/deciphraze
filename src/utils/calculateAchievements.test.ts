@@ -1,8 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { calculateAchievements } from "./calculateAchievements";
+import { createAllAchievements } from "../factories/createAllAchievements";
 import type { GameHistory } from "../entities/GameHistory";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { GameSession } from "../entities/GameSession";
+import type { AllAchievements } from "../entities/AllAchievements";
 
 describe("calculateAchievements", () => {
 	let gameHistory: GameHistory;
@@ -175,6 +177,126 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterQ.achievementId).toBe("first_letter_q");
 			expect(achievements.achievements.firstLetterQ.name).toBe("Qualifié");
+		});
+	});
+
+	describe("Alpha and Omega achievement", () => {
+		it("should unlock when first and last letters match", () => {
+			gameHistory = {
+				"2024-01-15": ["A", "B", "C", "D", "Z"]
+			};
+			const discoveryOrder: DiscoveryOrder = ["A", "B", "C", "D", "Z"];
+			const paragraphOfTheDay = "ABC DZ";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
+		});
+	});
+
+	describe("Paleographer achievement", () => {
+		it("should unlock when at least one game has no errors", () => {
+			const session1: GameSession = {
+				winAt: "2024-01-15",
+				lettersFound: ["A", "B", "C"],
+				hasErrors: true
+			};
+			const session2: GameSession = {
+				winAt: "2024-01-16",
+				lettersFound: ["D", "E", "F"],
+				hasErrors: false
+			};
+			gameHistory = {
+				"2024-01-15": session1,
+				"2024-01-16": session2
+			};
+			const discoveryOrder: DiscoveryOrder = ["D", "E", "F"];
+			const paragraphOfTheDay = "DEF";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.paleographer.unlocked).toBe(true);
+			expect(achievements.achievements.paleographer.achievementId).toBe("paleographer");
+			expect(achievements.achievements.paleographer.name).toBe("Paléographe");
+		});
+
+		it("should not unlock when all games have errors", () => {
+			const session1: GameSession = {
+				winAt: "2024-01-15",
+				lettersFound: ["A", "B", "C"],
+				hasErrors: true
+			};
+			const session2: GameSession = {
+				winAt: "2024-01-16",
+				lettersFound: ["D", "E", "F"],
+				hasErrors: true
+			};
+			gameHistory = {
+				"2024-01-15": session1,
+				"2024-01-16": session2
+			};
+			const discoveryOrder: DiscoveryOrder = ["D", "E", "F"];
+			const paragraphOfTheDay = "DEF";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.paleographer.unlocked).toBe(false);
+		});
+
+		it("should unlock for retrocompatibility when hasErrors is undefined", () => {
+			const session1: GameSession = {
+				winAt: "2024-01-15",
+				lettersFound: ["A", "B", "C"]
+			};
+			gameHistory = {
+				"2024-01-15": session1
+			};
+			const discoveryOrder: DiscoveryOrder = ["A", "B", "C"];
+			const paragraphOfTheDay = "ABC";
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+
+			expect(achievements.achievements.paleographer.unlocked).toBe(true);
+		});
+	});
+
+	describe("Preserving existing achievements", () => {
+		it("should preserve unlocked achievements even if conditions are no longer met", () => {
+			gameHistory = {};
+			const discoveryOrder: DiscoveryOrder = [];
+			const paragraphOfTheDay = "Hello world";
+
+			const existingAchievements: AllAchievements = createAllAchievements(
+				true, // firstGame
+				true, // streak5Days
+				{ current: 0, target: 5 },
+				true, // firstLetterA
+				true, // firstLetterE
+				true, // firstLetterY
+				true, // wordInOrder
+				true, // alphaAndOmega
+				true, // firstLetterQ
+				true, // words1000
+				{ current: 0, target: 500 },
+				true, // completeAlphabet
+				{ current: 0, target: 26 },
+				true, // paleographer
+				"2024-01-01T00:00:00.000Z"
+			);
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, existingAchievements);
+
+			expect(achievements.achievements.firstGame.unlocked).toBe(true);
+			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
+			expect(achievements.achievements.wordInOrder.unlocked).toBe(true);
+			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
+			expect(achievements.achievements.words1000.unlocked).toBe(true);
+			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);
+			expect(achievements.achievements.paleographer.unlocked).toBe(true);
 		});
 	});
 });

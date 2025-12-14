@@ -15,6 +15,7 @@ export function createAllAchievements(
 	words1000Progress: { current: number; target: 500 } = { current: 0, target: 500 },
 	completeAlphabetUnlocked: boolean = false,
 	completeAlphabetProgress: { current: number; target: 26 } = { current: 0, target: 26 },
+	paleographerUnlocked: boolean = false,
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -62,6 +63,10 @@ export function createAllAchievements(
 				...defaultAchievements.achievements.completeAlphabet,
 				unlocked: completeAlphabetUnlocked,
 				progress: completeAlphabetProgress
+			},
+			paleographer: {
+				...defaultAchievements.achievements.paleographer,
+				unlocked: paleographerUnlocked
 			}
 		}
 	};
