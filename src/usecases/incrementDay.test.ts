@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { incrementDay } from "./incrementDay";
 import { withGameStarted } from "../fixtures/withGameStarted";
+import { withFinishedGame } from "../fixtures/withFinishedGame";
 
 describe("incrementDay", () => {
 	it("should increment day by 1", () => {
@@ -61,6 +62,28 @@ describe("incrementDay", () => {
 		expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
 		expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
 		expect(Object.keys(context.playerCipherRepository.getPlayerCipher()).length).toBe(0);
+		
+		cleanup();
+	});
+
+	it("should reset statistics before changing day to avoid counting twice", () => {
+		const [cleanup, context] = withFinishedGame();
+		
+		// Vérifier que les statistiques ont été mises à jour après la partie gagnée
+		const statsBefore = context.statisticsRepository.getStatistics();
+		expect(statsBefore.totalGames).toBeGreaterThan(0);
+		
+		// Changer de jour
+		incrementDay(context);
+		
+		// Les statistiques devraient être réinitialisées à 0
+		const statsAfter = context.statisticsRepository.getStatistics();
+		expect(statsAfter.totalGames).toBe(0);
+		expect(statsAfter.totalWordsFound).toBe(0);
+		expect(statsAfter.firstGameDate).toBeNull();
+		expect(statsAfter.lastGameDate).toBeNull();
+		expect(statsAfter.averageWordsPerGame).toBe(0);
+		expect(statsAfter.letterPositions).toEqual([]);
 		
 		cleanup();
 	});

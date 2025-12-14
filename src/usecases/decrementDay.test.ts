@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { decrementDay } from "./decrementDay";
 import { withGameStarted } from "../fixtures/withGameStarted";
+import { withFinishedGame } from "../fixtures/withFinishedGame";
 
 describe("decrementDay", () => {
 	it("should decrement day by 1", () => {
@@ -18,7 +19,6 @@ describe("decrementDay", () => {
 		expect(newDay).toBe(expectedDay);
 		cleanup();
 	});
-
 	it("should reset discovery order for the new day", () => {
 		const [cleanup, context] = withGameStarted();
 		const initialDay = context.dayRepository.getDay();
@@ -61,6 +61,30 @@ describe("decrementDay", () => {
 		expect(context.letterSelectionRepository.getLetterSelection()).toBeNull();
 		expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
 		expect(Object.keys(context.playerCipherRepository.getPlayerCipher()).length).toBe(0);
+		
+		cleanup();
+	});
+
+	it("should reset statistics before changing day to avoid counting twice", () => {
+		const [cleanup, context] = withFinishedGame();
+		
+		// Vérifier que les statistiques ont été mises à jour après la partie gagnée
+		const statsBefore = context.statisticsRepository.getStatistics();
+		expect(statsBefore.totalGames).toBeGreaterThan(0);
+		
+		// Changer de jour
+		decrementDay(context);
+		
+		// Les statistiques devraient être réinitialisées avec toutes les propriétés correctes
+		const statsAfter = context.statisticsRepository.getStatistics();
+		expect(statsAfter.totalGames).toBe(0);
+		expect(statsAfter.totalWordsFound).toBe(0);
+		expect(statsAfter.firstGameDate).toBeNull();
+		expect(statsAfter.lastGameDate).toBeNull();
+		expect(statsAfter.averageWordsPerGame).toBe(0);
+		expect(statsAfter.letterPositions).toEqual([]);
+		expect(Array.isArray(statsAfter.letterPositions)).toBe(true);
+		expect(statsAfter.letterPositions.length).toBe(0);
 		
 		cleanup();
 	});
