@@ -89,7 +89,7 @@ describe("calculateAchievements", () => {
 	});
 
 	describe("Words 1000 achievement", () => {
-		it("should not unlock when total words found is less than 1000", () => {
+		it("should not unlock when total words found is less than 500", () => {
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["H", "E", "L", "L", "O"],
@@ -111,19 +111,19 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.words1000.unlocked).toBe(false);
 			expect(achievements.achievements.words1000.progress.current).toBe(125);
-			expect(achievements.achievements.words1000.progress.target).toBe(1000);
+			expect(achievements.achievements.words1000.progress.target).toBe(500);
 		});
 
-		it("should unlock when total words found is exactly 1000", () => {
+		it("should unlock when total words found is exactly 500", () => {
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["H", "E", "L", "L", "O"],
-				wordsFound: 500
+				wordsFound: 250
 			};
 			const session2: GameSession = {
 				winAt: "2024-01-16",
 				lettersFound: ["W", "O", "R", "L", "D"],
-				wordsFound: 500
+				wordsFound: 250
 			};
 			gameHistory = {
 				"2024-01-15": session1,
@@ -138,10 +138,10 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.words1000.achievementId).toBe("words_1000");
 			expect(achievements.achievements.words1000.name).toBe("Scribe");
 			expect(achievements.achievements.words1000.description).toBe(
-				"Trouver 1000 mots de manière cumulative",
+				"Déchiffrez 500 mots",
 			);
-			expect(achievements.achievements.words1000.progress.current).toBe(1000);
-			expect(achievements.achievements.words1000.progress.target).toBe(1000);
+			expect(achievements.achievements.words1000.progress.current).toBe(500);
+			expect(achievements.achievements.words1000.progress.target).toBe(500);
 		});
 
 	});

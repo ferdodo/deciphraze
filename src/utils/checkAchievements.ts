@@ -61,11 +61,11 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		words1000: z.object({
 			achievementId: z.literal("words_1000"),
 			name: z.literal("Scribe"),
-			description: z.literal("Trouver 1000 mots de manière cumulative"),
+			description: z.literal("Déchiffrez 500 mots"),
 			unlocked: z.boolean(),
 			progress: z.object({
 				current: z.number(),
-				target: z.literal(1000)
+				target: z.literal(500)
 			})
 		}),
 		completeAlphabet: z.object({

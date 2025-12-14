@@ -58,11 +58,11 @@ export const defaultAchievements: AllAchievements = {
 		words1000: {
 			achievementId: "words_1000",
 			name: "Scribe",
-			description: "Trouver 1000 mots de manière cumulative",
+			description: "Déchiffrez 500 mots",
 			unlocked: false,
 			progress: {
 				current: 0,
-				target: 1000
+				target: 500
 			}
 		},
 		completeAlphabet: {

@@ -30,10 +30,10 @@ export function calculateAchievements(
 	const calculatedFirstLetterQUnlocked = isFirstLetterFoundInHistory(gameHistory, "Q");
 	
 	const totalWordsFound = calculateTotalWordsFound(gameHistory);
-	const calculatedWords1000Unlocked = totalWordsFound >= 1000;
+	const calculatedWords1000Unlocked = totalWordsFound >= 500;
 	const words1000Progress = {
 		current: totalWordsFound,
-		target: 1000 as const
+		target: 500 as const
 	};
 	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
 

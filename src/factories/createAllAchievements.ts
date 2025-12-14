@@ -12,7 +12,7 @@ export function createAllAchievements(
 	alphaAndOmegaUnlocked: boolean = false,
 	firstLetterQUnlocked: boolean = false,
 	words1000Unlocked: boolean = false,
-	words1000Progress: { current: number; target: 1000 } = { current: 0, target: 1000 },
+	words1000Progress: { current: number; target: 500 } = { current: 0, target: 500 },
 	completeAlphabetUnlocked: boolean = false,
 	completeAlphabetProgress: { current: number; target: 26 } = { current: 0, target: 26 },
 	computedAtDate: string = new Date().toISOString()
