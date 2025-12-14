@@ -9,5 +9,4 @@ FROM base AS dev
 CMD ["npm", "run", "dev"]
 
 FROM base AS verify
-RUN npm run verify
-CMD ["sleep", "infinity"]
+CMD ["npm", "run", "verify"]
