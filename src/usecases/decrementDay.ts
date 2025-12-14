@@ -7,18 +7,6 @@ export const decrementDay = (context: GameContext): void => {
 	date.setDate(date.getDate() - 1);
 	const newDay = formatDate(date);
 	
-	// Réinitialiser les statistiques AVANT de changer de jour
-	const defaultStats = {
-		totalGames: 0,
-		totalWordsFound: 0,
-		firstGameDate: null,
-		lastGameDate: null,
-		averageWordsPerGame: 0,
-		letterPositions: [],
-		lastUpdated: new Date().toISOString()
-	};
-	context.statisticsRepository.saveStatistics(defaultStats);
-	
 	// Réinitialiser l'état du jeu pour le mode développement
 	context.letterSelectionRepository.selectLetter(null);
 	context.symbolSelectionRepository.selectSymbol(null);
