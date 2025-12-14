@@ -69,22 +69,26 @@ const Game: React.FC = () => {
 					</div>
 				))}
 
-				<br />
-				<br />
+				{!win && (
+					<>
+						<br />
+						<br />
 
-				<div>
-					{alphabet.map((l) => (
-						<LetterComponent key={l} character={l} />
-					))}
-				</div>
+						<div>
+							{alphabet.map((l) => (
+								<LetterComponent key={l} character={l} />
+							))}
+						</div>
 
-				<br />
+						<br />
 
-				<div>
-					{alphabetRandom.map((l) => (
-						<SymbolComponent key={l} character={l} />
-					))}
-				</div>
+						<div>
+							{alphabetRandom.map((l) => (
+								<SymbolComponent key={l} character={l} />
+							))}
+						</div>
+					</>
+				)}
 
 				{win && (
 					<div>
