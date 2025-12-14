@@ -49,7 +49,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		alphaAndOmega: z.object({
 			achievementId: z.literal("alpha_and_omega"),
 			name: z.literal("Synthèse"),
-			description: z.literal("Trouver respectivement la première lettre en premier et la dernière en dernier"),
+			description: z.literal("Trouver respectivement la première lettre du paragraphe en premier et la dernière lettre en dernier"),
 			unlocked: z.boolean()
 		}),
 		firstLetterQ: z.object({
