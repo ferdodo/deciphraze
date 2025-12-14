@@ -1,4 +1,5 @@
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import { isAlphabetic } from "./isAlphabetic";
 
 export function isAlphaAndOmega(paragraph: string, discoveryOrder: DiscoveryOrder): boolean {
 	if (discoveryOrder.length === 0) {
@@ -6,9 +7,9 @@ export function isAlphaAndOmega(paragraph: string, discoveryOrder: DiscoveryOrde
 	}
 
 	// Extraire toutes les lettres du paragraphe (ignorer ponctuation et espaces)
-	const letters = paragraph
-		.replace(/[^A-Za-zÀ-ÿ]/g, "")
-		.toUpperCase();
+	const letters = [...paragraph]
+		.filter(char => isAlphabetic(char))
+		.map(char => char.toUpperCase());
 
 	if (letters.length === 0) {
 		return false;
