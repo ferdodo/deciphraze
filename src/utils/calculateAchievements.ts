@@ -4,12 +4,9 @@ import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
-import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
-import { isFirstLetterFoundE } from "./isFirstLetterFoundE";
-import { isFirstLetterFoundY } from "./isFirstLetterFoundY";
+import { isFirstLetterFoundInHistory } from "./isFirstLetterFoundInHistory";
 import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
-import { isFirstLetterFoundQ } from "./isFirstLetterFoundQ";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
 import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 
@@ -25,12 +22,12 @@ export function calculateAchievements(
 		target: 5 as const
 	};
 	
-	const firstLetterAUnlocked = isFirstLetterFoundA(discoveryOrder);
-	const firstLetterEUnlocked = isFirstLetterFoundE(discoveryOrder);
-	const firstLetterYUnlocked = isFirstLetterFoundY(discoveryOrder);
+	const firstLetterAUnlocked = isFirstLetterFoundInHistory(gameHistory, "A");
+	const firstLetterEUnlocked = isFirstLetterFoundInHistory(gameHistory, "E");
+	const firstLetterYUnlocked = isFirstLetterFoundInHistory(gameHistory, "Y");
 	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
 	const alphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
-	const firstLetterQUnlocked = isFirstLetterFoundQ(discoveryOrder);
+	const firstLetterQUnlocked = isFirstLetterFoundInHistory(gameHistory, "Q");
 	
 	const totalWordsFound = calculateTotalWordsFound(gameHistory);
 	const words1000Unlocked = totalWordsFound >= 1000;

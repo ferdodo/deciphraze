@@ -7,6 +7,7 @@ await Promise.all([
 	runTask("Linting", $`biome ci ./src`),
 	runTask("Validating file names", $`exportcase check ./src`),
 	runTask("Mutation testing", $`node ./scripts/run-mutation.mjs`),
+	runTask("Auditing", $`npm audit --audit-level=critical`),
 ]);
 
 await runTask("Checking non-killing tests", $`node ./scripts/check-non-killing-tests.mjs`);

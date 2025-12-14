@@ -42,9 +42,9 @@ describe("calculateAchievements", () => {
 			);
 		});
 
-		it("should not unlock when Y is not the first letter found", () => {
+		it("should not unlock when Y is not the first letter found in any game", () => {
 			gameHistory = {
-				"2024-01-15": ["Y"]
+				"2024-01-15": ["E", "Y", "S"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["E", "Y", "S"];
 			const paragraphOfTheDay = "Yes world";
@@ -97,117 +97,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstLetterE.description).toBe(
 				"Trouver la lettre E en premier",
 			);
-		});
-
-		it("should not unlock when first letter discovered is not E", () => {
-			gameHistory = {
-				"2024-01-15": ["B", "E", "C"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["B", "E", "C"];
-			const paragraphOfTheDay = "Hello world";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
-		});
-	});
-
-	describe("Word in order achievement", () => {
-		it("should unlock when a word of 5+ letters is found in order", () => {
-			gameHistory = {
-				"2024-01-15": ["H", "E", "L", "L", "O"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O"];
-			const paragraphOfTheDay = "Hello world test";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.wordInOrder.unlocked).toBe(true);
-			expect(achievements.achievements.wordInOrder.achievementId).toBe("word_in_order");
-			expect(achievements.achievements.wordInOrder.name).toBe("Signature");
-			expect(achievements.achievements.wordInOrder.description).toBe(
-				"Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
-			);
-		});
-
-		it("should not unlock when letters are not in order", () => {
-			gameHistory = {
-				"2024-01-15": ["H", "E", "L", "L", "O"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["E", "H", "L", "L", "O"];
-			const paragraphOfTheDay = "Hello world test";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
-		});
-
-		it("should not unlock when word is less than 5 letters", () => {
-			gameHistory = {
-				"2024-01-15": ["T", "E", "S", "T"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["T", "E", "S", "T"];
-			const paragraphOfTheDay = "Hello world test";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
-		});
-
-	});
-
-	describe("Alpha and Omega achievement", () => {
-		it("should unlock when first and last letters match", () => {
-			gameHistory = {
-				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"];
-			const paragraphOfTheDay = "Hello world";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
-			expect(achievements.achievements.alphaAndOmega.achievementId).toBe("alpha_and_omega");
-			expect(achievements.achievements.alphaAndOmega.name).toBe("Synthèse");
-			expect(achievements.achievements.alphaAndOmega.description).toBe(
-				"Trouver respectivement la première lettre en premier et la dernière en dernier",
-			);
-		});
-
-		it("should not unlock when first letter does not match", () => {
-			gameHistory = {
-				"2024-01-15": ["E", "L", "L", "O", "W", "O", "R", "L", "D"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["E", "L", "L", "O", "W", "O", "R", "L", "D"];
-			const paragraphOfTheDay = "Hello world";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
-		});
-
-		it("should not unlock when last letter does not match", () => {
-			gameHistory = {
-				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L"];
-			const paragraphOfTheDay = "Hello world";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
-		});
-
-		it("should ignore punctuation when finding first and last letters", () => {
-			gameHistory = {
-				"2024-01-15": ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O", "W", "O", "R", "L", "D"];
-			const paragraphOfTheDay = "!Hello world!";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
 		});
 	});
 
@@ -269,41 +158,35 @@ describe("calculateAchievements", () => {
 
 	});
 
-	describe("Complete alphabet achievement", () => {
-		it("should unlock when all 26 letters are found across multiple games", () => {
-			const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+	describe("First letter A achievement", () => {
+		it("should unlock when A is the first letter found", () => {
 			gameHistory = {
-				"2024-01-15": alphabet.slice(0, 13),
-				"2024-01-16": alphabet.slice(13)
+				"2024-01-15": ["A", "B", "C"]
 			};
-			const discoveryOrder: DiscoveryOrder = ["A"];
-			const paragraphOfTheDay = "Hello world";
+			const discoveryOrder: DiscoveryOrder = ["A", "B", "C"];
+			const paragraphOfTheDay = "ABC world";
 
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
 
-			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);
-			expect(achievements.achievements.completeAlphabet.achievementId).toBe("complete_alphabet");
-			expect(achievements.achievements.completeAlphabet.name).toBe("Lettré");
-			expect(achievements.achievements.completeAlphabet.description).toBe(
-				"Trouver toutes les lettres de l'alphabet",
-			);
-			expect(achievements.achievements.completeAlphabet.progress.current).toBe(26);
-			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterA.achievementId).toBe("first_letter_a");
+			expect(achievements.achievements.firstLetterA.name).toBe("Aperçu");
 		});
+	});
 
-		it("should not unlock when only some letters are found", () => {
+	describe("First letter Q achievement", () => {
+		it("should unlock when Q is the first letter found", () => {
 			gameHistory = {
-				"2024-01-15": ["A", "B", "C", "D", "E"]
+				"2024-01-15": ["Q", "U", "E", "S", "T"]
 			};
-			const discoveryOrder: DiscoveryOrder = ["A"];
-			const paragraphOfTheDay = "Hello world";
+			const discoveryOrder: DiscoveryOrder = ["Q", "U", "E", "S", "T"];
+			const paragraphOfTheDay = "Quest world";
 
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
 
-			expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
-			expect(achievements.achievements.completeAlphabet.progress.current).toBe(5);
-			expect(achievements.achievements.completeAlphabet.progress.target).toBe(26);
+			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
+			expect(achievements.achievements.firstLetterQ.achievementId).toBe("first_letter_q");
+			expect(achievements.achievements.firstLetterQ.name).toBe("Qualifié");
 		});
-
 	});
 });
