@@ -1,8 +1,6 @@
 services:
-  dev:
-    build:
-      context: .
-      target: dev
+  frontend:
+    build: .
     develop:
       watch:
         - action: sync
@@ -12,8 +10,3 @@ services:
           path: ./package.json
     ports:
       - "1111:1111"
-
-  verify:
-    build:
-      context: .
-      target: verify
