@@ -13,29 +13,42 @@ import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 export function calculateAchievements(
 	gameHistory: GameHistory,
 	discoveryOrder: DiscoveryOrder,
-	paragraphOfTheDay: string
+	paragraphOfTheDay: string,
+	existingAchievements?: AllAchievements
 ): AllAchievements {
-	const firstGameUnlocked = Object.keys(gameHistory).length > 0;
-	const streak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
+	const calculatedFirstGameUnlocked = Object.keys(gameHistory).length > 0;
+	const calculatedStreak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
 	const streak5DaysProgress = {
 		current: calculateCurrentStreak(gameHistory, 0),
 		target: 5 as const
 	};
 	
-	const firstLetterAUnlocked = isFirstLetterFoundInHistory(gameHistory, "A");
-	const firstLetterEUnlocked = isFirstLetterFoundInHistory(gameHistory, "E");
-	const firstLetterYUnlocked = isFirstLetterFoundInHistory(gameHistory, "Y");
-	const wordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
-	const alphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
-	const firstLetterQUnlocked = isFirstLetterFoundInHistory(gameHistory, "Q");
+	const calculatedFirstLetterAUnlocked = isFirstLetterFoundInHistory(gameHistory, "A");
+	const calculatedFirstLetterEUnlocked = isFirstLetterFoundInHistory(gameHistory, "E");
+	const calculatedFirstLetterYUnlocked = isFirstLetterFoundInHistory(gameHistory, "Y");
+	const calculatedWordInOrderUnlocked = isWordFoundInOrder(paragraphOfTheDay, discoveryOrder);
+	const calculatedAlphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
+	const calculatedFirstLetterQUnlocked = isFirstLetterFoundInHistory(gameHistory, "Q");
 	
 	const totalWordsFound = calculateTotalWordsFound(gameHistory);
-	const words1000Unlocked = totalWordsFound >= 1000;
+	const calculatedWords1000Unlocked = totalWordsFound >= 1000;
 	const words1000Progress = {
 		current: totalWordsFound,
 		target: 1000 as const
 	};
-	const { unlocked: completeAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
+	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
+
+	// Préserver les succès déjà débloqués
+	const firstGameUnlocked = existingAchievements?.achievements.firstGame.unlocked || calculatedFirstGameUnlocked;
+	const streak5DaysUnlocked = existingAchievements?.achievements.streak5Days.unlocked || calculatedStreak5DaysUnlocked;
+	const firstLetterAUnlocked = existingAchievements?.achievements.firstLetterA.unlocked || calculatedFirstLetterAUnlocked;
+	const firstLetterEUnlocked = existingAchievements?.achievements.firstLetterE.unlocked || calculatedFirstLetterEUnlocked;
+	const firstLetterYUnlocked = existingAchievements?.achievements.firstLetterY.unlocked || calculatedFirstLetterYUnlocked;
+	const wordInOrderUnlocked = existingAchievements?.achievements.wordInOrder.unlocked || calculatedWordInOrderUnlocked;
+	const alphaAndOmegaUnlocked = existingAchievements?.achievements.alphaAndOmega.unlocked || calculatedAlphaAndOmegaUnlocked;
+	const firstLetterQUnlocked = existingAchievements?.achievements.firstLetterQ.unlocked || calculatedFirstLetterQUnlocked;
+	const words1000Unlocked = existingAchievements?.achievements.words1000.unlocked || calculatedWords1000Unlocked;
+	const completeAlphabetUnlocked = existingAchievements?.achievements.completeAlphabet.unlocked || calculatedCompleteAlphabetUnlocked;
 
 	return createAllAchievements(
 		firstGameUnlocked,

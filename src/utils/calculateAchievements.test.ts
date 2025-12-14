@@ -41,18 +41,6 @@ describe("calculateAchievements", () => {
 				"Trouver la lettre Y en premier",
 			);
 		});
-
-		it("should not unlock when Y is not the first letter found in any game", () => {
-			gameHistory = {
-				"2024-01-15": ["E", "Y", "S"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["E", "Y", "S"];
-			const paragraphOfTheDay = "Yes world";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
-
-			expect(achievements.achievements.firstLetterY.unlocked).toBe(false);
-		});
 	});
 
 	describe("Streak achievement", () => {

@@ -30,7 +30,8 @@ export function registerWinnedGame({
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
 		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);
-		const newAchievements = calculateAchievements(fullHistory, discoveryOrder, paragraphOfTheDay);
+		const existingAchievements = achievementRepository.loadAchievements();
+		const newAchievements = calculateAchievements(fullHistory, discoveryOrder, paragraphOfTheDay, existingAchievements);
 		achievementRepository.saveAchievements(newAchievements);
 	});
 }
