@@ -2,7 +2,7 @@
 
 body {
 	background-color: tan;
-	background-image: url("../public/background.jpg");
+	background-image: url("./background.jpg");
 	background-size: cover;
 }
 
@@ -12,5 +12,5 @@ div {
 
 @font-face {
 	font-family: "GlipervelzOrigy";
-	src: url("../public/GlipervelzOrigy.ttf");
+	src: url("./GlipervelzOrigy.ttf");
 }
