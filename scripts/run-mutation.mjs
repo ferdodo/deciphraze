@@ -1,6 +1,21 @@
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { spawn } from "node:child_process";
+
+async function spawnLive(command, commandArgs) {
+	return new Promise((resolve) => {
+		const child = spawn(command, commandArgs, { stdio: 'inherit' });
+
+		child.on('close', code => {
+			if (code !== 0) {
+				process.exit(code);
+			}
+			resolve();
+		});
+	});
+}
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,7 +30,7 @@ async function runMutation() {
 		return;
 	}
 
-	execSync(`npx stryker run --mutate ${filesToMutate.join(',')}`, { stdio: 'inherit' });
+	await spawnLive("npx", `stryker run --mutate ${filesToMutate.join(',')}`.split(' '));
 }
 
 runMutation();

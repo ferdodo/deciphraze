@@ -38,9 +38,6 @@ describe("createAssociationHistoryRepository", () => {
 		});
 	});
 
-	describe("addAssociation", () => {
-		// Tests removed - non-killing tests
-	});
 
 	describe("hasErrors", () => {
 		it("should return false when no history exists", () => {

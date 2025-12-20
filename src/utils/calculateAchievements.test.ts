@@ -5,16 +5,17 @@ import type { GameHistory } from "../entities/GameHistory";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { GameSession } from "../entities/GameSession";
 import type { AllAchievements } from "../entities/AllAchievements";
+import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
+import { getParagraphOfTheDay } from "./getParagraphOfTheDay";
 
 describe("calculateAchievements", () => {
-	let gameHistory: GameHistory;
-
 	describe("Empty history", () => {
 		it("should return no achievements", () => {
-			gameHistory = {};
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {};
 			const discoveryOrder: DiscoveryOrder = [];
 			const paragraphOfTheDay = "Hello world";
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
@@ -28,13 +29,14 @@ describe("calculateAchievements", () => {
 
 	describe("First letter Y achievement", () => {
 		it("should unlock when Y is the first letter found", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["Y"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["Y", "E", "S"];
 			const paragraphOfTheDay = "Yes world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterY.achievementId).toBe("first_letter_y");
@@ -47,7 +49,8 @@ describe("calculateAchievements", () => {
 
 	describe("Streak achievement", () => {
 		it("should return streak achievement after 5 consecutive days", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["A"],
 				"2024-01-16": ["B"],
 				"2024-01-17": ["C"],
@@ -57,7 +60,7 @@ describe("calculateAchievements", () => {
 			const discoveryOrder: DiscoveryOrder = ["A", "B", "C", "D", "E"];
 			const paragraphOfTheDay = "Hello world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(true);
@@ -73,13 +76,14 @@ describe("calculateAchievements", () => {
 
 	describe("First letter E achievement", () => {
 		it("should unlock when first letter discovered is E", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["E", "B", "C"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["E", "B", "C"];
 			const paragraphOfTheDay = "Hello world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterE.achievementId).toBe("first_letter_e");
@@ -92,6 +96,7 @@ describe("calculateAchievements", () => {
 
 	describe("Words 1000 achievement", () => {
 		it("should not unlock when total words found is less than 500", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["H", "E", "L", "L", "O"],
@@ -102,14 +107,14 @@ describe("calculateAchievements", () => {
 				lettersFound: ["W", "O", "R", "L", "D"],
 				wordsFound: 75
 			};
-			gameHistory = {
+			const gameHistory: GameHistory = {
 				"2024-01-15": session1,
 				"2024-01-16": session2
 			};
 			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O"];
 			const paragraphOfTheDay = "Hello world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.words1000.unlocked).toBe(false);
 			expect(achievements.achievements.words1000.progress.current).toBe(125);
@@ -117,6 +122,7 @@ describe("calculateAchievements", () => {
 		});
 
 		it("should unlock when total words found is exactly 500", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["H", "E", "L", "L", "O"],
@@ -127,14 +133,14 @@ describe("calculateAchievements", () => {
 				lettersFound: ["W", "O", "R", "L", "D"],
 				wordsFound: 250
 			};
-			gameHistory = {
+			const gameHistory: GameHistory = {
 				"2024-01-15": session1,
 				"2024-01-16": session2
 			};
 			const discoveryOrder: DiscoveryOrder = ["H", "E", "L", "L", "O"];
 			const paragraphOfTheDay = "Hello world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.words1000.unlocked).toBe(true);
 			expect(achievements.achievements.words1000.achievementId).toBe("words_1000");
@@ -150,13 +156,14 @@ describe("calculateAchievements", () => {
 
 	describe("First letter A achievement", () => {
 		it("should unlock when A is the first letter found", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["A", "B", "C"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["A", "B", "C"];
 			const paragraphOfTheDay = "ABC world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterA.achievementId).toBe("first_letter_a");
@@ -166,13 +173,14 @@ describe("calculateAchievements", () => {
 
 	describe("First letter Q achievement", () => {
 		it("should unlock when Q is the first letter found", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["Q", "U", "E", "S", "T"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["Q", "U", "E", "S", "T"];
 			const paragraphOfTheDay = "Quest world";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterQ.achievementId).toBe("first_letter_q");
@@ -182,20 +190,22 @@ describe("calculateAchievements", () => {
 
 	describe("Alpha and Omega achievement", () => {
 		it("should unlock when first and last letters match", () => {
-			gameHistory = {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {
 				"2024-01-15": ["A", "B", "C", "D", "Z"]
 			};
 			const discoveryOrder: DiscoveryOrder = ["A", "B", "C", "D", "Z"];
 			const paragraphOfTheDay = "ABC DZ";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
 		});
 	});
 
 	describe("Paleographer achievement", () => {
-		it("should unlock when at least one game has no errors", () => {
+		it("should unlock when at least one game has no errors and all associations are valid", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["A", "B", "C"],
@@ -206,14 +216,20 @@ describe("calculateAchievements", () => {
 				lettersFound: ["D", "E", "F"],
 				hasErrors: false
 			};
-			gameHistory = {
+			const gameHistory: GameHistory = {
 				"2024-01-15": session1,
 				"2024-01-16": session2
 			};
+			// Session 1: erreur (association incorrecte)
+			associationHistoryRepository.addAssociation("2024-01-15", "A", "X", false);
+			// Session 2: toutes les associations sont correctes ET les lettres sont dans le paragraphe
+			associationHistoryRepository.addAssociation("2024-01-16", "D", "D", true);
+			associationHistoryRepository.addAssociation("2024-01-16", "E", "E", true);
+			associationHistoryRepository.addAssociation("2024-01-16", "F", "F", true);
 			const discoveryOrder: DiscoveryOrder = ["D", "E", "F"];
 			const paragraphOfTheDay = "DEF";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(true);
 			expect(achievements.achievements.paleographer.achievementId).toBe("paleographer");
@@ -221,6 +237,7 @@ describe("calculateAchievements", () => {
 		});
 
 		it("should not unlock when all games have errors", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["A", "B", "C"],
@@ -231,38 +248,78 @@ describe("calculateAchievements", () => {
 				lettersFound: ["D", "E", "F"],
 				hasErrors: true
 			};
-			gameHistory = {
+			const gameHistory: GameHistory = {
 				"2024-01-15": session1,
 				"2024-01-16": session2
 			};
+			// Session 1: erreur
+			associationHistoryRepository.addAssociation("2024-01-15", "A", "X", false);
+			// Session 2: erreur
+			associationHistoryRepository.addAssociation("2024-01-16", "D", "X", false);
 			const discoveryOrder: DiscoveryOrder = ["D", "E", "F"];
 			const paragraphOfTheDay = "DEF";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(false);
 		});
 
-		it("should unlock for retrocompatibility when hasErrors is undefined", () => {
+		it("should unlock for retrocompatibility when hasErrors is undefined and no associations exist", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
 			const session1: GameSession = {
 				winAt: "2024-01-15",
 				lettersFound: ["A", "B", "C"]
 			};
-			gameHistory = {
+			const gameHistory: GameHistory = {
 				"2024-01-15": session1
 			};
+			// Pas d'associations dans l'historique (rétrocompatibilité)
 			const discoveryOrder: DiscoveryOrder = ["A", "B", "C"];
 			const paragraphOfTheDay = "ABC";
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(true);
+		});
+
+		it("should not unlock when association is correct in cipher but letter is not in paragraph", () => {
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const day = "2024-01-15";
+			const paragraphForDay = getParagraphOfTheDay(day);
+			// Trouver une lettre qui n'est pas dans le paragraphe
+			const lettersInParagraph = new Set([...paragraphForDay].filter(char => /[a-zA-Z]/.test(char)).map(char => char.toUpperCase()));
+			let letterNotInParagraph = "Z";
+			while (lettersInParagraph.has(letterNotInParagraph)) {
+				letterNotInParagraph = String.fromCharCode(letterNotInParagraph.charCodeAt(0) - 1);
+			}
+			
+			const session1: GameSession = {
+				winAt: day,
+				lettersFound: Array.from(lettersInParagraph).slice(0, 3),
+				hasErrors: false
+			};
+			const gameHistory: GameHistory = {
+				[day]: session1
+			};
+			// Ajouter des associations valides
+			Array.from(lettersInParagraph).slice(0, 2).forEach(letter => {
+				associationHistoryRepository.addAssociation(day, letter, letter, true);
+			});
+			// Ajouter une association correcte dans le cipher mais avec une lettre qui n'est pas dans le paragraphe
+			associationHistoryRepository.addAssociation(day, letterNotInParagraph, letterNotInParagraph, true);
+			const discoveryOrder: DiscoveryOrder = Array.from(lettersInParagraph).slice(0, 3);
+			const paragraphOfTheDay = paragraphForDay;
+
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
+
+			expect(achievements.achievements.paleographer.unlocked).toBe(false);
 		});
 	});
 
 	describe("Preserving existing achievements", () => {
 		it("should preserve unlocked achievements even if conditions are no longer met", () => {
-			gameHistory = {};
+			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
+			const gameHistory: GameHistory = {};
 			const discoveryOrder: DiscoveryOrder = [];
 			const paragraphOfTheDay = "Hello world";
 
@@ -284,7 +341,7 @@ describe("calculateAchievements", () => {
 				"2024-01-01T00:00:00.000Z"
 			);
 
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, existingAchievements);
+			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository, existingAchievements);
 
 			expect(achievements.achievements.firstGame.unlocked).toBe(true);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(true);

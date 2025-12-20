@@ -1,6 +1,7 @@
 import type { GameHistory } from "../entities/GameHistory";
 import type { AllAchievements } from "../entities/AllAchievements";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundInHistory } from "./isFirstLetterFoundInHistory";
@@ -8,11 +9,13 @@ import { isWordFoundInOrder } from "./isWordFoundInOrder";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
 import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
+import { calculatePaleographerUnlocked } from "./calculatePaleographerUnlocked";
 
 export function calculateAchievements(
 	gameHistory: GameHistory,
 	discoveryOrder: DiscoveryOrder,
 	paragraphOfTheDay: string,
+	associationHistoryRepository: AssociationHistoryRepository,
 	existingAchievements?: AllAchievements
 ): AllAchievements {
 	const calculatedFirstGameUnlocked = Object.keys(gameHistory).length > 0;
@@ -37,15 +40,7 @@ export function calculateAchievements(
 	};
 	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
 	
-	// Vérifier s'il existe au moins une partie sans erreur
-	const calculatedPaleographerUnlocked = Object.values(gameHistory).some((entry) => {
-		// Pour la rétrocompatibilité, si hasErrors n'est pas défini, considérer comme sans erreur
-		if (typeof entry === "object" && "hasErrors" in entry) {
-			return entry.hasErrors === false || entry.hasErrors === undefined;
-		}
-		// Les anciennes entrées (string[]) sont considérées comme sans erreur pour la rétrocompatibilité
-		return true;
-	});
+	const calculatedPaleographerUnlocked = calculatePaleographerUnlocked(gameHistory, associationHistoryRepository);
 
 	// Préserver les succès déjà débloqués
 	const firstGameUnlocked = existingAchievements?.achievements.firstGame.unlocked || calculatedFirstGameUnlocked;
