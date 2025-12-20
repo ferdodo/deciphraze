@@ -1,13 +1,37 @@
 #!/usr/bin/env zx
 
-import { runTask } from "zx-run-task";
+import task from "tasuku";
+import { exec } from "node:child_process";
+import { promisify } from "node:util";
 
-await Promise.all([
-	runTask("Type checking", $`tsc --noEmit`),
-	runTask("Linting", $`biome ci ./src`),
-	runTask("Validating file names", $`exportcase check ./src`),
-	runTask("Mutation testing", $`node ./scripts/run-mutation.mjs`),
-	runTask("Auditing", $`npm audit --audit-level=critical`),
-]);
+async function run(command) {
+	try {
+		await promisify(exec)(command);
+	} catch (error) {
+		throw new Error(error);
+	}
+}
 
-await runTask("Checking non-killing tests", $`node ./scripts/check-non-killing-tests.mjs`);
+task("Type checking", async () => {
+	await run("tsc --noEmit");
+});
+
+task("Linting", async () => {
+	await run("biome ci ./src");
+});
+
+task("Validating file names", async () => {
+	await run("exportcase check ./src");
+});
+
+task("Mutation testing", async () => {
+	await run("node ./scripts/run-mutation.mjs");
+});
+
+task("Auditing", async () => {
+	await run("npm audit --audit-level=critical");
+
+	task("Checking non-killing tests", async () => {
+		await run("node ./scripts/check-non-killing-tests.mjs");
+	});
+});
