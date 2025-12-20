@@ -3,6 +3,7 @@ import { useCellMatchesCurrentSelection } from "../hooks/useCellMatchesCurrentSe
 import styles from "./FragmentComponent.module.css";
 import { computeCellType } from "../utils/computeCellType";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
+import { normalizeWord } from "../utils/normalizeWord";
 
 interface FragmentComponentProps {
 	character: string;
@@ -19,7 +20,7 @@ export function FragmentComponent({ character }: FragmentComponentProps): JSX.El
 			{cellType === "letter" ? (
 				<span className={styles.letter}>{sanitizedCharacter}</span>
 			) : (
-				<span className={`${styles.symbol} ${styles.symbols}`}>{character.toUpperCase()}</span>
+				<span className={`${styles.symbol} ${styles.symbols}`}>{normalizeWord(character).toUpperCase()}</span>
 			)}
 		</span>
 	);
