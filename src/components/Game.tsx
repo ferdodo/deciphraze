@@ -6,6 +6,7 @@ import { SymbolComponent } from "./SymbolComponent";
 import { AchievementsComponent } from "./AchievementsComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
 import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
+import { isDev } from "../utils/isDev";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useDay } from "../hooks/useDay";
@@ -25,8 +26,7 @@ const Game: React.FC = () => {
 	const context = useGameContext();
 
 	const alphabetRandom = useMemo(() => {
-		const CHEAT_MODE = true;
-		return generateRandomAlphabet(currentDay, CHEAT_MODE);
+		return generateRandomAlphabet(currentDay, isDev());
 	}, [currentDay]);
 
 	const win = useWin();
@@ -123,29 +123,33 @@ const Game: React.FC = () => {
 				<StatisticsComponent />
 			</crumbs-panel>
 
-			<crumbs-p slot="title-5">Développement</crumbs-p>
-			<crumbs-panel slot="content-5" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
-				<crumbs-p>
-					Date actuelle : {currentDay}
-				</crumbs-p>
-				<br />
-				<div style={{ display: "flex", gap: "1rem" }}>
-					<crumbs-button
-						title="Jour précédent"
-						onClick={handleDecrementDay}
-						role="button"
-					>
-						← Jour précédent
-					</crumbs-button>
-					<crumbs-button
-						title="Jour suivant"
-						onClick={handleIncrementDay}
-						role="button"
-					>
-						Jour suivant →
-					</crumbs-button>
-				</div>
-			</crumbs-panel>
+			{isDev() && (
+				<>
+					<crumbs-p slot="title-5">Développement</crumbs-p>
+					<crumbs-panel slot="content-5" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
+						<crumbs-p>
+							Date actuelle : {currentDay}
+						</crumbs-p>
+						<br />
+						<div style={{ display: "flex", gap: "1rem" }}>
+							<crumbs-button
+								title="Jour précédent"
+								onClick={handleDecrementDay}
+								role="button"
+							>
+								← Jour précédent
+							</crumbs-button>
+							<crumbs-button
+								title="Jour suivant"
+								onClick={handleIncrementDay}
+								role="button"
+							>
+								Jour suivant →
+							</crumbs-button>
+						</div>
+					</crumbs-panel>
+				</>
+			)}
 		</crumbs-nav>
 		</div>
 	);
