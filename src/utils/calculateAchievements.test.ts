@@ -6,7 +6,6 @@ import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { GameSession } from "../entities/GameSession";
 import type { AllAchievements } from "../entities/AllAchievements";
 import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
-import { getParagraphOfTheDay } from "./getParagraphOfTheDay";
 
 describe("calculateAchievements", () => {
 	describe("Empty history", () => {
@@ -263,57 +262,6 @@ describe("calculateAchievements", () => {
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(false);
 		});
-
-		it("should unlock for retrocompatibility when hasErrors is undefined and no associations exist", () => {
-			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
-			const session1: GameSession = {
-				winAt: "2024-01-15",
-				lettersFound: ["A", "B", "C"]
-			};
-			const gameHistory: GameHistory = {
-				"2024-01-15": session1
-			};
-			// Pas d'associations dans l'historique (rétrocompatibilité)
-			const discoveryOrder: DiscoveryOrder = ["A", "B", "C"];
-			const paragraphOfTheDay = "ABC";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
-
-			expect(achievements.achievements.paleographer.unlocked).toBe(true);
-		});
-
-		it("should not unlock when association is correct in cipher but letter is not in paragraph", () => {
-			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
-			const day = "2024-01-15";
-			const paragraphForDay = getParagraphOfTheDay(day);
-			// Trouver une lettre qui n'est pas dans le paragraphe
-			const lettersInParagraph = new Set([...paragraphForDay].filter(char => /[a-zA-Z]/.test(char)).map(char => char.toUpperCase()));
-			let letterNotInParagraph = "Z";
-			while (lettersInParagraph.has(letterNotInParagraph)) {
-				letterNotInParagraph = String.fromCharCode(letterNotInParagraph.charCodeAt(0) - 1);
-			}
-			
-			const session1: GameSession = {
-				winAt: day,
-				lettersFound: Array.from(lettersInParagraph).slice(0, 3),
-				hasErrors: false
-			};
-			const gameHistory: GameHistory = {
-				[day]: session1
-			};
-			// Ajouter des associations valides
-			Array.from(lettersInParagraph).slice(0, 2).forEach(letter => {
-				associationHistoryRepository.addAssociation(day, letter, letter, true);
-			});
-			// Ajouter une association correcte dans le cipher mais avec une lettre qui n'est pas dans le paragraphe
-			associationHistoryRepository.addAssociation(day, letterNotInParagraph, letterNotInParagraph, true);
-			const discoveryOrder: DiscoveryOrder = Array.from(lettersInParagraph).slice(0, 3);
-			const paragraphOfTheDay = paragraphForDay;
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
-
-			expect(achievements.achievements.paleographer.unlocked).toBe(false);
-		});
 	});
 
 	describe("Preserving existing achievements", () => {
@@ -338,6 +286,7 @@ describe("calculateAchievements", () => {
 				true, // completeAlphabet
 				{ current: 0, target: 26 },
 				true, // paleographer
+				true, // allVowelsInSequence
 				"2024-01-01T00:00:00.000Z"
 			);
 

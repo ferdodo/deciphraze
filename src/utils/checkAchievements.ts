@@ -83,6 +83,12 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 			name: z.literal("Paléographe"),
 			description: z.literal("Compléter une partie sans erreur d'association"),
 			unlocked: z.boolean()
+		}),
+		allVowelsInSequence: z.object({
+			achievementId: z.literal("all_vowels_in_sequence"),
+			name: z.literal("Vocaliste"),
+			description: z.literal("Trouver toutes les voyelles à la suite"),
+			unlocked: z.boolean()
 		})
 	})
 });

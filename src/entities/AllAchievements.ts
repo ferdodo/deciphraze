@@ -79,6 +79,12 @@ export interface AllAchievements {
 			description: "Compléter une partie sans erreur d'association";
 			unlocked: boolean;
 		};
+		allVowelsInSequence: {
+			achievementId: "all_vowels_in_sequence";
+			name: "Vocaliste";
+			description: "Trouver toutes les voyelles à la suite";
+			unlocked: boolean;
+		};
 	};
 }
 

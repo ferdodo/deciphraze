@@ -13,7 +13,7 @@ export const AchievementsComponent: React.FC = () => {
 		return Object.values(achievements.achievements).filter(achievement => achievement.unlocked).length;
 	}, [achievements]);
 
-	const TOTAL_ACHIEVEMENTS = 11;
+	const TOTAL_ACHIEVEMENTS = 12;
 
 	// Créer un tableau d'achievements pour faciliter l'affichage
 	const achievementsList = useMemo(() => [
@@ -28,6 +28,7 @@ export const AchievementsComponent: React.FC = () => {
 		achievements.achievements.words1000,
 		achievements.achievements.completeAlphabet,
 		achievements.achievements.paleographer,
+		achievements.achievements.allVowelsInSequence,
 	], [achievements]);
 
 	return (

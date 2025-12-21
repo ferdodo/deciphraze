@@ -10,6 +10,7 @@ import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
 import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 import { calculatePaleographerUnlocked } from "./calculatePaleographerUnlocked";
+import { hasFoundAllVowelsInSequence } from "./hasFoundAllVowelsInSequence";
 
 export function calculateAchievements(
 	gameHistory: GameHistory,
@@ -41,6 +42,7 @@ export function calculateAchievements(
 	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
 	
 	const calculatedPaleographerUnlocked = calculatePaleographerUnlocked(gameHistory, associationHistoryRepository);
+	const calculatedAllVowelsInSequenceUnlocked = hasFoundAllVowelsInSequence(discoveryOrder);
 
 	// Préserver les succès déjà débloqués
 	const firstGameUnlocked = existingAchievements?.achievements.firstGame.unlocked || calculatedFirstGameUnlocked;
@@ -54,6 +56,7 @@ export function calculateAchievements(
 	const words1000Unlocked = existingAchievements?.achievements.words1000.unlocked || calculatedWords1000Unlocked;
 	const completeAlphabetUnlocked = existingAchievements?.achievements.completeAlphabet.unlocked || calculatedCompleteAlphabetUnlocked;
 	const paleographerUnlocked = existingAchievements?.achievements.paleographer.unlocked || calculatedPaleographerUnlocked;
+	const allVowelsInSequenceUnlocked = existingAchievements?.achievements.allVowelsInSequence.unlocked || calculatedAllVowelsInSequenceUnlocked;
 
 	return createAllAchievements(
 		firstGameUnlocked,
@@ -69,6 +72,7 @@ export function calculateAchievements(
 		words1000Progress,
 		completeAlphabetUnlocked,
 		completeAlphabetProgress,
-		paleographerUnlocked
+		paleographerUnlocked,
+		allVowelsInSequenceUnlocked
 	);
 }
