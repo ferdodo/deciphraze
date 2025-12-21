@@ -18,6 +18,11 @@
 	appearance: none;
 }
 
+@font-face {
+	font-family: "GlipervelzOrigy";
+	src: url("/GlipervelzOrigy.ttf");
+}
+
 .symbolContainer {
 	display: inline-block;
 	max-width: 4.9rem;

@@ -1,7 +1,6 @@
 import { createRoot, type Root } from "react-dom/client";
 import { App } from "./components/App";
 import "crumbs-design-system";
-import "./main.module.css";
 
 const container: HTMLElement = document.createElement("div");
 document.body.appendChild(container);
