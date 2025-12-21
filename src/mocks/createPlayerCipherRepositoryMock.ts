@@ -1,4 +1,5 @@
 import { BehaviorSubject } from "rxjs";
+import { characterEquals } from "../utils/characterEquals";
 import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
 
 export const createPlayerCipherRepositoryMock = (initialCipher: Record<string, string> = {}): PlayerCipherRepository & { playerCipherSubject: BehaviorSubject<Record<string, string>> } => {
@@ -23,6 +24,13 @@ export const createPlayerCipherRepositoryMock = (initialCipher: Record<string, s
 		},
 		addPlayerCipherEntry: (letter: string, symbol: string) => {
 			const currentCipher = { ...playerCipherSubject.value };
+			// Supprimer l'association précédente du symbole s'il existe
+			for (const [key, value] of Object.entries(currentCipher)) {
+				if (characterEquals(value, symbol)) {
+					delete currentCipher[key];
+				}
+			}
+			// Ajouter la nouvelle association
 			currentCipher[letter] = symbol;
 			playerCipherSubject.next(currentCipher);
 		},

@@ -29,6 +29,13 @@ export function createPlayerCipher(): PlayerCipherRepository {
 	};
 
 	const addPlayerCipherEntry = (letter: string, symbol: string): void => {
+		// Supprimer l'association précédente du symbole s'il existe
+		for (const [key, value] of Object.entries(playerCipher)) {
+			if (characterEquals(value, symbol)) {
+				delete playerCipher[key];
+			}
+		}
+		// Ajouter la nouvelle association
 		playerCipher[letter] = symbol;
 		playerCipherSubject.next({ ...playerCipher });
 	};

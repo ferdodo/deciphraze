@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { selectSymbol } from "./selectSymbol";
+import { selectLetter } from "./selectLetter";
 import { withGameStarted } from "../fixtures/withGameStarted";
 
 describe("selectSymbol", () => {
@@ -17,6 +18,22 @@ describe("selectSymbol", () => {
 			selectSymbol("1", context);
 			selectSymbol("0", context);
 			expect(context.symbolSelectionRepository.getSymbolSelection()).toBeNull();
+			cleanup();
+		});
+
+		it("should replace previous letter association when associating symbol to a different letter", () => {
+			const [cleanup, context] = withGameStarted();
+			// Créer association A->X
+			selectLetter("A", context);
+			selectSymbol("X", context);
+			expect(context.playerCipherRepository.getPlayerCipher().A).toBe("X");
+			
+			// Créer association B->X (remplace A->X)
+			selectLetter("B", context);
+			selectSymbol("X", context);
+			const cipher = context.playerCipherRepository.getPlayerCipher();
+			expect(cipher.A).toBeUndefined();
+			expect(cipher.B).toBe("X");
 			cleanup();
 		});
 	});
