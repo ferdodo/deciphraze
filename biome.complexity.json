@@ -5,7 +5,7 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["src/**/*.tsx"]
+		"includes": ["src/hooks/*.tsx"]
 	},
 	"assist": {
 		"actions": {
@@ -22,7 +22,7 @@
 				"noExcessiveCognitiveComplexity": {
 					"level": "error",
 					"options": {
-						"maxAllowedComplexity": 15
+						"maxAllowedComplexity": 1
 					}
 				}
 			}
