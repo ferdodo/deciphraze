@@ -1,13 +1,18 @@
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { StorageLike } from "./StorageLike";
 
 const DISCOVERY_ORDER_STORAGE_KEY = "deciphraze_discovery_order";
 
-export function createDiscoveryOrderRepository(): DiscoveryOrderRepository {
+export function createDiscoveryOrderRepository(storage: StorageLike): DiscoveryOrderRepository {
 	function loadDiscoveryOrder(): Record<string, DiscoveryOrder> {
 		try {
-			const stored = localStorage.getItem(DISCOVERY_ORDER_STORAGE_KEY);
-			return stored ? JSON.parse(stored) : {};
+			const stored = storage.getItem(DISCOVERY_ORDER_STORAGE_KEY);
+			if (!stored || stored === "null") {
+				return {};
+			}
+			const parsed = JSON.parse(stored);
+			return parsed && typeof parsed === "object" && parsed !== null ? parsed : {};
 		} catch {
 			return {};
 		}
@@ -15,7 +20,7 @@ export function createDiscoveryOrderRepository(): DiscoveryOrderRepository {
 
 	function saveDiscoveryOrder(discoveryOrder: Record<string, DiscoveryOrder>): void {
 		try {
-			localStorage.setItem(DISCOVERY_ORDER_STORAGE_KEY, JSON.stringify(discoveryOrder));
+			storage.setItem(DISCOVERY_ORDER_STORAGE_KEY, JSON.stringify(discoveryOrder));
 		} catch {
 			// Ignore storage errors
 		}

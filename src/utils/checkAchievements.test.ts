@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { checkAchievements } from "./checkAchievements";
 import { defaultAchievements } from "../constants/defaultAchievements";
+import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("checkAchievements", () => {
 
@@ -36,10 +37,10 @@ describe("checkAchievements", () => {
 	});
 
 	it("should backup invalid data before clearing localStorage", () => {
-		localStorage.clear();
+		const storage = createLocalStorageMock();
 		// Ajouter des données dans le localStorage avant le test
-		localStorage.setItem("deciphraze_achievements", '{"corrupted": "data"}');
-		localStorage.setItem("deciphraze_statistics", '{"totalGames": 5}');
+		storage.setItem("deciphraze_achievements", '{"corrupted": "data"}');
+		storage.setItem("deciphraze_statistics", '{"totalGames": 5}');
 
 		const invalidData = {
 			computedAtDate: "2024-01-01",
@@ -54,11 +55,11 @@ describe("checkAchievements", () => {
 		};
 
 		expect(() => {
-			checkAchievements(invalidData);
+			checkAchievements(invalidData, storage);
 		}).toThrow("Invalid achievements structure");
 
 		// Vérifier que les données invalides ont été sauvegardées
-		const invalidBackups = localStorage.getItem("deciphraze_invalid_data_backups");
+		const invalidBackups = storage.getItem("deciphraze_invalid_data_backups");
 		expect(invalidBackups).toBeTruthy();
 		if (invalidBackups) {
 			const parsed = JSON.parse(invalidBackups);
@@ -72,22 +73,26 @@ describe("checkAchievements", () => {
 		}
 
 		// Vérifier qu'une clé de backup du localStorage a été créée
-		const backupKeys = Object.keys(localStorage).filter(key => 
-			key.startsWith("deciphraze_localstorage_backup_")
-		);
+		const backupKeys: string[] = [];
+		for (let i = 0; i < storage.length; i++) {
+			const key = storage.key(i);
+			if (key && key.startsWith("deciphraze_localstorage_backup_")) {
+				backupKeys.push(key);
+			}
+		}
 		expect(backupKeys.length).toBeGreaterThan(0);
 
 		// Vérifier que les données originales ont été sauvegardées dans le backup
 		if (backupKeys.length > 0) {
 			const backupKey = backupKeys[backupKeys.length - 1];
-			const backupData = JSON.parse(localStorage.getItem(backupKey) || "{}");
+			const backupData = JSON.parse(storage.getItem(backupKey) || "{}");
 			expect(backupData.deciphraze_achievements).toBe('{"corrupted": "data"}');
 			expect(backupData.deciphraze_statistics).toBe('{"totalGames": 5}');
 		}
 
 		// Vérifier que les données originales ont été supprimées
-		expect(localStorage.getItem("deciphraze_achievements")).toBeNull();
-		expect(localStorage.getItem("deciphraze_statistics")).toBeNull();
+		expect(storage.getItem("deciphraze_achievements")).toBeNull();
+		expect(storage.getItem("deciphraze_statistics")).toBeNull();
 	});
 });
 

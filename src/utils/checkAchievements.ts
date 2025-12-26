@@ -1,5 +1,7 @@
 import { z } from "zod";
 import type { AllAchievements } from "../entities/AllAchievements";
+import type { StorageLike } from "./StorageLike";
+import { getDefaultStorage } from "./getDefaultStorage";
 import { backupInvalidData } from "./backupInvalidData";
 import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 
@@ -93,7 +95,7 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 	})
 });
 
-export function checkAchievements(data: unknown): AllAchievements {
+export function checkAchievements(data: unknown, storage: StorageLike | null = getDefaultStorage()): AllAchievements {
 	try {
 		const validatedData: AllAchievements = AllAchievementsSchema.parse(data);
 		return validatedData;
@@ -102,9 +104,9 @@ export function checkAchievements(data: unknown): AllAchievements {
 			timestamp: new Date().toISOString(),
 			userAgent: navigator.userAgent,
 			provenance: "checkAchievements",
-		});
+		}, storage);
 
-		backupAndClearLocalStorage();
+		backupAndClearLocalStorage(storage);
 
 		throw new Error(`Invalid achievements structure`);
 	}

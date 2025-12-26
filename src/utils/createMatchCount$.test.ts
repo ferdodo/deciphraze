@@ -17,8 +17,6 @@ describe("createMatchCount$", () => {
 	});
 
 	it("should update count when player cipher changes", async () => {
-		// Clear localStorage to ensure clean state
-		localStorage.clear();
 		const playerCipher = createPlayerCipher();
 		const matchCount$ = createMatchCount$(playerCipher);
 

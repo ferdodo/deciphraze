@@ -9,9 +9,11 @@ import { createDiscoveryOrderRepositoryMock } from "../mocks/createDiscoveryOrde
 import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
+import { createLocalStorageMock } from "../utils/createLocalStorageMock";
 
 export function withGameStarted(): [() => void, GameContextType] {
     const dayRepository = createDayRepositoryMock();
+    const storage = createLocalStorageMock();
     const context: GameContextType = {
         letterSelectionRepository: createLetterSelection(),
         playerCipherRepository: createPlayerCipher(),
@@ -20,7 +22,7 @@ export function withGameStarted(): [() => void, GameContextType] {
         achievementRepository: createAchievementRepositoryMock(),
         dayRepository,
         discoveryOrderRepository: createDiscoveryOrderRepositoryMock(),
-        statisticsRepository: createStatisticsRepository(),
+        statisticsRepository: createStatisticsRepository(storage),
         associationHistoryRepository: createAssociationHistoryRepositoryMock(),
     };
 

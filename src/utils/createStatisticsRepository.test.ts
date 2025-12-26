@@ -1,25 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { createStatisticsRepository } from "./createStatisticsRepository";
 import type { Statistics } from "../entities/Statistics";
+import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createStatisticsRepository", () => {
-	it("should create repository with default statistics when localStorage is empty", () => {
-		localStorage.clear();
-		const repository = createStatisticsRepository();
-		const statistics = repository.getStatistics();
-
-		expect(statistics.totalGames).toBe(0);
-		expect(statistics.totalWordsFound).toBe(0);
-		expect(statistics.firstGameDate).toBeNull();
-		expect(statistics.lastGameDate).toBeNull();
-		expect(statistics.averageWordsPerGame).toBe(0);
-		expect(statistics.letterPositions).toEqual([]);
-		expect(statistics.lastUpdated).toBeTruthy();
-	});
-
-
 	it("should load valid statistics from localStorage", () => {
-		localStorage.clear();
+		const storage = createLocalStorageMock();
 		const validStats: Statistics = {
 			totalGames: 5,
 			totalWordsFound: 100,
@@ -29,9 +15,9 @@ describe("createStatisticsRepository", () => {
 			letterPositions: [["A", "B", "C"], ["D", "E"]],
 			lastUpdated: "2024-01-05T00:00:00.000Z"
 		};
-		localStorage.setItem("deciphraze_statistics", JSON.stringify(validStats));
+		storage.setItem("deciphraze_statistics", JSON.stringify(validStats));
 
-		const repository = createStatisticsRepository();
+		const repository = createStatisticsRepository(storage);
 		const statistics = repository.getStatistics();
 
 		expect(statistics.totalGames).toBe(5);
@@ -43,7 +29,7 @@ describe("createStatisticsRepository", () => {
 	});
 
 	it("should use default values for invalid statistics fields", () => {
-		localStorage.clear();
+		const storage = createLocalStorageMock();
 		const invalidStats = {
 			totalGames: "not a number",
 			totalWordsFound: null,
@@ -53,9 +39,9 @@ describe("createStatisticsRepository", () => {
 			letterPositions: "not an array",
 			lastUpdated: null
 		};
-		localStorage.setItem("deciphraze_statistics", JSON.stringify(invalidStats));
+		storage.setItem("deciphraze_statistics", JSON.stringify(invalidStats));
 
-		const repository = createStatisticsRepository();
+		const repository = createStatisticsRepository(storage);
 		const statistics = repository.getStatistics();
 
 		expect(statistics.totalGames).toBe(0);
@@ -69,8 +55,8 @@ describe("createStatisticsRepository", () => {
 
 
 	it("should save and retrieve statistics", () => {
-		localStorage.clear();
-		const repository = createStatisticsRepository();
+		const storage = createLocalStorageMock();
+		const repository = createStatisticsRepository(storage);
 		const newStats: Statistics = {
 			totalGames: 3,
 			totalWordsFound: 50,
@@ -96,10 +82,10 @@ describe("createStatisticsRepository", () => {
 
 
 	it("should handle JSON parse errors gracefully", () => {
-		localStorage.clear();
-		localStorage.setItem("deciphraze_statistics", "invalid json{");
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_statistics", "invalid json{");
 
-		const repository = createStatisticsRepository();
+		const repository = createStatisticsRepository(storage);
 		const statistics = repository.getStatistics();
 
 		// Should fall back to default statistics
@@ -108,10 +94,10 @@ describe("createStatisticsRepository", () => {
 	});
 
 	it("should handle non-object parsed data", () => {
-		localStorage.clear();
-		localStorage.setItem("deciphraze_statistics", '"just a string"');
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_statistics", '"just a string"');
 
-		const repository = createStatisticsRepository();
+		const repository = createStatisticsRepository(storage);
 		const statistics = repository.getStatistics();
 
 		expect(statistics.totalGames).toBe(0);

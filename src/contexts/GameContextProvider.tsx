@@ -11,23 +11,28 @@ import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRep
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { createAssociationHistoryRepository } from "../utils/createAssociationHistoryRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
+import { getDefaultStorage } from "../utils/getDefaultStorage";
+import { createLocalStorageMock } from "../utils/createLocalStorageMock";
 
 interface GameContextProviderProps {
 	children: React.ReactNode;
 }
 
 export function GameContextProvider({ children }: GameContextProviderProps): JSX.Element {
-	const value = useMemo(() => ({
-		letterSelectionRepository: createLetterSelection(),
-		playerCipherRepository: createPlayerCipher(),
-		symbolSelectionRepository: createSymbolSelection(),
-		gameHistoryRepository: createGameHistoryRepository(),
-		achievementRepository: createAchievementRepository(),
-		dayRepository: createDayRepository(),
-		discoveryOrderRepository: createDiscoveryOrderRepository(),
-		statisticsRepository: createStatisticsRepository(),
-		associationHistoryRepository: createAssociationHistoryRepository(),
-	}), []);
+	const value = useMemo(() => {
+		const storage = getDefaultStorage() ?? createLocalStorageMock();
+		return {
+			letterSelectionRepository: createLetterSelection(),
+			playerCipherRepository: createPlayerCipher(),
+			symbolSelectionRepository: createSymbolSelection(),
+			gameHistoryRepository: createGameHistoryRepository(storage),
+			achievementRepository: createAchievementRepository(storage),
+			dayRepository: createDayRepository(),
+			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
+			statisticsRepository: createStatisticsRepository(storage),
+			associationHistoryRepository: createAssociationHistoryRepository(storage),
+		};
+	}, []);
 
 	// Initialiser les effets de bord du jeu
 	useEffect(() => {

@@ -1,18 +1,17 @@
 import type React from "react";
-import { useMemo } from "react";
 import { FragmentComponent } from "./FragmentComponent";
 import { LetterComponent } from "./LetterComponent";
 import { SymbolComponent } from "./SymbolComponent";
 import { AchievementsComponent } from "./AchievementsComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
-import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
-import { isDev } from "../utils/isDev";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";
 import { useParagraphOfYesterday } from "../hooks/useParagraphOfYesterday";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
+import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
+import { isDev } from "../utils/isDev";
 import { share } from "../utils/share";
 import { incrementDay } from "../usecases/incrementDay";
 import { decrementDay } from "../usecases/decrementDay";
@@ -22,12 +21,9 @@ const Game: React.FC = () => {
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-	const currentDay = useDay();
 	const context = useGameContext();
-
-	const alphabetRandom = useMemo(() => {
-		return generateRandomAlphabet(currentDay, isDev());
-	}, [currentDay]);
+	const currentDay = useDay();
+	const alphabetRandom = useSymbolsRandomOrder();
 
 	const win = useWin();
 	const matchCount = useMatchCount();

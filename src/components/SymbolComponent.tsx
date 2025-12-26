@@ -10,6 +10,9 @@ import { isSymbolMatched } from "../utils/isSymbolMatched";
 import styles from "./SymbolComponent.module.css";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";
 import { useGameContext } from "../hooks/useGameContext";
+import { useCipher } from "../hooks/useCipher";
+import { getEncodedCharacter } from "../utils/getEncodedCharacter";
+import { isDev } from "../utils/isDev";
 
 interface SymbolComponentProps {
 	character: string;
@@ -21,10 +24,15 @@ export function SymbolComponent({ character }: SymbolComponentProps): JSX.Elemen
 	const selectedSymbol = useSymbolSelection();
 	const context = useGameContext();
 	const win = useWin();
+	const cipher = useCipher();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
 	const matched = isSymbolMatched(character, selectedLetter, playerCipherMap);
     const highlighted = Object.values(playerCipherMap).includes(normalizedCharacter);
 	const selected = characterEquals(selectedSymbol ?? '', character);
+
+	const displayCharacter = isDev()
+		? character.toUpperCase()
+		: getEncodedCharacter(character, cipher);
 
 	const spanClassName = [
 		styles.symbols,
@@ -47,7 +55,7 @@ export function SymbolComponent({ character }: SymbolComponentProps): JSX.Elemen
 		>
 			<div className={styles.symbolContainer}>
 				<span className={spanClassName}>
-					{character.toUpperCase()}
+					{displayCharacter}
 				</span>
 			</div>
 		</button>

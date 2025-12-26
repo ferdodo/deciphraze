@@ -9,9 +9,4 @@ describe("generateRandomAlphabet", () => {
 		expect(result).toHaveLength(26);
 	});
 
-	it("should return ordered alphabet in development mode", () => {
-		const result = generateRandomAlphabet(testDate, true);
-		const expectedOrder = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-		expect(result).toEqual(expectedOrder);
-	});
 });

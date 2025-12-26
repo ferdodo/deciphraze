@@ -4,19 +4,20 @@ import type { AchievementRepository } from "../repositories/AchievementRepositor
 import type { AllAchievements } from "../entities/AllAchievements";
 import { defaultAchievements } from "../constants/defaultAchievements";
 import { checkAchievements } from "./checkAchievements";
+import type { StorageLike } from "./StorageLike";
 
 const ACHIEVEMENTS_STORAGE_KEY = "deciphraze_achievements";
 
-export function createAchievementRepository(): AchievementRepository {
+export function createAchievementRepository(storage: StorageLike): AchievementRepository {
 	const achievements$ = new Subject<AllAchievements>();
 	let achievements: AllAchievements;
 
 	try {
-		const stored: string = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY) ?? "";
+		const stored: string = storage.getItem(ACHIEVEMENTS_STORAGE_KEY) ?? "";
 		if (stored === "" || stored === "null") {
 			achievements = defaultAchievements;
 		} else {
-			achievements = checkAchievements(JSON.parse(stored));
+			achievements = checkAchievements(JSON.parse(stored), storage);
 		}
 	} catch (_error) {
 		achievements = defaultAchievements;
@@ -28,7 +29,7 @@ export function createAchievementRepository(): AchievementRepository {
 
 	function saveAchievements(newAchievements: AllAchievements): void {
 		achievements = newAchievements;
-		localStorage.setItem(ACHIEVEMENTS_STORAGE_KEY, JSON.stringify(achievements));
+		storage.setItem(ACHIEVEMENTS_STORAGE_KEY, JSON.stringify(achievements));
 		achievements$.next(achievements);
 	}
 

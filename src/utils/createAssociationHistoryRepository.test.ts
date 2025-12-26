@@ -1,12 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { createAssociationHistoryRepository } from "./createAssociationHistoryRepository";
+import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createAssociationHistoryRepository", () => {
 	let repository: ReturnType<typeof createAssociationHistoryRepository>;
+	let storage: ReturnType<typeof createLocalStorageMock>;
 
 	const setup = (): void => {
-		localStorage.clear();
-		repository = createAssociationHistoryRepository();
+		storage = createLocalStorageMock();
+		repository = createAssociationHistoryRepository(storage);
 	};
 
 	describe("getHistory", () => {

@@ -3,12 +3,13 @@ import { firstValueFrom } from "rxjs";
 import { skip } from "rxjs/operators";
 import { createGameHistoryRepository } from "./createGameHistoryRepository";
 import type { GameSession } from "../entities/GameSession";
+import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createGameHistoryRepository", () => {
 
 	it("should create repository instance", () => {
-		localStorage.clear();
-		const repository = createGameHistoryRepository();
+		const storage = createLocalStorageMock();
+		const repository = createGameHistoryRepository(storage);
 		
 		expect(repository).toBeDefined();
 		expect(typeof repository.getHistory).toBe("function");
@@ -17,8 +18,8 @@ describe("createGameHistoryRepository", () => {
 	});
 
 	it("should return empty history by default", () => {
-		localStorage.clear();
-		const repository = createGameHistoryRepository();
+		const storage = createLocalStorageMock();
+		const repository = createGameHistoryRepository(storage);
 		const history = repository.getHistory();
 		
 		expect(history).toEqual({});
@@ -26,8 +27,8 @@ describe("createGameHistoryRepository", () => {
 	});
 
 	it("should add a session and retrieve it", () => {
-		localStorage.clear();
-		const repository = createGameHistoryRepository();
+		const storage = createLocalStorageMock();
+		const repository = createGameHistoryRepository(storage);
 		const session: GameSession = {
 			winAt: "2024-01-15",
 			lettersFound: ["A", "B", "C"],
@@ -42,24 +43,24 @@ describe("createGameHistoryRepository", () => {
 	});
 
 	it("should load existing history from localStorage", () => {
-		localStorage.clear();
+		const storage = createLocalStorageMock();
 		const existingHistory = {
 			"2024-01-15": {
 				winAt: "2024-01-15",
 				lettersFound: ["A", "B", "C"]
 			}
 		};
-		localStorage.setItem("deciphraze_game_history", JSON.stringify(existingHistory));
+		storage.setItem("deciphraze_game_history", JSON.stringify(existingHistory));
 		
-		const repository = createGameHistoryRepository();
+		const repository = createGameHistoryRepository(storage);
 		const history = repository.getHistory();
 		
 		expect(history["2024-01-15"]).toEqual(existingHistory["2024-01-15"]);
 	});
 
 	it("should emit history changes through gameHistory$", async () => {
-		localStorage.clear();
-		const repository = createGameHistoryRepository();
+		const storage = createLocalStorageMock();
+		const repository = createGameHistoryRepository(storage);
 		const session: GameSession = {
 			winAt: "2024-01-15",
 			lettersFound: ["A", "B"]

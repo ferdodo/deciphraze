@@ -1,3 +1,6 @@
+import type { StorageLike } from "./StorageLike";
+import { getDefaultStorage } from "./getDefaultStorage";
+
 const BACKUP_PREFIX = "deciphraze_localstorage_backup_";
 const INVALID_DATA_BACKUP_KEY = "deciphraze_invalid_data_backups";
 
@@ -5,14 +8,19 @@ const INVALID_DATA_BACKUP_KEY = "deciphraze_invalid_data_backups";
  * Sauvegarde tout le localStorage dans une nouvelle clé avec timestamp,
  * puis nettoie complètement le localStorage (sauf les clés de backup).
  * 
+ * @param storage - Le storage à utiliser (par défaut: localStorage)
  * @returns La clé de backup créée, ou null en cas d'erreur
  */
-export function backupAndClearLocalStorage(): string | null {
+export function backupAndClearLocalStorage(storage: StorageLike | null = getDefaultStorage()): string | null {
+	if (!storage) {
+		return null;
+	}
+
 	try {
 		// Collecter toutes les clés du localStorage
 		const allKeys: string[] = [];
-		for (let i = 0; i < localStorage.length; i++) {
-			const key = localStorage.key(i);
+		for (let i = 0; i < storage.length; i++) {
+			const key = storage.key(i);
 			if (key) {
 				allKeys.push(key);
 			}
@@ -28,7 +36,7 @@ export function backupAndClearLocalStorage(): string | null {
 		const backupData: Record<string, string> = {};
 		for (const key of keysToBackup) {
 			try {
-				const value = localStorage.getItem(key);
+				const value = storage.getItem(key);
 				if (value !== null) {
 					backupData[key] = value;
 				}
@@ -43,12 +51,12 @@ export function backupAndClearLocalStorage(): string | null {
 		const backupKey = `${BACKUP_PREFIX}${timestamp}`;
 
 		// Sauvegarder toutes les données dans la nouvelle clé
-		localStorage.setItem(backupKey, JSON.stringify(backupData));
+		storage.setItem(backupKey, JSON.stringify(backupData));
 
 		// Supprimer toutes les clés sauf les clés de backup (qui ne sont pas dans keysToBackup)
 		for (const key of keysToBackup) {
 			try {
-				localStorage.removeItem(key);
+				storage.removeItem(key);
 			} catch (error) {
 				console.error(`Erreur lors de la suppression de la clé ${key}:`, error);
 			}

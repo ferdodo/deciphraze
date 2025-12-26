@@ -1,13 +1,14 @@
 import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
 import type { AssociationHistory } from "../entities/AssociationHistory";
 import type { AssociationEntry } from "../entities/AssociationEntry";
+import type { StorageLike } from "./StorageLike";
 
 const ASSOCIATION_HISTORY_STORAGE_KEY = "deciphraze_association_history";
 
-export function createAssociationHistoryRepository(): AssociationHistoryRepository {
+export function createAssociationHistoryRepository(storage: StorageLike): AssociationHistoryRepository {
 	function loadAssociationHistory(): AssociationHistory {
 		try {
-			const stored = localStorage.getItem(ASSOCIATION_HISTORY_STORAGE_KEY);
+			const stored = storage.getItem(ASSOCIATION_HISTORY_STORAGE_KEY);
 			return stored ? JSON.parse(stored) : {};
 		} catch {
 			return {};
@@ -15,11 +16,7 @@ export function createAssociationHistoryRepository(): AssociationHistoryReposito
 	}
 
 	function saveAssociationHistory(history: AssociationHistory): void {
-		try {
-			localStorage.setItem(ASSOCIATION_HISTORY_STORAGE_KEY, JSON.stringify(history));
-		} catch {
-			// Ignore storage errors
-		}
+		storage.setItem(ASSOCIATION_HISTORY_STORAGE_KEY, JSON.stringify(history));
 	}
 
 	function getHistory(day: string): AssociationEntry[] {

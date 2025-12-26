@@ -2,6 +2,7 @@ import { Subject } from "rxjs";
 import { share } from "rxjs/operators";
 import type { StatisticsRepository } from "../repositories/StatisticsRepository";
 import type { Statistics } from "../entities/Statistics";
+import type { StorageLike } from "./StorageLike";
 
 const STATISTICS_STORAGE_KEY = "deciphraze_statistics";
 
@@ -15,12 +16,12 @@ const defaultStatistics: Statistics = {
 	lastUpdated: new Date().toISOString()
 };
 
-export function createStatisticsRepository(): StatisticsRepository {
+export function createStatisticsRepository(storage: StorageLike): StatisticsRepository {
 	const statistics$ = new Subject<Statistics>();
 	let statistics: Statistics;
 
 	try {
-		const stored: string = localStorage.getItem(STATISTICS_STORAGE_KEY) ?? "";
+		const stored: string = storage.getItem(STATISTICS_STORAGE_KEY) ?? "";
 		if (stored === "" || stored === "null") {
 			statistics = defaultStatistics;
 		} else {
@@ -61,7 +62,7 @@ export function createStatisticsRepository(): StatisticsRepository {
 			...newStatistics,
 			lastUpdated: new Date().toISOString()
 		};
-		localStorage.setItem(STATISTICS_STORAGE_KEY, JSON.stringify(statistics));
+		storage.setItem(STATISTICS_STORAGE_KEY, JSON.stringify(statistics));
 		statistics$.next(statistics);
 	}
 

@@ -1,13 +1,24 @@
+import type { StorageLike } from "./StorageLike";
+import { getDefaultStorage } from "./getDefaultStorage";
+
 interface BackupEntry {
 	data: string;
 	metadata: Record<string, string>;
 }
 
 const BACKUP_STORAGE_KEY = "deciphraze_invalid_data_backups";
-//
-export function backupInvalidData(invalidData: string, metadata: Record<string, string>): void {
+
+export function backupInvalidData(
+	invalidData: string, 
+	metadata: Record<string, string>,
+	storage: StorageLike | null = getDefaultStorage()
+): void {
+	if (!storage) {
+		return;
+	}
+
 	try {
-		const existingBackups = localStorage.getItem(BACKUP_STORAGE_KEY);
+		const existingBackups = storage.getItem(BACKUP_STORAGE_KEY);
 		let backups: BackupEntry[] = [];
 		
 		if (existingBackups) {
@@ -27,7 +38,7 @@ export function backupInvalidData(invalidData: string, metadata: Record<string, 
 		};
 
 		backups.push(backupEntry);
-		localStorage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(backups));
+		storage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(backups));
 
 	} catch (error) {
 		console.error("Erreur lors de la sauvegarde des données invalides:", error);

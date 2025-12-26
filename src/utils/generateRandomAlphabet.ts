@@ -1,10 +1,6 @@
 import { createIntPRNG } from "./createIntPRNG";
 
-export function generateRandomAlphabet(date: string, isDev: boolean = false): string[] {
-	if (isDev) {
-		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-	}
-
+export function generateRandomAlphabet(date: string): string[] {
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 	const cipher = [];
 	const randomInt = createIntPRNG(date);

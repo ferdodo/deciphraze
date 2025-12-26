@@ -1,11 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { createAchievementRepository } from "./createAchievementRepository";
 import type { AllAchievements } from "../entities/AllAchievements";
+import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createAchievementRepository", () => {
 
 	it("should save and load achievements", () => {
-		const repository = createAchievementRepository();
+		const storage = createLocalStorageMock();
+		const repository = createAchievementRepository(storage);
 		const achievements: AllAchievements = {
 			computedAtDate: "2024-01-01T00:00:00.000Z",
 			achievements: {

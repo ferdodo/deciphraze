@@ -4,15 +4,16 @@ import type { GameHistoryRepository } from "../repositories/GameHistoryRepositor
 import type { GameHistory } from "../entities/GameHistory";
 import type { GameSession } from "../entities/GameSession";
 import { checkGameHistory } from "./checkGameHistory";
+import type { StorageLike } from "./StorageLike";
 
 const GAME_HISTORY_STORAGE_KEY = "deciphraze_game_history";
 
-export function createGameHistoryRepository(): GameHistoryRepository {
+export function createGameHistoryRepository(storage: StorageLike): GameHistoryRepository {
 	let gameHistory: GameHistory;
 
 	try {
-		const stored: string = localStorage.getItem(GAME_HISTORY_STORAGE_KEY) ?? "";
-		gameHistory = checkGameHistory(JSON.parse(stored));
+		const stored: string = storage.getItem(GAME_HISTORY_STORAGE_KEY) ?? "";
+		gameHistory = checkGameHistory(JSON.parse(stored), storage);
 	} catch (_error) {
 		gameHistory = {};
 	}
@@ -25,7 +26,7 @@ export function createGameHistoryRepository(): GameHistoryRepository {
 
 	function addSession(session: GameSession): void {
 		gameHistory[session.winAt] = session;
-		localStorage.setItem(GAME_HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+		storage.setItem(GAME_HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
 		gameHistorySubject.next({ ...gameHistory });
 	}
 

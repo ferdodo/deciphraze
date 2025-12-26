@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { GameHistory } from "../entities/GameHistory";
 import type { GameSession } from "../entities/GameSession";
+import type { StorageLike } from "./StorageLike";
 import { backupInvalidData } from "./backupInvalidData";
 import { backupAndClearLocalStorage } from "./backupAndClearLocalStorage";
 
@@ -17,7 +18,7 @@ const GameHistoryValueSchema: z.ZodType<string[] | GameSession> = z.union([
 
 const GameHistorySchema: z.ZodType<GameHistory> = z.record(z.string(), GameHistoryValueSchema);
 
-export function checkGameHistory(data: unknown): GameHistory {
+export function checkGameHistory(data: unknown, storage: StorageLike): GameHistory {
 	try {
 		const validatedData: GameHistory = GameHistorySchema.parse(data);
 		return validatedData;
@@ -26,9 +27,9 @@ export function checkGameHistory(data: unknown): GameHistory {
             timestamp: new Date().toISOString(),
             userAgent: navigator.userAgent,
             provenance: "checkGameHistory",
-        });
+        }, storage);
 
-		backupAndClearLocalStorage();
+		backupAndClearLocalStorage(storage);
 
 		throw new Error(`Invalid game history structure`);
 	}

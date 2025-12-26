@@ -30,7 +30,7 @@ async function runMutation() {
 		return;
 	}
 
-	await spawnLive("npx", `stryker run --mutate ${filesToMutate.join(',')}`.split(' '));
+	await spawnLive("npx", `stryker run --concurrency 2 --mutate ${filesToMutate.join(',')}`.split(' '));
 }
 
 runMutation();
