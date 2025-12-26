@@ -16,9 +16,6 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"complexity": {
-				"useLiteralKeys": "error"
-			},
 			"nursery":  {
 				"useExplicitType": "error"
 			},

@@ -9,7 +9,7 @@ export const useSymbolsRandomOrder = (): string[] => {
 	const currentDay = useDay();
 	
 	const symbolsOrder = useMemo(() => {
-		return isDev() ? ALPHABET : generateRandomAlphabet(currentDay + "_not_cipher");
+		return isDev() ? ALPHABET : generateRandomAlphabet(`${currentDay}_not_cipher`);
 	}, [currentDay]);
 	
 	return symbolsOrder;

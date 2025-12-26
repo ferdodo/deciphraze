@@ -18,6 +18,7 @@ task.group(task => [
 		});
 	}),
 	task("Linting", () => run("biome ci ./src")),
+	task("Checking hooks complexity", () => run("biome ci --config-path=./biome.complexity.json ./src")),
 	task("Validating file names", () => run("exportcase check ./src")),
 	task("Auditing", () => run("npm audit --audit-level=critical")),
 	task("Type checking", () => run("tsc --noEmit")),
