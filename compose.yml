@@ -1,6 +1,14 @@
 services:
+  frontend-deps:
+    build:
+      context: .
+      target: deps
+
   frontend:
-    build: .
+    build:
+      context: .
+      additional_contexts:
+        deciphraze-frontend-deps: service:frontend-deps
     develop:
       watch:
         - action: sync
