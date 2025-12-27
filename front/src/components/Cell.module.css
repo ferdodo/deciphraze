@@ -1,0 +1,26 @@
+/* Cell.module.css */
+
+.cell {
+	display: inline-block;
+	max-width: 4.9rem;
+	height: 1rem;
+	text-align: center;
+}
+
+.symbols {
+	font-family: GlipervelzOrigy, serif;
+}
+
+.highlighted {
+	color: white;
+}
+
+.matched {
+	color: #ff6400;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+}
+
+.selected {
+	color: #0064ff;
+	text-shadow: -1px -1px 3px white, 1px -1px 3px white, -1px 1px 3px white, 1px 1px 3px white;
+}

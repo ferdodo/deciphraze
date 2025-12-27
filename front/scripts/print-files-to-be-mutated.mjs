@@ -2,17 +2,17 @@
 import { execSync } from 'node:child_process';
 
 async function getCurrentStagedFiles() {
-	const result = execSync('git diff --cached --name-only', { stdio: 'pipe' });
+	const result = execSync('git diff --cached --name-only --relative .', { stdio: 'pipe' });
 	return result.toString().split('\n').filter(Boolean);
 }
 
 async function getUnstagedFiles() {
-	const result = execSync('git diff --name-only', { stdio: 'pipe' });
+	const result = execSync('git diff --name-only --relative .', { stdio: 'pipe' });
 	return result.toString().split('\n').filter(Boolean);
 }
 
 async function getModifiedFilesInLastCommit() {
-	const result = execSync('git diff HEAD^ --name-only', { stdio: 'pipe' });
+	const result = execSync('git diff HEAD^ --name-only --relative .', { stdio: 'pipe' });
 	return result.toString().split('\n').filter(Boolean);
 }
 

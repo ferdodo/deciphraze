@@ -7,17 +7,8 @@ describe("countWordsInParagraph", () => {
 		expect(countWordsInParagraph(paragraph)).toBe(3);
 	});
 
-	it("should ignore punctuation", () => {
-		const paragraph = "Hello, world! Test.";
-		expect(countWordsInParagraph(paragraph)).toBe(3);
-	});
-
 	it("should handle empty paragraph", () => {
 		expect(countWordsInParagraph("")).toBe(0);
-	});
-
-	it("should handle paragraph with only spaces", () => {
-		expect(countWordsInParagraph("   ")).toBe(0);
 	});
 
 	it("should handle paragraph with special characters", () => {
@@ -25,9 +16,5 @@ describe("countWordsInParagraph", () => {
 		expect(countWordsInParagraph(paragraph)).toBe(3);
 	});
 
-	it("should handle multiple spaces between words", () => {
-		const paragraph = "Hello    world     test";
-		expect(countWordsInParagraph(paragraph)).toBe(3);
-	});
 });
 

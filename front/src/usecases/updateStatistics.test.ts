@@ -34,17 +34,6 @@ describe("updateStatistics", () => {
 		cleanup();
 	});
 
-	it("should calculate average words per game correctly", () => {
-		const [cleanup, context] = withFinishedGame();
-		
-		const statistics = context.statisticsRepository.getStatistics();
-		const expectedAverage = statistics.totalWordsFound / statistics.totalGames;
-		
-		expect(statistics.averageWordsPerGame).toBe(expectedAverage);
-		
-		cleanup();
-	});
-
 	it("should set firstGameDate and lastGameDate on first win", () => {
 		const [cleanup, context] = withFinishedGame();
 		

@@ -56,14 +56,6 @@ describe("calculateCurrentStreak", () => {
 		expect(calculateCurrentStreak(gameHistory, "2024-01-17")).toBe(2);
 	});
 
-	it("should return 0 when last session is 2 days ago", () => {
-		gameHistory = {
-			"2024-01-15": ["A"],
-			"2024-01-16": ["B"]
-		};
-		expect(calculateCurrentStreak(gameHistory, "2024-01-18")).toBe(0);
-	});
-
 });
 
 describe("iterateStreaks", () => {

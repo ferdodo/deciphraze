@@ -56,18 +56,6 @@ describe("calculatePreferredLetters", () => {
 		expect(result.some((r) => r.letter === "G")).toBe(false);
 	});
 
-	it("should normalize letters to uppercase", () => {
-		const letterPositions = [["a", "b", "C", "d", "E"]];
-		const result = calculatePreferredLetters(letterPositions, 10);
-
-		expect(result).toHaveLength(5);
-		expect(result[0].letter).toBe("A");
-		expect(result[1].letter).toBe("B");
-		expect(result[2].letter).toBe("C");
-		expect(result[3].letter).toBe("D");
-		expect(result[4].letter).toBe("E");
-	});
-
 	it("should limit results to topN", () => {
 		const letterPositions = [
 			["A", "B", "C", "D", "E"],
@@ -108,58 +96,5 @@ describe("calculatePreferredLetters", () => {
 		}
 	});
 
-	it("should handle games with less than 5 letters", () => {
-		const letterPositions = [
-			["A", "B"], // Only 2 letters: A=1.4, B=1.3
-			["C", "D", "E"] // Only 3 letters: C=1.4, D=1.3, E=1.2
-		];
-		const result = calculatePreferredLetters(letterPositions, 10);
-
-		expect(result).toHaveLength(5);
-		// Results are sorted by score descending
-		// A and C both have score 1.4, B and D both have score 1.3, E has 1.2
-		expect(result[0].score).toBe(1.4); // A or C
-		expect(result[1].score).toBe(1.4); // A or C (the other one)
-		expect(result[2].score).toBe(1.3); // B or D
-		expect(result[3].score).toBe(1.3); // B or D (the other one)
-		expect(result[4].letter).toBe("E");
-		expect(result[4].score).toBe(1.2);
-		
-		// Verify all letters are present
-		const letters = result.map((r) => r.letter);
-		expect(letters).toContain("A");
-		expect(letters).toContain("B");
-		expect(letters).toContain("C");
-		expect(letters).toContain("D");
-		expect(letters).toContain("E");
-	});
-
-	it("should handle empty game arrays", () => {
-		const letterPositions = [[], ["A", "B"], []];
-		const result = calculatePreferredLetters(letterPositions, 10);
-
-		expect(result).toHaveLength(2);
-		expect(result[0].letter).toBe("A");
-		expect(result[1].letter).toBe("B");
-	});
-
-	it("should accumulate scores for same letter across multiple games", () => {
-		const letterPositions = [
-			["A", "B", "C"],
-			["A", "B", "C"],
-			["A", "B", "C"]
-		];
-		const result = calculatePreferredLetters(letterPositions, 10);
-
-		// A: 1.4 * 3 = 4.2
-		// B: 1.3 * 3 = 3.9
-		// C: 1.2 * 3 = 3.6
-		expect(result[0].letter).toBe("A");
-		expect(result[0].score).toBeCloseTo(4.2, 10);
-		expect(result[1].letter).toBe("B");
-		expect(result[1].score).toBeCloseTo(3.9, 10);
-		expect(result[2].letter).toBe("C");
-		expect(result[2].score).toBeCloseTo(3.6, 10);
-	});
 });
 

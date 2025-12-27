@@ -24,6 +24,7 @@
 		"typescript": "^5.9.2",
 		"vite": "^7.1.9",
 		"vitest": "^3.2.4",
-		"zod": "^4.1.12"
+		"zod": "^4.1.12",
+		"@deciphraze/ds": "../ds"
 	}
 }

@@ -1,0 +1,10 @@
+.app {
+	background-color: tan;
+	background-image: url("../assets/background.jpg");
+	background-size: cover;
+
+	& > div {
+		user-select: none;
+	}
+}
+
