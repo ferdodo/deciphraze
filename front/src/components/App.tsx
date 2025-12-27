@@ -1,15 +1,13 @@
-import type React from "react";
+import { DeciApp } from "@deciphraze/ds";
 import { Game } from "./Game";
 import { GameContextProvider } from "../contexts/GameContextProvider";
-import styles from "./App.module.css";
 
-
-export const App: React.FC = () => {
+export function App(): JSX.Element {
 	return (
-		<div className={styles.app}>
+		<DeciApp>
 			<GameContextProvider>
 				<Game />
 			</GameContextProvider>
-		</div>
+		</DeciApp>
 	);
 };
