@@ -10,9 +10,7 @@ import { characterEquals } from "../utils/characterEquals";
 import { isSymbolMatched } from "../utils/isSymbolMatched";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";
 import { useGameContext } from "../hooks/useGameContext";
-import { useCipher } from "../hooks/useCipher";
-import { getEncodedCharacter } from "../utils/getEncodedCharacter";
-import { isDev } from "../utils/isDev";
+import { useDisplayedSymbolCharacter } from "../hooks/useDisplayedSymbolCharacter";
 
 interface SymbolComponentProps {
 	character: string;
@@ -24,15 +22,11 @@ export function SymbolComponent({ character }: SymbolComponentProps): JSX.Elemen
 	const selectedSymbol = useSymbolSelection();
 	const context = useGameContext();
 	const win = useWin();
-	const cipher = useCipher();
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
 	const matched = isSymbolMatched(character, selectedLetter, playerCipherMap);
     const highlighted = Object.values(playerCipherMap).includes(normalizedCharacter);
 	const selected = characterEquals(selectedSymbol ?? '', character);
-
-	const displayCharacter = isDev()
-		? character.toUpperCase()
-		: getEncodedCharacter(character, cipher);
+	const displayCharacter = useDisplayedSymbolCharacter(character);
 
 	const clickSelectSymbol = (): void => {
 		selectSymbol(character, context);
