@@ -1,6 +1,6 @@
+import { DeciFragment } from "@deciphraze/ds";
 import { useSanitizedCharacter } from "../hooks/useSanitizedCharacter";
 import { useCellMatchesCurrentSelection } from "../hooks/useCellMatchesCurrentSelection";
-import styles from "./FragmentComponent.module.css";
 import { computeCellType } from "../utils/computeCellType";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { normalizeWord } from "../utils/normalizeWord";
@@ -26,12 +26,11 @@ export function FragmentComponent({ character }: FragmentComponentProps): JSX.El
 			: getEncodedCharacter(character, cipher);
 
 	return (
-		<span className={`${styles.fragment} ${matchesCurrentSelection ? styles.matched : ""}`}>
-			{cellType === "letter" ? (
-				<span className={styles.letter}>{displayCharacter}</span>
-			) : (
-				<span className={`${styles.symbol} ${styles.symbols}`}>{displayCharacter}</span>
-			)}
-		</span>
+		<DeciFragment
+			character={character}
+			cellType={cellType}
+			displayCharacter={displayCharacter}
+			matchesCurrentSelection={matchesCurrentSelection}
+		/>
 	);
 };

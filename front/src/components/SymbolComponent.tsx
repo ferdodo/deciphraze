@@ -1,5 +1,6 @@
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { LetterSelection } from "../entities/LetterSelection";
+import { DeciSymbol } from "@deciphraze/ds";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useLetterSelection } from "../hooks/useLetterSelection";
 import { useWin } from "../hooks/useWin";
@@ -7,7 +8,6 @@ import { selectSymbol } from "../usecases/selectSymbol";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
 import { isSymbolMatched } from "../utils/isSymbolMatched";
-import styles from "./SymbolComponent.module.css";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";
 import { useGameContext } from "../hooks/useGameContext";
 import { useCipher } from "../hooks/useCipher";
@@ -34,30 +34,18 @@ export function SymbolComponent({ character }: SymbolComponentProps): JSX.Elemen
 		? character.toUpperCase()
 		: getEncodedCharacter(character, cipher);
 
-	const spanClassName = [
-		styles.symbols,
-		selected ? styles.selected : "",
-		highlighted ? styles.highlighted : "",
-		matched ? styles.matched : "",
-		win ? styles.gameWon : "",
-	].join(" ");
-
 	const clickSelectSymbol = (): void => {
 		selectSymbol(character, context);
 	};
 
 	return (
-		<button
-			className={styles.inputs}
-			onClick={clickSelectSymbol}
-			type="button"
-			disabled={win}
-		>
-			<div className={styles.symbolContainer}>
-				<span className={spanClassName}>
-					{displayCharacter}
-				</span>
-			</div>
-		</button>
+		<DeciSymbol
+			displayCharacter={displayCharacter}
+			selected={selected}
+			highlighted={highlighted}
+			matched={matched}
+			onClickSelectSymbol={clickSelectSymbol}
+			win={win}
+		/>
 	);
 };
