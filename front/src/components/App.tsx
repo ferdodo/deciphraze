@@ -1,7 +1,6 @@
 import type React from "react";
 import { Game } from "./Game";
 import { GameContextProvider } from "../contexts/GameContextProvider";
-import "crumbs-design-system";
 import styles from "./App.module.css";
 
 

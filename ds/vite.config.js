@@ -7,6 +7,7 @@ export default defineConfig({
 			name: "@deciphraze/ds",
 			fileName: () => "index.js",
             cssFileName: () => "index.css",
+			formats: ["es"],
 		},
 	},
 });

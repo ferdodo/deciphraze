@@ -1,6 +1,6 @@
 import { createRoot, type Root } from "react-dom/client";
 import { App } from "./components/App";
-import "crumbs-design-system";
+import "@deciphraze/ds/dist/ds.css";
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./pwa.js');
