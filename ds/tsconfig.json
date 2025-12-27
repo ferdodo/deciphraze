@@ -1,7 +1,9 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"noEmit": true,
+		"declaration": true,
+		"outDir": "dist",
+		"rootDir": "src",
 		"allowJs": true,
 		"moduleResolution": "nodenext",
 		"skipLibCheck": true,

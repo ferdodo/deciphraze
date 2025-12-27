@@ -8,8 +8,8 @@ import { selectLetter } from "../usecases/selectLetter";
 import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
 import { isLetterMatched } from "../utils/isLetterMatched";
-import styles from "./LetterComponent.module.css";
 import { useGameContext } from "../hooks/useGameContext";
+import { DeciLetter } from "@deciphraze/ds";
 
 interface LetterComponentProps {
 	character: string;
@@ -25,29 +25,19 @@ export function LetterComponent({ character }: LetterComponentProps): JSX.Elemen
 	const highlighted = normalizedCharacter in playerCipher;
 	const selected = characterEquals(selectedLetter ?? '', character);
 	const matched = isLetterMatched(character, selectedLetter, selectedSymbol, playerCipher);
-
-    const spanClassName = [
-		selected ? styles.selected : "",
-		highlighted ? styles.highlighted : "",
-		matched ? styles.matched : "",
-		win ? styles.gameWon : "",
-	].join(" ");
 	
 	const clickSelectLetter = (): void => {
 		selectLetter(character, context);
 	};
 
 	return (
-		<button
-			className={styles.inputs}
-			onClick={clickSelectLetter}
-			type="button"
-			disabled={win}>
-			<div className={styles.letterContainer}>
-				<span className={spanClassName}>
-					{character}
-				</span>
-			</div>
-		</button>
+		<DeciLetter
+			character={character}
+			matched={matched}
+			selected={selected}
+			highlighted={highlighted}
+			win={win}
+			onClickSelectLetter={clickSelectLetter}
+		/>
 	);
 };
