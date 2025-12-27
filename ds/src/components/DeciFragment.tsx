@@ -1,7 +1,6 @@
 import styles from "./DeciFragment.module.css";
 
 interface DeciFragmentProps {
-	character: string;
 	cellType: "letter" | "symbol";
 	displayCharacter: string;
 	matchesCurrentSelection: boolean;
