@@ -1,65 +1,37 @@
-import type React from "react";
-import { DeciGame } from "@deciphraze/ds";
-import { FragmentComponent } from "./FragmentComponent";
-import { AchievementsComponent } from "./AchievementsComponent";
+import { useState } from "react";
+import { MainNavComponent } from "./MainNavComponent";
+import { SettingsPanelComponent } from "./SettingsPanelComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
-import { AlphabetComponent } from "./AlphabetComponent";
-import { SymbolsComponent } from "./SymbolsComponent";
+import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
 import { DevelopmentPanelComponent } from "./DevelopmentPanelComponent";
-import { useMatchCount } from "../hooks/useMatchCount";
-import { useWin } from "../hooks/useWin";
-import { useParagraphOfYesterday } from "../hooks/useParagraphOfYesterday";
-import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
-import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
-import { share } from "../utils/share";
 
-const Game: React.FC = () => {
-	const paragraphOfTheDay = useParagraphOfTheDay();
-	const separatedWords = paragraphOfTheDay.split(" ");
-	const words = separatedWords.map((word) => [...word]);
-	const alphabetRandom = useSymbolsRandomOrder();
+export function Game(): JSX.Element {
+	const [plusView, setPlusView] = useState<string | null>(null);
 
-	const win = useWin();
-	const matchCount = useMatchCount();
-	const paragraphOfYesterday = useParagraphOfYesterday();
-
-	const handleShare = (): void => {
-		share(matchCount);
+	const handlePlusViewChange = (view: string | null): void => {
+		setPlusView(view);
 	};
 
-	const paragraph = (
-		<>
-			{words.map((word, wordIndex) => (
-				<div
-					key={`word-${word.join("")}-${wordIndex}`}
-					style={{ display: "inline-block", marginRight: "0.9rem" }}
-				>
-					{word.map((f, fragmentIndex) => (
-						<FragmentComponent
-							key={`${f}-${word.join("")}-${fragmentIndex}`}
-							character={f}
-						/>
-					))}
-				</div>
-			))}
-		</>
-	);
-
-	return (
-		<DeciGame
-			Statistics={<StatisticsComponent />}
-			Achievements={<AchievementsComponent />}
-			DevelopmentPanel={<DevelopmentPanelComponent />}
-			Paragraph={paragraph}
-			Alphabet={<AlphabetComponent />}
-			Symbols={<SymbolsComponent />}
-			paragraphOfYesterday={paragraphOfYesterday}
-			alphabetRandom={alphabetRandom}
-			words={words}
-			win={win}
-			onShare={handleShare}
-		/>
-	);
+	switch (plusView) {
+		case "settings":
+			return (
+				<SettingsPanelComponent onBack={() => handlePlusViewChange(null)} />
+			);
+		case "statistics":
+			return (
+				<StatisticsComponent onBack={() => handlePlusViewChange(null)} />
+			);
+		case "yesterday":
+			return (
+				<YesterdaySolutionComponent onBack={() => handlePlusViewChange(null)} />
+			);
+		case "development":
+			return (
+				<DevelopmentPanelComponent onBack={() => handlePlusViewChange(null)} />
+			);
+		default:
+			return (
+				<MainNavComponent onPlusViewChange={handlePlusViewChange} />
+			);
+	}
 };
-
-export { Game };

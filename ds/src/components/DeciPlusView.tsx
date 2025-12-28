@@ -1,0 +1,27 @@
+import type React from "react";
+
+interface DeciPlusViewProps {
+	title: string;
+	content: React.ReactNode;
+	onBack: () => void;
+}
+
+export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): JSX.Element {
+	return (
+        <div style={{ height: "100vh", display: "grid", placeContent: "center" }}>
+		<crumbs-panel panel-title={title} style={{ maxHeight: "calc(100vh - 14.5rem)" }}>
+			{content}
+			<div style={{ marginTop: "2rem", paddingTop: "1rem" }}>
+				<crumbs-button
+					title="Retour"
+					onClick={onBack}
+					role="button"
+				>
+					Retour
+				</crumbs-button>
+			</div>
+		</crumbs-panel>
+        </div>
+	);
+}
+

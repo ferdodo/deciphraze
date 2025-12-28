@@ -1,11 +1,15 @@
-import { DeciDevelopmentPanel } from "@deciphraze/ds";
+import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ds";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";
 import { isDev } from "../utils/isDev";
 import { incrementDay } from "../usecases/incrementDay";
 import { decrementDay } from "../usecases/decrementDay";
 
-export function DevelopmentPanelComponent(): JSX.Element | null {
+interface DevelopmentPanelComponentProps {
+	onBack: () => void;
+}
+
+export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentProps): JSX.Element | null {
 	const context = useGameContext();
 	const currentDay = useDay();
 
@@ -22,10 +26,16 @@ export function DevelopmentPanelComponent(): JSX.Element | null {
 	}
 
 	return (
-		<DeciDevelopmentPanel
-			currentDay={currentDay}
-			onIncrementDay={handleIncrementDay}
-			onDecrementDay={handleDecrementDay}
+		<DeciPlusView
+			title="Panel développeur"
+			content={
+				<DeciDevelopmentPanelContent
+					currentDay={currentDay}
+					onIncrementDay={handleIncrementDay}
+					onDecrementDay={handleDecrementDay}
+				/>
+			}
+			onBack={onBack}
 		/>
 	);
 };

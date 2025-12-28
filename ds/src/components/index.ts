@@ -1,5 +1,5 @@
 export * from "./DeciApp";
-export * from "./DeciGame";
+export * from "./DeciMainNav";
 export * from "./DeciLetter";
 export * from "./DeciSymbol";
 export * from "./DeciAchievements";
@@ -8,3 +8,8 @@ export * from "./DeciFragment";
 export * from "./DeciCell";
 export * from "./DeciAchievement";
 export * from "./DeciDevelopmentPanel";
+export * from "./DeciDevelopmentPanelContent";
+export * from "./DeciSettingsPanel";
+export * from "./DeciPlusMenu";
+export * from "./DeciPlusView";
+export * from "./DeciYesterdaySolution";

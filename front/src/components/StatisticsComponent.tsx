@@ -1,8 +1,12 @@
-import { DeciStats } from "@deciphraze/ds";
+import { DeciStats, DeciPlusView } from "@deciphraze/ds";
 import { useStatistics } from "../hooks/useStatistics";
 import { calculatePreferredLetters } from "../utils/calculatePreferredLetters";
 
-export const StatisticsComponent = (): JSX.Element => {
+interface StatisticsComponentProps {
+	onBack: () => void;
+}
+
+export const StatisticsComponent = ({ onBack }: StatisticsComponentProps): JSX.Element => {
 	const statistics = useStatistics();
 	const preferredLettersWithScore = calculatePreferredLetters(statistics.letterPositions, 10);
 	
@@ -12,6 +16,12 @@ export const StatisticsComponent = (): JSX.Element => {
 		count: score
 	}));
 
-	return <DeciStats statistics={statistics} preferredLetters={preferredLetters} />;
+	return (
+		<DeciPlusView
+			title="Statistiques"
+			content={<DeciStats statistics={statistics} preferredLetters={preferredLetters} />}
+			onBack={onBack}
+		/>
+	);
 };
 

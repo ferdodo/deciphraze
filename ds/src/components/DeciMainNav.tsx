@@ -1,33 +1,31 @@
-interface DeciGameProps {
-	Statistics: React.ReactNode;
+import type React from "react";
+
+interface DeciMainNavProps {
 	Achievements: React.ReactNode;
-	DevelopmentPanel: React.ReactNode;
+	PlusMenu: React.ReactNode;
 	Paragraph: React.ReactNode;
 	Alphabet: React.ReactNode;
 	Symbols: React.ReactNode;
-	paragraphOfYesterday: string;
 	alphabetRandom: string[];
 	win: boolean;
 	words: string[][];
 	onShare: () => void;
 }
 
-export function DeciGame({
-	Statistics,
+export function DeciMainNav({
 	Achievements,
-	DevelopmentPanel,
-	paragraphOfYesterday,
+	PlusMenu,
 	Alphabet,
 	Symbols,
 	Paragraph,
 	win,
 	onShare,
-}: DeciGameProps): JSX.Element {
+}: DeciMainNavProps): JSX.Element {
 	return (
 		<div style={{display: "grid", height: "100svh"}}>
 		<crumbs-nav style={{ flexGrow: "1" }}>
 			<crumbs-p slot="title-1">Jouer</crumbs-p>
-			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100vh - 14.5rem)" }}>
+			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100vh - 10.8rem)" }}>
 				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
 					symboles.
@@ -68,24 +66,15 @@ export function DeciGame({
 				)}
 			</crumbs-panel>
 
-			<crumbs-p slot="title-2">Solution d'hier</crumbs-p>
-			<crumbs-panel slot="content-2" panel-title="Solution d'hier" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
-				<crumbs-p>
-					{paragraphOfYesterday}
-				</crumbs-p>
-			</crumbs-panel>
+		<crumbs-p slot="title-2">Succès</crumbs-p>
+		<crumbs-panel slot="content-2" panel-title="Succès" style={{ maxHeight: "calc(100vh - 10.8rem)" }}>
+			{Achievements}
+		</crumbs-panel>
 
-			<crumbs-p slot="title-3">Succès</crumbs-p>
-			<crumbs-panel slot="content-3" panel-title="Succès" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
-				{Achievements}
-			</crumbs-panel>
-
-			<crumbs-p slot="title-4">Statistiques</crumbs-p>
-			<crumbs-panel slot="content-4" panel-title="Statistiques" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
-				{Statistics}
-			</crumbs-panel>
-
-			{DevelopmentPanel}
+		<crumbs-p slot="title-3">Plus</crumbs-p>
+		<crumbs-panel slot="content-3" panel-title="Plus" style={{ maxHeight: "calc(100vh - 10.8rem)" }}>
+			{PlusMenu}
+		</crumbs-panel>
 		</crumbs-nav>
 		</div>
 	);

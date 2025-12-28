@@ -11,8 +11,8 @@ export function DeciDevelopmentPanel({
 }: DeciDevelopmentPanelProps): JSX.Element {
 	return (
 		<>
-			<crumbs-p slot="title-5">Développement</crumbs-p>
-			<crumbs-panel slot="content-5" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
+			<crumbs-p slot="title-4">Développement</crumbs-p>
+			<crumbs-panel slot="content-4" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
 				<crumbs-p>
 					Date actuelle : {currentDay}
 				</crumbs-p>
