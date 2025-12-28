@@ -3,7 +3,7 @@ import { isAlphabetic } from "./isAlphabetic";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { CellType } from "../types/CellType";
 
-export const computeCellType = (character: string, playerCipherMap: PlayerCipher): CellType => {
+export const computeCellType = (character: string, playerCipherMap: PlayerCipher, isWin: boolean): CellType => {
 	if (!isAlphabetic(character)) {
 		return "letter";
 	}
@@ -13,5 +13,10 @@ export const computeCellType = (character: string, playerCipherMap: PlayerCipher
 			return "letter";
 		}
 	}
+	
+	if (isWin) {
+		return "letter";
+	}
+	
 	return "symbol";
 };

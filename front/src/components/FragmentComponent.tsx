@@ -3,6 +3,7 @@ import { useCellMatchesCurrentSelection } from "../hooks/useCellMatchesCurrentSe
 import { computeCellType } from "../utils/computeCellType";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useDisplayedFragmentCharacter } from "../hooks/useDisplayedFragmentCharacter";
+import { useWin } from "../hooks/useWin";
 
 interface FragmentComponentProps {
 	character: string;
@@ -10,7 +11,8 @@ interface FragmentComponentProps {
 
 export function FragmentComponent({ character }: FragmentComponentProps): JSX.Element {
 	const playerCipher = usePlayerCipher();
-	const cellType = computeCellType(character, playerCipher);
+	const isWin = useWin();
+	const cellType = computeCellType(character, playerCipher, isWin);
 	const matchesCurrentSelection = useCellMatchesCurrentSelection(character);
 	const displayCharacter = useDisplayedFragmentCharacter(character);
 

@@ -1,12 +1,14 @@
 import { usePlayerCipher } from "./usePlayerCipher";
 import { useSanitizedCharacter } from "./useSanitizedCharacter";
 import { useCipher } from "./useCipher";
+import { useWin } from "./useWin";
 import { computeCellType } from "../utils/computeCellType";
 import { computeDisplayedFragmentCharacter } from "../utils/computeDisplayedFragmentCharacter";
 
 export function useDisplayedFragmentCharacter(character: string): string {
 	const playerCipher = usePlayerCipher();
-	const cellType = computeCellType(character, playerCipher);
+	const isWin = useWin();
+	const cellType = computeCellType(character, playerCipher, isWin);
 	const sanitizedCharacter = useSanitizedCharacter(character);
 	const cipher = useCipher();
 
