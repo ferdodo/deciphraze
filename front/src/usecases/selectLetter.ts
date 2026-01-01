@@ -1,7 +1,7 @@
 import { normalizeWord } from "../utils/normalizeWord";
 import { isAlphabetic } from "../utils/isAlphabetic";
 import { isWin } from "../utils/isWin";
-import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
+import { generateParagraph } from "../utils/generateParagraph";
 import { characterEquals } from "../utils/characterEquals";
 import type { GameContext } from "../contexts/GameContext";
 
@@ -19,7 +19,7 @@ export const selectLetter = (
 	} = context;
 	
 	const currentDay = dayRepository.getDay();
-	const paragraphOfTheDay = getParagraphOfTheDay(currentDay);
+	const paragraphOfTheDay = generateParagraph(currentDay);
 	const playerCipher = playerCipherRepository.getPlayerCipher();
 	const gameHistory = gameHistoryRepository.getHistory();
 

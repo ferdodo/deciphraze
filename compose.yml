@@ -22,3 +22,13 @@ services:
           path: ./front/package.json
     ports:
       - "1111:1111"
+
+  stryker:
+    build:
+      context: front
+      additional_contexts:
+        deciphraze-ds: service:ds
+        deciphraze-git: service:git
+      dockerfile: stryker.Dockerfile
+    ports:
+      - "1112:1112"

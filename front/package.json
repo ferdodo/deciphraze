@@ -2,6 +2,7 @@
 	"scripts": {
 		"build": "vite build",
 		"serve": "http-server dist -p 1111",
+		"stryker:serve": "http-server public -p 1112",
 		"verify": "node ./scripts/verify.mjs",
 		"dev": "vite --host --port 1111",
 		"test": "vitest"

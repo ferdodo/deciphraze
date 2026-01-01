@@ -1,7 +1,7 @@
 import type { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import { isWin } from "../utils/isWin";
-import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
+import { generateParagraph } from "../utils/generateParagraph";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
 import { countWordsInParagraph } from "../utils/countWordsInParagraph";
@@ -20,13 +20,13 @@ export function updateStatistics(context: GameContext): Subscription {
 	return playerCipherRepository.playerCipher$.pipe(
 		filter((playerCipher: PlayerCipher) => {
 			const currentDay = dayRepository.getDay();
-			const paragraphOfTheDay = getParagraphOfTheDay(currentDay);
+			const paragraphOfTheDay = generateParagraph(currentDay);
 			const gameHistory = gameHistoryRepository.getHistory();
 			return isWin(playerCipher, paragraphOfTheDay, gameHistory, currentDay);
 		})
 	).subscribe(() => {
 		const currentDay = dayRepository.getDay();
-		const paragraphOfTheDay = getParagraphOfTheDay(currentDay);
+		const paragraphOfTheDay = generateParagraph(currentDay);
 		
 		// Éviter de compter plusieurs fois la même victoire dans la même journée
 		if (lastWinDate === currentDay) {

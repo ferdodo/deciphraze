@@ -4,7 +4,7 @@ import { filter } from "rxjs/operators";
 import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
-import { getParagraphOfTheDay } from "../utils/getParagraphOfTheDay";
+import { generateParagraph } from "../utils/generateParagraph";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
 
@@ -21,12 +21,12 @@ export function registerWinnedGame({
 		dayRepository.observeDay(),
 	]).pipe(
 		filter(([playerCipher, day]: [PlayerCipher, string]) => {
-			const paragraphOfTheDay = getParagraphOfTheDay(day);
+			const paragraphOfTheDay = generateParagraph(day);
 			const gameHistory = gameHistoryRepository.getHistory();
 			return isWin(playerCipher, paragraphOfTheDay, gameHistory, day);
 		})
 	).subscribe(([, day]: [PlayerCipher, string]) => {
-		const paragraphOfTheDay = getParagraphOfTheDay(day);
+		const paragraphOfTheDay = generateParagraph(day);
 		const gameSession = createGameSession(day, discoveryOrderRepository, associationHistoryRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
