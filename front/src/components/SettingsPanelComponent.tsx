@@ -1,10 +1,11 @@
+import React from "react";
 import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ds";
 
 interface SettingsPanelComponentProps {
 	onBack: () => void;
 }
 
-export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps): JSX.Element {
+export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps): React.JSX.Element {
 	return (
 		<DeciPlusView
 			title="Paramètres"

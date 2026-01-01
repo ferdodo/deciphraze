@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciAchievements.module.css";
 import { DeciAchievement } from "./DeciAchievement";
 
@@ -22,7 +23,7 @@ export function DeciAchievements({
 	achievementsList,
 	unlockedCount,
 	currentStreak,
-}: DeciAchievementsProps): JSX.Element {
+}: DeciAchievementsProps): React.JSX.Element {
 	const TOTAL_ACHIEVEMENTS = 12;
 
 	return (

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import styles from "./DeciAchievements.module.css";
 
 interface Achievement {
@@ -19,7 +20,7 @@ interface DeciAchievementProps {
 export function DeciAchievement({
     achievement,
     currentStreak,
-}: DeciAchievementProps): JSX.Element {
+}: DeciAchievementProps): ReactNode {
 
 	return  (
         <div 

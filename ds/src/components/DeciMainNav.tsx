@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 
 interface DeciMainNavProps {
 	Achievements: React.ReactNode;
@@ -20,7 +20,7 @@ export function DeciMainNav({
 	Paragraph,
 	win,
 	onShare,
-}: DeciMainNavProps): JSX.Element {
+}: DeciMainNavProps): React.JSX.Element {
 	return (
 		<div style={{display: "grid", height: "100svh"}}>
 		<crumbs-nav style={{ flexGrow: "1" }}>

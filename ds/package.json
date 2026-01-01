@@ -9,13 +9,12 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
-		"@testing-library/react": "^14.2.1",
-		"@types/react": "^18.2.0",
-		"@types/react-dom": "^18.2.0",
+		"@types/react": "^19.2.7",
+		"@types/react-dom": "^19.2.3",
 		"crumbs-design-system": "^1.4.0",
 		"exportcase": "^1.2.5",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
+		"react": "^19.2.3",
+		"react-dom": "^19.2.3",
 		"tasuku": "^2.0.5",
 		"typescript": "^5.9.2",
 		"vite": "^7.1.9"

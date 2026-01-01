@@ -1,3 +1,5 @@
+import React from "react";
+
 interface DeciPlusMenuProps {
 	onParametersClick: () => void;
 	onStatisticsClick: () => void;
@@ -12,7 +14,7 @@ export function DeciPlusMenu({
 	onYesterdayClick,
 	onDevelopmentClick,
 	showDevelopmentPanelEntry,
-}: DeciPlusMenuProps): JSX.Element {
+}: DeciPlusMenuProps): React.JSX.Element {
 	return (
 		<div style={{ padding: "1rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
 			<crumbs-button

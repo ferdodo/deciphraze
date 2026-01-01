@@ -1,5 +1,4 @@
-import type React from "react";
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { gameContext } from "./gameContext";
 import { createLetterSelection } from "../utils/createLetterSelection";
 import { createPlayerCipher } from "../utils/createPlayerCipher";
@@ -18,7 +17,7 @@ interface GameContextProviderProps {
 	children: React.ReactNode;
 }
 
-export function GameContextProvider({ children }: GameContextProviderProps): JSX.Element {
+export function GameContextProvider({ children }: GameContextProviderProps): React.JSX.Element {
 	const value = useMemo(() => {
 		const storage = getDefaultStorage() ?? createLocalStorageMock();
 		return {

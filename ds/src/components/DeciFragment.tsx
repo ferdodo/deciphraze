@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciFragment.module.css";
 
 interface DeciFragmentProps {
@@ -6,7 +7,7 @@ interface DeciFragmentProps {
 	matchesCurrentSelection: boolean;
 }
 
-export function DeciFragment({ cellType, displayCharacter, matchesCurrentSelection }: DeciFragmentProps): JSX.Element {
+export function DeciFragment({ cellType, displayCharacter, matchesCurrentSelection }: DeciFragmentProps): React.JSX.Element {
 	return (
 		<span className={`${styles.fragment} ${matchesCurrentSelection ? styles.matched : ""}`}>
 			{cellType === "letter" ? (

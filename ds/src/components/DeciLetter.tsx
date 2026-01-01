@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciLetter.module.css";
 
 interface DeciLetterProps {
@@ -9,7 +10,7 @@ interface DeciLetterProps {
 	onClickSelectLetter: () => void;
 }
 
-export function DeciLetter({ character, matched, selected, highlighted, win, onClickSelectLetter }: DeciLetterProps): JSX.Element {
+export function DeciLetter({ character, matched, selected, highlighted, win, onClickSelectLetter }: DeciLetterProps): React.JSX.Element {
     const spanClassName = [
 		selected ? styles.selected : "",
 		highlighted ? styles.highlighted : "",

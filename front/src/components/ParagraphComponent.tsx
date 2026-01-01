@@ -1,10 +1,11 @@
+import React from "react";
 import { FragmentComponent } from "./FragmentComponent";
 
 interface ParagraphComponentProps {
 	words: string[][];
 }
 
-export function ParagraphComponent({ words }: ParagraphComponentProps): JSX.Element {
+export function ParagraphComponent({ words }: ParagraphComponentProps): React.JSX.Element {
 	return (
 		<>
 			{words.map((word, wordIndex) => (

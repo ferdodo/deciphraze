@@ -1,3 +1,5 @@
+import React from "react";
+
 interface DeciDevelopmentPanelContentProps {
 	currentDay: string;
 	onIncrementDay: () => void;
@@ -8,7 +10,7 @@ export function DeciDevelopmentPanelContent({
 	currentDay,
 	onIncrementDay,
 	onDecrementDay,
-}: DeciDevelopmentPanelContentProps): JSX.Element {
+}: DeciDevelopmentPanelContentProps): React.JSX.Element {
 	return (
 		<div style={{ padding: "1rem" }}>
 			<crumbs-p>

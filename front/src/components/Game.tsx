@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { MainNavComponent } from "./MainNavComponent";
 import { SettingsPanelComponent } from "./SettingsPanelComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
@@ -6,7 +6,7 @@ import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
 import { DevelopmentPanelComponent } from "./DevelopmentPanelComponent";
 import type { PlusView } from "../types/PlusView";
 
-export function Game(): JSX.Element {
+export function Game(): React.JSX.Element {
 	const [plusView, setPlusView] = useState<PlusView>("main");
 
 	const handlePlusViewChange = (view: PlusView): void => {

@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciStats.module.css";
 
 const formatDate = (dateString: string | null): string => {
@@ -25,7 +26,7 @@ interface DeciStatsProps {
 	preferredLetters: Array<{ letter: string; count: number }>;
 }
 
-export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): JSX.Element {
+export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): React.JSX.Element {
 
 	return (
 		<div className={styles.statisticsContainer}>

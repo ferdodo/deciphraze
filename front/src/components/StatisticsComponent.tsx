@@ -6,7 +6,9 @@ interface StatisticsComponentProps {
 	onBack: () => void;
 }
 
-export const StatisticsComponent = ({ onBack }: StatisticsComponentProps): JSX.Element => {
+import React from "react";
+
+export const StatisticsComponent = ({ onBack }: StatisticsComponentProps): React.JSX.Element => {
 	const statistics = useStatistics();
 	const preferredLettersWithScore = calculatePreferredLetters(statistics.letterPositions, 10);
 	

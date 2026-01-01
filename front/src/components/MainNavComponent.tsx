@@ -15,7 +15,9 @@ interface MainNavComponentProps {
 	onPlusViewChange: (view: PlusView) => void;
 }
 
-export function MainNavComponent({ onPlusViewChange }: MainNavComponentProps): JSX.Element {
+import React from "react";
+
+export function MainNavComponent({ onPlusViewChange }: MainNavComponentProps): React.JSX.Element {
 	const paragraphOfTheDay = useParagraphOfTheDay();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);

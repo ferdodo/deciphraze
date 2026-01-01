@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 
 interface DeciPlusViewProps {
 	title: string;
@@ -6,7 +6,7 @@ interface DeciPlusViewProps {
 	onBack: () => void;
 }
 
-export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): JSX.Element {
+export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): React.JSX.Element {
 	return (
         <div style={{ height: "100vh", display: "grid", placeContent: "center" }}>
 		<crumbs-panel panel-title={title} style={{ maxHeight: "calc(100vh - 14.5rem)" }}>

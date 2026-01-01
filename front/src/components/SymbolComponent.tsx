@@ -16,7 +16,9 @@ interface SymbolComponentProps {
 	character: string;
 }
 
-export function SymbolComponent({ character }: SymbolComponentProps): JSX.Element {
+import React from "react";
+
+export function SymbolComponent({ character }: SymbolComponentProps): React.JSX.Element {
 	const playerCipherMap: PlayerCipher = usePlayerCipher();
 	const selectedLetter: LetterSelection = useLetterSelection();
 	const selectedSymbol = useSymbolSelection();

@@ -1,10 +1,10 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { DeciAchievements } from "@deciphraze/ds";
 import { useAchievements } from "../hooks/useAchievements";
 import { useAchievementsAsList } from "../hooks/useAchievementsAsList";
 import { useCurrentStreak } from "../hooks/useCurrentStreak";
 
-export function AchievementsComponent(): JSX.Element {
+export function AchievementsComponent(): React.JSX.Element {
 	const achievements = useAchievements();
 	const achievementsList = useAchievementsAsList();
 	const currentStreak = useCurrentStreak();

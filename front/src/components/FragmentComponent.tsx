@@ -9,7 +9,9 @@ interface FragmentComponentProps {
 	character: string;
 }
 
-export function FragmentComponent({ character }: FragmentComponentProps): JSX.Element {
+import React from "react";
+
+export function FragmentComponent({ character }: FragmentComponentProps): React.JSX.Element {
 	const playerCipher = usePlayerCipher();
 	const isWin = useWin();
 	const cellType = computeCellType(character, playerCipher, isWin);

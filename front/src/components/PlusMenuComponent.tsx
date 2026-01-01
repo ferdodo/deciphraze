@@ -6,9 +6,11 @@ interface PlusMenuComponentProps {
 	onViewChange: (view: PlusView) => void;
 }
 
+import React from "react";
+
 export function PlusMenuComponent({
 	onViewChange,
-}: PlusMenuComponentProps): JSX.Element {
+}: PlusMenuComponentProps): React.JSX.Element {
 	const handleParametersClick = (): void => {
 		onViewChange("settings");
 	};

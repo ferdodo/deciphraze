@@ -15,7 +15,9 @@ interface LetterComponentProps {
 	character: string;
 }
 
-export function LetterComponent({ character }: LetterComponentProps): JSX.Element {
+import React from "react";
+
+export function LetterComponent({ character }: LetterComponentProps): React.JSX.Element {
 	const playerCipher: PlayerCipher = usePlayerCipher();
 	const selectedLetter: LetterSelection = useLetterSelection();
 	const selectedSymbol = useSymbolSelection();

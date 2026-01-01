@@ -1,3 +1,4 @@
+import React from "react";
 import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ds";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";
@@ -9,7 +10,7 @@ interface DevelopmentPanelComponentProps {
 	onBack: () => void;
 }
 
-export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentProps): JSX.Element | null {
+export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentProps): React.JSX.Element | null {
 	const context = useGameContext();
 	const currentDay = useDay();
 

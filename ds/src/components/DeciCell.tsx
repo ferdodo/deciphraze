@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciCell.module.css";
 
 interface DeciCellProps {
@@ -9,7 +10,7 @@ interface DeciCellProps {
 	matched: boolean;
 }
 
-export function DeciCell({ type, highlighted, selected, character, matched, encoded }: DeciCellProps): JSX.Element {
+export function DeciCell({ type, highlighted, selected, character, matched, encoded }: DeciCellProps): React.JSX.Element {
 	const letterClassName = [
 		selected ? styles.selected : "",
 		highlighted ? styles.highlighted : "",

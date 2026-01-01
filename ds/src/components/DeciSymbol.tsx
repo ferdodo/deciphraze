@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./DeciSymbol.module.css";
 
 interface DeciSymbolProps {
@@ -16,7 +17,7 @@ export function DeciSymbol({
 	matched,
 	onClickSelectSymbol,
 	win,
-}: DeciSymbolProps): JSX.Element {
+}: DeciSymbolProps): React.JSX.Element {
 	const spanClassName = [
 		styles.symbols,
 		selected ? styles.selected : "",
