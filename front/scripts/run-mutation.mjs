@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path';
 import { spawn } from "node:child_process";
 
 async function spawnLive(command, commandArgs) {
+	console.log(`${command} ${commandArgs.join(' ')}\n\n`);
 	return new Promise((resolve) => {
 		const child = spawn(command, commandArgs, { stdio: 'inherit' });
 

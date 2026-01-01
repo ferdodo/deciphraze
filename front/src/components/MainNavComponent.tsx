@@ -9,9 +9,10 @@ import { useWin } from "../hooks/useWin";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { share } from "../utils/share";
+import type { PlusView } from "../types/PlusView";
 
 interface MainNavComponentProps {
-	onPlusViewChange: (view: string | null) => void;
+	onPlusViewChange: (view: PlusView) => void;
 }
 
 export function MainNavComponent({ onPlusViewChange }: MainNavComponentProps): JSX.Element {

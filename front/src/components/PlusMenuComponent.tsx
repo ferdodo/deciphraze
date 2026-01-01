@@ -1,8 +1,9 @@
 import { DeciPlusMenu } from "@deciphraze/ds";
 import { isDev } from "../utils/isDev";
+import type { PlusView } from "../types/PlusView";
 
 interface PlusMenuComponentProps {
-	onViewChange: (view: string | null) => void;
+	onViewChange: (view: PlusView) => void;
 }
 
 export function PlusMenuComponent({

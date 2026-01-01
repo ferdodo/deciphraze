@@ -8,7 +8,7 @@
 		"break": 65
 	},
 	"vitest": {
-		"related": true
+		"related": false
 	},
 	"reporters": ["html", "json", "clear-text"],
 	"htmlReporter": {

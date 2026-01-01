@@ -16,9 +16,9 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./src
+          path: ./front/src
           target: /deciphraze/src
         - action: rebuild
-          path: ./package.json
+          path: ./front/package.json
     ports:
       - "1111:1111"

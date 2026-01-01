@@ -4,30 +4,31 @@ import { SettingsPanelComponent } from "./SettingsPanelComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
 import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
 import { DevelopmentPanelComponent } from "./DevelopmentPanelComponent";
+import type { PlusView } from "../types/PlusView";
 
 export function Game(): JSX.Element {
-	const [plusView, setPlusView] = useState<string | null>(null);
+	const [plusView, setPlusView] = useState<PlusView>("main");
 
-	const handlePlusViewChange = (view: string | null): void => {
+	const handlePlusViewChange = (view: PlusView): void => {
 		setPlusView(view);
 	};
 
 	switch (plusView) {
 		case "settings":
 			return (
-				<SettingsPanelComponent onBack={() => handlePlusViewChange(null)} />
+				<SettingsPanelComponent onBack={() => handlePlusViewChange("main")} />
 			);
 		case "statistics":
 			return (
-				<StatisticsComponent onBack={() => handlePlusViewChange(null)} />
+				<StatisticsComponent onBack={() => handlePlusViewChange("main")} />
 			);
 		case "yesterday":
 			return (
-				<YesterdaySolutionComponent onBack={() => handlePlusViewChange(null)} />
+				<YesterdaySolutionComponent onBack={() => handlePlusViewChange("main")} />
 			);
 		case "development":
 			return (
-				<DevelopmentPanelComponent onBack={() => handlePlusViewChange(null)} />
+				<DevelopmentPanelComponent onBack={() => handlePlusViewChange("main")} />
 			);
 		default:
 			return (
