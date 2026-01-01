@@ -9,8 +9,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
 		"@deciphraze/ds": "../ds",
-		"@stryker-mutator/core": "^9.1.1",
-		"@stryker-mutator/vitest-runner": "^9.1.1",
+		"@stryker-mutator/core": "^9.4.0",
+		"@stryker-mutator/vitest-runner": "^9.4.0",
 		"@types/react": "^19.2.7",
 		"@types/react-dom": "^19.2.3",
 		"exportcase": "^1.2.5",
@@ -22,7 +22,7 @@
 		"tasuku": "^2.0.5",
 		"typescript": "^5.9.2",
 		"vite": "^7.1.9",
-		"vitest": "^3.2.4",
+		"vitest": "^4.0.16",
 		"zod": "^4.1.12"
 	}
 }
