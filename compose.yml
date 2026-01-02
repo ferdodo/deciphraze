@@ -18,8 +18,13 @@ services:
         - action: sync
           path: ./front/src
           target: /deciphraze/front/src
+        - action: sync
+          path: ./front/index.html
+          target: /deciphraze/front
         - action: rebuild
           path: ./front/package.json
+        - action: rebuild
+          path: ./ds
     ports:
       - "1111:1111"
 

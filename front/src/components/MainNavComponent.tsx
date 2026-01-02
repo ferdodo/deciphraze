@@ -3,21 +3,16 @@ import { ParagraphComponent } from "./ParagraphComponent";
 import { AlphabetComponent } from "./AlphabetComponent";
 import { SymbolsComponent } from "./SymbolsComponent";
 import { AchievementsComponent } from "./AchievementsComponent";
-import { PlusMenuComponent } from "./PlusMenuComponent";
+import { PlusComponent } from "./PlusComponent";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { share } from "../utils/share";
-import type { PlusView } from "../types/PlusView";
-
-interface MainNavComponentProps {
-	onPlusViewChange: (view: PlusView) => void;
-}
 
 import React from "react";
 
-export function MainNavComponent({ onPlusViewChange }: MainNavComponentProps): React.JSX.Element {
+export function MainNavComponent(): React.JSX.Element {
 	const paragraphOfTheDay = useParagraphOfTheDay();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
@@ -33,7 +28,7 @@ export function MainNavComponent({ onPlusViewChange }: MainNavComponentProps): R
 	return (
 		<DeciMainNav
 			Achievements={<AchievementsComponent />}
-			PlusMenu={<PlusMenuComponent onViewChange={onPlusViewChange} />}
+			PlusMenu={<PlusComponent />}
 			Paragraph={<ParagraphComponent words={words} />}
 			Alphabet={<AlphabetComponent />}
 			Symbols={<SymbolsComponent />}

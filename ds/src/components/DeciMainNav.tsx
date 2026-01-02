@@ -72,9 +72,9 @@ export function DeciMainNav({
 		</crumbs-panel>
 
 		<crumbs-p slot="title-3">Plus</crumbs-p>
-		<crumbs-panel slot="content-3" panel-title="Plus" style={{ maxHeight: "calc(100vh - 10.8rem)" }}>
+		<div slot="content-3" style={{ maxHeight: "calc(100svh - 10.8rem)" }}>
 			{PlusMenu}
-		</crumbs-panel>
+		</div>
 		</crumbs-nav>
 		</div>
 	);
