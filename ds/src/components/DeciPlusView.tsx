@@ -8,8 +8,8 @@ interface DeciPlusViewProps {
 
 export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): React.JSX.Element {
 	return (
-        <div style={{ height: "100vh", display: "grid", placeContent: "center" }}>
-		<crumbs-panel panel-title={title} style={{ maxHeight: "calc(100vh - 14.5rem)" }}>
+        <div style={{ display: "grid", placeContent: "center" }}>
+		<crumbs-panel panel-title={title} style={{ maxHeight: "calc(100svh - 14.5rem)" }}>
 			{content}
 			<div style={{ marginTop: "2rem", paddingTop: "1rem" }}>
 				<crumbs-button

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "./DeciAchievements.module.css";
+import styles from "./DeciAchievement.module.css";
 
 interface Achievement {
     achievementId: string;
