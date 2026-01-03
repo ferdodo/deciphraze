@@ -19,7 +19,7 @@ export function createPwaServiceMock(): PwaService {
 		isInstalled(): boolean {
 			return false;
 		},
-		getSupportStatus() {
+		getSupportStatus(): "supported" {
 			return "supported" as const;
 		},
 	};

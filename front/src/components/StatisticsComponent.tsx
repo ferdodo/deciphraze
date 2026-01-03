@@ -6,7 +6,7 @@ interface StatisticsComponentProps {
 	onBack: () => void;
 }
 
-import React from "react";
+import type React from "react";
 
 export const StatisticsComponent = ({ onBack }: StatisticsComponentProps): React.JSX.Element => {
 	const statistics = useStatistics();

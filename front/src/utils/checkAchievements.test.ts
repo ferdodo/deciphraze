@@ -76,7 +76,7 @@ describe("checkAchievements", () => {
 		const backupKeys: string[] = [];
 		for (let i = 0; i < storage.length; i++) {
 			const key = storage.key(i);
-			if (key && key.startsWith("deciphraze_localstorage_backup_")) {
+			if (key?.startsWith("deciphraze_localstorage_backup_")) {
 				backupKeys.push(key);
 			}
 		}

@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 import { DeciAchievements } from "@deciphraze/ds";
 import { useAchievements } from "../hooks/useAchievements";
 import { useAchievementsAsList } from "../hooks/useAchievementsAsList";

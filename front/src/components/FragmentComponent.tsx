@@ -9,7 +9,7 @@ interface FragmentComponentProps {
 	character: string;
 }
 
-import React from "react";
+import type React from "react";
 
 export function FragmentComponent({ character }: FragmentComponentProps): React.JSX.Element {
 	const playerCipher = usePlayerCipher();

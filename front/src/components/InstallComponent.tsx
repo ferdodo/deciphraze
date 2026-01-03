@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { DeciInstallPanel, DeciPlusView } from "@deciphraze/ds";
 import { usePwaInstallable } from "../hooks/usePwaInstallable";
 import { useGameContext } from "../hooks/useGameContext";

@@ -10,7 +10,7 @@ import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { share } from "../utils/share";
 
-import React from "react";
+import type React from "react";
 
 export function MainNavComponent(): React.JSX.Element {
 	const paragraphOfTheDay = useParagraphOfTheDay();

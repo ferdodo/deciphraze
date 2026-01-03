@@ -1,5 +1,5 @@
 export function isDev(): boolean {
-    // @ts-ignore
+    // @ts-expect-error
 	return import.meta.env.DEV;
 }
 

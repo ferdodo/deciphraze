@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo } from "react";
+import type React from "react";
+import { useEffect, useMemo } from "react";
 import { gameContext } from "./gameContext";
 import { createLetterSelection } from "../utils/createLetterSelection";
 import { createPlayerCipher } from "../utils/createPlayerCipher";

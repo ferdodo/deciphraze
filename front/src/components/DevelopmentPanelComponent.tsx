@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ds";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";

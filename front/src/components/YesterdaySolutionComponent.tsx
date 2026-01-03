@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { DeciYesterdaySolution, DeciPlusView } from "@deciphraze/ds";
 import { useParagraphOfYesterday } from "../hooks/useParagraphOfYesterday";
 

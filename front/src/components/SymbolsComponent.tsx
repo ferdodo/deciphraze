@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { SymbolComponent } from "./SymbolComponent";
 

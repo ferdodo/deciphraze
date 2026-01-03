@@ -6,7 +6,7 @@ interface PlusMenuComponentProps {
 	onViewChange: (view: PlusView) => void;
 }
 
-import React from "react";
+import type React from "react";
 
 export function PlusMenuComponent({
 	onViewChange,

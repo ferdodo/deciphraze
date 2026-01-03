@@ -16,7 +16,7 @@ interface SymbolComponentProps {
 	character: string;
 }
 
-import React from "react";
+import type React from "react";
 
 export function SymbolComponent({ character }: SymbolComponentProps): React.JSX.Element {
 	const playerCipherMap: PlayerCipher = usePlayerCipher();

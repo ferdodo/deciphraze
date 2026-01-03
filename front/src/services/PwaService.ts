@@ -1,4 +1,4 @@
-export type PwaSupportStatus = "supported" | "no-service-worker" | "no-window" | "no-navigator" | "no-https";
+import type { PwaSupportStatus } from "./PwaSupportStatus";
 
 export interface PwaService {
 	isPwaInstallable(): boolean;
@@ -7,4 +7,3 @@ export interface PwaService {
 	isInstalled(): boolean;
 	getSupportStatus(): PwaSupportStatus;
 }
-

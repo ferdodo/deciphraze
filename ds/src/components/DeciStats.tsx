@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import styles from "./DeciStats.module.css";
 
 const formatDate = (dateString: string | null): string => {

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 type PwaSupportStatus = "supported" | "no-service-worker" | "no-window" | "no-navigator" | "no-https";
 
