@@ -7,6 +7,7 @@ import type { DayRepository } from "../repositories/DayRepository";
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { StatisticsRepository } from "../repositories/StatisticsRepository";
 import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
+import type { PwaService } from "../services/PwaService";
 
 export interface GameContext {
 	letterSelectionRepository: LetterSelectionRepository;
@@ -18,4 +19,5 @@ export interface GameContext {
 	discoveryOrderRepository: DiscoveryOrderRepository;
 	statisticsRepository: StatisticsRepository;
 	associationHistoryRepository: AssociationHistoryRepository;
+	pwaService: PwaService;
 }

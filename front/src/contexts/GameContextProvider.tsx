@@ -12,6 +12,7 @@ import { createAssociationHistoryRepository } from "../utils/createAssociationHi
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { getDefaultStorage } from "../utils/getDefaultStorage";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
+import { getPwaService } from "@deciphraze/pwa";
 
 interface GameContextProviderProps {
 	children: React.ReactNode;
@@ -30,6 +31,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
 			statisticsRepository: createStatisticsRepository(storage),
 			associationHistoryRepository: createAssociationHistoryRepository(storage),
+			pwaService: getPwaService(),
 		};
 	}, []);
 

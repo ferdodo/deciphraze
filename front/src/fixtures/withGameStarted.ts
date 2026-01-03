@@ -10,6 +10,7 @@ import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociati
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
+import { createPwaServiceMock } from "../mocks/createPwaServiceMock";
 
 export function withGameStarted(): [() => void, GameContextType] {
     const dayRepository = createDayRepositoryMock();
@@ -24,6 +25,7 @@ export function withGameStarted(): [() => void, GameContextType] {
         discoveryOrderRepository: createDiscoveryOrderRepositoryMock(),
         statisticsRepository: createStatisticsRepository(storage),
         associationHistoryRepository: createAssociationHistoryRepositoryMock(),
+        pwaService: createPwaServiceMock(),
     };
 
     const cleanup = initializeGameSideEffects(context);
