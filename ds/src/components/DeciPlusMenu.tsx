@@ -5,6 +5,7 @@ interface DeciPlusMenuProps {
 	onStatisticsClick: () => void;
 	onYesterdayClick: () => void;
 	onDevelopmentClick: () => void;
+	onInstallClick: () => void;
 	showDevelopmentPanelEntry: boolean;
 }
 
@@ -13,11 +14,19 @@ export function DeciPlusMenu({
 	onStatisticsClick,
 	onYesterdayClick,
 	onDevelopmentClick,
+	onInstallClick,
 	showDevelopmentPanelEntry,
 }: DeciPlusMenuProps): React.JSX.Element {
 	return (
 		<crumbs-panel panel-title="Plus">
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+				<crumbs-button
+					title="Installation"
+					onClick={onInstallClick}
+					role="button"
+				>
+					Installation
+				</crumbs-button>
 				<crumbs-button
 					title="Paramètres"
 					onClick={onParametersClick}

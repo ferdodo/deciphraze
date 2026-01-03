@@ -27,12 +27,17 @@ export function PlusMenuComponent({
 		onViewChange("development");
 	};
 
+	const handleInstallClick = (): void => {
+		onViewChange("install");
+	};
+
 	return (
 		<DeciPlusMenu
 			onParametersClick={handleParametersClick}
 			onStatisticsClick={handleStatisticsClick}
 			onYesterdayClick={handleYesterdayClick}
 			onDevelopmentClick={handleDevelopmentClick}
+			onInstallClick={handleInstallClick}
 			showDevelopmentPanelEntry={isDev()}
 		/>
 	);

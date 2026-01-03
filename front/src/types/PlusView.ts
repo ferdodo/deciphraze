@@ -1,2 +1,2 @@
-export type PlusView = "main" | "settings" | "statistics" | "yesterday" | "development";
+export type PlusView = "main" | "install" | "settings" | "statistics" | "yesterday" | "development";
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PlusMenuComponent } from "./PlusMenuComponent";
+import { InstallComponent } from "./InstallComponent";
 import { SettingsPanelComponent } from "./SettingsPanelComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
 import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
@@ -20,6 +21,8 @@ export function PlusComponent(): React.JSX.Element {
 	switch (plusView) {
 		case "main":
 			return <PlusMenuComponent onViewChange={handlePlusViewChange} />;
+		case "install":
+			return <InstallComponent onBack={handleBack} />;
 		case "settings":
 			return <SettingsPanelComponent onBack={handleBack} />;
 		case "statistics":

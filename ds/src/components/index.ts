@@ -9,6 +9,7 @@ export * from "./DeciCell";
 export * from "./DeciAchievement";
 export * from "./DeciDevelopmentPanel";
 export * from "./DeciDevelopmentPanelContent";
+export * from "./DeciInstallPanel";
 export * from "./DeciSettingsPanel";
 export * from "./DeciPlusMenu";
 export * from "./DeciPlusView";
