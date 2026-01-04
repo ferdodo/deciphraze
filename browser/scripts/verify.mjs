@@ -4,7 +4,7 @@ import { promisify } from "node:util";
 
 function run(command) {
 	return promisify(exec)(command).catch(error => {
-		throw new Error(`${error.stdout}\n${error.stderr}`);
+		throw new Error(`\n\n${command}\n\n${error.stdout}\n\n${error.stderr}\n\n`);
 	});
 }
 

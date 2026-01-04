@@ -2,8 +2,8 @@ services:
   ui:
     build: ui
 
-  pwa:
-    build: pwa
+  browser:
+    build: browser
 
   git:
     build:
@@ -15,7 +15,7 @@ services:
       context: front
       additional_contexts:
         deciphraze-ui: service:ui
-        deciphraze-pwa: service:pwa
+        deciphraze-browser: service:browser
         deciphraze-git: service:git
     develop:
       watch:
@@ -30,7 +30,7 @@ services:
         - action: rebuild
           path: ./ui
         - action: rebuild
-          path: ./pwa
+          path: ./browser
     ports:
       - "1111:1111"
 
@@ -39,7 +39,7 @@ services:
       context: front
       additional_contexts:
         deciphraze-ui: service:ui
-        deciphraze-pwa: service:pwa
+        deciphraze-browser: service:browser
         deciphraze-git: service:git
       dockerfile: stryker.Dockerfile
     ports:

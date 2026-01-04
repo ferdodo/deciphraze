@@ -5,15 +5,16 @@ interface BeforeInstallPromptEvent extends Event {
 	readonly userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-// Implémentation du service PWA
+// Implémentation du service Browser
 // L'interface est définie dans le frontend
 
-export function createPwaService(): {
+export function createBrowserService(): {
 	isPwaInstallable(): boolean;
 	observePwaInstallable(callback: (isInstallable: boolean) => void): () => void;
 	installPwa(): void;
 	isInstalled(): boolean;
 	getSupportStatus(): PwaSupportStatus;
+	toggleFullscreen(): void;
 } {
 	let deferredPrompt: BeforeInstallPromptEvent | null = null;
 	let isInstallable = false;
@@ -92,6 +93,19 @@ export function createPwaService(): {
 				return "no-service-worker";
 			}
 			return "supported";
+		},
+
+		toggleFullscreen(): void {
+			if (typeof document === "undefined") {
+				return;
+			}
+			if (!document.fullscreenElement) {
+				// Entrer en plein écran
+				void document.documentElement.requestFullscreen();
+			} else {
+				// Sortir du plein écran
+				void document.exitFullscreen();
+			}
 		},
 	};
 }

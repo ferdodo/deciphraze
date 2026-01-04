@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { createPwaServiceMock } from "./createPwaServiceMock";
+import { createBrowserServiceMock } from "./createBrowserServiceMock";
 
-describe("createPwaServiceMock", () => {
+describe("createBrowserServiceMock", () => {
 	it("should return a service with isPwaInstallable returning false", () => {
-		const service = createPwaServiceMock();
+		const service = createBrowserServiceMock();
 		expect(service.isPwaInstallable()).toBe(false);
 	});
 
 	it("should call the callback immediately with false when observing", () => {
-		const service = createPwaServiceMock();
+		const service = createBrowserServiceMock();
 		let callbackCalled = false;
 		let receivedValue: boolean | undefined;
 

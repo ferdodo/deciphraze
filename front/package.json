@@ -10,7 +10,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
 		"@deciphraze/ui": "../ui",
-		"@deciphraze/pwa": "../pwa",
+		"@deciphraze/browser": "../browser",
 		"@stryker-mutator/core": "^9.4.0",
 		"@stryker-mutator/vitest-runner": "^9.4.0",
 		"@types/react": "^19.2.7",

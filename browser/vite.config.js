@@ -4,7 +4,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: "./src/index.ts",
-			name: "@deciphraze/pwa",
+			name: "@deciphraze/browser",
 			fileName: () => "index.js",
 			formats: ["es"],
 		},

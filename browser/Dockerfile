@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /deciphraze/pwa
+WORKDIR /deciphraze/browser
 COPY package.json .
 RUN npm install
 COPY . .

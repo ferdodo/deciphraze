@@ -8,13 +8,13 @@ interface InstallComponentProps {
 }
 
 export function InstallComponent({ onBack }: InstallComponentProps): React.JSX.Element {
-	const { pwaService } = useGameContext();
+	const { browserService } = useGameContext();
 	const isPwaInstallable = usePwaInstallable();
-	const isInstalled = pwaService.isInstalled();
-	const supportStatus = pwaService.getSupportStatus();
+	const isInstalled = browserService.isInstalled();
+	const supportStatus = browserService.getSupportStatus();
 
 	const handleInstallClick = (): void => {
-		pwaService.installPwa();
+		browserService.installPwa();
 	};
 
 	return (

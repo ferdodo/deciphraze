@@ -1,6 +1,6 @@
-import type { PwaService } from "../services/PwaService";
+import type { BrowserService } from "../services/BrowserService";
 
-export function createPwaServiceMock(): PwaService {
+export function createBrowserServiceMock(): BrowserService {
 	return {
 		isPwaInstallable(): boolean {
 			return false;
@@ -21,6 +21,9 @@ export function createPwaServiceMock(): PwaService {
 		},
 		getSupportStatus(): "supported" {
 			return "supported" as const;
+		},
+		toggleFullscreen(): void {
+			// Pas d'action dans le mock
 		},
 	};
 }
