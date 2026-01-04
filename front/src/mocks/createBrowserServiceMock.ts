@@ -25,6 +25,20 @@ export function createBrowserServiceMock(): BrowserService {
 		toggleFullscreen(): void {
 			// Pas d'action dans le mock
 		},
+		togglePullToRefresh(): void {
+			// Pas d'action dans le mock
+		},
+		isPullToRefreshEnabled(): boolean {
+			return true;
+		},
+		observePullToRefresh(callback: (enabled: boolean) => void): () => void {
+			// Notifier immédiatement avec l'état par défaut (activé)
+			callback(true);
+			// Retourner une fonction de nettoyage vide
+			return () => {
+				// Pas de nettoyage nécessaire pour le mock
+			};
+		},
 	};
 }
 
