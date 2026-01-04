@@ -1,6 +1,6 @@
 import type React from "react";
 import { useMemo } from "react";
-import { DeciAchievements } from "@deciphraze/ds";
+import { DeciAchievements } from "@deciphraze/ui";
 import { useAchievements } from "../hooks/useAchievements";
 import { useAchievementsAsList } from "../hooks/useAchievementsAsList";
 import { useCurrentStreak } from "../hooks/useCurrentStreak";

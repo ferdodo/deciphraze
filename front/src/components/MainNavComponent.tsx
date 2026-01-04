@@ -1,4 +1,4 @@
-import { DeciMainNav } from "@deciphraze/ds";
+import { DeciMainNav } from "@deciphraze/ui";
 import { ParagraphComponent } from "./ParagraphComponent";
 import { AlphabetComponent } from "./AlphabetComponent";
 import { SymbolsComponent } from "./SymbolsComponent";

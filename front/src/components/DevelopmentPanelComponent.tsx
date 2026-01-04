@@ -1,5 +1,5 @@
 import type React from "react";
-import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ds";
+import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ui";
 import { useDay } from "../hooks/useDay";
 import { useGameContext } from "../hooks/useGameContext";
 import { isDev } from "../utils/isDev";

@@ -1,6 +1,6 @@
 services:
-  ds:
-    build: ds
+  ui:
+    build: ui
 
   pwa:
     build: pwa
@@ -14,7 +14,7 @@ services:
     build:
       context: front
       additional_contexts:
-        deciphraze-ds: service:ds
+        deciphraze-ui: service:ui
         deciphraze-pwa: service:pwa
         deciphraze-git: service:git
     develop:
@@ -28,7 +28,7 @@ services:
         - action: rebuild
           path: ./front/package.json
         - action: rebuild
-          path: ./ds
+          path: ./ui
         - action: rebuild
           path: ./pwa
     ports:
@@ -38,7 +38,7 @@ services:
     build:
       context: front
       additional_contexts:
-        deciphraze-ds: service:ds
+        deciphraze-ui: service:ui
         deciphraze-pwa: service:pwa
         deciphraze-git: service:git
       dockerfile: stryker.Dockerfile

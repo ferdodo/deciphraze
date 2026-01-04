@@ -9,7 +9,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
-		"@deciphraze/ds": "../ds",
+		"@deciphraze/ui": "../ui",
 		"@deciphraze/pwa": "../pwa",
 		"@stryker-mutator/core": "^9.4.0",
 		"@stryker-mutator/vitest-runner": "^9.4.0",

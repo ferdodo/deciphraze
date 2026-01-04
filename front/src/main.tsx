@@ -1,6 +1,6 @@
 import { createRoot, type Root } from "react-dom/client";
 import { App } from "./components/App";
-import "@deciphraze/ds/dist/ds.css";
+import "@deciphraze/ui/dist/index.css";
 import "./main.module.css";
 
 if ('serviceWorker' in navigator) {

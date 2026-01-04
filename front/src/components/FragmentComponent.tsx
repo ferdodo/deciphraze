@@ -1,4 +1,4 @@
-import { DeciFragment } from "@deciphraze/ds";
+import { DeciFragment } from "@deciphraze/ui";
 import { useCellMatchesCurrentSelection } from "../hooks/useCellMatchesCurrentSelection";
 import { computeCellType } from "../utils/computeCellType";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";

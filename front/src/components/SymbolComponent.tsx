@@ -1,6 +1,6 @@
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { LetterSelection } from "../entities/LetterSelection";
-import { DeciSymbol } from "@deciphraze/ds";
+import { DeciSymbol } from "@deciphraze/ui";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useLetterSelection } from "../hooks/useLetterSelection";
 import { useWin } from "../hooks/useWin";

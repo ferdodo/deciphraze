@@ -1,4 +1,4 @@
-import { DeciStats, DeciPlusView } from "@deciphraze/ds";
+import { DeciStats, DeciPlusView } from "@deciphraze/ui";
 import { useStatistics } from "../hooks/useStatistics";
 import { calculatePreferredLetters } from "../utils/calculatePreferredLetters";
 

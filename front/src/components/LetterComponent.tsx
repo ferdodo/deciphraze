@@ -9,7 +9,7 @@ import { normalizeWord } from "../utils/normalizeWord";
 import { characterEquals } from "../utils/characterEquals";
 import { isLetterMatched } from "../utils/isLetterMatched";
 import { useGameContext } from "../hooks/useGameContext";
-import { DeciLetter } from "@deciphraze/ds";
+import { DeciLetter } from "@deciphraze/ui";
 
 interface LetterComponentProps {
 	character: string;

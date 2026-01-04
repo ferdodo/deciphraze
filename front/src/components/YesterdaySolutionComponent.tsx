@@ -1,5 +1,5 @@
 import type React from "react";
-import { DeciYesterdaySolution, DeciPlusView } from "@deciphraze/ds";
+import { DeciYesterdaySolution, DeciPlusView } from "@deciphraze/ui";
 import { useParagraphOfYesterday } from "../hooks/useParagraphOfYesterday";
 
 interface YesterdaySolutionComponentProps {

@@ -1,4 +1,4 @@
-import { DeciPlusMenu } from "@deciphraze/ds";
+import { DeciPlusMenu } from "@deciphraze/ui";
 import { isDev } from "../utils/isDev";
 import type { PlusView } from "../types/PlusView";
 

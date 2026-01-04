@@ -4,7 +4,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: "./src/index.ts",
-			name: "@deciphraze/ds",
+			name: "@deciphraze/ui",
 			fileName: () => "index.js",
             cssFileName: () => "index.css",
 			formats: ["es"],

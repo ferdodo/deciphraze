@@ -1,5 +1,5 @@
 import type React from "react";
-import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ds";
+import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ui";
 
 interface SettingsPanelComponentProps {
 	onBack: () => void;
