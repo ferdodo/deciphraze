@@ -26,10 +26,17 @@ export function createAssociationHistoryRepositoryMock(): AssociationHistoryRepo
 		return dayHistory.some(entry => !entry.isCorrect);
 	}
 
+	function clear(): void {
+		Object.keys(history).forEach(key => {
+			delete history[key];
+		});
+	}
+
 	return {
 		getHistory,
 		addAssociation,
-		hasErrors
+		hasErrors,
+		clear
 	};
 }
 

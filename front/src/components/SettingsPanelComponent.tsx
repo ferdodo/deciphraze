@@ -2,30 +2,44 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ui";
 import { useGameContext } from "../hooks/useGameContext";
+import type { Settings } from "../entities/Settings";
+import { resetAllData } from "../usecases/resetAllData";
 
 interface SettingsPanelComponentProps {
 	onBack: () => void;
 }
 
 export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps): React.JSX.Element {
-	const { browserService } = useGameContext();
+	const context = useGameContext();
+	const { 
+		browserService,
+		settingsRepository,
+	} = context;
 	const [isPullToRefreshEnabled, setIsPullToRefreshEnabled] = useState<boolean>(() => 
-		browserService.isPullToRefreshEnabled()
+		settingsRepository.getSettings().pullToRefreshEnabled
 	);
 
 	useEffect(() => {
-		const unsubscribe = browserService.observePullToRefresh((enabled) => {
-			setIsPullToRefreshEnabled(enabled);
+		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
+			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
 		});
-		return unsubscribe;
-	}, [browserService]);
+		return () => subscription.unsubscribe();
+	}, [settingsRepository]);
 
 	const handleToggleFullscreen = (): void => {
 		browserService.toggleFullscreen();
 	};
 
 	const handleTogglePullToRefresh = (): void => {
-		browserService.togglePullToRefresh();
+		const currentSettings = settingsRepository.getSettings();
+		settingsRepository.saveSettings({
+			...currentSettings,
+			pullToRefreshEnabled: !currentSettings.pullToRefreshEnabled
+		});
+	};
+
+	const handleResetData = (): void => {
+		resetAllData(context);
 	};
 
 	return (
@@ -36,6 +50,7 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					onToggleFullscreen={handleToggleFullscreen}
 					onTogglePullToRefresh={handleTogglePullToRefresh}
 					isPullToRefreshEnabled={isPullToRefreshEnabled}
+					onResetData={handleResetData}
 				/>
 			}
 			onBack={onBack}

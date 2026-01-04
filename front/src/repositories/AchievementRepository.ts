@@ -5,4 +5,5 @@ export interface AchievementRepository {
 	loadAchievements(): AllAchievements;
 	saveAchievements(achievements: AllAchievements): void;
 	achievements$: Observable<AllAchievements>;
+	clear(): void;
 }

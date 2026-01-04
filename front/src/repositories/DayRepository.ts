@@ -4,5 +4,6 @@ export interface DayRepository {
 	getDay(): string;
 	setDay(day: string): void;
 	observeDay(): Observable<string>;
+	clear(): void;
 }
 

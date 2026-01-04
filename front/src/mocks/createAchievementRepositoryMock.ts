@@ -17,9 +17,15 @@ export function createAchievementRepositoryMock(): AchievementRepository {
 		achievements$.next(achievements);
 	}
 
+	function clear(): void {
+		achievements = defaultAchievements;
+		achievements$.next(achievements);
+	}
+
 	return {
 		loadAchievements,
 		saveAchievements,
 		achievements$: achievements$.asObservable().pipe(share()),
+		clear,
 	};
 }

@@ -5,5 +5,6 @@ export interface StatisticsRepository {
 	getStatistics(): Statistics;
 	saveStatistics(statistics: Statistics): void;
 	statistics$: Observable<Statistics>;
+	clear(): void;
 }
 

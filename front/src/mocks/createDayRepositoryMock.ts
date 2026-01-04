@@ -17,9 +17,14 @@ export function createDayRepositoryMock(): DayRepository {
 		return daySubject.asObservable();
 	}
 
+	function clear(): void {
+		daySubject.next("2024-01-15");
+	}
+
 	return {
 		getDay,
 		setDay,
 		observeDay,
+		clear,
 	};
 }

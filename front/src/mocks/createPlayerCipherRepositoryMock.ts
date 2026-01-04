@@ -35,6 +35,9 @@ export const createPlayerCipherRepositoryMock = (initialCipher: Record<string, s
 			playerCipherSubject.next(currentCipher);
 		},
 		playerCipher$: playerCipherSubject.asObservable(),
-		playerCipherSubject // Expose the subject for testing
+		playerCipherSubject, // Expose the subject for testing
+		clear: () => {
+			playerCipherSubject.next({});
+		}
 	};
 };

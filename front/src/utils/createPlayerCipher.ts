@@ -40,12 +40,20 @@ export function createPlayerCipher(): PlayerCipherRepository {
 		playerCipherSubject.next({ ...playerCipher });
 	};
 
+	function clear(): void {
+		Object.keys(playerCipher).forEach(key => {
+			delete playerCipher[key];
+		});
+		playerCipherSubject.next({ ...playerCipher });
+	}
+
 	return {
 		getPlayerCipher,
 		removePlayerCipherEntryByLetter,
 		removePlayerCipherEntryByValue,
 		addPlayerCipherEntry,
 		playerCipher$: playerCipherSubject.asObservable().pipe(share()),
+		clear
 	};
 }
 

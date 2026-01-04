@@ -45,10 +45,15 @@ export function createDiscoveryOrderRepository(storage: StorageLike): DiscoveryO
 		}
 	}
 
+	function clear(): void {
+		storage.removeItem(DISCOVERY_ORDER_STORAGE_KEY);
+	}
+
 	return {
 		getDiscoveryOrder,
 		setDiscoveryOrder,
-		addLetterToDiscoveryOrder
+		addLetterToDiscoveryOrder,
+		clear
 	};
 }
 

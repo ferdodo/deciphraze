@@ -7,5 +7,6 @@ export interface PlayerCipherRepository {
 	removePlayerCipherEntryByValue(removed: string): void;
 	addPlayerCipherEntry(letter: string, symbol: string): void;
 	playerCipher$: Observable<PlayerCipher>;
+	clear(): void;
 }
 

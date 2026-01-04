@@ -4,6 +4,10 @@ import type { LetterSelectionRepository } from "../repositories/LetterSelectionR
 export const createLetterSelectionRepositoryMock = (): LetterSelectionRepository => {
 	const letterSelectionSubject = new BehaviorSubject<string | null>(null);
 	
+	function clear(): void {
+		letterSelectionSubject.next(null);
+	}
+
 	return {
 		getLetterSelection: () => letterSelectionSubject.value,
 		setLetterSelection: (letter: string | null) => {
@@ -12,6 +16,7 @@ export const createLetterSelectionRepositoryMock = (): LetterSelectionRepository
 		selectLetter: (letter: string | null) => {
 			letterSelectionSubject.next(letter);
 		},
-		letterSelection$: letterSelectionSubject.asObservable()
+		letterSelection$: letterSelectionSubject.asObservable(),
+		clear
 	};
 };

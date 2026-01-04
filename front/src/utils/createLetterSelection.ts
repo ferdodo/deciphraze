@@ -26,11 +26,17 @@ export function createLetterSelection(): LetterSelectionRepository {
 		}
 	}
 
+	function clear(): void {
+		currentSelection = null;
+		letterSelectionSubject.next(null);
+	}
+
 	return {
 		getLetterSelection,
 		setLetterSelection,
 		letterSelection$: letterSelectionSubject.asObservable(),
 		selectLetter,
+		clear
 	};
 }
 

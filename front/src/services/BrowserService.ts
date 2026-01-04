@@ -7,7 +7,6 @@ export interface BrowserService {
 	isInstalled(): boolean;
 	getSupportStatus(): PwaSupportStatus;
 	toggleFullscreen(): void;
-	togglePullToRefresh(): void;
-	isPullToRefreshEnabled(): boolean;
-	observePullToRefresh(callback: (enabled: boolean) => void): () => void;
+	applyPullToRefresh(enabled: boolean): void;
+	confirm(message: string): boolean;
 }

@@ -66,10 +66,17 @@ export function createStatisticsRepository(storage: StorageLike): StatisticsRepo
 		statistics$.next(statistics);
 	}
 
+	function clear(): void {
+		statistics = defaultStatistics;
+		storage.removeItem(STATISTICS_STORAGE_KEY);
+		statistics$.next(statistics);
+	}
+
 	return {
 		getStatistics,
 		saveStatistics,
 		statistics$: statistics$.asObservable().pipe(share()),
+		clear
 	};
 }
 

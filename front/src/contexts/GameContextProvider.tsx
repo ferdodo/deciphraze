@@ -10,6 +10,7 @@ import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { createAssociationHistoryRepository } from "../utils/createAssociationHistoryRepository";
+import { createSettingsRepository } from "../utils/createSettingsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { getDefaultStorage } from "../utils/getDefaultStorage";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
@@ -22,6 +23,13 @@ interface GameContextProviderProps {
 export function GameContextProvider({ children }: GameContextProviderProps): React.JSX.Element {
 	const value = useMemo(() => {
 		const storage = getDefaultStorage() ?? createLocalStorageMock();
+		const settingsRepository = createSettingsRepository(storage);
+		const browserService = getBrowserService();
+		
+		// Appliquer les paramètres au démarrage
+		const settings = settingsRepository.getSettings();
+		browserService.applyPullToRefresh(settings.pullToRefreshEnabled);
+		
 		return {
 			letterSelectionRepository: createLetterSelection(),
 			playerCipherRepository: createPlayerCipher(),
@@ -32,9 +40,18 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
 			statisticsRepository: createStatisticsRepository(storage),
 			associationHistoryRepository: createAssociationHistoryRepository(storage),
-			browserService: getBrowserService(),
+			settingsRepository,
+			browserService,
 		};
 	}, []);
+
+	// Écouter les changements de settings pour appliquer au BrowserService
+	useEffect(() => {
+		const subscription = value.settingsRepository.settings$.subscribe((newSettings) => {
+			value.browserService.applyPullToRefresh(newSettings.pullToRefreshEnabled);
+		});
+		return () => subscription.unsubscribe();
+	}, [value]);
 
 	// Initialiser les effets de bord du jeu
 	useEffect(() => {

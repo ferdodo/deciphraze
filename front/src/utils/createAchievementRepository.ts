@@ -33,10 +33,17 @@ export function createAchievementRepository(storage: StorageLike): AchievementRe
 		achievements$.next(achievements);
 	}
 
+	function clear(): void {
+		achievements = defaultAchievements;
+		storage.removeItem(ACHIEVEMENTS_STORAGE_KEY);
+		achievements$.next(achievements);
+	}
+
 	return {
 		loadAchievements,
 		saveAchievements,
 		achievements$: achievements$.asObservable().pipe(share()),
+		clear
 	};
 }
 

@@ -6,5 +6,6 @@ export interface LetterSelectionRepository {
 	setLetterSelection(letter: LetterSelection): void;
 	selectLetter(letter: string | null): void;
 	letterSelection$: Observable<LetterSelection>;
+	clear(): void;
 }
 

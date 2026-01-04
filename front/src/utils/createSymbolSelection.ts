@@ -23,10 +23,16 @@ export function createSymbolSelection(): SymbolSelectionRepository {
 		}
 	}
 
+	function clear(): void {
+		currentSelection = null;
+		symbolSelectionSubject.next(null);
+	}
+
 	return {
 		getSymbolSelection,
 		selectSymbol,
 		symbolSelection$: symbolSelectionSubject.asObservable(),
+		clear
 	};
 }
 

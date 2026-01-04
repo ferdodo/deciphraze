@@ -20,10 +20,17 @@ export function createDayRepository(): DayRepository {
 		return daySubject.asObservable();
 	}
 
+	function clear(): void {
+		const now = new Date();
+		const currentDate = formatDate(now);
+		daySubject.next(currentDate);
+	}
+
 	return {
 		getDay,
 		setDay,
 		observeDay,
+		clear
 	};
 }
 

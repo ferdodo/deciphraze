@@ -4,11 +4,16 @@ import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionR
 export const createSymbolSelectionRepositoryMock = (): SymbolSelectionRepository => {
 	const symbolSelectionSubject = new BehaviorSubject<string | null>(null);
 	
+	function clear(): void {
+		symbolSelectionSubject.next(null);
+	}
+
 	return {
 		getSymbolSelection: () => symbolSelectionSubject.value,
 		selectSymbol: (symbol: string | null) => {
 			symbolSelectionSubject.next(symbol);
 		},
-		symbolSelection$: symbolSelectionSubject.asObservable()
+		symbolSelection$: symbolSelectionSubject.asObservable(),
+		clear
 	};
 };

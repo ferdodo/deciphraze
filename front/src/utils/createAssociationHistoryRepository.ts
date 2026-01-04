@@ -45,10 +45,15 @@ export function createAssociationHistoryRepository(storage: StorageLike): Associ
 		return dayHistory.some(entry => !entry.isCorrect);
 	}
 
+	function clear(): void {
+		storage.removeItem(ASSOCIATION_HISTORY_STORAGE_KEY);
+	}
+
 	return {
 		getHistory,
 		addAssociation,
-		hasErrors
+		hasErrors,
+		clear
 	};
 }
 

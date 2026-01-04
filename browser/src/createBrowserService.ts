@@ -15,30 +15,14 @@ export function createBrowserService(): {
 	isInstalled(): boolean;
 	getSupportStatus(): PwaSupportStatus;
 	toggleFullscreen(): void;
-	togglePullToRefresh(): void;
-	isPullToRefreshEnabled(): boolean;
-	observePullToRefresh(callback: (enabled: boolean) => void): () => void;
+	applyPullToRefresh(enabled: boolean): void;
+	confirm(message: string): boolean;
 } {
 	let deferredPrompt: BeforeInstallPromptEvent | null = null;
 	let isInstallable = false;
 	const observers: Set<(isInstallable: boolean) => void> = new Set();
 
-	// Gestion du pull-to-refresh
-	const PULL_TO_REFRESH_KEY = "pullToRefreshEnabled";
-	// Par défaut, le pull-to-refresh est activé
-	let pullToRefreshEnabled = true;
-	const pullToRefreshObservers: Set<(enabled: boolean) => void> = new Set();
-
-	// Initialiser l'état depuis localStorage
-	if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
-		const stored = localStorage.getItem(PULL_TO_REFRESH_KEY);
-		// Si une valeur est stockée, l'utiliser, sinon garder la valeur par défaut (true)
-		if (stored !== null) {
-			pullToRefreshEnabled = stored === "true";
-		}
-	}
-
-	function applyPullToRefreshSettings(): void {
+	function applyPullToRefreshSettings(enabled: boolean): void {
 		if (typeof document === "undefined" || typeof window === "undefined") {
 			return;
 		}
@@ -46,7 +30,7 @@ export function createBrowserService(): {
 		const body = document.body;
 		const html = document.documentElement;
 
-		if (pullToRefreshEnabled) {
+		if (enabled) {
 			// Réactiver le pull-to-refresh
 			body.style.overscrollBehaviorY = "";
 			html.style.overscrollBehaviorY = "";
@@ -55,22 +39,6 @@ export function createBrowserService(): {
 			// overscroll-behavior-y: none empêche le pull-to-refresh sans affecter le scroll normal
 			body.style.overscrollBehaviorY = "none";
 			html.style.overscrollBehaviorY = "none";
-		}
-	}
-
-	// Appliquer les paramètres au démarrage
-	if (typeof window !== "undefined" && typeof document !== "undefined") {
-		// Attendre que le DOM soit prêt
-		if (document.readyState === "loading") {
-			document.addEventListener("DOMContentLoaded", applyPullToRefreshSettings);
-		} else {
-			applyPullToRefreshSettings();
-		}
-	}
-
-	function notifyPullToRefreshObservers(): void {
-		for (const callback of pullToRefreshObservers) {
-			callback(pullToRefreshEnabled);
 		}
 	}
 
@@ -162,30 +130,15 @@ export function createBrowserService(): {
 			}
 		},
 
-		togglePullToRefresh(): void {
-			pullToRefreshEnabled = !pullToRefreshEnabled;
-			// Sauvegarder dans localStorage
-			if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
-				localStorage.setItem(PULL_TO_REFRESH_KEY, String(pullToRefreshEnabled));
+		applyPullToRefresh(enabled: boolean): void {
+			applyPullToRefreshSettings(enabled);
+		},
+
+		confirm(message: string): boolean {
+			if (typeof window === "undefined") {
+				return false;
 			}
-			// Appliquer les changements immédiatement
-			applyPullToRefreshSettings();
-			notifyPullToRefreshObservers();
-		},
-
-		isPullToRefreshEnabled(): boolean {
-			return pullToRefreshEnabled;
-		},
-
-		observePullToRefresh(callback: (enabled: boolean) => void): () => void {
-			pullToRefreshObservers.add(callback);
-			// Notifier immédiatement avec l'état actuel
-			callback(pullToRefreshEnabled);
-
-			// Retourner une fonction de nettoyage
-			return (): void => {
-				pullToRefreshObservers.delete(callback);
-			};
+			return window.confirm(message);
 		},
 	};
 }
