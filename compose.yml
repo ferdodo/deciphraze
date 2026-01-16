@@ -1,6 +1,12 @@
 services:
+  design-system:
+    build: design-system
+
   ui:
-    build: ui
+    build:
+      context: ui
+      additional_contexts:
+        deciphraze-design-system: service:design-system
 
   browser:
     build: browser
@@ -17,6 +23,7 @@ services:
         deciphraze-ui: service:ui
         deciphraze-browser: service:browser
         deciphraze-git: service:git
+        deciphraze-design-system: service:design-system
     develop:
       watch:
         - action: sync

@@ -9,11 +9,11 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.4",
-		"@deciphraze/ui": "../ui",
 		"@deciphraze/browser": "../browser",
+		"@deciphraze/ui": "../ui",
 		"@stryker-mutator/core": "^9.4.0",
 		"@stryker-mutator/vitest-runner": "^9.4.0",
-		"@types/react": "^19.2.7",
+		"@types/react": "^19.2.8",
 		"@types/react-dom": "^19.2.3",
 		"exportcase": "^1.2.5",
 		"http-server": "^14.1.1",
@@ -23,8 +23,8 @@
 		"rxjs": "^7.8.1",
 		"tasuku": "^2.0.5",
 		"typescript": "^5.9.2",
-		"vite": "^7.1.9",
-		"vitest": "^4.0.16",
+		"vite": "^7.3.1",
+		"vitest": "^4.0.17",
 		"zod": "^4.1.12"
 	}
 }

@@ -10,7 +10,6 @@ export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): Rea
 	return (
         <div style={{ display: "grid", placeContent: "center" }}>
 		<crumbs-panel panel-title={title} style={{ maxHeight: "calc(100svh - 14.5rem)" }}>
-			{content}
 			<div style={{ marginTop: "2rem", paddingTop: "1rem" }}>
 				<crumbs-button
 					title="Retour"
@@ -20,6 +19,7 @@ export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): Rea
 					Retour
 				</crumbs-button>
 			</div>
+			{content}
 		</crumbs-panel>
         </div>
 	);
