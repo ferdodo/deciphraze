@@ -38,6 +38,8 @@ services:
           path: ./ui
         - action: rebuild
           path: ./browser
+        - action: rebuild
+          path: ./design-system
     ports:
       - "1111:1111"
 
