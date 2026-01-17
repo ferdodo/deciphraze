@@ -33,6 +33,7 @@ const template = createTemplate(html`
 			box-shadow: 2px 10px 50px 5px rgba(26, 25, 25, 0.47);
 			margin: 1rem;
 			padding: 1rem;
+
 			/*backdrop-filter: blur(0.3rem);*/
 
 			& > div {
@@ -43,6 +44,8 @@ const template = createTemplate(html`
 				cursor: pointer;
 				width: max-content;
 				user-select: none;
+				padding-bottom: 0;
+				padding-top: 0;
 			}
 		}
 

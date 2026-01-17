@@ -25,7 +25,7 @@ export function DeciMainNav({
 		<div style={{display: "grid", height: "100svh"}}>
 		<crumbs-nav style={{ flexGrow: "1" }}>
 			<crumbs-p slot="title-1">Jouer</crumbs-p>
-			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100svh - 14.5rem)", maxWidth: "54rem" }}>
+			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100svh - 8.5rem)", maxWidth: "54rem" }}>
 				<crumbs-p>
 					Déchiffrez le paragraphe suivant en associant les lettres aux bons
 					symboles.
@@ -67,12 +67,12 @@ export function DeciMainNav({
 			</crumbs-panel>
 
 		<crumbs-p slot="title-2">Succès</crumbs-p>
-		<crumbs-panel slot="content-2" panel-title="Succès" style={{ maxHeight: "calc(100svh - 14.5rem)" }}>
+		<crumbs-panel slot="content-2" panel-title="Succès" style={{ maxHeight: "calc(100svh - 8.5rem)" }}>
 			{Achievements}
 		</crumbs-panel>
 
 		<crumbs-p slot="title-3">Plus</crumbs-p>
-		<div slot="content-3" style={{ maxHeight: "calc(100svh - 14.5rem)" }}>
+		<div slot="content-3" style={{ maxHeight: "calc(100svh - 8.5rem)" }}>
 			{PlusMenu}
 		</div>
 		</crumbs-nav>
