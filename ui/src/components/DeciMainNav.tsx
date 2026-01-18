@@ -1,4 +1,5 @@
 import type React from "react";
+import styles from "./DeciMainNav.module.css";
 
 interface DeciMainNavProps {
 	Achievements: React.ReactNode;
@@ -22,60 +23,60 @@ export function DeciMainNav({
 	onShare,
 }: DeciMainNavProps): React.JSX.Element {
 	return (
-		<div style={{display: "grid", height: "100svh"}}>
-		<crumbs-nav style={{ flexGrow: "1" }}>
-			<crumbs-p slot="title-1">Jouer</crumbs-p>
-			<crumbs-panel slot="content-1" panel-title="Deciphraze" style={{ maxHeight: "calc(100svh - 8.5rem)", maxWidth: "54rem" }}>
-				<crumbs-p>
-					Déchiffrez le paragraphe suivant en associant les lettres aux bons
-					symboles.
-				</crumbs-p>
+		<div className={styles.container}>
+			<crumbs-nav className={styles.nav}>
+				<crumbs-p slot="title-1">Jouer</crumbs-p>
+				<crumbs-panel slot="content-1" panel-title="Deciphraze" className={`${styles.panel} ${styles.panelContent1}`}>
+					<crumbs-p>
+						Déchiffrez le paragraphe suivant en associant les lettres aux bons
+						symboles.
+					</crumbs-p>
 
-				{Paragraph}
+					{Paragraph}
 
-				{!win && (
-					<>
-						<br />
-						<br />
+					{!win && (
+						<>
+							<br />
+							<br />
 
+							<div>
+								{Alphabet}
+							</div>
+
+							<br />
+
+							<div>
+								{Symbols}
+							</div>
+						</>
+					)}
+
+					{win && (
 						<div>
-							{Alphabet}
+							<crumbs-p className={styles.winText}>
+								🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
+								<crumbs-button
+									title="Copier dans le presse-papier"
+									onClick={onShare}
+									role="button"
+								>
+									Partager
+								</crumbs-button>
+							</crumbs-p>
 						</div>
+					)}
+				</crumbs-panel>
 
-						<br />
+				<crumbs-p slot="title-2">Succès</crumbs-p>
+				<crumbs-panel slot="content-2" panel-title="Succès" className={styles.panel}>
+					{Achievements}
+				</crumbs-panel>
 
-						<div>
-							{Symbols}
-						</div>
-					</>
-				)}
-
-				{win && (
-					<div>
-						<crumbs-p style={{ textAlign: "center" }}>
-							🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
-							<crumbs-button
-								title="Copier dans le presse-papier"
-								onClick={onShare}
-								role="button"
-							>
-								Partager
-							</crumbs-button>
-						</crumbs-p>
-					</div>
-				)}
-			</crumbs-panel>
-
-		<crumbs-p slot="title-2">Succès</crumbs-p>
-		<crumbs-panel slot="content-2" panel-title="Succès" style={{ maxHeight: "calc(100svh - 8.5rem)" }}>
-			{Achievements}
-		</crumbs-panel>
-
-		<crumbs-p slot="title-3">Plus</crumbs-p>
-		<div slot="content-3" style={{ maxHeight: "calc(100svh - 8.5rem)" }}>
-			{PlusMenu}
-		</div>
-		</crumbs-nav>
+				<crumbs-p slot="title-3">Plus</crumbs-p>
+				<div slot="content-3" className={styles.content3}>
+					{PlusMenu}
+				</div>
+			</crumbs-nav>
 		</div>
 	);
 };
