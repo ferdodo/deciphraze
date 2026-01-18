@@ -8,6 +8,7 @@ const SETTINGS_STORAGE_KEY = "deciphraze_settings";
 
 const defaultSettings: Settings = {
 	pullToRefreshEnabled: true,
+	hideInstructions: false,
 };
 
 export function createSettingsRepository(storage: StorageLike): SettingsRepository {
@@ -25,6 +26,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					pullToRefreshEnabled: typeof parsed.pullToRefreshEnabled === "boolean" 
 						? parsed.pullToRefreshEnabled 
 						: defaultSettings.pullToRefreshEnabled,
+					hideInstructions: typeof parsed.hideInstructions === "boolean" 
+						? parsed.hideInstructions 
+						: defaultSettings.hideInstructions,
 				};
 			} else {
 				settings = defaultSettings;

@@ -18,10 +18,14 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [isPullToRefreshEnabled, setIsPullToRefreshEnabled] = useState<boolean>(() => 
 		settingsRepository.getSettings().pullToRefreshEnabled
 	);
+	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
+		settingsRepository.getSettings().hideInstructions
+	);
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
+			setHideInstructions(settings.hideInstructions);
 		});
 		return () => subscription.unsubscribe();
 	}, [settingsRepository]);
@@ -38,6 +42,14 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		});
 	};
 
+	const handleToggleHideInstructions = (): void => {
+		const currentSettings = settingsRepository.getSettings();
+		settingsRepository.saveSettings({
+			...currentSettings,
+			hideInstructions: !currentSettings.hideInstructions
+		});
+	};
+
 	const handleResetData = (): void => {
 		resetAllData(context);
 	};
@@ -51,6 +63,8 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					onTogglePullToRefresh={handleTogglePullToRefresh}
 					isPullToRefreshEnabled={isPullToRefreshEnabled}
 					onResetData={handleResetData}
+					onToggleHideInstructions={handleToggleHideInstructions}
+					isHideInstructionsEnabled={hideInstructions}
 				/>
 			}
 			onBack={onBack}

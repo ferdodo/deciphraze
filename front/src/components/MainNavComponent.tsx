@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { DeciMainNav } from "@deciphraze/ui";
 import { ParagraphComponent } from "./ParagraphComponent";
 import { AlphabetComponent } from "./AlphabetComponent";
@@ -9,6 +10,8 @@ import { useWin } from "../hooks/useWin";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { share } from "../utils/share";
+import { useGameContext } from "../hooks/useGameContext";
+import type { Settings } from "../entities/Settings";
 
 import type React from "react";
 
@@ -25,6 +28,19 @@ export function MainNavComponent(): React.JSX.Element {
 		share(matchCount);
 	};
 
+	const context = useGameContext();
+	const { settingsRepository } = context;
+	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
+		settingsRepository.getSettings().hideInstructions
+	);
+
+	useEffect(() => {
+		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
+			setHideInstructions(settings.hideInstructions);
+		});
+		return () => subscription.unsubscribe();
+	}, [settingsRepository]);
+
 	return (
 		<DeciMainNav
 			Achievements={<AchievementsComponent />}
@@ -36,6 +52,7 @@ export function MainNavComponent(): React.JSX.Element {
 			words={words}
 			win={win}
 			onShare={handleShare}
+			hideInstructions={hideInstructions}
 		/>
 	);
 }

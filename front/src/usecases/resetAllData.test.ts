@@ -68,6 +68,7 @@ describe("resetAllData", () => {
 		contextWithSettings.associationHistoryRepository.addAssociation("2024-01-01", "A", "X", true);
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
+			hideInstructions: false,
 		});
 
 		// Appeler resetAllData
@@ -151,6 +152,7 @@ describe("resetAllData", () => {
 		contextWithSettings.associationHistoryRepository.addAssociation("2024-01-01", "A", "X", true);
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
+			hideInstructions: false,
 		});
 
 		// Appeler resetAllData

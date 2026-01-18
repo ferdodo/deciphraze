@@ -5,9 +5,11 @@ interface DeciSettingsPanelProps {
 	onTogglePullToRefresh: () => void;
 	isPullToRefreshEnabled: boolean;
 	onResetData: () => void;
+	onToggleHideInstructions: () => void;
+	isHideInstructionsEnabled: boolean;
 }
 
-export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData }: DeciSettingsPanelProps): React.JSX.Element {
+export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled }: DeciSettingsPanelProps): React.JSX.Element {
 
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -39,6 +41,21 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					role="button"
 				>
 					{isPullToRefreshEnabled ? "Pull-to-refresh activé" : "Pull-to-refresh désactivé"}
+				</crumbs-button>
+			</div>
+			<div style={{ marginTop: "2rem" }}>
+				<crumbs-p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+					Jeu
+				</crumbs-p>
+				<crumbs-p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "0.75rem", lineHeight: "1.4" }}>
+					Cache les instructions du jeu.
+				</crumbs-p>
+				<crumbs-button
+					title={isHideInstructionsEnabled ? "Afficher les instructions" : "Cacher les instructions"}
+					onClick={onToggleHideInstructions}
+					role="button"
+				>
+					{isHideInstructionsEnabled ? "Instructions cachées" : "Instructions visibles"}
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>

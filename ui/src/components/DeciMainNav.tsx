@@ -11,6 +11,7 @@ interface DeciMainNavProps {
 	win: boolean;
 	words: string[][];
 	onShare: () => void;
+	hideInstructions: boolean;
 }
 
 export function DeciMainNav({
@@ -21,16 +22,19 @@ export function DeciMainNav({
 	Paragraph,
 	win,
 	onShare,
+	hideInstructions,
 }: DeciMainNavProps): React.JSX.Element {
 	return (
 		<div className={styles.container}>
 			<crumbs-nav className={styles.nav}>
 				<crumbs-p slot="title-1">Jouer</crumbs-p>
 				<crumbs-panel slot="content-1" panel-title="Deciphraze" className={`${styles.panel} ${styles.panelContent1}`}>
-					<crumbs-p>
-						Déchiffrez le paragraphe suivant en associant les lettres aux bons
-						symboles.
-					</crumbs-p>
+					{!hideInstructions && (
+						<crumbs-p>
+							Déchiffrez le paragraphe suivant en associant les lettres aux bons
+							symboles.
+						</crumbs-p>
+					)}
 
 					{Paragraph}
 
