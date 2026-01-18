@@ -1,6 +1,6 @@
 import htm from "htm/mini";
 import h from "hyperscript";
-import { type Subscription, fromEvent } from "rxjs";
+import { type Subscription, fromEvent, map } from "rxjs";
 import { createTemplate, getShadowRoot } from "../utils";
 
 const html = htm.bind(h);
@@ -195,9 +195,6 @@ class Nav extends HTMLElement {
 									block: "nearest",
 									inline: "center"
 								});
-
-								this.selected = Number.parseInt(slotName.split('-')[1]);
-								this.render();
 							}
 						})
 					)
@@ -227,6 +224,33 @@ class Nav extends HTMLElement {
 				}
 			}
 		}
+
+		// Ajouter un listener sur l'événement scroll pour mettre à jour l'élément sélectionné
+		this.subscriptions.push(
+			fromEvent(content, "scroll")
+				.pipe(
+					map(() => {
+						const scrollLeft = content.scrollLeft;
+						const clientWidth = content.clientWidth;
+						const visibleIndex = Math.round(scrollLeft / clientWidth) + 1;
+						
+						// Vérifier que l'index est valide
+						const contentSlots = Array.from(content.children).filter(
+							(child) => child.id && child.id.startsWith("content-")
+						);
+						if (visibleIndex >= 1 && visibleIndex <= contentSlots.length) {
+							return visibleIndex;
+						}
+						return null;
+					})
+				)
+				.subscribe((visibleIndex) => {
+					if (!this.navOpen && visibleIndex !== null) {
+						this.selected = visibleIndex;
+						this.render();
+					}
+				})
+		);
 
 		this.render();
 	}
