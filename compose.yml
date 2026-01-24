@@ -50,6 +50,7 @@ services:
         deciphraze-ui: service:ui
         deciphraze-browser: service:browser
         deciphraze-git: service:git
+        deciphraze-design-system: service:design-system
       dockerfile: stryker.Dockerfile
     ports:
       - "1112:1112"

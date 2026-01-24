@@ -12,6 +12,7 @@ interface DeciMainNavProps {
 	words: string[][];
 	onShare: () => void;
 	hideInstructions: boolean;
+	hasNewAchievements: boolean;
 }
 
 export function DeciMainNav({
@@ -23,6 +24,7 @@ export function DeciMainNav({
 	win,
 	onShare,
 	hideInstructions,
+	hasNewAchievements,
 }: DeciMainNavProps): React.JSX.Element {
 	return (
 		<div className={styles.container}>
@@ -71,7 +73,10 @@ export function DeciMainNav({
 					)}
 				</crumbs-panel>
 
-				<crumbs-p slot="title-2">Succès</crumbs-p>
+				<div slot="title-2" style={{ display: "inline-block", position: "relative", lineHeight: "0" }}>
+					{hasNewAchievements && <crumbs-new-content-indicator />}
+					<crumbs-p> Succès </crumbs-p>
+				</div>
 				<crumbs-panel slot="content-2" panel-title="Succès" className={styles.panel}>
 					{Achievements}
 				</crumbs-panel>

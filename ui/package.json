@@ -8,8 +8,8 @@
 		"verify": "node ./scripts/verify.mjs"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.2.4",
-		"@types/react": "^19.2.7",
+		"@biomejs/biome": "^2.3.12",
+		"@types/react": "^19.2.9",
 		"@types/react-dom": "^19.2.3",
 		"crumbs-design-system": "file:../design-system",
 		"exportcase": "^1.2.5",

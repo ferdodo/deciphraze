@@ -1,42 +1,128 @@
 import type React from "react";
 import styles from "./DeciAchievements.module.css";
 import { DeciAchievement } from "./DeciAchievement";
+import { DeciAchievementFooter } from "./DeciAchievementFooter";
 
-interface Achievement {
-    achievementId: string;
-    name: string;
-    description: string;
-    unlocked: boolean;
-    progress?: {
-        current: number;
-        target: number;
-    };
+interface AllAchievements {
+	computedAtDate: string;
+	achievements: {
+		firstGame: {
+			name: "Préambule";
+			description: "Jouer votre première partie";
+			unlocked: boolean;
+		};
+		streak5Days: {
+			name: "Momentum";
+			description: "Réussir une partie 5 jours consécutifs";
+			unlocked: boolean;
+			progress: {
+				current: number;
+				target: 5;
+			};
+		};
+		firstLetterA: {
+			name: "Aperçu";
+			description: "Trouver la lettre A en premier";
+			unlocked: boolean;
+		};
+		firstLetterE: {
+			name: "Élémentaire";
+			description: "Trouver la lettre E en premier";
+			unlocked: boolean;
+		};
+		firstLetterY: {
+			name: "Mythique";
+			description: "Trouver la lettre Y en premier";
+			unlocked: boolean;
+		};
+		wordInOrder: {
+			name: "Signature";
+			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre";
+			unlocked: boolean;
+		};
+		alphaAndOmega: {
+			name: "Synthèse";
+			description: "Trouver respectivement la première lettre du paragraphe en premier et la dernière lettre en dernier";
+			unlocked: boolean;
+		};
+		firstLetterQ: {
+			name: "Qualifié";
+			description: "Trouver la lettre Q en premier";
+			unlocked: boolean;
+		};
+		words1000: {
+			name: "Scribe";
+			description: "Déchiffrez 500 mots";
+			unlocked: boolean;
+			progress: {
+				current: number;
+				target: 500;
+			};
+		};
+		completeAlphabet: {
+			name: "Lettré";
+			description: "Trouver toutes les lettres de l'alphabet";
+			unlocked: boolean;
+			progress: {
+				current: number;
+				target: 26;
+			};
+		};
+		paleographer: {
+			name: "Paléographe";
+			description: "Compléter une partie sans erreur d'association";
+			unlocked: boolean;
+		};
+		allVowelsInSequence: {
+			name: "Vocaliste";
+			description: "Trouver toutes les voyelles à la suite";
+			unlocked: boolean;
+		};
+	};
 }
 
 interface DeciAchievementsProps {
-	achievementsList: Achievement[];
+	achievements: AllAchievements;
 	unlockedCount: number;
 	currentStreak: number;
+	newAchievementIds?: string[];
+	onMarkAllAsViewed?: () => void;
 }
 
 export function DeciAchievements({
-	achievementsList,
+	achievements,
 	unlockedCount,
 	currentStreak,
-}: DeciAchievementsProps): React.JSX.Element {
-	const TOTAL_ACHIEVEMENTS = 12;
+	newAchievementIds = [],
+	onMarkAllAsViewed,
+}: DeciAchievementsProps): React.ReactNode {
+	const newIdsSet = new Set(newAchievementIds);
 
 	return (
-		<div className={styles.achievementsContainer}>
+		<>
+			<div className={styles.achievementsCounter}>
+				{unlockedCount}/{Object.keys(achievements.achievements).length} succès débloqués
+			</div>
+			<br />
 			<div className={styles.achievementsList}>
-				{achievementsList.map((achievement) => (
-					<DeciAchievement key={achievement.achievementId} achievement={achievement} currentStreak={currentStreak} />
+				{Object.entries(achievements.achievements).map(([key, achievement]) => (
+					<DeciAchievement 
+						key={key} 
+						achievement={achievement} 
+						currentStreak={currentStreak}
+						isNew={newIdsSet.has(key)}
+					/>
 				))}
 			</div>
-			<div className={styles.achievementsCounter}>
-				{unlockedCount}/{TOTAL_ACHIEVEMENTS} succès débloqués
-			</div>
-		</div>
+			{newAchievementIds.length > 0 && onMarkAllAsViewed && (
+				<div slot="footer">
+					<DeciAchievementFooter 
+						newAchievementIds={newAchievementIds}
+						onMarkAllAsViewed={onMarkAllAsViewed}
+					/>
+				</div>
+			)}
+		</>
 	);
-};
+}
 

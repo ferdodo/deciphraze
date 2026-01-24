@@ -38,7 +38,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterY.achievementId).toBe("first_letter_y");
 			expect(achievements.achievements.firstLetterY.name).toBe("Mythique");
 			expect(achievements.achievements.firstLetterY.description).toBe(
 				"Trouver la lettre Y en premier",
@@ -64,7 +63,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.computedAtDate).toBeDefined();
 			expect(achievements.achievements.firstGame.unlocked).toBe(true);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
-			expect(achievements.achievements.streak5Days.achievementId).toBe("streak_5_days");
 			expect(achievements.achievements.streak5Days.name).toBe("Momentum");
 			expect(achievements.achievements.streak5Days.description).toBe(
 				"Réussir une partie 5 jours consécutifs",
@@ -85,7 +83,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterE.achievementId).toBe("first_letter_e");
 			expect(achievements.achievements.firstLetterE.name).toBe("Élémentaire");
 			expect(achievements.achievements.firstLetterE.description).toBe(
 				"Trouver la lettre E en premier",
@@ -142,7 +139,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.words1000.unlocked).toBe(true);
-			expect(achievements.achievements.words1000.achievementId).toBe("words_1000");
 			expect(achievements.achievements.words1000.name).toBe("Scribe");
 			expect(achievements.achievements.words1000.description).toBe(
 				"Déchiffrez 500 mots",
@@ -165,7 +161,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterA.achievementId).toBe("first_letter_a");
 			expect(achievements.achievements.firstLetterA.name).toBe("Aperçu");
 		});
 	});
@@ -182,7 +177,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterQ.achievementId).toBe("first_letter_q");
 			expect(achievements.achievements.firstLetterQ.name).toBe("Qualifié");
 		});
 	});
@@ -231,7 +225,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(true);
-			expect(achievements.achievements.paleographer.achievementId).toBe("paleographer");
 			expect(achievements.achievements.paleographer.name).toBe("Paléographe");
 		});
 

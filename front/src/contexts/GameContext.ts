@@ -8,6 +8,7 @@ import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRep
 import type { StatisticsRepository } from "../repositories/StatisticsRepository";
 import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
 import type { SettingsRepository } from "../repositories/SettingsRepository";
+import type { ViewedAchievementsRepository } from "../repositories/ViewedAchievementsRepository";
 import type { BrowserService } from "../services/BrowserService";
 
 export interface GameContext {
@@ -21,5 +22,6 @@ export interface GameContext {
 	statisticsRepository: StatisticsRepository;
 	associationHistoryRepository: AssociationHistoryRepository;
 	settingsRepository: SettingsRepository;
+	viewedAchievementsRepository: ViewedAchievementsRepository;
 	browserService: BrowserService;
 }

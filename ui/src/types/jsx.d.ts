@@ -23,6 +23,10 @@ declare module "react" {
 				React.HTMLAttributes<HTMLElement>,
 				HTMLElement
 			>;
+			"crumbs-new-content-indicator": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			>;
 		}
 	}
 }

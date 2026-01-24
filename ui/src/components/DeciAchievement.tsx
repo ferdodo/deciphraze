@@ -2,8 +2,7 @@ import type { ReactNode } from "react";
 import styles from "./DeciAchievement.module.css";
 
 interface Achievement {
-    achievementId: string;
-    name: string;
+    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Signature" | "Synthèse" | "Qualifié" | "Scribe" | "Lettré" | "Paléographe" | "Vocaliste";
     description: string;
     unlocked: boolean;
     progress?: {
@@ -15,27 +14,35 @@ interface Achievement {
 interface DeciAchievementProps {
     achievement: Achievement;
     currentStreak: number;
+    isNew?: boolean;
 }
 
 export function DeciAchievement({
     achievement,
     currentStreak,
+    isNew = false,
 }: DeciAchievementProps): ReactNode {
 
 	return  (
         <div 
             className={`${styles.achievement} ${achievement.unlocked ? styles.unlocked : styles.locked}`}
+            style={{ position: "relative" }}
         >
             <div className={styles.achievementIcon}>
                 {achievement.unlocked ? "🏆" : "🔒"}
             </div>
             <div className={styles.achievementContent}>
-                <div className={styles.achievementName}>{achievement.name}</div>
+                <div className={styles.achievementName}>
+                    <div style={{ display: "inline-block", position: "relative" }}>
+                        {isNew && <crumbs-new-content-indicator />}
+                        <span>{achievement.name}</span>
+                    </div>
+                </div>
                 <div className={styles.achievementDescription}>
                     {achievement.description}
                 </div>
                 {!achievement.unlocked && "progress" in achievement && achievement.progress && (
-                    achievement.achievementId === "streak_5_days" ? (
+                    achievement.name === "Momentum" ? (
                         currentStreak > 0 && (
                             <div className={styles.progressContainer}>
                                 <div className={styles.progressBar}>
@@ -60,8 +67,8 @@ export function DeciAchievement({
                                 </div>
                                 <div className={styles.progressText}>
                                     {achievement.progress.current}/{achievement.progress.target} {
-                                        achievement.achievementId === "words_1000" ? "mots" :
-                                        achievement.achievementId === "complete_alphabet" ? "lettres" : ""
+                                        achievement.name === "Scribe" ? "mots" :
+                                        achievement.name === "Lettré" ? "lettres" : ""
                                     }
                                 </div>
                             </div>

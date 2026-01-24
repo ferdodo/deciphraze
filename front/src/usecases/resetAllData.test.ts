@@ -174,5 +174,34 @@ describe("resetAllData", () => {
 
 		cleanup();
 	});
+
+	it("should display correct confirmation message including viewed achievements", () => {
+		const [cleanup, context] = withGameStarted();
+		
+		// Créer un mock de browserService qui capture le message
+		let capturedMessage = "";
+		const browserServiceMock = createBrowserServiceMock();
+		browserServiceMock.confirm = (message: string): boolean => {
+			capturedMessage = message;
+			return false; // On ne veut pas réinitialiser pour ce test
+		};
+		context.browserService = browserServiceMock;
+
+		// Appeler resetAllData
+		resetAllData(context);
+
+		// Vérifier que le message contient toutes les informations attendues
+		expect(capturedMessage).toContain("Êtes-vous sûr de vouloir réinitialiser toutes les données de l'application ?");
+		expect(capturedMessage).toContain("Cette action supprimera définitivement :");
+		expect(capturedMessage).toContain("- L'historique des parties");
+		expect(capturedMessage).toContain("- Les statistiques");
+		expect(capturedMessage).toContain("- Les succès");
+		expect(capturedMessage).toContain("- Les notifications de succès vus"); // Vérification importante
+		expect(capturedMessage).toContain("- Les associations");
+		expect(capturedMessage).toContain("- L'ordre de découverte");
+		expect(capturedMessage).toContain("Cette action est irréversible.");
+
+		cleanup();
+	});
 });
 

@@ -11,6 +11,7 @@ import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRep
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { createAssociationHistoryRepository } from "../utils/createAssociationHistoryRepository";
 import { createSettingsRepository } from "../utils/createSettingsRepository";
+import { createViewedAchievementsRepository } from "../utils/createViewedAchievementsRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { getDefaultStorage } from "../utils/getDefaultStorage";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
@@ -41,6 +42,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			statisticsRepository: createStatisticsRepository(storage),
 			associationHistoryRepository: createAssociationHistoryRepository(storage),
 			settingsRepository,
+			viewedAchievementsRepository: createViewedAchievementsRepository(storage),
 			browserService,
 		};
 	}, []);

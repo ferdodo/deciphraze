@@ -13,6 +13,7 @@ export const resetAllData = (context: GameContext): void => {
 		statisticsRepository,
 		associationHistoryRepository,
 		settingsRepository,
+		viewedAchievementsRepository,
 	} = context;
 
 	// Demander confirmation avant de réinitialiser
@@ -22,6 +23,7 @@ export const resetAllData = (context: GameContext): void => {
 		"- L'historique des parties\n" +
 		"- Les statistiques\n" +
 		"- Les succès\n" +
+		"- Les notifications de succès vus\n" +
 		"- Les associations\n" +
 		"- L'ordre de découverte\n\n" +
 		"Cette action est irréversible."
@@ -42,5 +44,6 @@ export const resetAllData = (context: GameContext): void => {
 	statisticsRepository.clear();
 	associationHistoryRepository.clear();
 	settingsRepository.clear();
+	viewedAchievementsRepository.clear();
 };
 

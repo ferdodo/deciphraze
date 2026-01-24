@@ -8,6 +8,10 @@
 	transition: all 0.2s ease;
 }
 
+.achievement[role="button"] {
+	cursor: pointer;
+}
+
 .unlocked {
 	opacity: 1;
 }

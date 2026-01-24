@@ -9,6 +9,7 @@ import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
+import { useHasNewAchievements } from "../hooks/useHasNewAchievements";
 import { share } from "../utils/share";
 import { useGameContext } from "../hooks/useGameContext";
 import type { Settings } from "../entities/Settings";
@@ -23,6 +24,7 @@ export function MainNavComponent(): React.JSX.Element {
 
 	const win = useWin();
 	const matchCount = useMatchCount();
+	const hasNewAchievements = useHasNewAchievements();
 
 	const handleShare = (): void => {
 		share(matchCount);
@@ -53,6 +55,7 @@ export function MainNavComponent(): React.JSX.Element {
 			win={win}
 			onShare={handleShare}
 			hideInstructions={hideInstructions}
+			hasNewAchievements={hasNewAchievements}
 		/>
 	);
 }
