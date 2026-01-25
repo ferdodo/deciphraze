@@ -31,6 +31,10 @@ export function PlusMenuComponent({
 		onViewChange("install");
 	};
 
+	const handleAboutClick = (): void => {
+		onViewChange("about");
+	};
+
 	return (
 		<DeciPlusMenu
 			onParametersClick={handleParametersClick}
@@ -38,6 +42,7 @@ export function PlusMenuComponent({
 			onYesterdayClick={handleYesterdayClick}
 			onDevelopmentClick={handleDevelopmentClick}
 			onInstallClick={handleInstallClick}
+			onAboutClick={handleAboutClick}
 			showDevelopmentPanelEntry={isDev()}
 		/>
 	);

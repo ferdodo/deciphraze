@@ -6,6 +6,7 @@ interface DeciPlusMenuProps {
 	onYesterdayClick: () => void;
 	onDevelopmentClick: () => void;
 	onInstallClick: () => void;
+	onAboutClick: () => void;
 	showDevelopmentPanelEntry: boolean;
 }
 
@@ -15,6 +16,7 @@ export function DeciPlusMenu({
 	onYesterdayClick,
 	onDevelopmentClick,
 	onInstallClick,
+	onAboutClick,
 	showDevelopmentPanelEntry,
 }: DeciPlusMenuProps): React.JSX.Element {
 	return (
@@ -47,6 +49,13 @@ export function DeciPlusMenu({
 					role="button"
 				>
 					Solution d'hier
+				</crumbs-button>
+				<crumbs-button
+					title="À propos"
+					onClick={onAboutClick}
+					role="button"
+				>
+					À propos
 				</crumbs-button>
 				{showDevelopmentPanelEntry && (
 					<crumbs-button

@@ -6,6 +6,7 @@ import { SettingsPanelComponent } from "./SettingsPanelComponent";
 import { StatisticsComponent } from "./StatisticsComponent";
 import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
 import { DevelopmentPanelComponent } from "./DevelopmentPanelComponent";
+import { AboutComponent } from "./AboutComponent";
 import type { PlusView } from "../types/PlusView";
 
 export function PlusComponent(): React.JSX.Element {
@@ -32,6 +33,8 @@ export function PlusComponent(): React.JSX.Element {
 			return <YesterdaySolutionComponent onBack={handleBack} />;
 		case "development":
 			return <DevelopmentPanelComponent onBack={handleBack} />;
+		case "about":
+			return <AboutComponent onBack={handleBack} />;
 	}
 }
 
