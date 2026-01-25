@@ -14,3 +14,4 @@ export * from "./DeciSettingsPanel";
 export * from "./DeciPlusMenu";
 export * from "./DeciPlusView";
 export * from "./DeciYesterdaySolution";
+export * from "./DeciText";

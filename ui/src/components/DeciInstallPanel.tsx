@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 type PwaSupportStatus = "supported" | "no-service-worker" | "no-window" | "no-navigator" | "no-https";
 
@@ -15,9 +16,9 @@ export function DeciInstallPanel({ isPwaInstallable, isInstalled, supportStatus,
 	if (isInstalled) {
 		statusMessage = (
 			<div style={{ marginBottom: "1rem" }}>
-				<crumbs-p style={{ color: "#666", fontSize: "0.9rem" }}>
+				<DeciText variant="muted">
 					L'application est déjà installée.
-				</crumbs-p>
+				</DeciText>
 			</div>
 		);
 	} else if (isPwaInstallable) {
@@ -35,9 +36,9 @@ export function DeciInstallPanel({ isPwaInstallable, isInstalled, supportStatus,
 	} else if (supportStatus === "supported") {
 		statusMessage = (
 			<div style={{ marginBottom: "1rem" }}>
-				<crumbs-p style={{ color: "#666", fontSize: "0.9rem" }}>
+				<DeciText variant="muted">
 					L'installation n'est pas disponible pour le moment. Vérifiez que vous utilisez HTTPS et que vous avez visité le site plusieurs fois.
-				</crumbs-p>
+				</DeciText>
 			</div>
 		);
 	} else {
@@ -53,9 +54,9 @@ export function DeciInstallPanel({ isPwaInstallable, isInstalled, supportStatus,
 		}
 		statusMessage = (
 			<div style={{ marginBottom: "1rem" }}>
-				<crumbs-p style={{ color: "#666", fontSize: "0.9rem" }}>
+				<DeciText variant="muted">
 					{message}
-				</crumbs-p>
+				</DeciText>
 			</div>
 		);
 	}

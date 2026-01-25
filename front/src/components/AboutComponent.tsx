@@ -1,5 +1,5 @@
 import type React from "react";
-import { DeciPlusView } from "@deciphraze/ui";
+import { DeciPlusView, DeciText } from "@deciphraze/ui";
 
 interface AboutComponentProps {
 	onBack: () => void;
@@ -12,67 +12,67 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 			content={
 				<div style={{ padding: "1rem" }}>
 					<div style={{ marginBottom: "2rem" }}>
-						<p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+						<DeciText variant="sectionTitle">
 							Crédits
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Livre : Paris (1898)
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Auteur : Émile Zola
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Droits d'utilisation : Domaine public (œuvre de 1898)
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Police de symboles : Glipervelz (Free for personal use)
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Auteur de la police : Freddy V.P.
-						</p>
+						</DeciText>
 					</div>
 
 
 					<div style={{ marginBottom: "2rem" }}>
-						<p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+						<DeciText variant="sectionTitle">
 							Bugs & Support
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							Pour signaler un bug ou une anomalie :
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• GitHub Issues : https://github.com/ferdodo/deciphraze/issues
-						</p>
+						</DeciText>
 					</div>
 
 					<div style={{ marginBottom: "2rem" }}>
-						<p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+						<DeciText variant="sectionTitle">
 							Données personnelles
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Vos données de jeu sont stockées localement sur votre appareil
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Aucune donnée personnelle n'est collectée
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							• Vous pouvez supprimer toutes vos données à tout moment dans les paramètres
-						</p>
+						</DeciText>
 					</div>
 
 					<div style={{ marginBottom: "2rem" }}>
-						<p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+						<DeciText variant="sectionTitle">
 							Mentions légales
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							Éditeur : https://github.com/ferdodo
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							Contact : https://github.com/ferdodo/deciphraze/discussions
-						</p>
-						<p style={{ fontSize: "0.85rem", color: "#888", lineHeight: "1.4", marginBottom: "0.5rem" }}>
+						</DeciText>
+						<DeciText variant="muted">
 							License: MIT
-						</p>
+						</DeciText>
 					</div>
 				</div>
 			}

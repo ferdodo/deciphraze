@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 interface DeciSettingsPanelProps {
 	onToggleFullscreen: () => void;
@@ -13,13 +14,10 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 
 	return (
 		<div style={{ padding: "1rem" }}>
-			<crumbs-p>
-				Paramètres
-			</crumbs-p>
 			<div style={{ marginTop: "2rem" }}>
-				<crumbs-p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+				<DeciText variant="sectionTitle">
 					Affichage
-				</crumbs-p>
+				</DeciText>
 				<crumbs-button
 					title="Plein écran"
 					onClick={onToggleFullscreen}
@@ -29,12 +27,12 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
-				<crumbs-p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+				<DeciText variant="sectionTitle">
 					Comportement
-				</crumbs-p>
-				<crumbs-p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "0.75rem", lineHeight: "1.4" }}>
+				</DeciText>
+				<DeciText variant="muted">
 					Permet de rafraîchir la page en tirant vers le bas depuis le haut de l'écran.
-				</crumbs-p>
+				</DeciText>
 				<crumbs-button
 					title={isPullToRefreshEnabled ? "Désactiver le pull-to-refresh" : "Activer le pull-to-refresh"}
 					onClick={onTogglePullToRefresh}
@@ -44,12 +42,12 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
-				<crumbs-p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+				<DeciText variant="sectionTitle">
 					Jeu
-				</crumbs-p>
-				<crumbs-p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "0.75rem", lineHeight: "1.4" }}>
+				</DeciText>
+				<DeciText variant="muted">
 					Cache les instructions du jeu.
-				</crumbs-p>
+				</DeciText>
 				<crumbs-button
 					title={isHideInstructionsEnabled ? "Afficher les instructions" : "Cacher les instructions"}
 					onClick={onToggleHideInstructions}
@@ -59,12 +57,12 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
-				<crumbs-p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "1rem" }}>
+				<DeciText variant="sectionTitle">
 					Données
-				</crumbs-p>
-				<crumbs-p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "0.75rem", lineHeight: "1.4" }}>
+				</DeciText>
+				<DeciText variant="muted">
 					Réinitialise toutes les données de l'application (historique, statistiques, succès, etc.).
-				</crumbs-p>
+				</DeciText>
 				<crumbs-button
 					title="Réinitialiser les données"
 					onClick={onResetData}

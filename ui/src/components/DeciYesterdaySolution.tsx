@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 interface DeciYesterdaySolutionProps {
 	paragraphOfYesterday: string;
@@ -7,7 +8,9 @@ interface DeciYesterdaySolutionProps {
 export function DeciYesterdaySolution({ paragraphOfYesterday }: DeciYesterdaySolutionProps): React.JSX.Element {
 	return (
 		<div style={{ padding: "1rem" }}>
-			<crumbs-p>{paragraphOfYesterday}</crumbs-p>
+			<DeciText variant="muted">
+				{paragraphOfYesterday}
+			</DeciText>
 		</div>
 	);
 }

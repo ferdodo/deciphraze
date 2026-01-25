@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 interface DeciDevelopmentPanelProps {
 	currentDay: string;
@@ -15,9 +16,9 @@ export function DeciDevelopmentPanel({
 		<>
 			<crumbs-p slot="title-4">Développement</crumbs-p>
 			<crumbs-panel slot="content-4" panel-title="Développement" style={{ maxHeight: "calc(100vh - 14.5rem)"}}>
-				<crumbs-p>
+				<DeciText variant="muted">
 					Date actuelle : {currentDay}
-				</crumbs-p>
+				</DeciText>
 				<br />
 				<div style={{ display: "flex", gap: "1rem" }}>
 					<crumbs-button
