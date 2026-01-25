@@ -27,8 +27,21 @@ const template = createTemplate(html`
 			display: grid;
 			grid-column-gap: 0px;
 			grid-row-gap: 0px;
-			transition: grid-template-columns .5s cubic-bezier(.12,1.03,.11,.99), grid-template-rows .5s cubic-bezier(.12,1.03,.11,.99);
+			grid-template-columns: 1rem 1fr 1rem;
+			grid-template-rows: 1rem 1fr 1rem;
+			animation: fadein .5s cubic-bezier(.12,1.03,.11,.99);
 			height: 100%;
+		}
+
+		@keyframes fadein {
+			from {
+				opacity: 0;
+				transform: scale(0.75) translateY(-11%);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
 		}
 
 		#panel {
@@ -52,7 +65,6 @@ const template = createTemplate(html`
 		}
 
 		#panel-content {
-			visibility: collapse;
 			transition: opacity 1s cubic-bezier(.12,1.03,.11,.99);
 			z-index: 1;
 			position: relative;
@@ -91,7 +103,7 @@ const template = createTemplate(html`
 			padding-left: 1rem;
 			padding-right: 1rem;
 			opacity: 0;
-			transition-duration: 0.2s;
+			transition-duration: 0.5s;
 			transition-timing-function: cubic-bezier(.12,1.03,.11,.99);
 			transition-delay: 0.4s;
 			transition-property: opacity;
@@ -136,7 +148,7 @@ const template = createTemplate(html`
 		}
 	</style>
 
-	<div id="panel-container" style="grid-template-columns: 20% 1fr 20%; grid-template-rows: 1rem 1fr 40%;">
+	<div id="panel-container">
 		<div id="panel-loading-container">
 			<div id="panel-loading"></div>
 		</div>
@@ -192,8 +204,6 @@ class Panel extends HTMLElement {
 				"#panel-container",
 			);
 
-			panelContainer.style.gridTemplateColumns = "1rem 1fr 1rem";
-			panelContainer.style.gridTemplateRows = "1rem 1fr 1rem";
 			const panel: HTMLElement = getElement(shadowRoot, "#panel");
 			panel.style.backgroundColor = "rgba(255, 255, 255, 0.37)";
 
@@ -216,7 +226,7 @@ class Panel extends HTMLElement {
 		setTimeout(() => {
 			this.contentTimeoutElapsed = true;
 			this.render();
-		}, 400);
+		}, 200);
 
 		this.connected = true;
 		this.render();
@@ -248,11 +258,9 @@ class Panel extends HTMLElement {
 		}
 
 		if (this.contentTimeoutElapsed && isLoaded(this.loading)) {
-			panelContent.style.visibility = "visible";
 			panelContent.style.opacity = "1";
 			panelContent.style.overflow = "auto";
 		} else {
-			panelContent.style.visibility = "collapse";
 			panelContent.style.opacity = "0";
 			panelContent.style.overflow = "hidden";
 		}
