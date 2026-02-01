@@ -16,19 +16,16 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							Crédits
 						</DeciText>
 						<DeciText variant="muted">
-							• Livre : Paris (1898)
+							• Livre : Paris (1898) par Émile Zola - Domaine public
 						</DeciText>
 						<DeciText variant="muted">
-							• Auteur : Émile Zola
+							• Police de symboles : Glipervelz par Freddy V.P.
 						</DeciText>
 						<DeciText variant="muted">
-							• Droits d'utilisation : Domaine public (œuvre de 1898)
+							• Police de texte : Yrsa par Rosetta, Anna Giedryś, David Březina (OFL)
 						</DeciText>
 						<DeciText variant="muted">
-							• Police de symboles : Glipervelz (Free for personal use)
-						</DeciText>
-						<DeciText variant="muted">
-							• Auteur de la police : Freddy V.P.
+							• Police de titres : Neuton par Brian Zick (OFL)
 						</DeciText>
 					</div>
 
@@ -65,13 +62,13 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							Mentions légales
 						</DeciText>
 						<DeciText variant="muted">
-							Éditeur : https://github.com/ferdodo
+							• Éditeur : ferdodo
 						</DeciText>
 						<DeciText variant="muted">
-							Contact : https://github.com/ferdodo/deciphraze/discussions
+							• Contact : https://github.com/ferdodo/deciphraze/discussions
 						</DeciText>
 						<DeciText variant="muted">
-							License: MIT
+							• License: MIT
 						</DeciText>
 					</div>
 				</div>

@@ -200,14 +200,12 @@ const template = createTemplate(html`
 		/* ❤️ https://codepen.io/yuhomyan/pen/OJMejWJ */
 
 		.custom-btn {
+			font-family: inherit;
 			border: none;
-			font-family: ds-notes-sans;
-			font-size: 1rem;
 			display: grid;
 			place-content: center;
 			border-radius: 5px;
 			padding: 10px 25px;
-			font-weight: 500;
 			background: transparent;
 			transition: all 0.3s ease;
 			position: relative;
@@ -236,12 +234,6 @@ const template = createTemplate(html`
 			}
 			100% {
 				background-color: transparent;
-			}
-		}
-
-		@media screen and (min-width: 800px) {
-			.custom-btn {
-				font-size: 1.4rem;
 			}
 		}
 
