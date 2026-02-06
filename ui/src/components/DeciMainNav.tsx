@@ -1,5 +1,6 @@
 import type React from "react";
 import styles from "./DeciMainNav.module.css";
+import { DeciText } from "./DeciText";
 
 interface DeciMainNavProps {
 	Achievements: React.ReactNode;
@@ -29,7 +30,7 @@ export function DeciMainNav({
 	return (
 		<div className={styles.container}>
 			<crumbs-nav className={styles.nav}>
-				<crumbs-p slot="title-1">Jouer</crumbs-p>
+				<span slot="title-1"><DeciText variant="command">Jouer</DeciText></span>
 				<crumbs-panel slot="content-1" panel-title="Deciphraze" className={`${styles.panel} ${styles.panelContent1}`}>
 					{!hideInstructions && (
 						<crumbs-p>
@@ -75,13 +76,13 @@ export function DeciMainNav({
 
 				<div slot="title-2" style={{ display: "inline-block", position: "relative", lineHeight: "0" }}>
 					{hasNewAchievements && <crumbs-new-content-indicator />}
-					<crumbs-p> Succès </crumbs-p>
+					<DeciText variant="command"> Succès </DeciText>
 				</div>
 				<crumbs-panel slot="content-2" panel-title="Succès" className={styles.panel}>
 					{Achievements}
 				</crumbs-panel>
 
-				<crumbs-p slot="title-3">Plus</crumbs-p>
+				<span slot="title-3"><DeciText variant="command">Plus</DeciText></span>
 				<div slot="content-3" className={styles.content3}>
 					{PlusMenu}
 				</div>

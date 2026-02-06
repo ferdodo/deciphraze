@@ -41,6 +41,10 @@
 	font-family: "Neuton", serif;
 }
 
+.text_command {
+	color: black;
+}
+
 
 @media screen and (min-width: 800px) {
 	.text {

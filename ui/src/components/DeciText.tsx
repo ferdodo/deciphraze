@@ -3,7 +3,7 @@ import styles from "./DeciText.module.css";
 
 interface DeciTextProps {
 	children: React.ReactNode;
-	variant: "muted" | "sectionTitle";
+	variant: "muted" | "sectionTitle" | "command";
 }
 
 export function DeciText({ 

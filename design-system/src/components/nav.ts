@@ -110,6 +110,10 @@ const template = createTemplate(html`
 			height: 100%;
 		}
 
+		.nav-title-wrapper {
+			min-height: 3.5rem;
+		}
+
 		@keyframes fadeInBackground {
 			from {
 				background: rgba(255, 255, 255, 0.01);
@@ -185,7 +189,7 @@ class Nav extends HTMLElement {
 			}
 
 			if (slotName.startsWith("title-")) {
-				const slot = html`<div id=${slotName}> <crumbs-p> <slot name=${slotName}></slot> </crumbs-p> </div>`;
+				const slot = html`<div id=${slotName} className="nav-title-wrapper"> <span> <slot name=${slotName}></slot> </span> </div>`;
 
 				if (slot instanceof Element) {
 					navbar.appendChild(slot);
@@ -212,7 +216,7 @@ class Nav extends HTMLElement {
 			}
 
 			if (slotName.startsWith("navigation-toggle")) {
-				const slot = html`<div id=${slotName}> <crumbs-p> <slot name=${slotName}></slot> </crumbs-p> </div>`;
+				const slot = html`<div id=${slotName} className="nav-title-wrapper"> <span> <slot name=${slotName}></slot> </span> </div>`;
 
 				if (slot instanceof Element) {
 					navbar.appendChild(slot);
