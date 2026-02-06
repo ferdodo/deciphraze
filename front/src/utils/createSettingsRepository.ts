@@ -7,7 +7,7 @@ import type { StorageLike } from "./StorageLike";
 const SETTINGS_STORAGE_KEY = "deciphraze_settings";
 
 const defaultSettings: Settings = {
-	pullToRefreshEnabled: true,
+	pullToRefreshEnabled: false,
 	hideInstructions: false,
 };
 
