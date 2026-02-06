@@ -21,6 +21,10 @@
 
 .content3 {
 	max-height: calc(100svh - 8.5rem);
+	mask: linear-gradient(to top, transparent 0px, black 1rem),
+		linear-gradient(to right, transparent 0px, black 1rem, black calc(100% - 1rem), transparent 100%),
+		linear-gradient(to bottom, transparent 0px, black 1rem, black calc(100% - 1rem), transparent 100%);
+	mask-composite: intersect;
 }
 
 .winText {
