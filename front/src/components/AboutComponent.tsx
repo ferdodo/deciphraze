@@ -27,6 +27,12 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 						<DeciText variant="muted">
 							• Police de titres : Neuton par Brian Zick (OFL)
 						</DeciText>
+						<DeciText variant="muted">
+							• Icône cadenas : https://www.svgrepo.com/svg/262870/padlock-lock (CC0 License)
+						</DeciText>
+						<DeciText variant="muted">
+							• Icône trophée : https://www.svgrepo.com/svg/398519/trophy (CC0 License)
+						</DeciText>
 					</div>
 
 

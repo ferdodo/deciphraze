@@ -1,3 +1,5 @@
+import padlock from '../assets/padlock.svg';
+import trophy from '../assets/trophy.svg';
 import type { ReactNode } from "react";
 import styles from "./DeciAchievement.module.css";
 
@@ -29,7 +31,7 @@ export function DeciAchievement({
             style={{ position: "relative" }}
         >
             <div className={styles.achievementIcon}>
-                {achievement.unlocked ? "🏆" : "🔒"}
+                {achievement.unlocked ? <img src={trophy} alt="Trophy" className={styles.trophyIcon} /> : <img src={padlock} alt="Padlock" className={styles.padlockIcon} />}
             </div>
             <div className={styles.achievementContent}>
                 <div className={styles.achievementName}>
