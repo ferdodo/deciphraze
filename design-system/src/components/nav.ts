@@ -21,8 +21,9 @@ const template = createTemplate(html`
 		}
 
 		.selected-title {
-			background: linear-gradient(0deg, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0.44) 100%);
+			background: rgba(255, 255, 255, 0.45);
 			border-radius: 0.3rem;
+			animation: fadeInBackground 0.2s ease-in-out;
 		}
 
 		#navbar {
@@ -107,6 +108,15 @@ const template = createTemplate(html`
 			display: grid;
 			grid-template-rows: 1fr auto;
 			height: 100%;
+		}
+
+		@keyframes fadeInBackground {
+			from {
+				background: rgba(255, 255, 255, 0.01);
+			}
+			to {
+				background: rgba(255, 255, 255, 0.45);
+			}
 		}
 	</style>
 
