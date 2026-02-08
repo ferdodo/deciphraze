@@ -1,6 +1,6 @@
 import htm from "htm/mini";
 import h from "hyperscript";
-import { type Subscription, fromEvent, map } from "rxjs";
+import { type Subscription, fromEvent, map, debounceTime } from "rxjs";
 import { createTemplate, getShadowRoot } from "../utils";
 
 const html = htm.bind(h);
@@ -266,6 +266,15 @@ class Nav extends HTMLElement {
 				})
 		);
 
+		// Listen for window resize to re-snap the content
+		this.subscriptions.push(
+			fromEvent(window, "resize")
+				.pipe(debounceTime(200)) // Debounce the resize event by 200ms
+				.subscribe(() => {
+					this._handleResize();
+				})
+		);
+
 		this.render();
 	}
 
@@ -285,7 +294,7 @@ class Nav extends HTMLElement {
 		navbar.style.visibility = this.navOpen ? "hidden": "visible";
 
 		[...navbar.children].forEach((title) => {
-			const id = Number.parseInt(title.id.split('-')[1]);
+			const id = Number.parseInt(title.id.split('-')[1], 10);
 
 			if (id === this.selected) {
 				if (title instanceof HTMLElement) {
@@ -338,6 +347,48 @@ class Nav extends HTMLElement {
 		content.style.willChange = "initial";
 	}
 
+	private _handleResize(): void {
+		const shadowRoot = getShadowRoot(this);
+		const content: HTMLElement | null = shadowRoot.querySelector("#content");
+		
+		if (!content) {
+			return;
+		}
+
+		const maxScrollLeft = content.scrollWidth - content.clientWidth;
+		let scrollProgress = 0;
+		if (maxScrollLeft > 0) {
+			scrollProgress = content.scrollLeft / maxScrollLeft;
+		}
+
+		const navbar: HTMLElement | null = shadowRoot.querySelector("#navbar");
+		let titleSlotCount = 0;
+		if (navbar instanceof HTMLElement) {
+			titleSlotCount = Array.from(navbar.children).filter(
+				(child) => child.id && child.id.startsWith("title-")
+			).length;
+		}
+
+		// Calculate the intended scrollLeft for the currently selected item
+		const intendedScrollLeft = (this.selected - 1) * content.clientWidth;
+		const tolerance = 1; // Small tolerance for floating point comparisons
+
+		const isClosestSlotLeft = content.scrollLeft < intendedScrollLeft - tolerance;
+		const isClosestSlotRight = content.scrollLeft > intendedScrollLeft + tolerance;
+
+		if (this.selected >= 1 && this.selected <= titleSlotCount) {
+			if (isClosestSlotLeft) {
+				content.scrollBy(1, 0);
+			} else if (isClosestSlotRight) {
+				content.scrollBy(-1, 0);
+			} else {
+				content.scrollBy(1, 0);
+			}
+		} else {
+			content.scrollBy(1, 0);
+		}
+	}
+
 	disconnectedCallback() {
 		for (const subscription of this.subscriptions) {
 			subscription.unsubscribe();
@@ -355,4 +406,10 @@ class Nav extends HTMLElement {
 	}
 }
 
-customElements.define(tagName, Nav);
+export async function defineNavCustomElement() {
+	if (customElements.get(tagName) === undefined) {
+		customElements.define(tagName, Nav);
+	}
+
+	await customElements.whenDefined(tagName);
+}
