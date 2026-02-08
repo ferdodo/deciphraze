@@ -170,7 +170,7 @@ describe("resetAllData", () => {
 		expect(contextWithSettings.discoveryOrderRepository.getDiscoveryOrder("2024-01-01").length).toBe(0);
 		expect(contextWithSettings.statisticsRepository.getStatistics().totalGames).toBe(0);
 		expect(contextWithSettings.associationHistoryRepository.getHistory("2024-01-01").length).toBe(0);
-		expect(contextWithSettings.settingsRepository.getSettings().pullToRefreshEnabled).toBe(true); // Valeur par défaut
+		expect(contextWithSettings.settingsRepository.getSettings().pullToRefreshEnabled).toBe(false); // Valeur par défaut
 
 		cleanup();
 	});

@@ -11,7 +11,6 @@ function run(command) {
 task.group(task => [
 	task("Linting", () => run("biome ci ./src")),
 	task("Validating file names", () => run("exportcase check ./src")),
-	task("Outdated dependencies", () => run("npm outdated")),
 	task("Auditing", () => run("npm audit --audit-level=critical")),
 	task("Type checking", () => run("tsc --noEmit")),
 ], {

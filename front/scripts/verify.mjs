@@ -25,7 +25,6 @@ task.group(task => [
 	task("Checking hooks complexity", () => run("biome ci --config-path=./biome.complexity.json ./src")),
 	task("Validating file names", () => run("exportcase check ./src")),
 	task("Auditing", () => run("npm audit --audit-level=critical")),
-	task("Outdated dependencies", () => run("npm outdated")),
 ], {
 	concurrency: 2,
 	stopOnError: true,

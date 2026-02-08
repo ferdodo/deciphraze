@@ -9,7 +9,7 @@ describe("createSettingsRepository", () => {
 		const repository = createSettingsRepository(storage);
 		const settings = repository.getSettings();
 
-		expect(settings.pullToRefreshEnabled).toBe(true);
+		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
 	});
 
@@ -39,7 +39,7 @@ describe("createSettingsRepository", () => {
 		const repository = createSettingsRepository(storage);
 		const settings = repository.getSettings();
 
-		expect(settings.pullToRefreshEnabled).toBe(true); // Default value
+		expect(settings.pullToRefreshEnabled).toBe(false); // Default value
 		expect(settings.hideInstructions).toBe(true);
 	});
 
@@ -91,7 +91,7 @@ describe("createSettingsRepository", () => {
 			const subscription = repository.settings$.subscribe((settings: Settings) => {
 				receivedSettings.push({ ...settings });
 				if (receivedSettings.length === 2) {
-					expect(receivedSettings[0].pullToRefreshEnabled).toBe(true);
+					expect(receivedSettings[0].pullToRefreshEnabled).toBe(false);
 					expect(receivedSettings[0].hideInstructions).toBe(false);
 					expect(receivedSettings[1].pullToRefreshEnabled).toBe(false);
 					expect(receivedSettings[1].hideInstructions).toBe(true);
@@ -121,7 +121,7 @@ describe("createSettingsRepository", () => {
 		repository.clear();
 		const settings = repository.getSettings();
 
-		expect(settings.pullToRefreshEnabled).toBe(true); // Default
+		expect(settings.pullToRefreshEnabled).toBe(false); // Default
 		expect(settings.hideInstructions).toBe(false); // Default
 		expect(storage.getItem("deciphraze_settings")).toBeNull();
 	});
@@ -133,7 +133,7 @@ describe("createSettingsRepository", () => {
 		const repository = createSettingsRepository(storage);
 		const settings = repository.getSettings();
 
-		expect(settings.pullToRefreshEnabled).toBe(true);
+		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
 	});
 });

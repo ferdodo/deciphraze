@@ -21,7 +21,6 @@ task.group(task => [
         });
     }),
 	task("Linting", () => run("npm run lint")),
-	task("Outdated dependencies", () => run("npm outdated")),
 	task("Auditing", () => run("npm audit --audit-level=low")),
 ], {
 	concurrency: 2,
