@@ -3,7 +3,7 @@ import styles from "./DeciText.module.css";
 
 interface DeciTextProps {
 	children: React.ReactNode;
-	variant: "muted" | "sectionTitle" | "command";
+	variant?: "default" | "muted" | "sectionTitle" | "command" | "primary";
 }
 
 export function DeciText({ 
@@ -13,7 +13,7 @@ export function DeciText({
 	
 	const classNames = [
 		styles.text,
-		styles[`text_${variant}`]
+		variant && variant !== "default" ? styles[`text_${variant}`] : undefined
 	].filter(Boolean).join(" ");
 
 	return (

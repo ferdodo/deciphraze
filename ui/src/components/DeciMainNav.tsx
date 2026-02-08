@@ -33,10 +33,12 @@ export function DeciMainNav({
 				<span slot="title-1"><DeciText variant="command">Jouer</DeciText></span>
 				<crumbs-panel slot="content-1" panel-title="Deciphraze" className={`${styles.panel} ${styles.panelContent1}`}>
 					{!hideInstructions && (
-						<crumbs-p>
-							Déchiffrez le paragraphe suivant en associant les lettres aux bons
-							symboles.
-						</crumbs-p>
+						<div style={{ paddingTop: "0.5rem", paddingBottom: "0.8rem" }}>
+							<DeciText variant="default">
+								Déchiffrez le paragraphe suivant en associant les lettres aux bons
+								symboles.
+							</DeciText>
+						</div>
 					)}
 
 					{Paragraph}

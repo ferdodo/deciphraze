@@ -2,6 +2,7 @@ import padlock from '../assets/padlock.svg';
 import trophy from '../assets/trophy.svg';
 import type { ReactNode } from "react";
 import styles from "./DeciAchievement.module.css";
+import { DeciText } from "./DeciText";
 
 interface Achievement {
     name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Signature" | "Synthèse" | "Qualifié" | "Scribe" | "Lettré" | "Paléographe" | "Vocaliste";
@@ -37,12 +38,10 @@ export function DeciAchievement({
                 <div className={styles.achievementName}>
                     <div style={{ display: "inline-block", position: "relative" }}>
                         {isNew && <crumbs-new-content-indicator />}
-                        <span>{achievement.name}</span>
+                        <DeciText variant="primary">{achievement.name}</DeciText>
                     </div>
                 </div>
-                <div className={styles.achievementDescription}>
-                    {achievement.description}
-                </div>
+                <DeciText variant="default">{achievement.description}</DeciText>
                 {!achievement.unlocked && "progress" in achievement && achievement.progress && (
                     achievement.name === "Momentum" ? (
                         currentStreak > 0 && (

@@ -2,6 +2,7 @@ import type React from "react";
 import styles from "./DeciAchievements.module.css";
 import { DeciAchievement } from "./DeciAchievement";
 import { DeciAchievementFooter } from "./DeciAchievementFooter";
+import { DeciText } from "./DeciText";
 
 interface AllAchievements {
 	computedAtDate: string;
@@ -100,8 +101,10 @@ export function DeciAchievements({
 
 	return (
 		<>
-			<div className={styles.achievementsCounter}>
-				{unlockedCount}/{Object.keys(achievements.achievements).length} succès débloqués
+			<div style={{ textAlign: "center" }}>
+				<DeciText variant="primary">
+					{unlockedCount}/{Object.keys(achievements.achievements).length} succès débloqués
+				</DeciText>
 			</div>
 			<br />
 			<div className={styles.achievementsList}>

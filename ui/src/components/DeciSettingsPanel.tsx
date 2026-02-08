@@ -23,7 +23,7 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					onClick={onToggleFullscreen}
 					role="button"
 				>
-					Plein écran
+					<DeciText variant="command">Plein écran</DeciText>
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
@@ -38,7 +38,9 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					onClick={onTogglePullToRefresh}
 					role="button"
 				>
-					{isPullToRefreshEnabled ? "Pull-to-refresh activé" : "Pull-to-refresh désactivé"}
+					<DeciText variant="command">
+						{isPullToRefreshEnabled ? "Pull-to-refresh activé" : "Pull-to-refresh désactivé"}
+					</DeciText>
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
@@ -53,7 +55,9 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					onClick={onToggleHideInstructions}
 					role="button"
 				>
-					{isHideInstructionsEnabled ? "Instructions cachées" : "Instructions visibles"}
+					<DeciText variant="command">
+						{isHideInstructionsEnabled ? "Instructions cachées" : "Instructions visibles"}
+					</DeciText>
 				</crumbs-button>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
@@ -68,7 +72,7 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					onClick={onResetData}
 					role="button"
 				>
-					Réinitialiser les données
+					<DeciText variant="command">Réinitialiser les données</DeciText>
 				</crumbs-button>
 			</div>
 		</div>

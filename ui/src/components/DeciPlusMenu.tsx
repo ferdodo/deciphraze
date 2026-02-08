@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 interface DeciPlusMenuProps {
 	onParametersClick: () => void;
@@ -27,35 +28,35 @@ export function DeciPlusMenu({
 					onClick={onInstallClick}
 					role="button"
 				>
-					Installation
+					<DeciText variant="command">Installation</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="Paramètres"
 					onClick={onParametersClick}
 					role="button"
 				>
-					Paramètres
+					<DeciText variant="command">Paramètres</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="Statistiques"
 					onClick={onStatisticsClick}
 					role="button"
 				>
-					Statistiques
+					<DeciText variant="command">Statistiques</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="Solution d'hier"
 					onClick={onYesterdayClick}
 					role="button"
 				>
-					Solution d'hier
+					<DeciText variant="command">Solution d'hier</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="À propos"
 					onClick={onAboutClick}
 					role="button"
 				>
-					À propos
+					<DeciText variant="command">À propos</DeciText>
 				</crumbs-button>
 				{showDevelopmentPanelEntry && (
 					<crumbs-button
@@ -63,7 +64,7 @@ export function DeciPlusMenu({
 						onClick={onDevelopmentClick}
 						role="button"
 					>
-						Panel développeur
+						<DeciText variant="command">Panel développeur</DeciText>
 					</crumbs-button>
 				)}
 			</div>

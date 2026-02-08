@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciText } from "./DeciText";
 
 interface DeciPlusViewProps {
 	title: string;
@@ -17,7 +18,7 @@ export function DeciPlusView({ title, content, onBack }: DeciPlusViewProps): Rea
 					onClick={onBack}
 					role="button"
 				>
-					Retour
+					<DeciText variant="command">Retour</DeciText>
 				</crumbs-button>
 			</div>
 		</crumbs-panel>

@@ -1,5 +1,6 @@
 import type React from "react";
 import styles from "./DeciStats.module.css";
+import { DeciText } from "./DeciText";
 
 const formatDate = (dateString: string | null): string => {
 	if (!dateString) return "Aucune";
@@ -35,8 +36,8 @@ export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): Rea
 				<div className={styles.statistic}>
 					<div className={styles.statisticIcon}>🎮</div>
 					<div className={styles.statisticContent}>
-						<div className={styles.statisticName}>Parties jouées</div>
-						<div className={styles.statisticValue}>{statistics.totalGames}</div>
+						<DeciText variant="primary">Parties jouées</DeciText>
+						<DeciText variant="muted">{statistics.totalGames}</DeciText>
 					</div>
 				</div>
 
@@ -44,8 +45,8 @@ export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): Rea
 				<div className={styles.statistic}>
 					<div className={styles.statisticIcon}>📝</div>
 					<div className={styles.statisticContent}>
-						<div className={styles.statisticName}>Mots trouvés</div>
-						<div className={styles.statisticValue}>{statistics.totalWordsFound}</div>
+						<DeciText variant="primary">Mots trouvés</DeciText>
+						<DeciText variant="muted">{statistics.totalWordsFound}</DeciText>
 					</div>
 				</div>
 
@@ -53,17 +54,17 @@ export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): Rea
 				<div className={styles.statistic}>
 					<div className={styles.statisticIcon}>⭐</div>
 					<div className={styles.statisticContent}>
-						<div className={styles.statisticName}>Lettres préférées</div>
+						<DeciText variant="primary">Lettres préférées</DeciText>
 						<div className={styles.statisticValue}>
 							{preferredLetters.length > 0 ? (
 								preferredLetters.map((item, index) => (
-									<span key={item.letter}>
+									<DeciText key={item.letter} variant="muted">
 										{item.letter}
 										{index < preferredLetters.length - 1 ? ", " : ""}
-									</span>
+									</DeciText>
 								))
 							) : (
-								<div>Aucune statistique disponible</div>
+								<DeciText variant="muted">Aucune statistique disponible</DeciText>
 							)}
 						</div>
 					</div>
@@ -73,8 +74,8 @@ export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): Rea
 				<div className={styles.statistic}>
 					<div className={styles.statisticIcon}>🌱</div>
 					<div className={styles.statisticContent}>
-						<div className={styles.statisticName}>Première partie</div>
-						<div className={styles.statisticValue}>{formatDate(statistics.firstGameDate)}</div>
+						<DeciText variant="primary">Première partie</DeciText>
+						<DeciText variant="muted">{formatDate(statistics.firstGameDate)}</DeciText>
 					</div>
 				</div>
 
@@ -82,8 +83,8 @@ export function DeciStats({ statistics, preferredLetters }: DeciStatsProps): Rea
 				<div className={styles.statistic}>
 					<div className={styles.statisticIcon}>🕐</div>
 					<div className={styles.statisticContent}>
-						<div className={styles.statisticName}>Dernière partie</div>
-						<div className={styles.statisticValue}>{formatDate(statistics.lastGameDate)}</div>
+						<DeciText variant="primary">Dernière partie</DeciText>
+						<DeciText variant="muted">{formatDate(statistics.lastGameDate)}</DeciText>
 					</div>
 				</div>
 			</div>
