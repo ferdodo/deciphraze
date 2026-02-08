@@ -406,6 +406,8 @@ class Nav extends HTMLElement {
 	}
 }
 
+customElements.define(tagName, Nav);
+
 export async function defineNavCustomElement() {
 	if (customElements.get(tagName) === undefined) {
 		customElements.define(tagName, Nav);

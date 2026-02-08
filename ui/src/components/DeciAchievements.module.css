@@ -21,6 +21,7 @@
 	justify-content: center;
 	gap: 1rem;
 	align-items: stretch;
+	min-width: 60vw;
 }
 
 .markAllViewedContainer {
