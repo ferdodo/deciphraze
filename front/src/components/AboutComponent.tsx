@@ -28,10 +28,10 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							• Police de titres : Neuton par Brian Zick (OFL)
 						</DeciText>
 						<DeciText variant="muted">
-							• Icône cadenas : https://www.svgrepo.com/svg/262870/padlock-lock (CC0 License)
+							• Icône cadenas : <a href="https://www.svgrepo.com/svg/262870/padlock-lock" target="_blank" rel="noopener noreferrer">https://www.svgrepo.com/svg/262870/padlock-lock</a> (CC0 License)
 						</DeciText>
 						<DeciText variant="muted">
-							• Icône trophée : https://www.svgrepo.com/svg/398519/trophy (CC0 License)
+							• Icône trophée : <a href="https://www.svgrepo.com/svg/398519/trophy" target="_blank" rel="noopener noreferrer">https://www.svgrepo.com/svg/398519/trophy</a> (CC0 License)
 						</DeciText>
 					</div>
 
@@ -44,7 +44,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							Pour signaler un bug ou une anomalie :
 						</DeciText>
 						<DeciText variant="muted">
-							• GitHub Issues : https://github.com/ferdodo/deciphraze/issues
+							• GitHub Issues : <a href="https://github.com/ferdodo/deciphraze/issues" target="_blank" rel="noopener noreferrer">https://github.com/ferdodo/deciphraze/issues</a>
 						</DeciText>
 					</div>
 
@@ -71,7 +71,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							• Éditeur : ferdodo
 						</DeciText>
 						<DeciText variant="muted">
-							• Contact : https://github.com/ferdodo/deciphraze/discussions
+							• Contact : <a href="https://github.com/ferdodo/deciphraze/discussions" target="_blank" rel="noopener noreferrer">https://github.com/ferdodo/deciphraze/discussions</a>
 						</DeciText>
 						<DeciText variant="muted">
 							• License: MIT
