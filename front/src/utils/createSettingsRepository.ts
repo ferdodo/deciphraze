@@ -11,6 +11,7 @@ const defaultSettings: Settings = {
 	pullToRefreshEnabled: false,
 	hideInstructions: false,
 	textSize: getDefaultTextSize(),
+	commandTextSize: getDefaultTextSize(),
 };
 
 export function createSettingsRepository(storage: StorageLike): SettingsRepository {
@@ -34,6 +35,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					textSize: typeof parsed.textSize === "number" 
 						? parsed.textSize 
 						: defaultSettings.textSize,
+					commandTextSize: typeof parsed.commandTextSize === "number" 
+						? parsed.commandTextSize 
+						: defaultSettings.commandTextSize,
 				};
 			} else {
 				settings = defaultSettings;

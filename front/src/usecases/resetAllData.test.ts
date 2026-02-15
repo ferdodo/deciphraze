@@ -5,6 +5,7 @@ import { createSettingsRepository } from "../utils/createSettingsRepository";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
 import { createBrowserServiceMock } from "../mocks/createBrowserServiceMock";
 import { createAllAchievements } from "../factories/createAllAchievements";
+import { getDefaultTextSize } from "../utils/getDefaultTextSize";
 
 describe("resetAllData", () => {
 	it("should not reset data when user cancels confirmation", () => {
@@ -70,6 +71,7 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			textSize: 0,
+			commandTextSize: getDefaultTextSize(),
 		});
 
 		// Appeler resetAllData
@@ -155,6 +157,7 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			textSize: 0,
+			commandTextSize: 0,
 		});
 
 		// Appeler resetAllData

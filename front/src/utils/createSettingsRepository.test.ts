@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { createSettingsRepository } from "./createSettingsRepository";
 import type { Settings } from "../entities/Settings";
 import { createLocalStorageMock } from "./createLocalStorageMock";
+import { getDefaultTextSize } from "./getDefaultTextSize";
 
 describe("createSettingsRepository", () => {
 	it("should use default settings when localStorage is empty", () => {
@@ -19,6 +20,7 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			textSize: 0,
+			commandTextSize: getDefaultTextSize(),
 		};
 		storage.setItem("deciphraze_settings", JSON.stringify(validSettings));
 
@@ -83,6 +85,7 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			textSize: 0,
+			commandTextSize: getDefaultTextSize(),
 		};
 
 		repository.saveSettings(newSettings);
@@ -123,6 +126,7 @@ describe("createSettingsRepository", () => {
 				pullToRefreshEnabled: false,
 				hideInstructions: true,
 				textSize: 0,
+				commandTextSize: getDefaultTextSize(),
 			});
 		});
 	});
@@ -136,6 +140,7 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			textSize: 0,
+			commandTextSize: getDefaultTextSize(),
 		});
 
 		// Clear settings
@@ -169,6 +174,24 @@ describe("createSettingsRepository", () => {
 		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
 		expect(settings.textSize).toBe(1);
+	});
+
+	it("should handle stored settings with missing commandTextSize field", () => {
+		const storage = createLocalStorageMock();
+		const legacySettings = {
+			pullToRefreshEnabled: true,
+			hideInstructions: false,
+			textSize: 2,
+		};
+		storage.setItem("deciphraze_settings", JSON.stringify(legacySettings));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.pullToRefreshEnabled).toBe(true);
+		expect(settings.hideInstructions).toBe(false);
+		expect(settings.textSize).toBe(2);
+		expect(settings.commandTextSize).toBe(1); // Should use default
 	});
 });
 
