@@ -4,6 +4,10 @@ import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ui";
 import { useGameContext } from "../hooks/useGameContext";
 import type { Settings } from "../entities/Settings";
 import { resetAllData } from "../usecases/resetAllData";
+import { increaseTextSize } from "../usecases/increaseTextSize";
+import { decreaseTextSize } from "../usecases/decreaseTextSize";
+import { increaseCommandTextSize } from "../usecases/increaseCommandTextSize";
+import { decreaseCommandTextSize } from "../usecases/decreaseCommandTextSize";
 
 interface SettingsPanelComponentProps {
 	onBack: () => void;
@@ -21,11 +25,19 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
 		settingsRepository.getSettings().hideInstructions
 	);
+	const [textSize, setTextSize] = useState<number>(() => 
+		settingsRepository.getSettings().textSize
+	);
+	const [commandTextSize, setCommandTextSize] = useState<number>(() => 
+		settingsRepository.getSettings().commandTextSize
+	);
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
 			setHideInstructions(settings.hideInstructions);
+			setTextSize(settings.textSize);
+			setCommandTextSize(settings.commandTextSize);
 		});
 		return () => subscription.unsubscribe();
 	}, [settingsRepository]);
@@ -54,6 +66,22 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		resetAllData(context);
 	};
 
+	const handleIncreaseTextSize = (): void => {
+		increaseTextSize(context);
+	};
+
+	const handleDecreaseTextSize = (): void => {
+		decreaseTextSize(context);
+	};
+
+	const handleIncreaseCommandTextSize = (): void => {
+		increaseCommandTextSize(context);
+	};
+
+	const handleDecreaseCommandTextSize = (): void => {
+		decreaseCommandTextSize(context);
+	};
+
 	return (
 		<DeciPlusView
 			title="Paramètres"
@@ -65,6 +93,12 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					onResetData={handleResetData}
 					onToggleHideInstructions={handleToggleHideInstructions}
 					isHideInstructionsEnabled={hideInstructions}
+					textSize={textSize}
+					onIncreaseTextSize={handleIncreaseTextSize}
+					onDecreaseTextSize={handleDecreaseTextSize}
+					commandTextSize={commandTextSize}
+					onIncreaseCommandTextSize={handleIncreaseCommandTextSize}
+					onDecreaseCommandTextSize={handleDecreaseCommandTextSize}
 				/>
 			}
 			onBack={onBack}

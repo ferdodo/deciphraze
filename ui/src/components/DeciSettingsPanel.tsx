@@ -8,9 +8,15 @@ interface DeciSettingsPanelProps {
 	onResetData: () => void;
 	onToggleHideInstructions: () => void;
 	isHideInstructionsEnabled: boolean;
+	textSize: number;
+	onIncreaseTextSize: () => void;
+	onDecreaseTextSize: () => void;
+	commandTextSize: number;
+	onIncreaseCommandTextSize: () => void;
+	onDecreaseCommandTextSize: () => void;
 }
 
-export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled }: DeciSettingsPanelProps): React.JSX.Element {
+export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
 
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -25,6 +31,48 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				>
 					<DeciText variant="command">Plein écran</DeciText>
 				</crumbs-button>
+				<div style={{ marginTop: "1.5rem" }}>
+					<DeciText variant="muted">
+						Taille du texte: {textSize.toFixed(1)}
+					</DeciText>
+					<div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
+						<crumbs-button
+							title="Diminuer la taille du texte"
+							onClick={onDecreaseTextSize}
+							role="button"
+						>
+							<DeciText variant="command">−</DeciText>
+						</crumbs-button>
+						<crumbs-button
+							title="Augmenter la taille du texte"
+							onClick={onIncreaseTextSize}
+							role="button"
+						>
+							<DeciText variant="command">+</DeciText>
+						</crumbs-button>
+					</div>
+				</div>
+				<div style={{ marginTop: "1.5rem" }}>
+					<DeciText variant="muted">
+						Taille du texte des commandes: {commandTextSize.toFixed(1)}
+					</DeciText>
+					<div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
+						<crumbs-button
+							title="Diminuer la taille du texte des commandes"
+							onClick={onDecreaseCommandTextSize}
+							role="button"
+						>
+							<DeciText variant="command">−</DeciText>
+						</crumbs-button>
+						<crumbs-button
+							title="Augmenter la taille du texte des commandes"
+							onClick={onIncreaseCommandTextSize}
+							role="button"
+						>
+							<DeciText variant="command">+</DeciText>
+						</crumbs-button>
+					</div>
+				</div>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
 				<DeciText variant="sectionTitle">
