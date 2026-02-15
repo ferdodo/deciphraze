@@ -11,29 +11,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 			title="À propos"
 			content={
 				<div style={{ padding: "1rem" }}>
-					<div style={{ marginBottom: "2rem" }}>
-						<DeciText variant="sectionTitle">
-							Crédits
-						</DeciText>
-						<DeciText variant="muted">
-							• Livre : Paris (1898) par Émile Zola - Domaine public
-						</DeciText>
-						<DeciText variant="muted">
-							• Police de symboles : Glipervelz par Freddy V.P.
-						</DeciText>
-						<DeciText variant="muted">
-							• Police de texte : Yrsa par Rosetta, Anna Giedryś, David Březina (OFL)
-						</DeciText>
-						<DeciText variant="muted">
-							• Police de titres : Neuton par Brian Zick (OFL)
-						</DeciText>
-						<DeciText variant="muted">
-							• Icône cadenas : <a href="https://www.svgrepo.com/svg/262870/padlock-lock" target="_blank" rel="noopener noreferrer">https://www.svgrepo.com/svg/262870/padlock-lock</a> (CC0 License)
-						</DeciText>
-						<DeciText variant="muted">
-							• Icône trophée : <a href="https://www.svgrepo.com/svg/398519/trophy" target="_blank" rel="noopener noreferrer">https://www.svgrepo.com/svg/398519/trophy</a> (CC0 License)
-						</DeciText>
-					</div>
+
 
 
 					<div style={{ marginBottom: "2rem" }}>
@@ -73,9 +51,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 						<DeciText variant="muted">
 							• Contact : <a href="https://github.com/ferdodo/deciphraze/discussions" target="_blank" rel="noopener noreferrer">https://github.com/ferdodo/deciphraze/discussions</a>
 						</DeciText>
-						<DeciText variant="muted">
-							• License: MIT
-						</DeciText>
+
 					</div>
 				</div>
 			}
