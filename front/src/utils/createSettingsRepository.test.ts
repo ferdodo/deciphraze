@@ -18,6 +18,7 @@ describe("createSettingsRepository", () => {
 		const validSettings: Settings = {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			textSize: 0,
 		};
 		storage.setItem("deciphraze_settings", JSON.stringify(validSettings));
 
@@ -58,12 +59,30 @@ describe("createSettingsRepository", () => {
 		expect(settings.hideInstructions).toBe(false); // Default value
 	});
 
+	it("should use default value for invalid textSize", () => {
+		const storage = createLocalStorageMock();
+		const invalidSettings = {
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			textSize: "not a number",
+		};
+		storage.setItem("deciphraze_settings", JSON.stringify(invalidSettings));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.pullToRefreshEnabled).toBe(false);
+		expect(settings.hideInstructions).toBe(false);
+		expect(settings.textSize).toBe(1); // Default value from createSettingsRepository.ts
+	});
+
 	it("should save and retrieve settings", () => {
 		const storage = createLocalStorageMock();
 		const repository = createSettingsRepository(storage);
 		const newSettings: Settings = {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			textSize: 0,
 		};
 
 		repository.saveSettings(newSettings);
@@ -103,6 +122,7 @@ describe("createSettingsRepository", () => {
 			repository.saveSettings({
 				pullToRefreshEnabled: false,
 				hideInstructions: true,
+				textSize: 0,
 			});
 		});
 	});
@@ -115,6 +135,7 @@ describe("createSettingsRepository", () => {
 		repository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			textSize: 0,
 		});
 
 		// Clear settings
@@ -135,6 +156,19 @@ describe("createSettingsRepository", () => {
 
 		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
+	});
+
+	it("should use default settings when localStorage contains invalid JSON", () => {
+		const storage = createLocalStorageMock();
+		// Set an invalid JSON string that will cause JSON.parse to throw an error
+		storage.setItem("deciphraze_settings", "{invalid json");
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.pullToRefreshEnabled).toBe(false);
+		expect(settings.hideInstructions).toBe(false);
+		expect(settings.textSize).toBe(1);
 	});
 });
 

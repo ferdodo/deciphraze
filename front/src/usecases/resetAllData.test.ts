@@ -69,6 +69,7 @@ describe("resetAllData", () => {
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
+			textSize: 0,
 		});
 
 		// Appeler resetAllData
@@ -153,6 +154,7 @@ describe("resetAllData", () => {
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
+			textSize: 0,
 		});
 
 		// Appeler resetAllData

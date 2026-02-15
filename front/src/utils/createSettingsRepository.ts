@@ -3,12 +3,14 @@ import { share } from "rxjs/operators";
 import type { SettingsRepository } from "../repositories/SettingsRepository";
 import type { Settings } from "../entities/Settings";
 import type { StorageLike } from "./StorageLike";
+import { getDefaultTextSize } from "./getDefaultTextSize";
 
 const SETTINGS_STORAGE_KEY = "deciphraze_settings";
 
 const defaultSettings: Settings = {
 	pullToRefreshEnabled: false,
 	hideInstructions: false,
+	textSize: getDefaultTextSize(),
 };
 
 export function createSettingsRepository(storage: StorageLike): SettingsRepository {
@@ -29,6 +31,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					hideInstructions: typeof parsed.hideInstructions === "boolean" 
 						? parsed.hideInstructions 
 						: defaultSettings.hideInstructions,
+					textSize: typeof parsed.textSize === "number" 
+						? parsed.textSize 
+						: defaultSettings.textSize,
 				};
 			} else {
 				settings = defaultSettings;
