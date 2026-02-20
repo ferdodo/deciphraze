@@ -6,6 +6,6 @@ export const increaseTextSize = (context: GameContext): void => {
 	
 	settingsRepository.saveSettings({
 		...currentSettings,
-		textSize: currentSettings.textSize + 0.1
+		textSize: Math.min(2.5, currentSettings.textSize + 0.1)
 	});
 };
