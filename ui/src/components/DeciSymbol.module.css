@@ -1,7 +1,7 @@
 .inputs {
-	font-size: 2rem;
-	line-height: 3rem;
-	width: 3rem;
+	font-size: calc(2rem * var(--deci-ui-command-text-size, 1));
+	line-height: calc(3rem * var(--deci-ui-command-text-size, 1));
+	width: calc(3rem * var(--deci-ui-command-text-size, 1));
 	text-align: center;
 	display: inline-block;
 	background: none;
@@ -20,7 +20,7 @@
 
 .symbolContainer {
 	display: inline-block;
-	max-width: 4.9rem;
+	max-width: calc(4.9rem * var(--deci-ui-command-text-size, 1));
 	height: 1rem;
 }
 

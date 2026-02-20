@@ -6,6 +6,6 @@ export const increaseCommandTextSize = (context: GameContext): void => {
 	
 	settingsRepository.saveSettings({
 		...currentSettings,
-		commandTextSize: currentSettings.commandTextSize + 0.1
+		commandTextSize: Math.min(2.5, currentSettings.commandTextSize + 0.1)
 	});
 };
