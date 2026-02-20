@@ -54,18 +54,18 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				</div>
 				<div style={{ marginTop: "1.5rem" }}>
 					<DeciText variant="muted">
-						Taille du texte des commandes: {commandTextSize.toFixed(1)}
+						Taille du texte des éléments interactifs: {commandTextSize.toFixed(1)}
 					</DeciText>
 					<div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
 						<crumbs-button
-							title="Diminuer la taille du texte des commandes"
+							title="Diminuer la taille du texte des éléments interactifs"
 							onClick={onDecreaseCommandTextSize}
 							role="button"
 						>
 							<DeciText variant="command">−</DeciText>
 						</crumbs-button>
 						<crumbs-button
-							title="Augmenter la taille du texte des commandes"
+							title="Augmenter la taille du texte des éléments interactifs"
 							onClick={onIncreaseCommandTextSize}
 							role="button"
 						>
@@ -79,7 +79,7 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					Comportement
 				</DeciText>
 				<DeciText variant="muted">
-					Permet de rafraîchir la page en tirant vers le bas depuis le haut de l'écran.
+					Permet de rafraîchir la page en tirant vers le bas depuis le haut de l'écran, uniquement sur mobile.
 				</DeciText>
 				<crumbs-button
 					title={isPullToRefreshEnabled ? "Désactiver le pull-to-refresh" : "Activer le pull-to-refresh"}

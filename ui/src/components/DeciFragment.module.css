@@ -1,7 +1,7 @@
 /* FragmentComponent.module.css */
 
 .fragment {
-	font-size: clamp(1rem, 4vw, 2rem);
+	font-size: calc(1.1rem * var(--deci-ui-text-size, 1));
 	display: inline-block;
 }
 
