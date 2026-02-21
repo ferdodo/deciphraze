@@ -1,37 +1,19 @@
 import type { BrowserService } from "../services/BrowserService";
+import type { DeviceType } from "../services/DeviceType";
 
-export function createBrowserServiceMock(): BrowserService {
+export function createBrowserServiceMock(deviceType: DeviceType = "unknown"): BrowserService {
 	return {
-		isPwaInstallable(): boolean {
-			return false;
-		},
-		observePwaInstallable(callback: (isInstallable: boolean) => void): () => void {
-			// Notifier immédiatement avec l'état par défaut
-			callback(false);
-			// Retourner une fonction de nettoyage vide
-			return () => {
-				// Pas de nettoyage nécessaire pour le mock
-			};
-		},
-		installPwa(): void {
-			// Pas d'action dans le mock
-		},
-		isInstalled(): boolean {
-			return false;
-		},
-		getSupportStatus(): "supported" {
-			return "supported" as const;
+		getDevice(): DeviceType {
+			return deviceType;
 		},
 		toggleFullscreen(): void {
-			// Pas d'action dans le mock
+			// Mock implementation
 		},
-		applyPullToRefresh(_enabled: boolean): void {
-			// Pas d'action dans le mock
+		applyPullToRefresh(): void {
+			// Mock implementation
 		},
-		confirm(_message: string): boolean {
-			// Par défaut, retourner false dans le mock
-			return false;
+		confirm(): boolean {
+			return true;
 		},
 	};
 }
-

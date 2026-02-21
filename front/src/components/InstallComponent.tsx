@@ -1,6 +1,5 @@
 import type React from "react";
 import { DeciInstallPanel, DeciPlusView } from "@deciphraze/ui";
-import { usePwaInstallable } from "../hooks/usePwaInstallable";
 import { useGameContext } from "../hooks/useGameContext";
 
 interface InstallComponentProps {
@@ -9,18 +8,12 @@ interface InstallComponentProps {
 
 export function InstallComponent({ onBack }: InstallComponentProps): React.JSX.Element {
 	const { browserService } = useGameContext();
-	const isPwaInstallable = usePwaInstallable();
-	const isInstalled = browserService.isInstalled();
-	const supportStatus = browserService.getSupportStatus();
-
-	const handleInstallClick = (): void => {
-		browserService.installPwa();
-	};
+	const deviceType = browserService.getDevice();
 
 	return (
 		<DeciPlusView
 			title="Installation"
-			content={<DeciInstallPanel isPwaInstallable={isPwaInstallable} isInstalled={isInstalled} supportStatus={supportStatus} onInstallClick={handleInstallClick} />}
+			content={<DeciInstallPanel deviceType={deviceType} />}
 			onBack={onBack}
 		/>
 	);

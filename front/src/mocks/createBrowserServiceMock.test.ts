@@ -1,26 +1,22 @@
 import { describe, it, expect } from "vitest";
 import { createBrowserServiceMock } from "./createBrowserServiceMock";
+import type { DeviceType } from "../services/DeviceType";
 
 describe("createBrowserServiceMock", () => {
-	it("should return a service with isPwaInstallable returning false", () => {
-		const service = createBrowserServiceMock();
-		expect(service.isPwaInstallable()).toBe(false);
+	it("should return a service with getDevice returning the specified device type", () => {
+		const deviceType: DeviceType = "ios-safari";
+		const service = createBrowserServiceMock(deviceType);
+		expect(service.getDevice()).toBe(deviceType);
 	});
 
-	it("should call the callback immediately with false when observing", () => {
+	it("should return 'unknown' device type by default", () => {
 		const service = createBrowserServiceMock();
-		let callbackCalled = false;
-		let receivedValue: boolean | undefined;
-
-		const unsubscribe = service.observePwaInstallable((isInstallable) => {
-			callbackCalled = true;
-			receivedValue = isInstallable;
-		});
-
-		expect(callbackCalled).toBe(true);
-		expect(receivedValue).toBe(false);
-		expect(typeof unsubscribe).toBe("function");
+		expect(service.getDevice()).toBe("unknown");
 	});
 
+	it("should return true for confirm method", () => {
+		const service = createBrowserServiceMock();
+		expect(service.confirm("test")).toBe(true);
+	});
 });
 

@@ -1,26 +1,51 @@
-import type { PwaSupportStatus } from "./PwaSupportStatus";
-
-interface BeforeInstallPromptEvent extends Event {
-	prompt(): Promise<void>;
-	readonly userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
-}
-
-// Implémentation du service Browser
-// L'interface est définie dans le frontend
+import type { DeviceType } from "./DeviceType";
 
 export function createBrowserService(): {
-	isPwaInstallable(): boolean;
-	observePwaInstallable(callback: (isInstallable: boolean) => void): () => void;
-	installPwa(): void;
-	isInstalled(): boolean;
-	getSupportStatus(): PwaSupportStatus;
+	getDevice(): DeviceType;
 	toggleFullscreen(): void;
 	applyPullToRefresh(enabled: boolean): void;
 	confirm(message: string): boolean;
 } {
-	let deferredPrompt: BeforeInstallPromptEvent | null = null;
-	let isInstallable = false;
-	const observers: Set<(isInstallable: boolean) => void> = new Set();
+	
+	function getDevice(): DeviceType {
+		if (typeof window === "undefined" || typeof navigator === "undefined") {
+			return "unknown";
+		}
+
+		const userAgent = navigator.userAgent;
+		const isMobile = /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+		
+		// Détection iOS
+		if (/iPhone|iPad|iPod/.test(userAgent)) {
+			return "ios-safari";
+		}
+		
+		// Détection Android
+		if (/Android/.test(userAgent)) {
+			if (/Firefox/.test(userAgent)) {
+				return "android-firefox";
+			} else if (/Edg/.test(userAgent)) {
+				return "android-edge";
+			} else if (/Chrome/.test(userAgent)) {
+				return "android-chrome";
+			}
+		}
+		
+		// Détection Desktop
+		if (!isMobile) {
+			if (/Firefox/.test(userAgent)) {
+				return "desktop-firefox";
+			} else if (/Edg/.test(userAgent)) {
+				return "desktop-edge";
+			} else if (/Chrome/.test(userAgent)) {
+				return "desktop-chrome";
+			} else if (/Safari/.test(userAgent)) {
+				return "desktop-safari";
+			}
+		}
+		
+		return "unknown";
+	}
 
 	function applyPullToRefreshSettings(enabled: boolean): void {
 		if (typeof document === "undefined" || typeof window === "undefined") {
@@ -42,80 +67,8 @@ export function createBrowserService(): {
 		}
 	}
 
-	function notifyObservers(): void {
-		for (const callback of observers) {
-			callback(isInstallable);
-		}
-	}
-
-	function handleBeforeInstallPrompt(event: Event): void {
-		event.preventDefault();
-		deferredPrompt = event as BeforeInstallPromptEvent;
-		isInstallable = true;
-		notifyObservers();
-	}
-
-	// Écouter l'événement beforeinstallprompt
-	if (typeof window !== "undefined") {
-		window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-	}
-
 	return {
-		isPwaInstallable(): boolean {
-			return isInstallable;
-		},
-
-		observePwaInstallable(callback: (isInstallable: boolean) => void): () => void {
-			observers.add(callback);
-			// Notifier immédiatement avec l'état actuel
-			callback(isInstallable);
-
-			// Retourner une fonction de nettoyage
-			return (): void => {
-				observers.delete(callback);
-			};
-		},
-
-		installPwa(): void {
-			if (!deferredPrompt) {
-				return;
-			}
-
-			// Afficher l'invite d'installation native du navigateur
-			deferredPrompt.prompt();
-
-			// Attendre la réponse de l'utilisateur
-			deferredPrompt.userChoice.then(() => {
-				// Réinitialiser après utilisation
-				deferredPrompt = null;
-				isInstallable = false;
-				notifyObservers();
-			});
-		},
-
-		isInstalled(): boolean {
-			if (typeof window === "undefined") {
-				return false;
-			}
-			return window.matchMedia("(display-mode: standalone)").matches;
-		},
-
-		getSupportStatus(): PwaSupportStatus {
-			if (typeof window === "undefined") {
-				return "no-window";
-			}
-			if (typeof navigator === "undefined") {
-				return "no-navigator";
-			}
-			// Vérifier si le contexte est sécurisé (HTTPS requis, sauf localhost)
-			if (!window.isSecureContext) {
-				return "no-https";
-			}
-			if (!("serviceWorker" in navigator)) {
-				return "no-service-worker";
-			}
-			return "supported";
-		},
+		getDevice,
 
 		toggleFullscreen(): void {
 			if (typeof document === "undefined") {

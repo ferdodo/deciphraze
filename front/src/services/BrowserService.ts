@@ -1,11 +1,7 @@
-import type { PwaSupportStatus } from "./PwaSupportStatus";
+import type { DeviceType } from "./DeviceType";
 
 export interface BrowserService {
-	isPwaInstallable(): boolean;
-	observePwaInstallable(callback: (isInstallable: boolean) => void): () => void;
-	installPwa(): void;
-	isInstalled(): boolean;
-	getSupportStatus(): PwaSupportStatus;
+	getDevice(): DeviceType;
 	toggleFullscreen(): void;
 	applyPullToRefresh(enabled: boolean): void;
 	confirm(message: string): boolean;
