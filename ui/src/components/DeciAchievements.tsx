@@ -43,7 +43,7 @@ interface AllAchievements {
 		};
 		alphaAndOmega: {
 			name: "Synthèse";
-			description: "Trouver respectivement la première lettre du paragraphe en premier et la dernière lettre en dernier";
+			description: "Déchiffrer la première lettre en premier, la dernière en dernier";
 			unlocked: boolean;
 		};
 		firstLetterQ: {

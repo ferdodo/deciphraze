@@ -75,7 +75,7 @@ describe("createSettingsRepository", () => {
 
 		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
-		expect(settings.textSize).toBe(1); // Default value from createSettingsRepository.ts
+		expect(settings.textSize).toBe(1.4); // Default value from createSettingsRepository.ts
 	});
 
 	it("should save and retrieve settings", () => {
@@ -173,7 +173,7 @@ describe("createSettingsRepository", () => {
 
 		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
-		expect(settings.textSize).toBe(1);
+		expect(settings.textSize).toBe(1.4);
 	});
 
 	it("should handle stored settings with missing commandTextSize field", () => {
@@ -191,7 +191,7 @@ describe("createSettingsRepository", () => {
 		expect(settings.pullToRefreshEnabled).toBe(true);
 		expect(settings.hideInstructions).toBe(false);
 		expect(settings.textSize).toBe(2);
-		expect(settings.commandTextSize).toBe(1); // Should use default
+		expect(settings.commandTextSize).toBe(1.4); // Should use default
 	});
 });
 

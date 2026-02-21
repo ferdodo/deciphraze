@@ -16,7 +16,7 @@
 }
 
 .panelContent1 {
-	max-width: 54rem;
+	max-width: max(54rem, 80vw);
 }
 
 .content3 {

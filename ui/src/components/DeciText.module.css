@@ -51,9 +51,9 @@
 }
 
 .text_primary {
-	font-weight: bold;
+	font-weight: 500;
 	color: #b8860b;
-	font-size: calc(1rem * var(--deci-ui-text-size, 1));
+	font-size: calc(1.1rem * var(--deci-ui-text-size, 1));
 }
 
 
