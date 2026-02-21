@@ -19,6 +19,11 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: "GlipervelzOrigy";
+	src: url("../assets/GlipervelzOrigy/GlipervelzOrigy.ttf") format("truetype");
+}
+
 .text {
 	margin: 0;
 	font-size: calc(0.85rem * var(--deci-ui-text-size, 1));
