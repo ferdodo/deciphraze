@@ -85,7 +85,17 @@ export function DeciInstallPanel({ deviceType }: DeciInstallPanelProps): React.J
 
 	return (
 		<div style={{ padding: "1rem" }}>
-			{getInstallInstructions()}
+			<DeciText variant="default">
+				Une fois installée, l'application pourra s'utiliser sans connexion internet.
+			</DeciText>
+			<div style={{ marginTop: "1rem" }}>
+				<DeciText variant="default">
+					Les étapes peuvent différer en fonction du modèle de votre téléphone et du lanceur d'application utilisé.
+				</DeciText>
+			</div>
+			<div style={{ marginTop: "1rem" }}>
+				{getInstallInstructions()}
+			</div>
 		</div>
 	);
 }
