@@ -3,9 +3,7 @@ import type { GameContext } from "../contexts/GameContext";
 export const resetAllData = (context: GameContext): void => {
 	const {
 		browserService,
-		letterSelectionRepository,
-		playerCipherRepository,
-		symbolSelectionRepository,
+		allGamesRepository,
 		gameHistoryRepository,
 		achievementRepository,
 		dayRepository,
@@ -34,9 +32,7 @@ export const resetAllData = (context: GameContext): void => {
 	}
 
 	// Réinitialiser tous les repositories
-	letterSelectionRepository.clear();
-	playerCipherRepository.clear();
-	symbolSelectionRepository.clear();
+	allGamesRepository.clear();
 	gameHistoryRepository.clear();
 	achievementRepository.clear();
 	dayRepository.clear();

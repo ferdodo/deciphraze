@@ -2,17 +2,19 @@ import type { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import type { GameContext } from "../contexts/GameContext";
 import { characterEquals } from "../utils/characterEquals";
+import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";
 
 export function registerDiscoveryOrder(context: GameContext): Subscription {
 	const {
+        allGamesRepository,
         discoveryOrderRepository,
         dayRepository,
-        playerCipherRepository,
     } = context;
 
-	return playerCipherRepository.playerCipher$.pipe(
-		map((playerCipher) => {
+	return allGamesRepository.subscribe().pipe(
+		map((allGames) => {
 			const today = dayRepository.getDay();
+			const playerCipher = getPlayerCipherFromAllGames(allGames, today);
 			const currentDiscoveryOrder = discoveryOrderRepository.getDiscoveryOrder(today);
 			
 			Object.entries(playerCipher).forEach(([letter, symbol]) => {

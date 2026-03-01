@@ -1,7 +1,7 @@
 import { useGameContext } from "./useGameContext";
-import type { LetterSelectionRepository } from "../repositories/LetterSelectionRepository";
+import type { AllGamesRepository } from "../repositories/AllGamesRepository";
 
-export const useLetterSelectionRepository = (): LetterSelectionRepository => {
-	const { letterSelectionRepository } = useGameContext();
-	return letterSelectionRepository;
+export const useLetterSelectionRepository = (): AllGamesRepository => {
+	const { allGamesRepository } = useGameContext();
+	return allGamesRepository;
 };

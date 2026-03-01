@@ -2,10 +2,13 @@ import type { GameContext } from "../contexts/GameContext";
 import { selectLetter } from "../usecases/selectLetter";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { characterEquals } from "../utils/characterEquals";
+import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";
 
 export function asPlayerAssociateOneBadLetter(context: GameContext): void {
-	const { playerCipherRepository } = context;
-	const playerCipher = playerCipherRepository.getPlayerCipher();
+	const { allGamesRepository, dayRepository } = context;
+	const currentDay = dayRepository.getDay();
+	const allGames = allGamesRepository.get();
+	const playerCipher = getPlayerCipherFromAllGames(allGames, currentDay);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 	const availableLetters = alphabet.filter(letter => !playerCipher[letter]);
 	const availableSymbols = alphabet.filter(symbol => !Object.values(playerCipher).includes(symbol));

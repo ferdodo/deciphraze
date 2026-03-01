@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { usePlayerCipherRepository } from "./usePlayerCipherRepository";
+import { useGameContext } from "./useGameContext";
 import { createMatchCount$ } from "../utils/createMatchCount$";
 
 export const useMatchCount = (): number => {
-	const playerCipherRepository = usePlayerCipherRepository();
+	const { allGamesRepository, dayRepository } = useGameContext();
 	const [matchCount, setMatchCount] = useState(0);
 
 	useEffect(() => {
-		const matchCount$ = createMatchCount$(playerCipherRepository);
+		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
 		const matchCountSubscription = matchCount$.subscribe((value) =>
 			setMatchCount(value),
 		);
@@ -15,7 +15,7 @@ export const useMatchCount = (): number => {
 		return () => {
 			matchCountSubscription.unsubscribe();
 		};
-	}, [playerCipherRepository]);
+	}, [allGamesRepository, dayRepository]);
 
 	return matchCount;
 };

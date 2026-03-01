@@ -1,12 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { skip } from "rxjs/operators";
 import { createMatchCount$ } from "./createMatchCount$";
-import { createPlayerCipher } from "./createPlayerCipher";
+import { createAllGamesRepositoryMock } from "../mocks/createAllGamesRepositoryMock";
+import { createDayRepositoryMock } from "../mocks/createDayRepositoryMock";
 
 describe("createMatchCount$", () => {
 	it("should start with 0 matches", async () => {
-		const playerCipher = createPlayerCipher();
-		const matchCount$ = createMatchCount$(playerCipher);
+		const allGamesRepository = createAllGamesRepositoryMock();
+		const dayRepository = createDayRepositoryMock();
+		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
 
 		return new Promise<void>((resolve) => {
 			matchCount$.subscribe((count) => {
@@ -17,8 +19,12 @@ describe("createMatchCount$", () => {
 	});
 
 	it("should update count when player cipher changes", async () => {
-		const playerCipher = createPlayerCipher();
-		const matchCount$ = createMatchCount$(playerCipher);
+		const day = "2024-01-01";
+		const allGamesRepository = createAllGamesRepositoryMock();
+		const dayRepository = createDayRepositoryMock();
+		dayRepository.setDay(day);
+		
+		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
 
 		return new Promise<void>((resolve) => {
 			// Skip initial emission and wait for the change
@@ -27,7 +33,11 @@ describe("createMatchCount$", () => {
 				resolve();
 			});
 			// Trigger the change
-			playerCipher.addPlayerCipherEntry("A", "X");
+			allGamesRepository.upsertByDay(day, {
+				letterSelection: null,
+				symbolSelection: null,
+				playerCipher: { A: "X" },
+			});
 		});
 	});
 

@@ -4,15 +4,14 @@ import { isWin } from "../utils/isWin";
 import { generateParagraph } from "../utils/generateParagraph";
 import { characterEquals } from "../utils/characterEquals";
 import type { GameContext } from "../contexts/GameContext";
+import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export const selectSymbol = (
 	character: string,
 	context: GameContext,
 ): void => {
 	const {
-		letterSelectionRepository,
-		symbolSelectionRepository,
-		playerCipherRepository,
+		allGamesRepository,
 		dayRepository,
 		gameHistoryRepository,
 		associationHistoryRepository,
@@ -21,8 +20,16 @@ export const selectSymbol = (
 	// Vérifier si la partie est gagnée avant toute action
 	const currentDay = dayRepository.getDay();
 	const paragraphOfTheDay = generateParagraph(currentDay);
-	const playerCipher = playerCipherRepository.getPlayerCipher();
 	const gameHistory = gameHistoryRepository.getHistory();
+	const allGames = allGamesRepository.get();
+	const gameDay = getCurrentGameDay(allGames, currentDay);
+	const gameData = allGames.gameByDay[gameDay] ?? {
+		letterSelection: null,
+		symbolSelection: null,
+		playerCipher: {},
+	};
+	const playerCipher = gameData.playerCipher;
+
 	if (isWin(playerCipher, paragraphOfTheDay, gameHistory, currentDay)) {
 		return;
 	}
@@ -32,23 +39,44 @@ export const selectSymbol = (
 	}
 
 	const normalizedCharacter = normalizeWord(character).toUpperCase();
-	const currentLetter = letterSelectionRepository.getLetterSelection();
-	const currentSymbol = symbolSelectionRepository.getSymbolSelection();
+	const currentLetter = gameData.letterSelection;
+	const currentSymbol = gameData.symbolSelection;
 
 	if (currentSymbol === normalizedCharacter) {
-		playerCipherRepository.removePlayerCipherEntryByValue(normalizedCharacter);
-		symbolSelectionRepository.selectSymbol(null);
+		const updatedPlayerCipher = { ...playerCipher };
+		const keyToRemove = Object.keys(updatedPlayerCipher).find(key => updatedPlayerCipher[key] === normalizedCharacter);
+		if (keyToRemove) {
+			delete updatedPlayerCipher[keyToRemove];
+		}
+		allGamesRepository.upsertByDay(gameDay, {
+			...gameData,
+			playerCipher: updatedPlayerCipher,
+			symbolSelection: null,
+		});
 		return;
 	}
 
 	if (currentLetter !== null) {
 		const isCorrect = characterEquals(currentLetter, normalizedCharacter);
-		playerCipherRepository.addPlayerCipherEntry(currentLetter, normalizedCharacter);
+		// Supprimer les associations précédentes avec le même symbole
+		const updatedPlayerCipher = { ...playerCipher };
+		const keyToRemove = Object.keys(updatedPlayerCipher).find(key => updatedPlayerCipher[key] === normalizedCharacter);
+		if (keyToRemove) {
+			delete updatedPlayerCipher[keyToRemove];
+		}
+		updatedPlayerCipher[currentLetter] = normalizedCharacter;
 		associationHistoryRepository.addAssociation(currentDay, currentLetter, normalizedCharacter, isCorrect);
-		letterSelectionRepository.selectLetter(null);
-		symbolSelectionRepository.selectSymbol(null);
+		allGamesRepository.upsertByDay(gameDay, {
+			...gameData,
+			playerCipher: updatedPlayerCipher,
+			letterSelection: null,
+			symbolSelection: null,
+		});
 		return;
 	}
 
-	symbolSelectionRepository.selectSymbol(normalizedCharacter);
+	allGamesRepository.upsertByDay(gameDay, {
+		...gameData,
+		symbolSelection: normalizedCharacter,
+	});
 };

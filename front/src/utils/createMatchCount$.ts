@@ -1,16 +1,24 @@
-import { BehaviorSubject } from "rxjs";
-import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
+import { BehaviorSubject, map, switchMap, startWith } from "rxjs";
+import type { AllGamesRepository } from "../repositories/AllGamesRepository";
+import type { DayRepository } from "../repositories/DayRepository";
 
-export const createMatchCount$ = (playerCipher: PlayerCipherRepository): BehaviorSubject<number> => {
+export const createMatchCount$ = (allGamesRepository: AllGamesRepository, dayRepository: DayRepository): BehaviorSubject<number> => {
 	const matchCountSubject = new BehaviorSubject<number>(0);
 	
-	// Calculate initial count
-	const initialCipher = playerCipher.getPlayerCipher();
-	matchCountSubject.next(Object.keys(initialCipher).length);
+	const currentDay = dayRepository.getDay();
+	const initialAllGames = allGamesRepository.get();
+	const initialPlayerCipher = initialAllGames.gameByDay[currentDay]?.playerCipher || {};
+	matchCountSubject.next(Object.keys(initialPlayerCipher).length);
 	
-	// Subscribe to changes
-	playerCipher.playerCipher$.subscribe((playerCipherMap: Record<string, string>) => {
-		matchCountSubject.next(Object.keys(playerCipherMap).length);
+	dayRepository.observeDay().pipe(
+		switchMap(day => 
+			allGamesRepository.subscribe().pipe(
+				map(allGames => Object.keys(allGames.gameByDay[day]?.playerCipher || {}).length),
+				startWith(Object.keys(initialAllGames.gameByDay[day]?.playerCipher || {}).length)
+			)
+		)
+	).subscribe((count) => {
+		matchCountSubject.next(count);
 	});
 	
 	return matchCountSubject;

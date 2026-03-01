@@ -1,7 +1,5 @@
 import type { GameContextType } from "../types/GameContextType";
-import { createLetterSelection } from "../utils/createLetterSelection";
-import { createPlayerCipher } from "../utils/createPlayerCipher";
-import { createSymbolSelection } from "../utils/createSymbolSelection";
+import { createAllGamesRepositoryMock } from "../mocks/createAllGamesRepositoryMock";
 import { createAchievementRepositoryMock } from "../mocks/createAchievementRepositoryMock";
 import { createGameHistoryRepositoryMock } from "../mocks/createGameHistoryRepositoryMock";
 import { createDayRepositoryMock } from "../mocks/createDayRepositoryMock";
@@ -18,9 +16,7 @@ export function withGameStarted(): [() => void, GameContextType] {
     const dayRepository = createDayRepositoryMock();
     const storage = createLocalStorageMock();
     const context: GameContextType = {
-        letterSelectionRepository: createLetterSelection(),
-        playerCipherRepository: createPlayerCipher(),
-        symbolSelectionRepository: createSymbolSelection(),
+        allGamesRepository: createAllGamesRepositoryMock(),
         gameHistoryRepository: createGameHistoryRepositoryMock(),
         achievementRepository: createAchievementRepositoryMock(),
         dayRepository,

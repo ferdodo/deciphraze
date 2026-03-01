@@ -1,6 +1,4 @@
-import type { LetterSelectionRepository } from "../repositories/LetterSelectionRepository";
-import type { PlayerCipherRepository } from "../repositories/PlayerCipherRepository";
-import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
+import type { AllGamesRepository } from "../repositories/AllGamesRepository";
 import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
 import type { AchievementRepository } from "../repositories/AchievementRepository";
 import type { DayRepository } from "../repositories/DayRepository";
@@ -12,9 +10,7 @@ import type { ViewedAchievementsRepository } from "../repositories/ViewedAchieve
 import type { BrowserService } from "../services/BrowserService";
 
 export interface GameContext {
-	letterSelectionRepository: LetterSelectionRepository;
-	playerCipherRepository: PlayerCipherRepository;
-	symbolSelectionRepository: SymbolSelectionRepository;
+	allGamesRepository: AllGamesRepository;
 	gameHistoryRepository: GameHistoryRepository;
 	achievementRepository: AchievementRepository;
 	dayRepository: DayRepository;

@@ -1,7 +1,7 @@
 import { useGameContext } from "./useGameContext";
-import type { SymbolSelectionRepository } from "../repositories/SymbolSelectionRepository";
+import type { AllGamesRepository } from "../repositories/AllGamesRepository";
 
-export const useSymbolSelectionRepository = (): SymbolSelectionRepository => {
-	const { symbolSelectionRepository } = useGameContext();
-	return symbolSelectionRepository;
+export const useSymbolSelectionRepository = (): AllGamesRepository => {
+	const { allGamesRepository } = useGameContext();
+	return allGamesRepository;
 };

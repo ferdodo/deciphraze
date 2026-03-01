@@ -28,9 +28,11 @@ describe("resetAllData", () => {
 		contextWithSettings.browserService = browserServiceMock;
 
 		// Ajouter des données dans les repositories
-		contextWithSettings.letterSelectionRepository.selectLetter("A");
-		contextWithSettings.playerCipherRepository.addPlayerCipherEntry("A", "X");
-		contextWithSettings.symbolSelectionRepository.selectSymbol("X");
+		contextWithSettings.allGamesRepository.upsertByDay("2024-01-01", {
+			letterSelection: "A",
+			symbolSelection: "X",
+			playerCipher: { A: "X" },
+		});
 		contextWithSettings.gameHistoryRepository.addSession({
 			winAt: "2024-01-01",
 			lettersFound: ["A"],
@@ -81,9 +83,7 @@ describe("resetAllData", () => {
 		expect(confirmCalled).toBe(true);
 
 		// Vérifier que les données n'ont pas été réinitialisées
-		expect(contextWithSettings.letterSelectionRepository.getLetterSelection()).toBe("A");
-		expect(contextWithSettings.playerCipherRepository.getPlayerCipher().A).toBe("X");
-		expect(contextWithSettings.symbolSelectionRepository.getSymbolSelection()).toBe("X");
+		expect(contextWithSettings.allGamesRepository.get().gameByDay["2024-01-01"]).toBeDefined();
 		expect(Object.keys(contextWithSettings.gameHistoryRepository.getHistory()).length).toBeGreaterThan(0);
 		expect(contextWithSettings.achievementRepository.loadAchievements().achievements.firstGame.unlocked).toBe(true);
 		expect(contextWithSettings.discoveryOrderRepository.getDiscoveryOrder("2024-01-01").length).toBeGreaterThan(0);
@@ -114,9 +114,11 @@ describe("resetAllData", () => {
 		contextWithSettings.browserService = browserServiceMock;
 
 		// Ajouter des données dans les repositories
-		contextWithSettings.letterSelectionRepository.selectLetter("A");
-		contextWithSettings.playerCipherRepository.addPlayerCipherEntry("A", "X");
-		contextWithSettings.symbolSelectionRepository.selectSymbol("X");
+		contextWithSettings.allGamesRepository.upsertByDay("2024-01-01", {
+			letterSelection: "A",
+			symbolSelection: "X",
+			playerCipher: { A: "X" },
+		});
 		contextWithSettings.gameHistoryRepository.addSession({
 			winAt: "2024-01-01",
 			lettersFound: ["A"],
@@ -167,9 +169,7 @@ describe("resetAllData", () => {
 		expect(confirmCalled).toBe(true);
 
 		// Vérifier que toutes les données ont été réinitialisées
-		expect(contextWithSettings.letterSelectionRepository.getLetterSelection()).toBeNull();
-		expect(Object.keys(contextWithSettings.playerCipherRepository.getPlayerCipher()).length).toBe(0);
-		expect(contextWithSettings.symbolSelectionRepository.getSymbolSelection()).toBeNull();
+		expect(Object.keys(contextWithSettings.allGamesRepository.get().gameByDay).length).toBe(0);
 		expect(Object.keys(contextWithSettings.gameHistoryRepository.getHistory()).length).toBe(0);
 		expect(contextWithSettings.achievementRepository.loadAchievements().achievements.firstGame.unlocked).toBe(false);
 		expect(contextWithSettings.discoveryOrderRepository.getDiscoveryOrder("2024-01-01").length).toBe(0);

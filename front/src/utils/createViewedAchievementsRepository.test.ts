@@ -118,6 +118,6 @@ describe("createViewedAchievementsRepository", () => {
 		repository.saveViewedAchievement(newAchievements);
 		
 		expect(callbackCalled).toBe(true);
-		expect(receivedAchievements!.firstGame).toBe(true);
+		expect(receivedAchievements).toEqual(newAchievements);
 	});
 });

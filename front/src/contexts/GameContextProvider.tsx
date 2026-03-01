@@ -1,9 +1,7 @@
 import type React from "react";
 import { useEffect, useMemo } from "react";
 import { gameContext } from "./gameContext";
-import { createLetterSelection } from "../utils/createLetterSelection";
-import { createPlayerCipher } from "../utils/createPlayerCipher";
-import { createSymbolSelection } from "../utils/createSymbolSelection";
+import { createAllGamesRepository } from "../utils/createAllGamesRepository";
 import { createGameHistoryRepository } from "../utils/createGameHistoryRepository";
 import { createAchievementRepository } from "../utils/createAchievementRepository";
 import { createDayRepository } from "../utils/createDayRepository";
@@ -32,9 +30,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 		browserService.applyPullToRefresh(settings.pullToRefreshEnabled);
 		
 		return {
-			letterSelectionRepository: createLetterSelection(),
-			playerCipherRepository: createPlayerCipher(),
-			symbolSelectionRepository: createSymbolSelection(),
+			allGamesRepository: createAllGamesRepository(storage),
 			gameHistoryRepository: createGameHistoryRepository(storage),
 			achievementRepository: createAchievementRepository(storage),
 			dayRepository: createDayRepository(),

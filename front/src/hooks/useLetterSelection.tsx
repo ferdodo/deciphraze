@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
+import { useCurrentDay } from "./useCurrentDay";
 import type { LetterSelection } from "../entities/LetterSelection";
+import { getLetterSelectionFromAllGames } from "../utils/getLetterSelectionFromAllGames";
 
 export const useLetterSelection = (): LetterSelection => {
-	const { letterSelectionRepository } = useGameContext();
-	const [selectedLetter, setSelectedLetter] = useState<LetterSelection>(letterSelectionRepository.getLetterSelection());
+	const { allGamesRepository } = useGameContext();
+	const currentDay = useCurrentDay();
+	const allGames = allGamesRepository.get();
+	const [selectedLetter, setSelectedLetter] = useState<LetterSelection>(getLetterSelectionFromAllGames(allGames, currentDay));
 
 	useEffect(() => {
-		const subscription = letterSelectionRepository.letterSelection$.subscribe((value: LetterSelection) => {
-			setSelectedLetter(value);
+		const subscription = allGamesRepository.subscribe().subscribe(() => {
+			const updatedAllGames = allGamesRepository.get();
+			setSelectedLetter(getLetterSelectionFromAllGames(updatedAllGames, currentDay));
 		});
 
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [letterSelectionRepository]);
+	}, [allGamesRepository, currentDay]);
 
 	return selectedLetter;
 };
