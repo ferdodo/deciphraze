@@ -14,6 +14,8 @@ interface DeciMainNavProps {
 	onShare: () => void;
 	hideInstructions: boolean;
 	hasNewAchievements: boolean;
+	isTodayGame: boolean;
+	onPlayTodayGame: () => void;
 }
 
 export function DeciMainNav({
@@ -26,6 +28,8 @@ export function DeciMainNav({
 	onShare,
 	hideInstructions,
 	hasNewAchievements,
+	isTodayGame,
+	onPlayTodayGame,
 }: DeciMainNavProps): React.JSX.Element {
 	return (
 		<div className={styles.container}>
@@ -57,13 +61,23 @@ export function DeciMainNav({
 							<div>
 								{Symbols}
 							</div>
+
+							{!isTodayGame && (
+								<div style={{ marginTop: "1rem", textAlign: "center", opacity: 0.7 }}>
+									<em>
+										<DeciText variant="default">
+											Vous ne jouez pas la partie d'aujourd'hui
+										</DeciText>
+									</em>
+								</div>
+							)}
 						</>
 					)}
 
 					{win && (
 						<div>
 							<crumbs-p className={styles.winText}>
-								🎉 C'est gagné pour aujourd'hui ! 🥳 <br />
+								🎉 C'est gagné{isTodayGame ? " pour aujourd'hui" : ""} ! 🥳 <br />
 								<crumbs-button
 									title="Copier dans le presse-papier"
 									onClick={onShare}
@@ -71,6 +85,18 @@ export function DeciMainNav({
 								>
 									Partager
 								</crumbs-button>
+								{!isTodayGame && (
+									<>
+										<br />
+										<crumbs-button
+											title="Jouer le jeu d'aujourd'hui"
+											onClick={onPlayTodayGame}
+											role="button"
+										>
+											Jouer la partie d'aujourd'hui
+										</crumbs-button>
+									</>
+								)}
 							</crumbs-p>
 						</div>
 					)}

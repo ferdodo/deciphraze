@@ -12,6 +12,8 @@ import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { useHasNewAchievements } from "../hooks/useHasNewAchievements";
 import { share } from "../utils/share";
 import { useGameContext } from "../hooks/useGameContext";
+import { useIsTodayGame } from "../hooks/useIsTodayGame";
+import { playTodayGame } from "../usecases/playTodayGame";
 import type { Settings } from "../entities/Settings";
 
 import type React from "react";
@@ -25,12 +27,17 @@ export function MainNavComponent(): React.JSX.Element {
 	const win = useWin();
 	const matchCount = useMatchCount();
 	const hasNewAchievements = useHasNewAchievements();
+	const isTodayGame = useIsTodayGame();
+	const context = useGameContext();
 
 	const handleShare = (): void => {
 		share(matchCount);
 	};
 
-	const context = useGameContext();
+	const handlePlayTodayGame = (): void => {
+		playTodayGame(context);
+	};
+
 	const { settingsRepository } = context;
 	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
 		settingsRepository.getSettings().hideInstructions
@@ -56,6 +63,8 @@ export function MainNavComponent(): React.JSX.Element {
 			onShare={handleShare}
 			hideInstructions={hideInstructions}
 			hasNewAchievements={hasNewAchievements}
+			isTodayGame={isTodayGame}
+			onPlayTodayGame={handlePlayTodayGame}
 		/>
 	);
 }

@@ -8,6 +8,7 @@ import { generateParagraph } from "../utils/generateParagraph";
 import { subscribePlayerCipher } from "../utils/subscribePlayerCipher";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
+import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export function registerWinnedGame({
 	allGamesRepository,
@@ -21,17 +22,21 @@ export function registerWinnedGame({
 		subscribePlayerCipher(allGamesRepository, dayRepository),
 		dayRepository.observeDay(),
 	]).pipe(
-		filter(([playerCipher, day]: [PlayerCipher, string]) => {
-			const paragraphOfTheDay = generateParagraph(day);
+		filter(([playerCipher, currentDay]: [PlayerCipher, string]) => {
+			const allGames = allGamesRepository.get();
+			const gameDay = getCurrentGameDay(allGames, currentDay);
+			const paragraphOfTheDay = generateParagraph(gameDay);
 			const gameHistory = gameHistoryRepository.getHistory();
-			return isWin(playerCipher, paragraphOfTheDay, gameHistory, day);
+			return isWin(playerCipher, paragraphOfTheDay, gameHistory, gameDay);
 		})
-	).subscribe(([, day]: [PlayerCipher, string]) => {
-		const paragraphOfTheDay = generateParagraph(day);
-		const gameSession = createGameSession(day, discoveryOrderRepository, associationHistoryRepository, paragraphOfTheDay);
+	).subscribe(([, currentDay]: [PlayerCipher, string]) => {
+		const allGames = allGamesRepository.get();
+		const gameDay = getCurrentGameDay(allGames, currentDay);
+		const paragraphOfTheDay = generateParagraph(gameDay);
+		const gameSession = createGameSession(gameDay, discoveryOrderRepository, associationHistoryRepository, paragraphOfTheDay);
 		gameHistoryRepository.addSession(gameSession);
 		const fullHistory = gameHistoryRepository.getHistory();
-		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(day);
+		const discoveryOrder = discoveryOrderRepository.getDiscoveryOrder(gameDay);
 		const existingAchievements = achievementRepository.loadAchievements();
 		const newAchievements = calculateAchievements(fullHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository, existingAchievements);
 		achievementRepository.saveAchievements(newAchievements);
