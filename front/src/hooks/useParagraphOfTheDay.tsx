@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { useDay } from "./useDay";
+import { useGameDay } from "./useGameDay";
 import { generateParagraph } from "../utils/generateParagraph";
 
 export const useParagraphOfTheDay = (): string => {
-	const currentDay = useDay();
+	const gameDay = useGameDay();
 	
 	const paragraphOfTheDay = useMemo(() => {
-		return generateParagraph(currentDay);
-	}, [currentDay]);
+		return generateParagraph(gameDay);
+	}, [gameDay]);
 	
 	return paragraphOfTheDay;
 };
