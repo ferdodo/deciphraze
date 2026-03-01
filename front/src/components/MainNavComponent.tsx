@@ -14,6 +14,7 @@ import { share } from "../utils/share";
 import { useGameContext } from "../hooks/useGameContext";
 import { useIsTodayGame } from "../hooks/useIsTodayGame";
 import { playTodayGame } from "../usecases/playTodayGame";
+import { abandonGame } from "../usecases/abandonGame";
 import type { Settings } from "../entities/Settings";
 
 import type React from "react";
@@ -36,6 +37,10 @@ export function MainNavComponent(): React.JSX.Element {
 
 	const handlePlayTodayGame = (): void => {
 		playTodayGame(context);
+	};
+
+	const handleAbandonGame = (): void => {
+		abandonGame(context);
 	};
 
 	const { settingsRepository } = context;
@@ -65,6 +70,7 @@ export function MainNavComponent(): React.JSX.Element {
 			hasNewAchievements={hasNewAchievements}
 			isTodayGame={isTodayGame}
 			onPlayTodayGame={handlePlayTodayGame}
+			onAbandon={handleAbandonGame}
 		/>
 	);
 }

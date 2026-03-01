@@ -16,6 +16,7 @@ interface DeciMainNavProps {
 	hasNewAchievements: boolean;
 	isTodayGame: boolean;
 	onPlayTodayGame: () => void;
+	onAbandon: () => void;
 }
 
 export function DeciMainNav({
@@ -30,6 +31,7 @@ export function DeciMainNav({
 	hasNewAchievements,
 	isTodayGame,
 	onPlayTodayGame,
+	onAbandon,
 }: DeciMainNavProps): React.JSX.Element {
 	return (
 		<div className={styles.container}>
@@ -63,13 +65,26 @@ export function DeciMainNav({
 							</div>
 
 							{!isTodayGame && (
-								<div style={{ marginTop: "1rem", textAlign: "center", opacity: 0.7 }}>
-									<em>
-										<DeciText variant="default">
-											Vous ne jouez pas la partie d'aujourd'hui
-										</DeciText>
-									</em>
-								</div>
+								<>
+									<div style={{ marginTop: "1rem", textAlign: "center", opacity: 0.7 }}>
+										<em>
+											<DeciText variant="default">
+												Vous ne jouez pas la partie d'aujourd'hui
+												<br />
+												Cette partie sera quand même comptabilisée pour vos succès
+											</DeciText>
+										</em>
+									</div>
+									<div style={{ marginTop: "1rem", textAlign: "center" }}>
+										<crumbs-button
+											title="Jouer la partie d'aujourd'hui"
+											onClick={onAbandon}
+											role="button"
+										>
+											Jouer la partie d'aujourd'hui
+										</crumbs-button>
+									</div>
+								</>
 							)}
 						</>
 					)}
