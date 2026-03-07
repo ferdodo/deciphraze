@@ -30,8 +30,8 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.13",
-		"@stryker-mutator/core": "^9.5.0",
-		"@stryker-mutator/vitest-runner": "^9.5.0",
+		"@stryker-mutator/core": "^9.6.0",
+		"@stryker-mutator/vitest-runner": "^9.6.0",
 		"@testing-library/dom": "^10.4.0",
 		"@types/hyperscript": "^0.0.7",
 		"happy-dom": "^20.4.0",
