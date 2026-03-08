@@ -121,7 +121,7 @@ export function DeciMainNav({
 					{hasNewAchievements && <crumbs-new-content-indicator />}
 					<DeciText variant="command"> Succès </DeciText>
 				</div>
-				<crumbs-panel slot="content-2" panel-title="Succès" className={styles.panel}>
+				<crumbs-panel slot="content-2" className={styles.panel}>
 					{Achievements}
 				</crumbs-panel>
 
