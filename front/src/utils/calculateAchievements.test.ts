@@ -4,7 +4,7 @@ import { createAllAchievements } from "../factories/createAllAchievements";
 import type { GameHistory } from "../entities/GameHistory";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { GameSession } from "../entities/GameSession";
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
 
 describe("calculateAchievements", () => {

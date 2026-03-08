@@ -1,4 +1,4 @@
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 
 export const defaultAchievements: AllAchievements = {
 	computedAtDate: "2024-01-01T00:00:00.000Z",

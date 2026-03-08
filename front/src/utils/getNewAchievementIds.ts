@@ -1,4 +1,4 @@
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 import type { ViewedAchievements } from "../entities/ViewedAchievements";
 
 export function getNewAchievementIds(

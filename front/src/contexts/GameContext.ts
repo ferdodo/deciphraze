@@ -1,6 +1,6 @@
 import type { AllGamesRepository } from "../repositories/AllGamesRepository";
 import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
-import type { AchievementRepository } from "../repositories/AchievementRepository";
+import type { AchievementRepository } from "@deciphraze/core";
 import type { DayRepository } from "../repositories/DayRepository";
 import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
 import type { StatisticsRepository } from "../repositories/StatisticsRepository";

@@ -6,16 +6,21 @@ interface ParagraphComponentProps {
 }
 
 export function ParagraphComponent({ words }: ParagraphComponentProps): React.JSX.Element {
+	const wordsWithIds = words.map((word, index) => ({
+		word: word.map((f, fragmentIndex) => ({ f, fragmentIndex })),
+		id: index,
+	}));
+
 	return (
 		<>
-			{words.map((word, wordIndex) => (
+			{wordsWithIds.map(({ word, id }) => (
 				<div
-					key={`word-${word.join("")}-${wordIndex}`}
+					key={id}
 					style={{ display: "inline-block", marginRight: "0.9rem" }}
 				>
-					{word.map((f, fragmentIndex) => (
+					{word.map(({ f, fragmentIndex }) => (
 						<FragmentComponent
-							key={`${f}-${word.join("")}-${fragmentIndex}`}
+							key={`${id}-${fragmentIndex}`}
 							character={f}
 						/>
 					))}

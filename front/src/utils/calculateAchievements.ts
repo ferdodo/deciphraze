@@ -1,5 +1,5 @@
 import type { GameHistory } from "../entities/GameHistory";
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
 import { calculateMaxStreak } from "./calculateMaxStreak";

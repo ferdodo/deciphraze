@@ -10,6 +10,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.13",
 		"@deciphraze/browser": "../browser",
+		"@deciphraze/core": "../core",
+		"@deciphraze/persistance": "../persistance",
 		"@deciphraze/ui": "../ui",
 		"@stryker-mutator/core": "^9.5.0",
 		"@stryker-mutator/vitest-runner": "^9.5.0",

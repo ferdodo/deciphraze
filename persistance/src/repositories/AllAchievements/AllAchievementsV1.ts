@@ -1,4 +1,4 @@
-export interface AllAchievements {
+export interface AllAchievementsV1 {
 	computedAtDate: string;
 	achievements: {
 		firstGame: {
@@ -75,4 +75,3 @@ export interface AllAchievements {
 		};
 	};
 }
-

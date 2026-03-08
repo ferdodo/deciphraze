@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 import { useAchievements } from "./useAchievements";
 
 export const useAchievementsAsList = (): Array<AllAchievements["achievements"][keyof AllAchievements["achievements"]]> => {

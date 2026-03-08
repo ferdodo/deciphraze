@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { AllAchievements } from "../entities/AllAchievements";
+import type { AllAchievements } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 import { getDefaultStorage } from "./getDefaultStorage";
 import { backupInvalidData } from "./backupInvalidData";
