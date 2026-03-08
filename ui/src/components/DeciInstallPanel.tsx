@@ -64,8 +64,7 @@ export function DeciInstallPanel({ deviceType }: DeciInstallPanelProps): React.J
 			case "desktop-safari":
 				return (
 					<div>
-						<DeciText variant="muted">
-							L'installation de l'application est disponible uniquement sur mobile.<br/><br/>
+						<DeciText variant="default">
 							Sur mobile, utilisez les options de votre navigateur pour ajouter ce site à votre écran d'accueil.
 						</DeciText>
 					</div>
@@ -84,16 +83,21 @@ export function DeciInstallPanel({ deviceType }: DeciInstallPanelProps): React.J
 	};
 
 	return (
-		<div style={{ padding: "1rem" }}>
+		<div style={{ 
+			padding: "1rem",
+			maxWidth: "max(30rem, 60vw)"
+		}}>
+			<DeciText variant="sectionTitle">C'est quoi l'installation?</DeciText>
 			<DeciText variant="default">
-				Une fois installée, l'application pourra s'utiliser sans connexion internet.
+				L'installation permet d'ajouter cette application à votre écran d'accueil sur votre appareil mobile. Une fois installée, vous pourrez l'utiliser en mode offline sans connexion internet.
 			</DeciText>
 			<div style={{ marginTop: "1rem" }}>
-				<DeciText variant="default">
+				<DeciText variant="muted">
 					Les étapes peuvent différer en fonction du modèle de votre téléphone et du lanceur d'application utilisé.
 				</DeciText>
 			</div>
 			<div style={{ marginTop: "1rem" }}>
+				<DeciText variant="sectionTitle">Comment installer ?</DeciText>
 				{getInstallInstructions()}
 			</div>
 		</div>
