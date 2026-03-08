@@ -15,11 +15,11 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 		}),
 		streak5Days: z.object({
 			name: z.literal("Momentum"),
-			description: z.literal("Réussir une partie 5 jours consécutifs"),
+			description: z.literal("Réussir une partie 3 jours consécutifs"),
 			unlocked: z.boolean(),
 			progress: z.object({
 				current: z.number(),
-				target: z.literal(5)
+				target: z.literal(3)
 			})
 		}),
 		firstLetterA: z.object({

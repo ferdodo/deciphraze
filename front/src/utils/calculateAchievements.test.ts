@@ -65,7 +65,7 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
 			expect(achievements.achievements.streak5Days.name).toBe("Momentum");
 			expect(achievements.achievements.streak5Days.description).toBe(
-				"Réussir une partie 5 jours consécutifs",
+				"Réussir une partie 3 jours consécutifs",
 			);
 		});
 
@@ -267,7 +267,7 @@ describe("calculateAchievements", () => {
 			const existingAchievements: AllAchievements = createAllAchievements(
 				true, // firstGame
 				true, // streak5Days
-				{ current: 0, target: 5 },
+				{ current: 0, target: 3 },
 				true, // firstLetterA
 				true, // firstLetterE
 				true, // firstLetterY

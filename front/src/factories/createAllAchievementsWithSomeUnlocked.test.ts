@@ -24,7 +24,7 @@ describe("createAllAchievementsWithSomeUnlocked", () => {
 		expect(achievements.achievements.allVowelsInSequence.unlocked).toBe(false);
 		
 		// Test progress values for achievements in progress
-		expect(achievements.achievements.streak5Days.progress).toEqual({ current: 3, target: 5 });
+		expect(achievements.achievements.streak5Days.progress).toEqual({ current: 3, target: 3 });
 		expect(achievements.achievements.words1000.progress).toEqual({ current: 250, target: 500 });
 		expect(achievements.achievements.completeAlphabet.progress).toEqual({ current: 15, target: 26 });
 		

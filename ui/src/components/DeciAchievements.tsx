@@ -14,11 +14,11 @@ interface AllAchievements {
 		};
 		streak5Days: {
 			name: "Momentum";
-			description: "Réussir une partie 5 jours consécutifs";
+			description: "Réussir une partie 3 jours consécutifs";
 			unlocked: boolean;
 			progress: {
 				current: number;
-				target: 5;
+				target: 3;
 			};
 		};
 		firstLetterA: {

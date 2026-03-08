@@ -20,10 +20,10 @@ export function calculateAchievements(
 	existingAchievements?: AllAchievements
 ): AllAchievements {
 	const calculatedFirstGameUnlocked = Object.keys(gameHistory).length > 0;
-	const calculatedStreak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 5;
+	const calculatedStreak5DaysUnlocked = calculateMaxStreak(gameHistory) >= 3;
 	const streak5DaysProgress = {
 		current: 0,
-		target: 5 as const
+		target: 3 as const
 	};
 	
 	const calculatedFirstLetterAUnlocked = isFirstLetterFoundInHistory(gameHistory, "A");

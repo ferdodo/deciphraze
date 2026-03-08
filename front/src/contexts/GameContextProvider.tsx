@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import { gameContext } from "./gameContext";
 import { createAllGamesRepository } from "../utils/createAllGamesRepository";
 import { createGameHistoryRepository } from "../utils/createGameHistoryRepository";
-import { createAllAchievementsV1Repository } from "@deciphraze/persistance";
+import { createAllAchievementsV2Repository } from "@deciphraze/persistance";
 import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
@@ -32,7 +32,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 		return {
 			allGamesRepository: createAllGamesRepository(storage),
 			gameHistoryRepository: createGameHistoryRepository(storage),
-			achievementRepository: createAllAchievementsV1Repository(),
+			achievementRepository: createAllAchievementsV2Repository(),
 			dayRepository: createDayRepository(),
 			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
 			statisticsRepository: createStatisticsRepository(storage),

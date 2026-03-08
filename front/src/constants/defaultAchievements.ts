@@ -10,11 +10,11 @@ export const defaultAchievements: AllAchievements = {
 		},
 		streak5Days: {
 			name: "Momentum",
-			description: "Réussir une partie 5 jours consécutifs",
+			description: "Réussir une partie 3 jours consécutifs",
 			unlocked: false,
 			progress: {
 				current: 0,
-				target: 5
+				target: 3
 			}
 		},
 		firstLetterA: {

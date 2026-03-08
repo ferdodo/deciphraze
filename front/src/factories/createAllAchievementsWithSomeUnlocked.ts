@@ -12,7 +12,7 @@ export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
 			streak5Days: {
 				...defaultAchievements.achievements.streak5Days,
 				unlocked: false,
-				progress: { current: 3, target: 5 }
+				progress: { current: 3, target: 3 }
 			},
 			firstLetterA: {
 				...defaultAchievements.achievements.firstLetterA,

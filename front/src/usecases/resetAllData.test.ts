@@ -42,7 +42,7 @@ describe("resetAllData", () => {
 			createAllAchievements(
 				true, // firstGameUnlocked
 				false, // streak5DaysUnlocked
-				{ current: 0, target: 5 }, // streak5DaysProgress
+				{ current: 0, target: 3 }, // streak5DaysProgress
 				false, // firstLetterAUnlocked
 				false, // firstLetterEUnlocked
 				false, // firstLetterYUnlocked
@@ -128,7 +128,7 @@ describe("resetAllData", () => {
 			createAllAchievements(
 				true, // firstGameUnlocked
 				false, // streak5DaysUnlocked
-				{ current: 0, target: 5 }, // streak5DaysProgress
+				{ current: 0, target: 3 }, // streak5DaysProgress
 				false, // firstLetterAUnlocked
 				false, // firstLetterEUnlocked
 				false, // firstLetterYUnlocked
