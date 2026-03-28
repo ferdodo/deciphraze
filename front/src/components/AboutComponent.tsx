@@ -19,10 +19,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							Bugs & Support
 						</DeciText>
 						<DeciText variant="muted">
-							Pour signaler un bug ou une anomalie :
-						</DeciText>
-						<DeciText variant="muted">
-							• GitHub Issues : <a href="https://github.com/ferdodo/deciphraze/issues" target="_blank" rel="noopener noreferrer">https://github.com/ferdodo/deciphraze/issues</a>
+							• <a href="https://github.com/ferdodo/deciphraze/issues" target="_blank" rel="noopener noreferrer">Signaler un problème</a>
 						</DeciText>
 					</div>
 
@@ -49,7 +46,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 							• Éditeur : ferdodo
 						</DeciText>
 						<DeciText variant="muted">
-							• Contact : <a href="https://github.com/ferdodo/deciphraze/discussions" target="_blank" rel="noopener noreferrer">https://github.com/ferdodo/deciphraze/discussions</a>
+							• <a href="https://github.com/ferdodo/deciphraze/discussions" target="_blank" rel="noopener noreferrer">Contact</a>
 						</DeciText>
 
 					</div>
