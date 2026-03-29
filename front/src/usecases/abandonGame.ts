@@ -12,7 +12,7 @@ export const abandonGame = (context: GameContext): void => {
 		return;
 	}
 
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const allGames = allGamesRepository.get();
 
 	// Récupérer le jour de la partie actuelle
@@ -34,5 +34,5 @@ export const abandonGame = (context: GameContext): void => {
 	});
 
 	// Changer au jour d'aujourd'hui
-	dayRepository.setDay(currentDay);
+	dayRepository.setRealTodaysDate(currentDay);
 };

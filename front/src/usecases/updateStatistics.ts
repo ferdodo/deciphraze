@@ -21,7 +21,7 @@ export function updateStatistics(context: GameContext): Subscription {
 
 	return subscribePlayerCipher(allGamesRepository, dayRepository).pipe(
 		filter((playerCipher: PlayerCipher) => {
-			const currentDay = dayRepository.getDay();
+			const currentDay = dayRepository.getRealTodaysDate();
 			const allGames = allGamesRepository.get();
 			const gameDay = getCurrentGameDay(allGames, currentDay);
 			const paragraphOfTheDay = generateParagraph(gameDay);
@@ -29,7 +29,7 @@ export function updateStatistics(context: GameContext): Subscription {
 			return isWin(playerCipher, paragraphOfTheDay, gameHistory, gameDay);
 		})
 	).subscribe(() => {
-		const currentDay = dayRepository.getDay();
+		const currentDay = dayRepository.getRealTodaysDate();
 		const allGames = allGamesRepository.get();
 		const gameDay = getCurrentGameDay(allGames, currentDay);
 		const paragraphOfTheDay = generateParagraph(gameDay);

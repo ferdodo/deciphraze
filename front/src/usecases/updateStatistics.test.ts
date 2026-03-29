@@ -21,7 +21,7 @@ describe("updateStatistics", () => {
 		const [cleanup, context] = withFinishedGame();
 		
 		const statistics = context.statisticsRepository.getStatistics();
-		const today = context.dayRepository.getDay();
+		const today = context.dayRepository.getRealTodaysDate();
 		const discoveryOrder = context.discoveryOrderRepository.getDiscoveryOrder(today);
 		
 		// Il peut y avoir plusieurs entrées si plusieurs victoires ont été enregistrées
@@ -38,7 +38,7 @@ describe("updateStatistics", () => {
 		const [cleanup, context] = withFinishedGame();
 		
 		const statistics = context.statisticsRepository.getStatistics();
-		const today = context.dayRepository.getDay();
+		const today = context.dayRepository.getRealTodaysDate();
 		
 		expect(statistics.firstGameDate).toBe(today);
 		expect(statistics.lastGameDate).toBe(today);

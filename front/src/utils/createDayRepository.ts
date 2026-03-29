@@ -8,15 +8,15 @@ export function createDayRepository(): DayRepository {
 	const currentDate = formatDate(now);
 	const daySubject = new BehaviorSubject<string>(currentDate);
 
-	function getDay(): string {
+	function getRealTodaysDate(): string {
 		return daySubject.value;
 	}
 
-	function setDay(day: string): void {
+	function setRealTodaysDate(day: string): void {
 		daySubject.next(day);
 	}
 
-	function observeDay(): Observable<string> {
+	function observeRealTodaysDate(): Observable<string> {
 		return daySubject.asObservable();
 	}
 
@@ -27,9 +27,9 @@ export function createDayRepository(): DayRepository {
 	}
 
 	return {
-		getDay,
-		setDay,
-		observeDay,
+		getRealTodaysDate,
+		setRealTodaysDate,
+		observeRealTodaysDate,
 		clear
 	};
 }

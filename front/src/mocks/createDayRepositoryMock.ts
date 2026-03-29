@@ -5,15 +5,15 @@ import type { DayRepository } from "../repositories/DayRepository";
 export function createDayRepositoryMock(): DayRepository {
 	const daySubject = new BehaviorSubject<string>("2024-01-15");
 
-	function getDay(): string {
+	function getRealTodaysDate(): string {
 		return daySubject.value;
 	}
 
-	function setDay(day: string): void {
+	function setRealTodaysDate(day: string): void {
 		daySubject.next(day);
 	}
 
-	function observeDay(): Observable<string> {
+	function observeRealTodaysDate(): Observable<string> {
 		return daySubject.asObservable();
 	}
 
@@ -22,9 +22,9 @@ export function createDayRepositoryMock(): DayRepository {
 	}
 
 	return {
-		getDay,
-		setDay,
-		observeDay,
+		getRealTodaysDate,
+		setRealTodaysDate,
+		observeRealTodaysDate,
 		clear,
 	};
 }

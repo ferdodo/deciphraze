@@ -18,7 +18,7 @@ export const selectSymbol = (
 	} = context;
 	
 	// Vérifier si la partie est gagnée avant toute action
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const paragraphOfTheDay = generateParagraph(currentDay);
 	const gameHistory = gameHistoryRepository.getHistory();
 	const allGames = allGamesRepository.get();

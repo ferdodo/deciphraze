@@ -20,7 +20,7 @@ export function registerWinnedGame({
 }: GameContext): Subscription {
 	return combineLatest([
 		subscribePlayerCipher(allGamesRepository, dayRepository),
-		dayRepository.observeDay(),
+		dayRepository.observeRealTodaysDate(),
 	]).pipe(
 		filter(([playerCipher, currentDay]: [PlayerCipher, string]) => {
 			const allGames = allGamesRepository.get();

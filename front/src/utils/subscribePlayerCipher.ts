@@ -11,7 +11,7 @@ export const subscribePlayerCipher = (
 ): Observable<PlayerCipher> => {
 	return allGamesRepository.subscribe().pipe(
 		map((allGames) => {
-			const currentDay = dayRepository.getDay();
+			const currentDay = dayRepository.getRealTodaysDate();
 			return getPlayerCipherFromAllGames(allGames, currentDay);
 		})
 	);

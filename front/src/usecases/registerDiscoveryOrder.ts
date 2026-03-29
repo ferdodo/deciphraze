@@ -13,7 +13,7 @@ export function registerDiscoveryOrder(context: GameContext): Subscription {
 
 	return allGamesRepository.subscribe().pipe(
 		map((allGames) => {
-			const today = dayRepository.getDay();
+			const today = dayRepository.getRealTodaysDate();
 			const playerCipher = getPlayerCipherFromAllGames(allGames, today);
 			const currentDiscoveryOrder = discoveryOrderRepository.getDiscoveryOrder(today);
 			

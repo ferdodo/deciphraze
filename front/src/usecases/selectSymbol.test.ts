@@ -10,7 +10,7 @@ describe("selectSymbol", () => {
 	describe("Basic selection", () => {
 		it("should select a symbol when no letter is selected", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getDay();
+			const day = context.dayRepository.getRealTodaysDate();
 			selectSymbol("X", context);
 			expect(getSymbolSelectionFromAllGames(context.allGamesRepository.get(), day)).toBe("X");
 			expect(getLetterSelectionFromAllGames(context.allGamesRepository.get(), day)).toBeNull();
@@ -19,7 +19,7 @@ describe("selectSymbol", () => {
 
 		it("should not select non-alphabetic characters", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getDay();
+			const day = context.dayRepository.getRealTodaysDate();
 			selectSymbol("1", context);
 			selectSymbol("0", context);
 			expect(getSymbolSelectionFromAllGames(context.allGamesRepository.get(), day)).toBeNull();
@@ -28,7 +28,7 @@ describe("selectSymbol", () => {
 
 		it("should replace previous letter association when associating symbol to a different letter", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getDay();
+			const day = context.dayRepository.getRealTodaysDate();
 			
 			// Créer association A->X
 			selectLetter("A", context);

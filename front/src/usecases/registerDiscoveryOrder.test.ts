@@ -7,7 +7,7 @@ describe("registerDiscoveryOrder", () => {
 	it("should register discovery order when correct association is made", () => {
 		const [cleanup, context] = withGameStarted();
 		asPlayerAssociateOneGoodLetter(context);
-		const today = context.dayRepository.getDay();
+		const today = context.dayRepository.getRealTodaysDate();
 		const discoveryOrder = context.discoveryOrderRepository.getDiscoveryOrder(today);
 		expect(discoveryOrder.length).toBe(1);
 		cleanup();
@@ -16,7 +16,7 @@ describe("registerDiscoveryOrder", () => {
 	it("should not register discovery order when incorrect association is made", () => {
 		const [cleanup, context] = withGameStarted();
 		asPlayerAssociateOneBadLetter(context);
-		const today = context.dayRepository.getDay();
+		const today = context.dayRepository.getRealTodaysDate();
 		const discoveryOrder = context.discoveryOrderRepository.getDiscoveryOrder(today);
 		expect(discoveryOrder.length).toBe(0);
 		cleanup();

@@ -4,7 +4,7 @@ import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export const incrementDay = (context: GameContext): void => {
 	const { allGamesRepository, dayRepository, discoveryOrderRepository } = context;
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const date = new Date(currentDay);
 	date.setDate(date.getDate() + 1);
 	const newDay = formatDate(date);
@@ -41,6 +41,6 @@ export const incrementDay = (context: GameContext): void => {
 	discoveryOrderRepository.setDiscoveryOrder(newDay, []);
 	
 	// Changer de jour en dernier
-	dayRepository.setDay(newDay);
+	context.dayRepository.setRealTodaysDate(newDay);
 };
 

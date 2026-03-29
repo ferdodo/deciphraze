@@ -16,8 +16,8 @@ describe("abandonGame", () => {
 		};
 
 		const mockDayRepository = {
-			getDay: () => "2025-03-01",
-			setDay: () => { throw new Error("Should not set day"); },
+			getRealTodaysDate: () => "2025-03-01",
+			setRealTodaysDate: () => { throw new Error("Should not set day"); },
 		};
 
 		const mockBrowserService = {
@@ -53,10 +53,10 @@ describe("abandonGame", () => {
 			},
 		};
 
-		let setDayCalled = false;
+		let setRealTodaysDateCalled = false;
 		const mockDayRepository = {
-			getDay: () => "2025-03-01",
-			setDay: () => { setDayCalled = true; },
+			getRealTodaysDate: () => "2025-03-01",
+			setRealTodaysDate: () => { setRealTodaysDateCalled = true; },
 		};
 
 		const mockBrowserService = {
@@ -73,7 +73,7 @@ describe("abandonGame", () => {
 
 		expect(clearCalled).toBe(true);
 		expect(upsertCalled).toBe(true);
-		expect(setDayCalled).toBe(true);
+		expect(setRealTodaysDateCalled).toBe(true);
 		expect(upsertedDays).toContain("2025-03-01");
 	});
 });

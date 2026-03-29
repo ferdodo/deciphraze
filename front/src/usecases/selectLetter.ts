@@ -17,7 +17,7 @@ export const selectLetter = (
 		associationHistoryRepository,
 	} = context;
 	
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const paragraphOfTheDay = generateParagraph(currentDay);
 	const gameHistory = gameHistoryRepository.getHistory();
 	const allGames = allGamesRepository.get();

@@ -6,7 +6,7 @@ import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGame
 
 export function asPlayerAssociateOneGoodLetter(context: GameContext): void {
 	const { allGamesRepository, dayRepository } = context;
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const allGames = allGamesRepository.get();
 	const playerCipher = getPlayerCipherFromAllGames(allGames, currentDay);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

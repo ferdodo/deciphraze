@@ -3,10 +3,10 @@ import { useGameContext } from "./useGameContext";
 
 export const useDay = (): string => {
 	const { dayRepository } = useGameContext();
-	const [day, setDay] = useState<string>(dayRepository.getDay());
+	const [day, setDay] = useState<string>(dayRepository.getRealTodaysDate());
 
 	useEffect(() => {
-		const subscription = dayRepository.observeDay().subscribe((newDay: string) => {
+		const subscription = dayRepository.observeRealTodaysDate().subscribe((newDay: string) => {
 			setDay(newDay);
 		});
 

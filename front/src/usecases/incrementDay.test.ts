@@ -8,9 +8,9 @@ import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGame
 describe("incrementDay", () => {
 	it("should increment day by 1", () => {
 		const [cleanup, context] = withGameStarted();
-		const initialDay = context.dayRepository.getDay();
+		const initialDay = context.dayRepository.getRealTodaysDate();
 		incrementDay(context);
-		const newDay = context.dayRepository.getDay();
+		const newDay = context.dayRepository.getRealTodaysDate();
 		
 		const initialDate = new Date(initialDay);
 		const expectedDate = new Date(initialDate);
@@ -24,7 +24,7 @@ describe("incrementDay", () => {
 
 	it("should preserve player cipher when incrementing day", () => {
 		const [cleanup, context] = withGameStarted();
-		const initialDay = context.dayRepository.getDay();
+		const initialDay = context.dayRepository.getRealTodaysDate();
 		
 		// Make an association
 		selectLetter("A", context);

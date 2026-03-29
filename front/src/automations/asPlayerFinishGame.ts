@@ -6,7 +6,7 @@ import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGame
 
 export function asPlayerFinishGame(context: GameContext): void {
 	const { allGamesRepository, gameHistoryRepository, dayRepository } = context;
-	const currentDay = dayRepository.getDay();
+	const currentDay = dayRepository.getRealTodaysDate();
 	const paragraphOfTheDay = generateParagraph(currentDay);
 	const gameHistory = gameHistoryRepository.getHistory();
 	let allGames = allGamesRepository.get();

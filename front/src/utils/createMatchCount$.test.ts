@@ -22,7 +22,7 @@ describe("createMatchCount$", () => {
 		const day = "2024-01-01";
 		const allGamesRepository = createAllGamesRepositoryMock();
 		const dayRepository = createDayRepositoryMock();
-		dayRepository.setDay(day);
+		dayRepository.setRealTodaysDate(day);
 		
 		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
 
