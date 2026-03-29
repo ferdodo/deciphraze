@@ -19,6 +19,7 @@ const defaultViewedAchievements: ViewedAchievements = {
 	completeAlphabet: false,
 	paleographer: false,
 	allVowelsInSequence: false,
+	doublet: false,
 };
 
 export function createViewedAchievementsRepository(storage: StorageLike): ViewedAchievementsRepository {

@@ -17,6 +17,7 @@ export function createAllAchievements(
 	completeAlphabetProgress: { current: number; target: 26 } = { current: 0, target: 26 },
 	paleographerUnlocked: boolean = false,
 	allVowelsInSequenceUnlocked: boolean = false,
+	doubletUnlocked: boolean = false,
 	computedAtDate: string = new Date().toISOString()
 ): AllAchievements {
 	return {
@@ -72,6 +73,10 @@ export function createAllAchievements(
 			allVowelsInSequence: {
 				...defaultAchievements.achievements.allVowelsInSequence,
 				unlocked: allVowelsInSequenceUnlocked
+			},
+			doublet: {
+				...defaultAchievements.achievements.doublet,
+				unlocked: doubletUnlocked
 			}
 		}
 	};

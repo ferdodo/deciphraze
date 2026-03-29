@@ -1,7 +1,18 @@
 #!/bin/sh
 set -e
-docker compose run -T --rm --build --remove-orphans core npm run verify
-docker compose run -T --rm --build --remove-orphans design-system npm run verify
-docker compose run -T --rm --build --remove-orphans ui npm run verify
-docker compose run -T --rm --build --remove-orphans front npm run verify
-docker compose run -T --rm --build --remove-orphans browser npm run verify
+
+if test -t 0; then
+  INTERACTIVE=""
+else
+  INTERACTIVE="-T"
+fi
+
+verify() {
+  docker compose run $INTERACTIVE --rm --build --quiet-build --remove-orphans "$1" npm run verify
+}
+
+verify core
+verify ui
+verify front
+verify browser
+verify design-system

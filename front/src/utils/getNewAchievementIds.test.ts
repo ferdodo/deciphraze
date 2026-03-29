@@ -20,6 +20,7 @@ describe("getNewAchievementIds", () => {
 			completeAlphabet: false,
 			paleographer: false,
 			allVowelsInSequence: false,
+			doublet: false,
 		};
 
 		const result = getNewAchievementIds(mockAchievements, viewedAchievements);

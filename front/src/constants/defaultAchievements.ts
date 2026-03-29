@@ -74,6 +74,11 @@ export const defaultAchievements: AllAchievements = {
 			name: "Vocaliste",
 			description: "Trouver toutes les voyelles à la suite",
 			unlocked: false
+		},
+		doublet: {
+			name: "Doublet",
+			description: "Trouver une double lettre en premier",
+			unlocked: false
 		}
 	}
 };

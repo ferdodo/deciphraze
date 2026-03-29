@@ -22,6 +22,7 @@ describe("createViewedAchievementsRepository", () => {
 			completeAlphabet: false,
 			paleographer: false,
 			allVowelsInSequence: false,
+			doublet: false,
 		});
 	});
 
@@ -40,6 +41,7 @@ describe("createViewedAchievementsRepository", () => {
 			completeAlphabet: false,
 			paleographer: false,
 			allVowelsInSequence: false,
+			doublet: false,
 		};
 
 		storage.setItem("deciphraze_viewed_achievements", JSON.stringify(storedAchievements));
@@ -64,6 +66,7 @@ describe("createViewedAchievementsRepository", () => {
 			completeAlphabet: false,
 			paleographer: false,
 			allVowelsInSequence: false,
+			doublet: false,
 		};
 
 		repository.saveViewedAchievement(someAchievements);
@@ -113,6 +116,7 @@ describe("createViewedAchievementsRepository", () => {
 			completeAlphabet: false,
 			paleographer: false,
 			allVowelsInSequence: false,
+			doublet: false,
 		};
 
 		repository.saveViewedAchievement(newAchievements);

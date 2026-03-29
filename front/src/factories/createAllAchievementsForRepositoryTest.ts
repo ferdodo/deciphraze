@@ -56,6 +56,10 @@ export function createAllAchievementsForRepositoryTest(): AllAchievements {
 				...defaultAchievements.achievements.allVowelsInSequence,
 				unlocked: false
 			},
+			doublet: {
+				...defaultAchievements.achievements.doublet,
+				unlocked: false
+			},
 		},
 	};
 }

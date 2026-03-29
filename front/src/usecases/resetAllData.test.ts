@@ -55,6 +55,7 @@ describe("resetAllData", () => {
 				{ current: 0, target: 26 }, // completeAlphabetProgress
 				false, // paleographerUnlocked
 				false, // allVowelsInSequenceUnlocked
+				false, // doubletUnlocked
 				"2024-01-01" // computedAtDate
 			)
 		);
@@ -141,6 +142,7 @@ describe("resetAllData", () => {
 				{ current: 0, target: 26 }, // completeAlphabetProgress
 				false, // paleographerUnlocked
 				false, // allVowelsInSequenceUnlocked
+				false, // doubletUnlocked
 				"2024-01-01" // computedAtDate
 			)
 		);
