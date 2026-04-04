@@ -20,7 +20,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
-			expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(false);
 		});
@@ -271,7 +270,6 @@ describe("calculateAchievements", () => {
 				true, // firstLetterA
 				true, // firstLetterE
 				true, // firstLetterY
-				true, // wordInOrder
 				true, // alphaAndOmega
 				true, // firstLetterQ
 				true, // words1000
@@ -291,7 +289,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
-			expect(achievements.achievements.wordInOrder.unlocked).toBe(true);
 			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
 			expect(achievements.achievements.words1000.unlocked).toBe(true);

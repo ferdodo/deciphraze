@@ -1,26 +1,83 @@
-import type { AllAchievementsV3Repository } from "./AllAchievementsV3Repository";
-import type { AllAchievementsV3 } from "./AllAchievementsV3";
+import type { AllAchievementsV3 } from "../entities";
+import type { AllAchievementsV3Repository } from "../repositories";
+import { migrateAllAchievementsV2ToV3 } from "../repositories/migrations";
 import { createAllAchievementsV2Repository } from "./createAllAchievementsV2Repository";
-import { migrateAllAchievementsV2ToV3 } from "./migrateV2ToV3";
 
 const ACHIEVEMENTS_STORAGE_KEY = "deciphraze_achievements_v3";
 
 const defaultAchievements: AllAchievementsV3 = {
 	computedAtDate: "2024-01-01T00:00:00.000Z",
 	achievements: {
-		firstGame: { name: "Préambule", description: "Jouer votre première partie", unlocked: false },
-		streak5Days: { name: "Momentum", description: "Réussir une partie 3 jours consécutifs", unlocked: false, progress: { current: 0, target: 3 } },
-		firstLetterA: { name: "Aperçu", description: "Trouver la lettre A en premier", unlocked: false },
-		firstLetterE: { name: "Élémentaire", description: "Trouver la lettre E en premier", unlocked: false },
-		firstLetterY: { name: "Mythique", description: "Trouver la lettre Y en premier", unlocked: false },
-		wordInOrder: { name: "Signature", description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre", unlocked: false },
-		alphaAndOmega: { name: "Synthèse", description: "Déchiffrer la première lettre en premier, la dernière en dernier", unlocked: false },
-		firstLetterQ: { name: "Qualifié", description: "Trouver la lettre Q en premier", unlocked: false },
-		words1000: { name: "Scribe", description: "Déchiffrez 500 mots", unlocked: false, progress: { current: 0, target: 500 } },
-		completeAlphabet: { name: "Lettré", description: "Trouver toutes les lettres de l'alphabet", unlocked: false, progress: { current: 0, target: 26 } },
-		paleographer: { name: "Paléographe", description: "Compléter une partie sans erreur d'association", unlocked: false },
-		allVowelsInSequence: { name: "Vocaliste", description: "Trouver toutes les voyelles à la suite", unlocked: false },
-		doublet: { name: "Doublet", description: "Trouver une double lettre en premier", unlocked: false },
+		firstGame: {
+			name: "Préambule",
+			description: "Jouer votre première partie",
+			unlocked: false,
+		},
+		streak5Days: {
+			name: "Momentum",
+			description: "Réussir une partie 3 jours consécutifs",
+			unlocked: false,
+			progress: { current: 0, target: 3 },
+		},
+		firstLetterA: {
+			name: "Aperçu",
+			description: "Trouver la lettre A en premier",
+			unlocked: false,
+		},
+		firstLetterE: {
+			name: "Élémentaire",
+			description: "Trouver la lettre E en premier",
+			unlocked: false,
+		},
+		firstLetterY: {
+			name: "Mythique",
+			description: "Trouver la lettre Y en premier",
+			unlocked: false,
+		},
+		wordInOrder: {
+			name: "Signature",
+			description:
+				"Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
+			unlocked: false,
+		},
+		alphaAndOmega: {
+			name: "Synthèse",
+			description:
+				"Déchiffrer la première lettre en premier, la dernière en dernier",
+			unlocked: false,
+		},
+		firstLetterQ: {
+			name: "Qualifié",
+			description: "Trouver la lettre Q en premier",
+			unlocked: false,
+		},
+		words1000: {
+			name: "Scribe",
+			description: "Déchiffrez 500 mots",
+			unlocked: false,
+			progress: { current: 0, target: 500 },
+		},
+		completeAlphabet: {
+			name: "Lettré",
+			description: "Trouver toutes les lettres de l'alphabet",
+			unlocked: false,
+			progress: { current: 0, target: 26 },
+		},
+		paleographer: {
+			name: "Paléographe",
+			description: "Compléter une partie sans erreur d'association",
+			unlocked: false,
+		},
+		allVowelsInSequence: {
+			name: "Vocaliste",
+			description: "Trouver toutes les voyelles à la suite",
+			unlocked: false,
+		},
+		doublet: {
+			name: "Doublet",
+			description: "Trouver une double lettre en premier",
+			unlocked: false,
+		},
 	},
 };
 

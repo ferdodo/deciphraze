@@ -30,11 +30,6 @@ export interface AllAchievements {
 			description: "Trouver la lettre Y en premier";
 			unlocked: boolean;
 		};
-		wordInOrder: {
-			name: "Signature";
-			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre";
-			unlocked: boolean;
-		};
 		alphaAndOmega: {
 			name: "Synthèse";
 			description: "Déchiffrer la première lettre en premier, la dernière en dernier";

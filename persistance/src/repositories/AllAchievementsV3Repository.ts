@@ -1,4 +1,4 @@
-import type { AllAchievementsV3 } from "./AllAchievementsV3";
+import type { AllAchievementsV3 } from "../entities/AllAchievementsV3";
 
 export interface AllAchievementsV3Repository {
 	loadAchievements(): AllAchievementsV3;

@@ -26,10 +26,6 @@ export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
 				...defaultAchievements.achievements.firstLetterY,
 				unlocked: true
 			},
-			wordInOrder: {
-				...defaultAchievements.achievements.wordInOrder,
-				unlocked: false
-			},
 			alphaAndOmega: {
 				...defaultAchievements.achievements.alphaAndOmega,
 				unlocked: false
@@ -59,7 +55,7 @@ export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
 			doublet: {
 				...defaultAchievements.achievements.doublet,
 				unlocked: false
-			},
+			}
 		},
 	};
 }

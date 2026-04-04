@@ -32,11 +32,6 @@ export const defaultAchievements: AllAchievements = {
 			description: "Trouver la lettre Y en premier",
 			unlocked: false
 		},
-		wordInOrder: {
-			name: "Signature",
-			description: "Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
-			unlocked: false
-		},
 		alphaAndOmega: {
 			name: "Synthèse",
 			description: "Déchiffrer la première lettre en premier, la dernière en dernier",

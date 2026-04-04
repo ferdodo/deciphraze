@@ -1,9 +1,10 @@
-import type { AllAchievementsV1 } from "../entities";
-import type { AllAchievementsV1Repository } from "../repositories";
+import { createAllAchievementsV3Repository } from "../creators/createAllAchievementsV3Repository";
+import { migrateAllAchievementsV3ToV4 } from "../migrations";
+import type { AllAchievementsV4, AllAchievementsV4Repository } from "./";
 
-const ACHIEVEMENTS_STORAGE_KEY = "deciphraze_achievements";
+const ACHIEVEMENTS_STORAGE_KEY = "deciphraze_achievements_v4";
 
-const defaultAchievements: AllAchievementsV1 = {
+const defaultAchievements: AllAchievementsV4 = {
 	computedAtDate: "2024-01-01T00:00:00.000Z",
 	achievements: {
 		firstGame: {
@@ -13,9 +14,9 @@ const defaultAchievements: AllAchievementsV1 = {
 		},
 		streak5Days: {
 			name: "Momentum",
-			description: "Réussir une partie 5 jours consécutifs",
+			description: "Réussir une partie 3 jours consécutifs",
 			unlocked: false,
-			progress: { current: 0, target: 5 },
+			progress: { current: 0, target: 3 },
 		},
 		firstLetterA: {
 			name: "Aperçu",
@@ -30,12 +31,6 @@ const defaultAchievements: AllAchievementsV1 = {
 		firstLetterY: {
 			name: "Mythique",
 			description: "Trouver la lettre Y en premier",
-			unlocked: false,
-		},
-		wordInOrder: {
-			name: "Signature",
-			description:
-				"Trouver toutes les lettres d'un mot d'au moins 5 lettres dans l'ordre",
 			unlocked: false,
 		},
 		alphaAndOmega: {
@@ -71,39 +66,46 @@ const defaultAchievements: AllAchievementsV1 = {
 			description: "Trouver toutes les voyelles à la suite",
 			unlocked: false,
 		},
+		doublet: {
+			name: "Doublet",
+			description: "Trouver une double lettre en premier",
+			unlocked: false,
+		},
 	},
 };
 
-export const createAllAchievementsV1Repository = (
+export const createAllAchievementsV4Repository = (
 	storage: Storage = window.localStorage,
-	achievements: AllAchievementsV1 = defaultAchievements,
-): AllAchievementsV1Repository => {
-	const listeners: ((achievements: AllAchievementsV1) => void)[] = [];
-	let achievementsData: AllAchievementsV1;
+): AllAchievementsV4Repository => {
+	const listeners: ((achievements: AllAchievementsV4) => void)[] = [];
 
-	try {
-		const stored: string = storage.getItem(ACHIEVEMENTS_STORAGE_KEY) ?? "";
-		if (stored === "" || stored === "null") {
-			achievementsData = achievements;
-		} else {
-			achievementsData = JSON.parse(stored);
+	let achievementsData: AllAchievementsV4;
+
+	const v4Stored = storage.getItem(ACHIEVEMENTS_STORAGE_KEY);
+	if (!v4Stored) {
+		const v3Repository = createAllAchievementsV3Repository(storage);
+		const v3Data = v3Repository.loadAchievements();
+		achievementsData = migrateAllAchievementsV3ToV4(v3Data);
+	} else {
+		try {
+			achievementsData = JSON.parse(v4Stored);
+		} catch {
+			achievementsData = defaultAchievements;
 		}
-	} catch (_error) {
-		achievementsData = achievements;
 	}
 
-	function loadAchievements(): AllAchievementsV1 {
+	function loadAchievements(): AllAchievementsV4 {
 		return achievementsData;
 	}
 
-	function saveAchievements(newAchievements: AllAchievementsV1): void {
+	function saveAchievements(newAchievements: AllAchievementsV4): void {
 		achievementsData = newAchievements;
 		storage.setItem(ACHIEVEMENTS_STORAGE_KEY, JSON.stringify(achievementsData));
 		notifyListeners();
 	}
 
 	function subscribe(
-		listener: (achievements: AllAchievementsV1) => void,
+		listener: (achievements: AllAchievementsV4) => void,
 	): () => void {
 		listeners.push(listener);
 		return () => {
@@ -121,7 +123,7 @@ export const createAllAchievementsV1Repository = (
 	}
 
 	function clear(): void {
-		achievementsData = achievements;
+		achievementsData = defaultAchievements;
 		storage.removeItem(ACHIEVEMENTS_STORAGE_KEY);
 		notifyListeners();
 	}

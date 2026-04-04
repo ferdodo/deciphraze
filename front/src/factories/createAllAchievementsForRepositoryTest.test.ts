@@ -15,7 +15,6 @@ describe("createAllAchievementsForRepositoryTest", () => {
 		expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterY.unlocked).toBe(false);
-		expect(achievements.achievements.wordInOrder.unlocked).toBe(false);
 		expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		expect(achievements.achievements.words1000.unlocked).toBe(false);

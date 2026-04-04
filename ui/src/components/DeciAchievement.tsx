@@ -5,7 +5,7 @@ import styles from "./DeciAchievement.module.css";
 import { DeciText } from "./DeciText";
 
 interface Achievement {
-    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Signature" | "Synthèse" | "Qualifié" | "Scribe" | "Lettré" | "Paléographe" | "Vocaliste";
+    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Synthèse" | "Qualifié" | "Scribe" | "Lettré" | "Paléographe" | "Vocaliste" | "Doublet";
     description: string;
     unlocked: boolean;
     progress?: {

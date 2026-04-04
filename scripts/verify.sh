@@ -12,6 +12,7 @@ verify() {
 }
 
 verify core
+verify persistance
 verify ui
 verify front
 verify browser

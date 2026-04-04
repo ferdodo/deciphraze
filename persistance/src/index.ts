@@ -1,3 +1,4 @@
-export { createAllAchievementsV1Repository } from "./repositories/AllAchievements/createAllAchievementsV1Repository";
-export { createAllAchievementsV2Repository } from "./repositories/AllAchievements/createAllAchievementsV2Repository";
-export { createAllAchievementsV3Repository } from "./repositories/AllAchievements/createAllAchievementsV3Repository";
+export * from "./creators/createAllAchievementsV1Repository";
+export * from "./creators/createAllAchievementsV2Repository";
+export * from "./creators/createAllAchievementsV3Repository";
+export * from "./repositories/createAllAchievementsV4Repository";

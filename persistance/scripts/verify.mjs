@@ -13,6 +13,7 @@ task.group(task => [
 	task("Validating file names", () => run("exportcase check ./src")),
 	task("Auditing", () => run("npm audit --audit-level=critical")),
 	task("Type checking", () => run("tsc --noEmit")),
+	task("Verifying immutable files", () => run("node ./scripts/verify-immutable.mjs")),
 ], {
 	concurrency: 2,
 	stopOnError: true,
