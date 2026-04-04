@@ -16,7 +16,6 @@ const defaultViewedAchievements: ViewedAchievements = {
 	words1000: false,
 	completeAlphabet: false,
 	paleographer: false,
-	allVowelsInSequence: false,
 	doublet: false,
 };
 

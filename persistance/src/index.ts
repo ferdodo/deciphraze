@@ -6,4 +6,4 @@
  * All previous versions exist solely for internal migration purposes
  * and must NOT be exposed publicly.
  */
-export * from "./creators/createAllAchievementsV5Repository";
+export * from "./creators/createAllAchievementsV6Repository";

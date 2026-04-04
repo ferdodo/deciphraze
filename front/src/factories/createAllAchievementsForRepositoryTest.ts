@@ -44,10 +44,6 @@ export function createAllAchievementsForRepositoryTest(): AllAchievements {
 				...defaultAchievements.achievements.paleographer,
 				unlocked: false
 			},
-			allVowelsInSequence: {
-				...defaultAchievements.achievements.allVowelsInSequence,
-				unlocked: false
-			},
 			doublet: {
 				...defaultAchievements.achievements.doublet,
 				unlocked: false

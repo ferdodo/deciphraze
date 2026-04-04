@@ -64,11 +64,6 @@ interface AllAchievements {
 			description: "Compléter une partie sans erreur d'association";
 			unlocked: boolean;
 		};
-		allVowelsInSequence: {
-			name: "Vocaliste";
-			description: "Trouver toutes les voyelles à la suite";
-			unlocked: boolean;
-		};
 		doublet: {
 			name: "Doublet";
 			description: "Trouver une double lettre en premier";

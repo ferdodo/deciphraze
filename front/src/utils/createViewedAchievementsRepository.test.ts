@@ -19,7 +19,6 @@ describe("createViewedAchievementsRepository", () => {
 			words1000: false,
 			completeAlphabet: false,
 			paleographer: false,
-			allVowelsInSequence: false,
 			doublet: false,
 		});
 	});
@@ -36,7 +35,6 @@ describe("createViewedAchievementsRepository", () => {
 			words1000: false,
 			completeAlphabet: false,
 			paleographer: false,
-			allVowelsInSequence: false,
 			doublet: false,
 		};
 
@@ -59,7 +57,6 @@ describe("createViewedAchievementsRepository", () => {
 			words1000: false,
 			completeAlphabet: false,
 			paleographer: false,
-			allVowelsInSequence: false,
 			doublet: false,
 		};
 
@@ -107,7 +104,6 @@ describe("createViewedAchievementsRepository", () => {
 			words1000: false,
 			completeAlphabet: false,
 			paleographer: false,
-			allVowelsInSequence: false,
 			doublet: false,
 		};
 

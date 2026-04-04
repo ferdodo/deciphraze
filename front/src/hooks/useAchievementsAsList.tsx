@@ -14,7 +14,7 @@ export const useAchievementsAsList = (): Array<AllAchievements["achievements"][k
 		achievements.achievements.words1000,
 		achievements.achievements.completeAlphabet,
 		achievements.achievements.paleographer,
-		achievements.achievements.allVowelsInSequence,
+		achievements.achievements.doublet,
 	], [achievements]);
 };
 

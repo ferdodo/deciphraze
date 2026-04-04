@@ -19,7 +19,6 @@ describe("createAllAchievementsForRepositoryTest", () => {
 		expect(achievements.achievements.words1000.unlocked).toBe(false);
 		expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
 		expect(achievements.achievements.paleographer.unlocked).toBe(false);
-		expect(achievements.achievements.allVowelsInSequence.unlocked).toBe(false);
 		
 		// Test progress values
 		expect(achievements.achievements.streak5Days.progress).toEqual({ current: 0, target: 3 });

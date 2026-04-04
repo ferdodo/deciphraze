@@ -60,11 +60,6 @@ export const defaultAchievements: AllAchievements = {
 			description: "Compléter une partie sans erreur d'association",
 			unlocked: false
 		},
-		allVowelsInSequence: {
-			name: "Vocaliste",
-			description: "Trouver toutes les voyelles à la suite",
-			unlocked: false
-		},
 		doublet: {
 			name: "Doublet",
 			description: "Trouver une double lettre en premier",
