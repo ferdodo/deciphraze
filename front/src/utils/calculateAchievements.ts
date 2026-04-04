@@ -5,7 +5,6 @@ import type { AssociationHistoryRepository } from "../repositories/AssociationHi
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundInHistory } from "./isFirstLetterFoundInHistory";
-import { isAlphaAndOmega } from "./isAlphaAndOmega";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
 import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 import { calculatePaleographerUnlocked } from "./calculatePaleographerUnlocked";
@@ -29,7 +28,6 @@ export function calculateAchievements(
 	const calculatedFirstLetterAUnlocked = isFirstLetterFoundInHistory(gameHistory, "A");
 	const calculatedFirstLetterEUnlocked = isFirstLetterFoundInHistory(gameHistory, "E");
 	const calculatedFirstLetterYUnlocked = isFirstLetterFoundInHistory(gameHistory, "Y");
-	const calculatedAlphaAndOmegaUnlocked = isAlphaAndOmega(paragraphOfTheDay, discoveryOrder);
 	const calculatedFirstLetterQUnlocked = isFirstLetterFoundInHistory(gameHistory, "Q");
 	
 	const totalWordsFound = calculateTotalWordsFound(gameHistory);
@@ -50,7 +48,6 @@ export function calculateAchievements(
 	const firstLetterAUnlocked = existingAchievements?.achievements.firstLetterA.unlocked || calculatedFirstLetterAUnlocked;
 	const firstLetterEUnlocked = existingAchievements?.achievements.firstLetterE.unlocked || calculatedFirstLetterEUnlocked;
 	const firstLetterYUnlocked = existingAchievements?.achievements.firstLetterY.unlocked || calculatedFirstLetterYUnlocked;
-	const alphaAndOmegaUnlocked = existingAchievements?.achievements.alphaAndOmega.unlocked || calculatedAlphaAndOmegaUnlocked;
 	const firstLetterQUnlocked = existingAchievements?.achievements.firstLetterQ.unlocked || calculatedFirstLetterQUnlocked;
 	const words1000Unlocked = existingAchievements?.achievements.words1000.unlocked || calculatedWords1000Unlocked;
 	const completeAlphabetUnlocked = existingAchievements?.achievements.completeAlphabet.unlocked || calculatedCompleteAlphabetUnlocked;
@@ -65,7 +62,6 @@ export function calculateAchievements(
 		firstLetterAUnlocked,
 		firstLetterEUnlocked,
 		firstLetterYUnlocked,
-		alphaAndOmegaUnlocked,
 		firstLetterQUnlocked,
 		words1000Unlocked,
 		words1000Progress,

@@ -30,11 +30,6 @@ export interface AllAchievements {
 			description: "Trouver la lettre Y en premier";
 			unlocked: boolean;
 		};
-		alphaAndOmega: {
-			name: "Synthèse";
-			description: "Déchiffrer la première lettre en premier, la dernière en dernier";
-			unlocked: boolean;
-		};
 		firstLetterQ: {
 			name: "Qualifié";
 			description: "Trouver la lettre Q en premier";

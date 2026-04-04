@@ -1,10 +1,4 @@
-import type React from "react";
-import styles from "./DeciAchievements.module.css";
-import { DeciAchievement } from "./DeciAchievement";
-import { DeciAchievementFooter } from "./DeciAchievementFooter";
-import { DeciText } from "./DeciText";
-
-interface AllAchievements {
+export interface AllAchievementsV5 {
 	computedAtDate: string;
 	achievements: {
 		firstGame: {
@@ -76,51 +70,3 @@ interface AllAchievements {
 		};
 	};
 }
-
-interface DeciAchievementsProps {
-	achievements: AllAchievements;
-	unlockedCount: number;
-	currentStreak: number;
-	newAchievementIds?: string[];
-	onMarkAllAsViewed?: () => void;
-}
-
-export function DeciAchievements({
-	achievements,
-	unlockedCount,
-	currentStreak,
-	newAchievementIds = [],
-	onMarkAllAsViewed,
-}: DeciAchievementsProps): React.ReactNode {
-	const newIdsSet = new Set(newAchievementIds);
-
-	return (
-		<>
-			<div style={{ textAlign: "center" }}>
-				<DeciText variant="primary">
-					{unlockedCount}/{Object.keys(achievements.achievements).length} succès débloqués
-				</DeciText>
-			</div>
-			<br />
-			<div className={styles.achievementsList}>
-				{Object.entries(achievements.achievements).map(([key, achievement]) => (
-					<DeciAchievement 
-						key={key} 
-						achievement={achievement} 
-						currentStreak={currentStreak}
-						isNew={newIdsSet.has(key)}
-					/>
-				))}
-			</div>
-			{newAchievementIds.length > 0 && onMarkAllAsViewed && (
-				<div slot="footer">
-					<DeciAchievementFooter 
-						newAchievementIds={newAchievementIds}
-						onMarkAllAsViewed={onMarkAllAsViewed}
-					/>
-				</div>
-			)}
-		</>
-	);
-}
-

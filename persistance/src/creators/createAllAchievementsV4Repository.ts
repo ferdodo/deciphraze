@@ -1,6 +1,7 @@
-import { createAllAchievementsV3Repository } from "../creators/createAllAchievementsV3Repository";
-import { migrateAllAchievementsV3ToV4 } from "../migrations";
-import type { AllAchievementsV4, AllAchievementsV4Repository } from "./";
+import type { AllAchievementsV4 } from "../entities";
+import type { AllAchievementsV4Repository } from "../repositories";
+import { migrateAllAchievementsV3ToV4 } from "../repositories/migrations";
+import { createAllAchievementsV3Repository } from "./createAllAchievementsV3Repository";
 
 const ACHIEVEMENTS_STORAGE_KEY = "deciphraze_achievements_v4";
 

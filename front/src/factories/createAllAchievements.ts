@@ -8,7 +8,6 @@ export function createAllAchievements(
 	firstLetterAUnlocked: boolean = false,
 	firstLetterEUnlocked: boolean = false,
 	firstLetterYUnlocked: boolean = false,
-	alphaAndOmegaUnlocked: boolean = false,
 	firstLetterQUnlocked: boolean = false,
 	words1000Unlocked: boolean = false,
 	words1000Progress: { current: number; target: 500 } = { current: 0, target: 500 },
@@ -42,10 +41,6 @@ export function createAllAchievements(
 			firstLetterY: {
 				...defaultAchievements.achievements.firstLetterY,
 				unlocked: firstLetterYUnlocked
-			},
-			alphaAndOmega: {
-				...defaultAchievements.achievements.alphaAndOmega,
-				unlocked: alphaAndOmegaUnlocked
 			},
 			firstLetterQ: {
 				...defaultAchievements.achievements.firstLetterQ,

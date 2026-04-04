@@ -32,11 +32,6 @@ export const defaultAchievements: AllAchievements = {
 			description: "Trouver la lettre Y en premier",
 			unlocked: false
 		},
-		alphaAndOmega: {
-			name: "Synthèse",
-			description: "Déchiffrer la première lettre en premier, la dernière en dernier",
-			unlocked: false
-		},
 		firstLetterQ: {
 			name: "Qualifié",
 			description: "Trouver la lettre Q en premier",

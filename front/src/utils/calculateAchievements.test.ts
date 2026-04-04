@@ -20,7 +20,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstGame.unlocked).toBe(false);
 			expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(false);
 		});
 	});
@@ -180,21 +179,6 @@ describe("calculateAchievements", () => {
 		});
 	});
 
-	describe("Alpha and Omega achievement", () => {
-		it("should unlock when first and last letters match", () => {
-			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
-			const gameHistory: GameHistory = {
-				"2024-01-15": ["A", "B", "C", "D", "Z"]
-			};
-			const discoveryOrder: DiscoveryOrder = ["A", "B", "C", "D", "Z"];
-			const paragraphOfTheDay = "ABC DZ";
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
-
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
-		});
-	});
-
 	describe("Paleographer achievement", () => {
 		it("should unlock when at least one game has no errors and all associations are valid", () => {
 			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
@@ -270,7 +254,6 @@ describe("calculateAchievements", () => {
 				true, // firstLetterA
 				true, // firstLetterE
 				true, // firstLetterY
-				true, // alphaAndOmega
 				true, // firstLetterQ
 				true, // words1000
 				{ current: 0, target: 500 },
@@ -289,7 +272,6 @@ describe("calculateAchievements", () => {
 			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
-			expect(achievements.achievements.alphaAndOmega.unlocked).toBe(true);
 			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
 			expect(achievements.achievements.words1000.unlocked).toBe(true);
 			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);

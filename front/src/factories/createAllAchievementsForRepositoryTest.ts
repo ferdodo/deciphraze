@@ -26,10 +26,6 @@ export function createAllAchievementsForRepositoryTest(): AllAchievements {
 				...defaultAchievements.achievements.firstLetterY,
 				unlocked: false
 			},
-			alphaAndOmega: {
-				...defaultAchievements.achievements.alphaAndOmega,
-				unlocked: false
-			},
 			firstLetterQ: {
 				...defaultAchievements.achievements.firstLetterQ,
 				unlocked: false

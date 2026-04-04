@@ -26,10 +26,6 @@ export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
 				...defaultAchievements.achievements.firstLetterY,
 				unlocked: true
 			},
-			alphaAndOmega: {
-				...defaultAchievements.achievements.alphaAndOmega,
-				unlocked: false
-			},
 			firstLetterQ: {
 				...defaultAchievements.achievements.firstLetterQ,
 				unlocked: false

@@ -15,7 +15,6 @@ describe("createAllAchievementsWithSomeUnlocked", () => {
 		// Test locked achievements
 		expect(achievements.achievements.streak5Days.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
-		expect(achievements.achievements.alphaAndOmega.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		expect(achievements.achievements.words1000.unlocked).toBe(false);
 		expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);

@@ -1,5 +1,5 @@
 import type { AllAchievementsV3 } from "../entities/AllAchievementsV3";
-import type { AllAchievementsV4 } from "../repositories/AllAchievementsV4";
+import type { AllAchievementsV4 } from "../entities/AllAchievementsV4";
 
 export const migrateAllAchievementsV3ToV4 = (
 	v3: AllAchievementsV3,

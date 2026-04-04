@@ -46,7 +46,6 @@ describe("resetAllData", () => {
 				false, // firstLetterAUnlocked
 				false, // firstLetterEUnlocked
 				false, // firstLetterYUnlocked
-				false, // alphaAndOmegaUnlocked
 				false, // firstLetterQUnlocked
 				false, // words1000Unlocked
 				{ current: 0, target: 500 }, // words1000Progress
@@ -132,7 +131,6 @@ describe("resetAllData", () => {
 				false, // firstLetterAUnlocked
 				false, // firstLetterEUnlocked
 				false, // firstLetterYUnlocked
-				false, // alphaAndOmegaUnlocked
 				false, // firstLetterQUnlocked
 				false, // words1000Unlocked
 				{ current: 0, target: 500 }, // words1000Progress
