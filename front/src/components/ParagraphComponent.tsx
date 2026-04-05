@@ -1,11 +1,15 @@
 import type React from "react";
 import { FragmentComponent } from "./FragmentComponent";
+import styles from "./ParagraphComponent.module.css";
 
 interface ParagraphComponentProps {
 	words: string[][];
+	unrevealedWords: Array<{ id: number; length: number }>;
 }
 
-export function ParagraphComponent({ words }: ParagraphComponentProps): React.JSX.Element {
+const CHAR_WIDTH_PX = 14.9;
+
+export function ParagraphComponent({ words, unrevealedWords }: ParagraphComponentProps): React.JSX.Element {
 	const wordsWithIds = words.map((word, index) => ({
 		word: word.map((f, fragmentIndex) => ({ f, fragmentIndex })),
 		id: index,
@@ -14,10 +18,7 @@ export function ParagraphComponent({ words }: ParagraphComponentProps): React.JS
 	return (
 		<>
 			{wordsWithIds.map(({ word, id }) => (
-				<div
-					key={id}
-					style={{ display: "inline-block", marginRight: "0.9rem" }}
-				>
+				<div key={id} className={styles.word}>
 					{word.map(({ f, fragmentIndex }) => (
 						<FragmentComponent
 							key={`${id}-${fragmentIndex}`}
@@ -25,6 +26,13 @@ export function ParagraphComponent({ words }: ParagraphComponentProps): React.JS
 						/>
 					))}
 				</div>
+			))}
+			{unrevealedWords.map(({ id, length }) => (
+				<div
+					key={`skeleton-${id}`}
+					className={styles.skeleton}
+					style={{ width: `${length * CHAR_WIDTH_PX}px` }}
+				/>
 			))}
 		</>
 	);

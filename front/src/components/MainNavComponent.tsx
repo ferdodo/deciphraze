@@ -8,6 +8,7 @@ import { PlusComponent } from "./PlusComponent";
 import { useMatchCount } from "../hooks/useMatchCount";
 import { useWin } from "../hooks/useWin";
 import { useParagraphOfTheDay } from "../hooks/useParagraphOfTheDay";
+import { useRevealString } from "../hooks/useRevealString";
 import { useSymbolsRandomOrder } from "../hooks/useSymbolsRandomOrder";
 import { useHasNewAchievements } from "../hooks/useHasNewAchievements";
 import { share } from "../utils/share";
@@ -23,6 +24,11 @@ export function MainNavComponent(): React.JSX.Element {
 	const paragraphOfTheDay = useParagraphOfTheDay();
 	const separatedWords = paragraphOfTheDay.split(" ");
 	const words = separatedWords.map((word) => [...word]);
+
+	const { paragraphReveal, unrevealedWords } = useRevealString(paragraphOfTheDay);
+	const revealedWords = paragraphReveal
+		.split(" ")
+		.map((word) => [...word]);
 	const alphabetRandom = useSymbolsRandomOrder();
 
 	const win = useWin();
@@ -59,7 +65,7 @@ export function MainNavComponent(): React.JSX.Element {
 		<DeciMainNav
 			Achievements={<AchievementsComponent />}
 			PlusMenu={<PlusComponent />}
-			Paragraph={<ParagraphComponent words={words} />}
+			Paragraph={<ParagraphComponent words={revealedWords} unrevealedWords={unrevealedWords} />}
 			Alphabet={<AlphabetComponent />}
 			Symbols={<SymbolsComponent />}
 			alphabetRandom={alphabetRandom}
