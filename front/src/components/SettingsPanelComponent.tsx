@@ -25,6 +25,9 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
 		settingsRepository.getSettings().hideInstructions
 	);
+	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
+		settingsRepository.getSettings().showAssociationHistory
+	);
 	const [textSize, setTextSize] = useState<number>(() => 
 		settingsRepository.getSettings().textSize
 	);
@@ -36,6 +39,7 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
 			setHideInstructions(settings.hideInstructions);
+			setShowAssociationHistory(settings.showAssociationHistory);
 			setTextSize(settings.textSize);
 			setCommandTextSize(settings.commandTextSize);
 		});
@@ -59,6 +63,14 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		settingsRepository.saveSettings({
 			...currentSettings,
 			hideInstructions: !currentSettings.hideInstructions
+		});
+	};
+
+	const handleToggleShowAssociationHistory = (): void => {
+		const currentSettings = settingsRepository.getSettings();
+		settingsRepository.saveSettings({
+			...currentSettings,
+			showAssociationHistory: !currentSettings.showAssociationHistory
 		});
 	};
 
@@ -93,6 +105,8 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					onResetData={handleResetData}
 					onToggleHideInstructions={handleToggleHideInstructions}
 					isHideInstructionsEnabled={hideInstructions}
+					onToggleShowAssociationHistory={handleToggleShowAssociationHistory}
+					isShowAssociationHistoryEnabled={showAssociationHistory}
 					textSize={textSize}
 					onIncreaseTextSize={handleIncreaseTextSize}
 					onDecreaseTextSize={handleDecreaseTextSize}

@@ -16,6 +16,7 @@ import { useGameContext } from "../hooks/useGameContext";
 import { useIsTodayGame } from "../hooks/useIsTodayGame";
 import { playTodayGame } from "../usecases/playTodayGame";
 import { abandonGame } from "../usecases/abandonGame";
+import { useAssociationHistory } from "../hooks/useAssociationHistory";
 import type { Settings } from "../entities/Settings";
 
 import type React from "react";
@@ -53,10 +54,15 @@ export function MainNavComponent(): React.JSX.Element {
 	const [hideInstructions, setHideInstructions] = useState<boolean>(() => 
 		settingsRepository.getSettings().hideInstructions
 	);
+	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
+		settingsRepository.getSettings().showAssociationHistory
+	);
+	const associationHistory = useAssociationHistory();
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setHideInstructions(settings.hideInstructions);
+			setShowAssociationHistory(settings.showAssociationHistory);
 		});
 		return () => subscription.unsubscribe();
 	}, [settingsRepository]);
@@ -73,6 +79,8 @@ export function MainNavComponent(): React.JSX.Element {
 			win={win}
 			onShare={handleShare}
 			hideInstructions={hideInstructions}
+			showAssociationHistory={showAssociationHistory}
+			associationHistory={associationHistory}
 			hasNewAchievements={hasNewAchievements}
 			isTodayGame={isTodayGame}
 			onPlayTodayGame={handlePlayTodayGame}

@@ -70,6 +70,7 @@ describe("resetAllData", () => {
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
+			showAssociationHistory: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});
@@ -154,6 +155,7 @@ describe("resetAllData", () => {
 		contextWithSettings.settingsRepository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
+			showAssociationHistory: false,
 			textSize: 0,
 			commandTextSize: 0,
 		});

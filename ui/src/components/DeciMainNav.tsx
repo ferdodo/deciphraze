@@ -2,6 +2,12 @@ import type React from "react";
 import styles from "./DeciMainNav.module.css";
 import { DeciText } from "./DeciText";
 
+type AssociationEntry = {
+	letter: string;
+	symbol: string;
+	isCorrect: boolean;
+};
+
 interface DeciMainNavProps {
 	Achievements: React.ReactNode;
 	PlusMenu: React.ReactNode;
@@ -13,6 +19,8 @@ interface DeciMainNavProps {
 	words: string[][];
 	onShare: () => void;
 	hideInstructions: boolean;
+	showAssociationHistory: boolean;
+	associationHistory: AssociationEntry[];
 	hasNewAchievements: boolean;
 	isTodayGame: boolean;
 	onPlayTodayGame: () => void;
@@ -28,6 +36,8 @@ export function DeciMainNav({
 	win,
 	onShare,
 	hideInstructions,
+	showAssociationHistory,
+	associationHistory,
 	hasNewAchievements,
 	isTodayGame,
 	onPlayTodayGame,
@@ -44,6 +54,28 @@ export function DeciMainNav({
 								Déchiffrez le paragraphe suivant en associant les lettres aux bons
 								symboles.
 							</DeciText>
+						</div>
+					)}
+
+					{showAssociationHistory && associationHistory.length > 0 && (
+						<div style={{ paddingBottom: "0.8rem" }}>
+							<DeciText variant="muted">Associations effectuées :</DeciText>
+							<div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginTop: "0.3rem" }}>
+								{associationHistory.map((entry, index) => (
+									<span
+										key={`${entry.letter}-${index}`}
+										style={{
+											display: "inline-flex",
+											alignItems: "center",
+											padding: "0.1rem 0.4rem",
+											borderRadius: "4px",
+											background: "rgba(128,128,128,0.12)",
+										}}
+									>
+										<DeciText variant="command">{entry.letter}</DeciText>
+									</span>
+								))}
+							</div>
 						</div>
 					)}
 

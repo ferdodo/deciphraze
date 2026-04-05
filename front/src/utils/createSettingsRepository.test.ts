@@ -19,6 +19,7 @@ describe("createSettingsRepository", () => {
 		const validSettings: Settings = {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			showAssociationHistory: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		};
@@ -84,6 +85,7 @@ describe("createSettingsRepository", () => {
 		const newSettings: Settings = {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			showAssociationHistory: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		};
@@ -125,6 +127,7 @@ describe("createSettingsRepository", () => {
 			repository.saveSettings({
 				pullToRefreshEnabled: false,
 				hideInstructions: true,
+				showAssociationHistory: false,
 				textSize: 0,
 				commandTextSize: getDefaultTextSize(),
 			});
@@ -139,6 +142,7 @@ describe("createSettingsRepository", () => {
 		repository.saveSettings({
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
+			showAssociationHistory: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});

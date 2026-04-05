@@ -8,6 +8,8 @@ interface DeciSettingsPanelProps {
 	onResetData: () => void;
 	onToggleHideInstructions: () => void;
 	isHideInstructionsEnabled: boolean;
+	onToggleShowAssociationHistory: () => void;
+	isShowAssociationHistoryEnabled: boolean;
 	textSize: number;
 	onIncreaseTextSize: () => void;
 	onDecreaseTextSize: () => void;
@@ -16,7 +18,7 @@ interface DeciSettingsPanelProps {
 	onDecreaseCommandTextSize: () => void;
 }
 
-export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
+export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, onToggleShowAssociationHistory, isShowAssociationHistoryEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
 
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -107,6 +109,20 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 						{isHideInstructionsEnabled ? "Instructions cachées" : "Instructions visibles"}
 					</DeciText>
 				</crumbs-button>
+				<div style={{ marginTop: "1.5rem" }}>
+					<DeciText variant="muted">
+						Affiche l'historique des associations de la partie actuelle sous les instructions.
+					</DeciText>
+					<crumbs-button
+						title={isShowAssociationHistoryEnabled ? "Cacher l'historique des associations" : "Afficher l'historique des associations"}
+						onClick={onToggleShowAssociationHistory}
+						role="button"
+					>
+						<DeciText variant="command">
+							{isShowAssociationHistoryEnabled ? "Historique visible" : "Historique caché"}
+						</DeciText>
+					</crumbs-button>
+				</div>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
 				<DeciText variant="sectionTitle">

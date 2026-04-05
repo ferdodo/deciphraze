@@ -10,6 +10,7 @@ const SETTINGS_STORAGE_KEY = "deciphraze_settings";
 const defaultSettings: Settings = {
 	pullToRefreshEnabled: false,
 	hideInstructions: false,
+	showAssociationHistory: false,
 	textSize: getDefaultTextSize(),
 	commandTextSize: getDefaultTextSize(),
 };
@@ -32,6 +33,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					hideInstructions: typeof parsed.hideInstructions === "boolean" 
 						? parsed.hideInstructions 
 						: defaultSettings.hideInstructions,
+					showAssociationHistory: typeof parsed.showAssociationHistory === "boolean"
+						? parsed.showAssociationHistory
+						: defaultSettings.showAssociationHistory,
 					textSize: typeof parsed.textSize === "number" 
 						? parsed.textSize 
 						: defaultSettings.textSize,
