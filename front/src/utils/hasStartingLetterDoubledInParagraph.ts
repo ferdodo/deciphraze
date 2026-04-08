@@ -1,4 +1,5 @@
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import { normalizeWord } from "./normalizeWord";
 
 export function hasStartingLetterDoubledInParagraph(
 	paragraph: string,
@@ -9,8 +10,8 @@ export function hasStartingLetterDoubledInParagraph(
 	}
 
 	const firstDiscoveredLetter = discoveryOrder[0].toUpperCase();
-	const paragraphUpperCase = paragraph.toUpperCase();
-	
+	const normalizedParagraph = normalizeWord(paragraph).toUpperCase();
+
 	const doubledPattern = firstDiscoveredLetter + firstDiscoveredLetter;
-	return paragraphUpperCase.includes(doubledPattern);
+	return normalizedParagraph.includes(doubledPattern);
 }
