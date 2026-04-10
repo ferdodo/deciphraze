@@ -21,6 +21,8 @@ interface DeciMainNavProps {
 	hideInstructions: boolean;
 	showAssociationHistory: boolean;
 	associationHistory: AssociationEntry[];
+	showLetterAvailabilityForLettre: boolean;
+	isLetterAvailableForLettre: boolean;
 	hasNewAchievements: boolean;
 	isTodayGame: boolean;
 	onPlayTodayGame: () => void;
@@ -38,6 +40,8 @@ export function DeciMainNav({
 	hideInstructions,
 	showAssociationHistory,
 	associationHistory,
+	showLetterAvailabilityForLettre,
+	isLetterAvailableForLettre,
 	hasNewAchievements,
 	isTodayGame,
 	onPlayTodayGame,
@@ -53,6 +57,16 @@ export function DeciMainNav({
 							<DeciText variant="default">
 								Déchiffrez le paragraphe suivant en associant les lettres aux bons
 								symboles.
+							</DeciText>
+						</div>
+					)}
+
+					{showLetterAvailabilityForLettre && (
+						<div style={{ paddingBottom: "0.8rem" }}>
+							<DeciText variant="muted">
+								{isLetterAvailableForLettre
+									? "Une lettre est disponible pour le succès Lettré."
+									: "Aucune lettre n'est disponible pour le succès Lettré."}
 							</DeciText>
 						</div>
 					)}

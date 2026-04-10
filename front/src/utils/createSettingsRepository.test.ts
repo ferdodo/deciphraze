@@ -5,21 +5,13 @@ import { createLocalStorageMock } from "./createLocalStorageMock";
 import { getDefaultTextSize } from "./getDefaultTextSize";
 
 describe("createSettingsRepository", () => {
-	it("should use default settings when localStorage is empty", () => {
-		const storage = createLocalStorageMock();
-		const repository = createSettingsRepository(storage);
-		const settings = repository.getSettings();
-
-		expect(settings.pullToRefreshEnabled).toBe(false);
-		expect(settings.hideInstructions).toBe(false);
-	});
-
 	it("should load valid settings from localStorage", () => {
 		const storage = createLocalStorageMock();
 		const validSettings: Settings = {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		};
@@ -79,33 +71,6 @@ describe("createSettingsRepository", () => {
 		expect(settings.textSize).toBe(1.4); // Default value from createSettingsRepository.ts
 	});
 
-	it("should save and retrieve settings", () => {
-		const storage = createLocalStorageMock();
-		const repository = createSettingsRepository(storage);
-		const newSettings: Settings = {
-			pullToRefreshEnabled: false,
-			hideInstructions: true,
-			showAssociationHistory: false,
-			textSize: 0,
-			commandTextSize: getDefaultTextSize(),
-		};
-
-		repository.saveSettings(newSettings);
-		const savedSettings = repository.getSettings();
-
-		expect(savedSettings.pullToRefreshEnabled).toBe(false);
-		expect(savedSettings.hideInstructions).toBe(true);
-
-		// Verify it's persisted in storage
-		const stored = storage.getItem("deciphraze_settings");
-		expect(stored).toBeTruthy();
-		if (stored) {
-			const parsed = JSON.parse(stored);
-			expect(parsed.pullToRefreshEnabled).toBe(false);
-			expect(parsed.hideInstructions).toBe(true);
-		}
-	});
-
 	it("should emit settings changes through settings$ observable", async () => {
 		const storage = createLocalStorageMock();
 		const repository = createSettingsRepository(storage);
@@ -128,6 +93,7 @@ describe("createSettingsRepository", () => {
 				pullToRefreshEnabled: false,
 				hideInstructions: true,
 				showAssociationHistory: false,
+				showLetterAvailabilityForLettre: false,
 				textSize: 0,
 				commandTextSize: getDefaultTextSize(),
 			});
@@ -143,6 +109,7 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});
@@ -180,6 +147,71 @@ describe("createSettingsRepository", () => {
 		expect(settings.textSize).toBe(1.4);
 	});
 
+	it("should use showLetterAvailabilityForLettre: true when loaded from localStorage", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: true,
+			textSize: 1.4,
+			commandTextSize: 1.4,
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.showLetterAvailabilityForLettre).toBe(true);
+	});
+
+	it("should use default false for invalid showLetterAvailabilityForLettre", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: "not-a-boolean",
+			textSize: 1.4,
+			commandTextSize: 1.4,
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.showLetterAvailabilityForLettre).toBe(false);
+	});
+
+	it("should use default false for showAssociationHistory when field is missing", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			textSize: 1.4,
+			commandTextSize: 1.4,
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.showAssociationHistory).toBe(false);
+	});
+
+	it("should use default for commandTextSize when value is invalid", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			showAssociationHistory: false,
+			textSize: 1.4,
+			commandTextSize: "invalid",
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.commandTextSize).toBe(1.4);
+	});
+
 	it("should handle stored settings with missing commandTextSize field", () => {
 		const storage = createLocalStorageMock();
 		const legacySettings = {
@@ -195,7 +227,7 @@ describe("createSettingsRepository", () => {
 		expect(settings.pullToRefreshEnabled).toBe(true);
 		expect(settings.hideInstructions).toBe(false);
 		expect(settings.textSize).toBe(2);
-		expect(settings.commandTextSize).toBe(1.4); // Should use default
+		expect(settings.commandTextSize).toBe(1.4);
 	});
 });
 

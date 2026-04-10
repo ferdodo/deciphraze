@@ -11,6 +11,7 @@ const defaultSettings: Settings = {
 	pullToRefreshEnabled: false,
 	hideInstructions: false,
 	showAssociationHistory: false,
+	showLetterAvailabilityForLettre: false,
 	textSize: getDefaultTextSize(),
 	commandTextSize: getDefaultTextSize(),
 };
@@ -36,6 +37,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					showAssociationHistory: typeof parsed.showAssociationHistory === "boolean"
 						? parsed.showAssociationHistory
 						: defaultSettings.showAssociationHistory,
+					showLetterAvailabilityForLettre: typeof parsed.showLetterAvailabilityForLettre === "boolean"
+						? parsed.showLetterAvailabilityForLettre
+						: defaultSettings.showLetterAvailabilityForLettre,
 					textSize: typeof parsed.textSize === "number" 
 						? parsed.textSize 
 						: defaultSettings.textSize,

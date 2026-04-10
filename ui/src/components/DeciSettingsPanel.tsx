@@ -10,6 +10,8 @@ interface DeciSettingsPanelProps {
 	isHideInstructionsEnabled: boolean;
 	onToggleShowAssociationHistory: () => void;
 	isShowAssociationHistoryEnabled: boolean;
+	onToggleShowLetterAvailabilityForLettre: () => void;
+	isShowLetterAvailabilityForLettreEnabled: boolean;
 	textSize: number;
 	onIncreaseTextSize: () => void;
 	onDecreaseTextSize: () => void;
@@ -18,7 +20,7 @@ interface DeciSettingsPanelProps {
 	onDecreaseCommandTextSize: () => void;
 }
 
-export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, onToggleShowAssociationHistory, isShowAssociationHistoryEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
+export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, onToggleShowAssociationHistory, isShowAssociationHistoryEnabled, onToggleShowLetterAvailabilityForLettre, isShowLetterAvailabilityForLettreEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
 
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -120,6 +122,20 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 					>
 						<DeciText variant="command">
 							{isShowAssociationHistoryEnabled ? "Historique visible" : "Historique caché"}
+						</DeciText>
+					</crumbs-button>
+				</div>
+				<div style={{ marginTop: "1.5rem" }}>
+					<DeciText variant="muted">
+						Affiche sous les instructions si une lettre est disponible pour le succès Lettré.
+					</DeciText>
+					<crumbs-button
+						title={isShowLetterAvailabilityForLettreEnabled ? "Cacher la disponibilité des lettres" : "Afficher la disponibilité des lettres"}
+						onClick={onToggleShowLetterAvailabilityForLettre}
+						role="button"
+					>
+						<DeciText variant="command">
+							{isShowLetterAvailabilityForLettreEnabled ? "Disponibilité lettres visible" : "Disponibilité lettres cachée"}
 						</DeciText>
 					</crumbs-button>
 				</div>

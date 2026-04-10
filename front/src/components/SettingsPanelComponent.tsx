@@ -28,6 +28,9 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
 		settingsRepository.getSettings().showAssociationHistory
 	);
+	const [showLetterAvailabilityForLettre, setShowLetterAvailabilityForLettre] = useState<boolean>(() =>
+		settingsRepository.getSettings().showLetterAvailabilityForLettre
+	);
 	const [textSize, setTextSize] = useState<number>(() => 
 		settingsRepository.getSettings().textSize
 	);
@@ -40,6 +43,7 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
 			setHideInstructions(settings.hideInstructions);
 			setShowAssociationHistory(settings.showAssociationHistory);
+			setShowLetterAvailabilityForLettre(settings.showLetterAvailabilityForLettre);
 			setTextSize(settings.textSize);
 			setCommandTextSize(settings.commandTextSize);
 		});
@@ -71,6 +75,14 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		settingsRepository.saveSettings({
 			...currentSettings,
 			showAssociationHistory: !currentSettings.showAssociationHistory
+		});
+	};
+
+	const handleToggleShowLetterAvailabilityForLettre = (): void => {
+		const currentSettings = settingsRepository.getSettings();
+		settingsRepository.saveSettings({
+			...currentSettings,
+			showLetterAvailabilityForLettre: !currentSettings.showLetterAvailabilityForLettre
 		});
 	};
 
@@ -107,6 +119,8 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					isHideInstructionsEnabled={hideInstructions}
 					onToggleShowAssociationHistory={handleToggleShowAssociationHistory}
 					isShowAssociationHistoryEnabled={showAssociationHistory}
+					onToggleShowLetterAvailabilityForLettre={handleToggleShowLetterAvailabilityForLettre}
+					isShowLetterAvailabilityForLettreEnabled={showLetterAvailabilityForLettre}
 					textSize={textSize}
 					onIncreaseTextSize={handleIncreaseTextSize}
 					onDecreaseTextSize={handleDecreaseTextSize}

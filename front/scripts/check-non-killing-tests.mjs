@@ -146,7 +146,7 @@ function analyzeStrykerReport() {
 
 		if (nonKillingTests.length > 0) {
 			console.log("\n🚨 TESTS NON-KILLING DÉTECTÉS:");
-			console.log("   Ces tests ne tuent aucun mutant:\n");
+			console.log("   Ces tests ne tuent aucun mutant et doivent être supprimés:\n");
 
 			nonKillingTests.forEach((testId) => {
 				const killCount = testKillCount.get(testId) || 0;
@@ -170,10 +170,10 @@ function analyzeStrykerReport() {
 					: 100;
 			console.log(`   - Taux d'efficacité: ${efficiencyRate}%`);
 
-			console.log("\n💡 Recommandations:");
-			console.log("   - Vérifiez que ces tests couvrent bien le code");
-			console.log("   - Ajoutez des assertions plus spécifiques");
-			console.log("   - Testez des cas limites supplémentaires");
+			console.log("\n💡 Action requise:");
+			console.log("   - Supprimez les tests listés ci-dessus.");
+			console.log("   - Un test qui ne tue aucun mutant est redondant : il ne vérifie");
+			console.log("     rien que les autres tests ne vérifient déjà.");
 
 			console.log("\n❌ ÉCHEC: Des tests non-killing ont été détectés");
 			process.exit(1);

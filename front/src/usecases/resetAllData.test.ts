@@ -71,6 +71,7 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});
@@ -156,6 +157,7 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
 			textSize: 0,
 			commandTextSize: 0,
 		});

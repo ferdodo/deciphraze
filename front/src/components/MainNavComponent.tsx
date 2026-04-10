@@ -17,6 +17,7 @@ import { useIsTodayGame } from "../hooks/useIsTodayGame";
 import { playTodayGame } from "../usecases/playTodayGame";
 import { abandonGame } from "../usecases/abandonGame";
 import { useAssociationHistory } from "../hooks/useAssociationHistory";
+import { useIsLetterAvailableForLettre } from "../hooks/useIsLetterAvailableForLettre";
 import type { Settings } from "../entities/Settings";
 
 import type React from "react";
@@ -57,12 +58,17 @@ export function MainNavComponent(): React.JSX.Element {
 	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
 		settingsRepository.getSettings().showAssociationHistory
 	);
+	const [showLetterAvailabilityForLettre, setShowLetterAvailabilityForLettre] = useState<boolean>(() =>
+		settingsRepository.getSettings().showLetterAvailabilityForLettre
+	);
 	const associationHistory = useAssociationHistory();
+	const isLetterAvailableForLettre = useIsLetterAvailableForLettre();
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setHideInstructions(settings.hideInstructions);
 			setShowAssociationHistory(settings.showAssociationHistory);
+			setShowLetterAvailabilityForLettre(settings.showLetterAvailabilityForLettre);
 		});
 		return () => subscription.unsubscribe();
 	}, [settingsRepository]);
@@ -81,6 +87,8 @@ export function MainNavComponent(): React.JSX.Element {
 			hideInstructions={hideInstructions}
 			showAssociationHistory={showAssociationHistory}
 			associationHistory={associationHistory}
+			showLetterAvailabilityForLettre={showLetterAvailabilityForLettre}
+			isLetterAvailableForLettre={isLetterAvailableForLettre}
 			hasNewAchievements={hasNewAchievements}
 			isTodayGame={isTodayGame}
 			onPlayTodayGame={handlePlayTodayGame}
