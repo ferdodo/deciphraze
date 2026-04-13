@@ -15,7 +15,10 @@ services:
     build: persistance
 
   core:
-    build: core
+    build:
+      context: core
+      additional_contexts:
+        deciphraze-git: service:git
 
   git:
     build:
