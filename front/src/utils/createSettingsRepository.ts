@@ -12,6 +12,7 @@ const defaultSettings: Settings = {
 	hideInstructions: false,
 	showAssociationHistory: false,
 	showLetterAvailabilityForLettre: false,
+	showGameDayDate: false,
 	textSize: getDefaultTextSize(),
 	commandTextSize: getDefaultTextSize(),
 };
@@ -40,6 +41,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					showLetterAvailabilityForLettre: typeof parsed.showLetterAvailabilityForLettre === "boolean"
 						? parsed.showLetterAvailabilityForLettre
 						: defaultSettings.showLetterAvailabilityForLettre,
+					showGameDayDate: typeof parsed.showGameDayDate === "boolean"
+						? parsed.showGameDayDate
+						: defaultSettings.showGameDayDate,
 					textSize: typeof parsed.textSize === "number" 
 						? parsed.textSize 
 						: defaultSettings.textSize,
@@ -80,4 +84,3 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 		clear
 	};
 }
-

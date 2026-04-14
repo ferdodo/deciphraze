@@ -12,6 +12,8 @@ interface DeciSettingsPanelProps {
 	isShowAssociationHistoryEnabled: boolean;
 	onToggleShowLetterAvailabilityForLettre: () => void;
 	isShowLetterAvailabilityForLettreEnabled: boolean;
+	onToggleShowGameDayDate: () => void;
+	isShowGameDayDateEnabled: boolean;
 	textSize: number;
 	onIncreaseTextSize: () => void;
 	onDecreaseTextSize: () => void;
@@ -20,7 +22,7 @@ interface DeciSettingsPanelProps {
 	onDecreaseCommandTextSize: () => void;
 }
 
-export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, onToggleShowAssociationHistory, isShowAssociationHistoryEnabled, onToggleShowLetterAvailabilityForLettre, isShowLetterAvailabilityForLettreEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
+export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, isPullToRefreshEnabled, onResetData, onToggleHideInstructions, isHideInstructionsEnabled, onToggleShowAssociationHistory, isShowAssociationHistoryEnabled, onToggleShowLetterAvailabilityForLettre, isShowLetterAvailabilityForLettreEnabled, onToggleShowGameDayDate, isShowGameDayDateEnabled, textSize, onIncreaseTextSize, onDecreaseTextSize, commandTextSize, onIncreaseCommandTextSize, onDecreaseCommandTextSize }: DeciSettingsPanelProps): React.JSX.Element {
 
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -139,6 +141,20 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 						</DeciText>
 					</crumbs-button>
 				</div>
+				<div style={{ marginTop: "1.5rem" }}>
+					<DeciText variant="muted">
+						Affiche la date de la partie actuellement jouée.
+					</DeciText>
+					<crumbs-button
+						title={isShowGameDayDateEnabled ? "Cacher la date de la partie" : "Afficher la date de la partie"}
+						onClick={onToggleShowGameDayDate}
+						role="button"
+					>
+						<DeciText variant="command">
+							{isShowGameDayDateEnabled ? "Date de la partie visible" : "Date de la partie cachée"}
+						</DeciText>
+					</crumbs-button>
+				</div>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
 				<DeciText variant="sectionTitle">
@@ -158,4 +174,3 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 		</div>
 	);
 }
-

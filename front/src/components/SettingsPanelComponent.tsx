@@ -31,6 +31,9 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [showLetterAvailabilityForLettre, setShowLetterAvailabilityForLettre] = useState<boolean>(() =>
 		settingsRepository.getSettings().showLetterAvailabilityForLettre
 	);
+	const [showGameDayDate, setShowGameDayDate] = useState<boolean>(() =>
+		settingsRepository.getSettings().showGameDayDate
+	);
 	const [textSize, setTextSize] = useState<number>(() => 
 		settingsRepository.getSettings().textSize
 	);
@@ -44,6 +47,7 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 			setHideInstructions(settings.hideInstructions);
 			setShowAssociationHistory(settings.showAssociationHistory);
 			setShowLetterAvailabilityForLettre(settings.showLetterAvailabilityForLettre);
+			setShowGameDayDate(settings.showGameDayDate);
 			setTextSize(settings.textSize);
 			setCommandTextSize(settings.commandTextSize);
 		});
@@ -86,6 +90,14 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		});
 	};
 
+	const handleToggleShowGameDayDate = (): void => {
+		const currentSettings = settingsRepository.getSettings();
+		settingsRepository.saveSettings({
+			...currentSettings,
+			showGameDayDate: !currentSettings.showGameDayDate
+		});
+	};
+
 	const handleResetData = (): void => {
 		resetAllData(context);
 	};
@@ -121,6 +133,8 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					isShowAssociationHistoryEnabled={showAssociationHistory}
 					onToggleShowLetterAvailabilityForLettre={handleToggleShowLetterAvailabilityForLettre}
 					isShowLetterAvailabilityForLettreEnabled={showLetterAvailabilityForLettre}
+					onToggleShowGameDayDate={handleToggleShowGameDayDate}
+					isShowGameDayDateEnabled={showGameDayDate}
 					textSize={textSize}
 					onIncreaseTextSize={handleIncreaseTextSize}
 					onDecreaseTextSize={handleDecreaseTextSize}
@@ -133,4 +147,3 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		/>
 	);
 }
-

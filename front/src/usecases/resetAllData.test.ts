@@ -72,6 +72,7 @@ describe("resetAllData", () => {
 			hideInstructions: false,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: false,
+			showGameDayDate: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});
@@ -158,6 +159,7 @@ describe("resetAllData", () => {
 			hideInstructions: false,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: false,
+			showGameDayDate: false,
 			textSize: 0,
 			commandTextSize: 0,
 		});
@@ -209,4 +211,3 @@ describe("resetAllData", () => {
 		cleanup();
 	});
 });
-

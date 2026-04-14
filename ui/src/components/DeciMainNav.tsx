@@ -23,6 +23,8 @@ interface DeciMainNavProps {
 	associationHistory: AssociationEntry[];
 	showLetterAvailabilityForLettre: boolean;
 	isLetterAvailableForLettre: boolean;
+	showGameDayDate: boolean;
+	gameDay: string;
 	hasNewAchievements: boolean;
 	isTodayGame: boolean;
 	onPlayTodayGame: () => void;
@@ -42,6 +44,8 @@ export function DeciMainNav({
 	associationHistory,
 	showLetterAvailabilityForLettre,
 	isLetterAvailableForLettre,
+	showGameDayDate,
+	gameDay,
 	hasNewAchievements,
 	isTodayGame,
 	onPlayTodayGame,
@@ -67,6 +71,14 @@ export function DeciMainNav({
 								{isLetterAvailableForLettre
 									? "Une lettre est disponible pour le succès Lettré."
 									: "Aucune lettre n'est disponible pour le succès Lettré."}
+							</DeciText>
+						</div>
+					)}
+
+					{showGameDayDate && (
+						<div style={{ paddingBottom: "0.8rem" }}>
+							<DeciText variant="muted">
+								Date de la partie en cours : {gameDay}
 							</DeciText>
 						</div>
 					)}
@@ -179,4 +191,3 @@ export function DeciMainNav({
 		</div>
 	);
 };
-

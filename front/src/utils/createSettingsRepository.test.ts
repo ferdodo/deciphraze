@@ -12,6 +12,7 @@ describe("createSettingsRepository", () => {
 			hideInstructions: true,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: false,
+			showGameDayDate: true,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		};
@@ -94,6 +95,7 @@ describe("createSettingsRepository", () => {
 				hideInstructions: true,
 				showAssociationHistory: false,
 				showLetterAvailabilityForLettre: false,
+				showGameDayDate: false,
 				textSize: 0,
 				commandTextSize: getDefaultTextSize(),
 			});
@@ -110,6 +112,7 @@ describe("createSettingsRepository", () => {
 			hideInstructions: true,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: false,
+			showGameDayDate: true,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
 		});
@@ -154,6 +157,7 @@ describe("createSettingsRepository", () => {
 			hideInstructions: false,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: true,
+			showGameDayDate: false,
 			textSize: 1.4,
 			commandTextSize: 1.4,
 		}));
@@ -171,6 +175,7 @@ describe("createSettingsRepository", () => {
 			hideInstructions: false,
 			showAssociationHistory: false,
 			showLetterAvailabilityForLettre: "not-a-boolean",
+			showGameDayDate: false,
 			textSize: 1.4,
 			commandTextSize: 1.4,
 		}));
@@ -202,6 +207,7 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
+			showGameDayDate: false,
 			textSize: 1.4,
 			commandTextSize: "invalid",
 		}));
@@ -229,5 +235,40 @@ describe("createSettingsRepository", () => {
 		expect(settings.textSize).toBe(2);
 		expect(settings.commandTextSize).toBe(1.4);
 	});
-});
 
+	it("should use showGameDayDate: true when loaded from localStorage", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
+			showGameDayDate: true,
+			textSize: 1.4,
+			commandTextSize: 1.4,
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.showGameDayDate).toBe(true);
+	});
+
+	it("should use default false for invalid showGameDayDate", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_settings", JSON.stringify({
+			pullToRefreshEnabled: false,
+			hideInstructions: false,
+			showAssociationHistory: false,
+			showLetterAvailabilityForLettre: false,
+			showGameDayDate: "not-a-boolean",
+			textSize: 1.4,
+			commandTextSize: 1.4,
+		}));
+
+		const repository = createSettingsRepository(storage);
+		const settings = repository.getSettings();
+
+		expect(settings.showGameDayDate).toBe(false);
+	});
+});
