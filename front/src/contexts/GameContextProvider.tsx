@@ -4,16 +4,16 @@ import { gameContext } from "./gameContext";
 import { createAllGamesRepository } from "../utils/createAllGamesRepository";
 import { createGameHistoryRepository } from "../utils/createGameHistoryRepository";
 import { createAllAchievementsV6Repository } from "@deciphraze/persistance";
-import { createDayRepository } from "../utils/createDayRepository";
 import { createDiscoveryOrderRepository } from "../utils/createDiscoveryOrderRepository";
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { createAssociationHistoryRepository } from "../utils/createAssociationHistoryRepository";
 import { createSettingsRepository } from "../utils/createSettingsRepository";
 import { createViewedAchievementsRepository } from "../utils/createViewedAchievementsRepository";
+import { createForcedDayRepository } from "../utils/createForcedDayRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { getDefaultStorage } from "../utils/getDefaultStorage";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
-import { getBrowserService } from "@deciphraze/browser";
+import { createTimeService, getBrowserService } from "@deciphraze/browser";
 
 interface GameContextProviderProps {
 	children: React.ReactNode;
@@ -24,6 +24,8 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 		const storage = getDefaultStorage() ?? createLocalStorageMock();
 		const settingsRepository = createSettingsRepository(storage);
 		const browserService = getBrowserService();
+		const timeService = createTimeService();
+		const forcedDayRepository = createForcedDayRepository();
 		
 		// Appliquer les paramètres au démarrage
 		const settings = settingsRepository.getSettings();
@@ -33,7 +35,8 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			allGamesRepository: createAllGamesRepository(storage),
 			gameHistoryRepository: createGameHistoryRepository(storage),
 			achievementRepository: createAllAchievementsV6Repository(),
-			dayRepository: createDayRepository(),
+			timeService,
+			forcedDayRepository,
 			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
 			statisticsRepository: createStatisticsRepository(storage),
 			associationHistoryRepository: createAssociationHistoryRepository(storage),

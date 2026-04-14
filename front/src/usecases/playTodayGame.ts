@@ -1,8 +1,9 @@
 import type { GameContext } from "../contexts/GameContext";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 export const playTodayGame = (context: GameContext): void => {
-	const { dayRepository, allGamesRepository } = context;
-	const today = dayRepository.getRealTodaysDate();
+	const { allGamesRepository, timeService, forcedDayRepository } = context;
+	const today = getCurrentDay(timeService, forcedDayRepository);
 	
 	// Garder seulement la partie d'aujourd'hui et supprimer les autres
 	const allGames = allGamesRepository.get();
@@ -21,6 +22,4 @@ export const playTodayGame = (context: GameContext): void => {
 		allGamesRepository.upsertByDay(day, gameData);
 	});
 	
-	// Changer au jour d'aujourd'hui
-	dayRepository.setRealTodaysDate(today);
 };

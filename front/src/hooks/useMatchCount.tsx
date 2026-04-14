@@ -3,11 +3,11 @@ import { useGameContext } from "./useGameContext";
 import { createMatchCount$ } from "../utils/createMatchCount$";
 
 export const useMatchCount = (): number => {
-	const { allGamesRepository, dayRepository } = useGameContext();
+	const { allGamesRepository, forcedDayRepository, timeService } = useGameContext();
 	const [matchCount, setMatchCount] = useState(0);
 
 	useEffect(() => {
-		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
+		const matchCount$ = createMatchCount$(allGamesRepository, timeService, forcedDayRepository);
 		const matchCountSubscription = matchCount$.subscribe((value) =>
 			setMatchCount(value),
 		);
@@ -15,7 +15,7 @@ export const useMatchCount = (): number => {
 		return () => {
 			matchCountSubscription.unsubscribe();
 		};
-	}, [allGamesRepository, dayRepository]);
+	}, [allGamesRepository, forcedDayRepository, timeService]);
 
 	return matchCount;
 };

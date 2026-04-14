@@ -5,12 +5,13 @@ import { withGameStarted } from "../fixtures/withGameStarted";
 import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";
 import { getLetterSelectionFromAllGames } from "../utils/getLetterSelectionFromAllGames";
 import { getSymbolSelectionFromAllGames } from "../utils/getSymbolSelectionFromAllGames";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 describe("selectSymbol", () => {
 	describe("Basic selection", () => {
 		it("should select a symbol when no letter is selected", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getRealTodaysDate();
+			const day = getCurrentDay(context.timeService, context.forcedDayRepository);
 			selectSymbol("X", context);
 			expect(getSymbolSelectionFromAllGames(context.allGamesRepository.get(), day)).toBe("X");
 			expect(getLetterSelectionFromAllGames(context.allGamesRepository.get(), day)).toBeNull();
@@ -19,7 +20,7 @@ describe("selectSymbol", () => {
 
 		it("should not select non-alphabetic characters", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getRealTodaysDate();
+			const day = getCurrentDay(context.timeService, context.forcedDayRepository);
 			selectSymbol("1", context);
 			selectSymbol("0", context);
 			expect(getSymbolSelectionFromAllGames(context.allGamesRepository.get(), day)).toBeNull();
@@ -28,7 +29,7 @@ describe("selectSymbol", () => {
 
 		it("should replace previous letter association when associating symbol to a different letter", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getRealTodaysDate();
+			const day = getCurrentDay(context.timeService, context.forcedDayRepository);
 			
 			// Créer association A->X
 			selectLetter("A", context);

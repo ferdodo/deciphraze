@@ -1,11 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { playTodayGame } from "./playTodayGame";
 import { withGameStarted } from "../fixtures/withGameStarted";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 describe("playTodayGame", () => {
 	it("should keep games from today onwards and remove past games", () => {
 		const [cleanup, context] = withGameStarted();
-		const today = context.dayRepository.getRealTodaysDate();
+		const today = getCurrentDay(context.timeService, context.forcedDayRepository);
 
 		// Add a game for a past date
 		const pastDate = new Date(today);

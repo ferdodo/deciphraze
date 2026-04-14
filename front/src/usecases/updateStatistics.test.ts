@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { withFinishedGame } from "../fixtures/withFinishedGame";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 describe("updateStatistics", () => {
 	it("should update statistics when a game is won", () => {
@@ -21,7 +22,7 @@ describe("updateStatistics", () => {
 		const [cleanup, context] = withFinishedGame();
 		
 		const statistics = context.statisticsRepository.getStatistics();
-		const today = context.dayRepository.getRealTodaysDate();
+		const today = getCurrentDay(context.timeService, context.forcedDayRepository);
 		const discoveryOrder = context.discoveryOrderRepository.getDiscoveryOrder(today);
 		
 		// Il peut y avoir plusieurs entrées si plusieurs victoires ont été enregistrées
@@ -38,7 +39,7 @@ describe("updateStatistics", () => {
 		const [cleanup, context] = withFinishedGame();
 		
 		const statistics = context.statisticsRepository.getStatistics();
-		const today = context.dayRepository.getRealTodaysDate();
+		const today = getCurrentDay(context.timeService, context.forcedDayRepository);
 		
 		expect(statistics.firstGameDate).toBe(today);
 		expect(statistics.lastGameDate).toBe(today);
@@ -47,4 +48,3 @@ describe("updateStatistics", () => {
 	});
 
 });
-

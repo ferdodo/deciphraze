@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { useGameHistory } from "./useGameHistory";
 import { calculateCurrentStreak } from "../utils/calculateCurrentStreak";
 
 export const useCurrentStreak = (): number => {
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	const gameHistory = useGameHistory();
 	
 	const streak = useMemo(() => {
@@ -13,4 +13,3 @@ export const useCurrentStreak = (): number => {
 	
 	return streak;
 };
-

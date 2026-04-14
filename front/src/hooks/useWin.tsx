@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { isWin } from "../utils/isWin";
 import { useParagraphOfTheDay } from "./useParagraphOfTheDay";
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { usePlayerCipher } from "./usePlayerCipher";
 import { useGameHistory } from "./useGameHistory";
 
 export const useWin = (): boolean => {
 	const paragraphOfTheDay = useParagraphOfTheDay();
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	const playerCipher = usePlayerCipher();
 	const gameHistory = useGameHistory();
 

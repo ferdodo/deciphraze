@@ -1,13 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { decrementDay } from "./decrementDay";
 import { withGameStarted } from "../fixtures/withGameStarted";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 describe("decrementDay", () => {
 	it("should decrement day by 1", () => {
 		const [cleanup, context] = withGameStarted();
-		const initialDay = context.dayRepository.getRealTodaysDate();
+		const initialDay = getCurrentDay(context.timeService, context.forcedDayRepository);
 		decrementDay(context);
-		const newDay = context.dayRepository.getRealTodaysDate();
+		const newDay = getCurrentDay(context.timeService, context.forcedDayRepository);
 		
 		const initialDate = new Date(initialDay);
 		const expectedDate = new Date(initialDate);
@@ -51,4 +52,3 @@ describe("decrementDay", () => {
 		cleanup();
 	});
 });
-

@@ -6,7 +6,7 @@ export const resetAllData = (context: GameContext): void => {
 		allGamesRepository,
 		gameHistoryRepository,
 		achievementRepository,
-		dayRepository,
+		forcedDayRepository,
 		discoveryOrderRepository,
 		statisticsRepository,
 		associationHistoryRepository,
@@ -35,11 +35,10 @@ export const resetAllData = (context: GameContext): void => {
 	allGamesRepository.clear();
 	gameHistoryRepository.clear();
 	achievementRepository.clear();
-	dayRepository.clear();
+	forcedDayRepository.clear();
 	discoveryOrderRepository.clear();
 	statisticsRepository.clear();
 	associationHistoryRepository.clear();
 	settingsRepository.clear();
 	viewedAchievementsRepository.clear();
 };
-

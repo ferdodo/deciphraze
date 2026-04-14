@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { computeYesterday } from "../utils/computeYesterday";
 
 export const useYesterday = (): string => {
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	
 	const yesterday = useMemo(() => {
 		return computeYesterday(currentDay);
@@ -11,4 +11,3 @@ export const useYesterday = (): string => {
 
 	return yesterday;
 };
-

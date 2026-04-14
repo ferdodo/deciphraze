@@ -10,7 +10,7 @@
 	"vitest": {
 		"related": false
 	},
-	"reporters": ["html", "json", "clear-text"],
+	"reporters": ["progress", "html", "json", "clear-text"],
 	"htmlReporter": {
 		"fileName": "public/stryker-report.html"
 	},

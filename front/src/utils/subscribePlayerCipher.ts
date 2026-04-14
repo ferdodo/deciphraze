@@ -1,18 +1,23 @@
+import { combineLatest, type Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import type { Observable } from "rxjs";
+import type { TimeService } from "@deciphraze/core";
 import type { AllGamesRepository } from "../repositories/AllGamesRepository";
-import type { DayRepository } from "../repositories/DayRepository";
+import type { ForcedDayRepository } from "../repositories/ForcedDayRepository";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import { getPlayerCipherFromAllGames } from "./getPlayerCipherFromAllGames";
+import { observeCurrentDay } from "./observeCurrentDay";
 
 export const subscribePlayerCipher = (
 	allGamesRepository: AllGamesRepository,
-	dayRepository: DayRepository
+	timeService: TimeService,
+	forcedDayRepository: ForcedDayRepository,
 ): Observable<PlayerCipher> => {
-	return allGamesRepository.subscribe().pipe(
-		map((allGames) => {
-			const currentDay = dayRepository.getRealTodaysDate();
+	return combineLatest([
+		allGamesRepository.subscribe(),
+		observeCurrentDay(timeService, forcedDayRepository),
+	]).pipe(
+		map(([allGames, currentDay]) => {
 			return getPlayerCipherFromAllGames(allGames, currentDay);
-		})
+		}),
 	);
 };

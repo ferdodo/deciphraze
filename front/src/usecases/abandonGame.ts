@@ -1,7 +1,7 @@
 import type { GameContext } from "../contexts/GameContext";
 
 export const abandonGame = (context: GameContext): void => {
-	const { allGamesRepository, dayRepository, browserService } = context;
+	const { allGamesRepository, browserService } = context;
 
 	// Demander confirmation avant d'abandonner
 	const confirmed = browserService.confirm(
@@ -12,7 +12,6 @@ export const abandonGame = (context: GameContext): void => {
 		return;
 	}
 
-	const currentDay = dayRepository.getRealTodaysDate();
 	const allGames = allGamesRepository.get();
 
 	// Récupérer le jour de la partie actuelle
@@ -33,6 +32,4 @@ export const abandonGame = (context: GameContext): void => {
 		}
 	});
 
-	// Changer au jour d'aujourd'hui
-	dayRepository.setRealTodaysDate(currentDay);
 };

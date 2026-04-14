@@ -2,13 +2,14 @@ import { describe, it, expect } from "vitest";
 import { selectLetter } from "./selectLetter";
 import { withGameStarted } from "../fixtures/withGameStarted";
 import { getLetterSelectionFromAllGames } from "../utils/getLetterSelectionFromAllGames";
+import { getCurrentDay } from "../utils/getCurrentDay";
 
 describe("selectLetter", () => {
 
 	describe("Basic selection", () => {
 		it("should deselect letter if already selected", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getRealTodaysDate();
+			const day = getCurrentDay(context.timeService, context.forcedDayRepository);
 			
 			// Sélectionner une lettre
 			selectLetter("A", context);
@@ -25,7 +26,7 @@ describe("selectLetter", () => {
 
 		it("should not select non-alphabetic characters", () => {
 			const [cleanup, context] = withGameStarted();
-			const day = context.dayRepository.getRealTodaysDate();
+			const day = getCurrentDay(context.timeService, context.forcedDayRepository);
 			selectLetter("1", context);
 			selectLetter("@", context);
 			selectLetter(" ", context);

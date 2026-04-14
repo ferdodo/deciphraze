@@ -1,14 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { skip } from "rxjs/operators";
+import { createTimeService } from "@deciphraze/browser";
 import { createMatchCount$ } from "./createMatchCount$";
 import { createAllGamesRepositoryMock } from "../mocks/createAllGamesRepositoryMock";
-import { createDayRepositoryMock } from "../mocks/createDayRepositoryMock";
+import { createForcedDayRepositoryMock } from "../mocks/createForcedDayRepositoryMock";
 
 describe("createMatchCount$", () => {
 	it("should start with 0 matches", async () => {
 		const allGamesRepository = createAllGamesRepositoryMock();
-		const dayRepository = createDayRepositoryMock();
-		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
+		const timeService = createTimeService();
+		const forcedDayRepository = createForcedDayRepositoryMock();
+		const matchCount$ = createMatchCount$(allGamesRepository, timeService, forcedDayRepository);
 
 		return new Promise<void>((resolve) => {
 			matchCount$.subscribe((count) => {
@@ -21,10 +23,11 @@ describe("createMatchCount$", () => {
 	it("should update count when player cipher changes", async () => {
 		const day = "2024-01-01";
 		const allGamesRepository = createAllGamesRepositoryMock();
-		const dayRepository = createDayRepositoryMock();
-		dayRepository.setRealTodaysDate(day);
+		const timeService = createTimeService();
+		const forcedDayRepository = createForcedDayRepositoryMock();
+		forcedDayRepository.forceVirtualDate(day);
 		
-		const matchCount$ = createMatchCount$(allGamesRepository, dayRepository);
+		const matchCount$ = createMatchCount$(allGamesRepository, timeService, forcedDayRepository);
 
 		return new Promise<void>((resolve) => {
 			// Skip initial emission and wait for the change

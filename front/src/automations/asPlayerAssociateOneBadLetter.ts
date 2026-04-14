@@ -2,11 +2,12 @@ import type { GameContext } from "../contexts/GameContext";
 import { selectLetter } from "../usecases/selectLetter";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { characterEquals } from "../utils/characterEquals";
+import { getCurrentDay } from "../utils/getCurrentDay";
 import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";
 
 export function asPlayerAssociateOneBadLetter(context: GameContext): void {
-	const { allGamesRepository, dayRepository } = context;
-	const currentDay = dayRepository.getRealTodaysDate();
+	const { allGamesRepository, timeService, forcedDayRepository } = context;
+	const currentDay = getCurrentDay(timeService, forcedDayRepository);
 	const allGames = allGamesRepository.get();
 	const playerCipher = getPlayerCipherFromAllGames(allGames, currentDay);
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

@@ -1,9 +1,9 @@
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { useGameContext } from "./useGameContext";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export const useIsTodayGame = (): boolean => {
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	const { allGamesRepository } = useGameContext();
 	
 	const allGames = allGamesRepository.get();

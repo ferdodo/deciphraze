@@ -1,6 +1,6 @@
 import type React from "react";
 import { DeciDevelopmentPanelContent, DeciPlusView } from "@deciphraze/ui";
-import { useDay } from "../hooks/useDay";
+import { useCurrentDay } from "../hooks/useCurrentDay";
 import { useGameContext } from "../hooks/useGameContext";
 import { isDev } from "../utils/isDev";
 import { incrementDay } from "../usecases/incrementDay";
@@ -12,7 +12,7 @@ interface DevelopmentPanelComponentProps {
 
 export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentProps): React.JSX.Element | null {
 	const context = useGameContext();
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 
 	const handleIncrementDay = (): void => {
 		incrementDay(context);
@@ -40,4 +40,3 @@ export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentP
 		/>
 	);
 };
-

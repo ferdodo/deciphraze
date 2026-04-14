@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { useAllGames } from "./useAllGames";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export const useGameDay = (): string => {
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	const allGames = useAllGames();
 
 	const gameDay = useMemo(() => {

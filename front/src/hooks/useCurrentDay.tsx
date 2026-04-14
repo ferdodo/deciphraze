@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
+import { getCurrentDay } from "../utils/getCurrentDay";
+import { observeCurrentDay } from "../utils/observeCurrentDay";
 
 export const useCurrentDay = (): string => {
-	const { dayRepository } = useGameContext();
-	const [currentDay, setCurrentDay] = useState<string>(dayRepository.getRealTodaysDate());
+	const { timeService, forcedDayRepository } = useGameContext();
+	const [currentDay, setCurrentDay] = useState<string>(getCurrentDay(timeService, forcedDayRepository));
 
 	useEffect(() => {
-		const subscription = dayRepository.observeRealTodaysDate().subscribe((day: string) => {
+		const subscription = observeCurrentDay(timeService, forcedDayRepository).subscribe((day: string) => {
 			setCurrentDay(day);
 		});
 
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [dayRepository]);
+	}, [forcedDayRepository, timeService]);
 
 	return currentDay;
 };

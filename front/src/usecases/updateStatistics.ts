@@ -6,12 +6,14 @@ import { subscribePlayerCipher } from "../utils/subscribePlayerCipher";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
 import { countWordsInParagraph } from "../utils/countWordsInParagraph";
+import { getCurrentDay } from "../utils/getCurrentDay";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export function updateStatistics(context: GameContext): Subscription {
 	const {
 		allGamesRepository,
-		dayRepository,
+		timeService,
+		forcedDayRepository,
 		statisticsRepository,
 		discoveryOrderRepository,
 		gameHistoryRepository,
@@ -19,9 +21,9 @@ export function updateStatistics(context: GameContext): Subscription {
 
 	let lastWinDate: string | null = null;
 
-	return subscribePlayerCipher(allGamesRepository, dayRepository).pipe(
+	return subscribePlayerCipher(allGamesRepository, timeService, forcedDayRepository).pipe(
 		filter((playerCipher: PlayerCipher) => {
-			const currentDay = dayRepository.getRealTodaysDate();
+			const currentDay = getCurrentDay(timeService, forcedDayRepository);
 			const allGames = allGamesRepository.get();
 			const gameDay = getCurrentGameDay(allGames, currentDay);
 			const paragraphOfTheDay = generateParagraph(gameDay);
@@ -29,7 +31,7 @@ export function updateStatistics(context: GameContext): Subscription {
 			return isWin(playerCipher, paragraphOfTheDay, gameHistory, gameDay);
 		})
 	).subscribe(() => {
-		const currentDay = dayRepository.getRealTodaysDate();
+		const currentDay = getCurrentDay(timeService, forcedDayRepository);
 		const allGames = allGamesRepository.get();
 		const gameDay = getCurrentGameDay(allGames, currentDay);
 		const paragraphOfTheDay = generateParagraph(gameDay);
@@ -72,4 +74,3 @@ export function updateStatistics(context: GameContext): Subscription {
 		});
 	});
 }
-

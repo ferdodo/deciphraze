@@ -1,1 +1,1 @@
-export * from "./createTimeService";
+export * from "./createTimeServiceMock";

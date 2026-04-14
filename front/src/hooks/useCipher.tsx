@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useDay } from "./useDay";
+import { useCurrentDay } from "./useCurrentDay";
 import { generateRandomAlphabet } from "../utils/generateRandomAlphabet";
 import type { Cipher } from "../types/Cipher";
 
 export const useCipher = (): Cipher => {
-	const currentDay = useDay();
+	const currentDay = useCurrentDay();
 	
 	const cipher = useMemo(() => {
 		return generateRandomAlphabet(currentDay);

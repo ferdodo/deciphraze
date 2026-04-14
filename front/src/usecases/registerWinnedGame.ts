@@ -5,6 +5,7 @@ import { calculateAchievements } from "../utils/calculateAchievements";
 import { isWin } from "../utils/isWin";
 import { createGameSession } from "../utils/createGameSession";
 import { generateParagraph } from "../utils/generateParagraph";
+import { observeCurrentDay } from "../utils/observeCurrentDay";
 import { subscribePlayerCipher } from "../utils/subscribePlayerCipher";
 import type { PlayerCipher } from "../entities/PlayerCipher";
 import type { GameContext } from "../contexts/GameContext";
@@ -12,15 +13,16 @@ import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export function registerWinnedGame({
 	allGamesRepository,
-	dayRepository,
+	timeService,
+	forcedDayRepository,
 	gameHistoryRepository,
 	achievementRepository,
 	discoveryOrderRepository,
 	associationHistoryRepository,
 }: GameContext): Subscription {
 	return combineLatest([
-		subscribePlayerCipher(allGamesRepository, dayRepository),
-		dayRepository.observeRealTodaysDate(),
+		subscribePlayerCipher(allGamesRepository, timeService, forcedDayRepository),
+		observeCurrentDay(timeService, forcedDayRepository),
 	]).pipe(
 		filter(([playerCipher, currentDay]: [PlayerCipher, string]) => {
 			const allGames = allGamesRepository.get();

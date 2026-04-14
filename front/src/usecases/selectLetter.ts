@@ -4,6 +4,7 @@ import { isWin } from "../utils/isWin";
 import { generateParagraph } from "../utils/generateParagraph";
 import { characterEquals } from "../utils/characterEquals";
 import type { GameContext } from "../contexts/GameContext";
+import { getCurrentDay } from "../utils/getCurrentDay";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export const selectLetter = (
@@ -12,12 +13,13 @@ export const selectLetter = (
 ): void => {
 	const {
 		allGamesRepository,
-		dayRepository,
+		timeService,
+		forcedDayRepository,
 		gameHistoryRepository,
 		associationHistoryRepository,
 	} = context;
 	
-	const currentDay = dayRepository.getRealTodaysDate();
+	const currentDay = getCurrentDay(timeService, forcedDayRepository);
 	const paragraphOfTheDay = generateParagraph(currentDay);
 	const gameHistory = gameHistoryRepository.getHistory();
 	const allGames = allGamesRepository.get();

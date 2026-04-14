@@ -15,18 +15,12 @@ describe("abandonGame", () => {
 			upsertByDay: () => { throw new Error("Should not upsert"); },
 		};
 
-		const mockDayRepository = {
-			getRealTodaysDate: () => "2025-03-01",
-			setRealTodaysDate: () => { throw new Error("Should not set day"); },
-		};
-
 		const mockBrowserService = {
 			confirm: () => false,
 		};
 
 		const context = {
 			allGamesRepository: mockAllGamesRepository,
-			dayRepository: mockDayRepository,
 			browserService: mockBrowserService,
 		} as unknown as GameContext;
 
@@ -53,19 +47,12 @@ describe("abandonGame", () => {
 			},
 		};
 
-		let setRealTodaysDateCalled = false;
-		const mockDayRepository = {
-			getRealTodaysDate: () => "2025-03-01",
-			setRealTodaysDate: () => { setRealTodaysDateCalled = true; },
-		};
-
 		const mockBrowserService = {
 			confirm: () => true,
 		};
 
 		const context = {
 			allGamesRepository: mockAllGamesRepository,
-			dayRepository: mockDayRepository,
 			browserService: mockBrowserService,
 		} as unknown as GameContext;
 
@@ -73,7 +60,6 @@ describe("abandonGame", () => {
 
 		expect(clearCalled).toBe(true);
 		expect(upsertCalled).toBe(true);
-		expect(setRealTodaysDateCalled).toBe(true);
 		expect(upsertedDays).toContain("2025-03-01");
 	});
 });
