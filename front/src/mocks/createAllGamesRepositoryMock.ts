@@ -13,8 +13,10 @@ export const createAllGamesRepositoryMock = (initialGames: AllGames = { gameByDa
 			currentGames.gameByDay = { ...currentGames.gameByDay, [day]: data };
 			allGamesSubject.next(currentGames);
 		},
-		clear: () => {
-			allGamesSubject.next({ gameByDay: {} });
+		removeByDay: (day: string) => {
+			const currentGames = { ...allGamesSubject.value };
+			const { [day]: _removedGame, ...remainingGames } = currentGames.gameByDay;
+			allGamesSubject.next({ ...currentGames, gameByDay: remainingGames });
 		}
 	};
 };

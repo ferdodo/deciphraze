@@ -22,14 +22,6 @@ export const abandonGame = (context: GameContext): void => {
 
 	const gameDay = days[0];
 
-	// Supprimer la partie actuelle
-	allGamesRepository.clear();
-	
-	// Repeupler avec toutes les parties sauf celle-ci
-	Object.entries(allGames.gameByDay).forEach(([day, gameData]) => {
-		if (day !== gameDay) {
-			allGamesRepository.upsertByDay(day, gameData);
-		}
-	});
+	allGamesRepository.removeByDay(gameDay);
 
 };

@@ -5,6 +5,4 @@ export interface SettingsRepository {
 	getSettings(): Settings;
 	saveSettings(settings: Settings): void;
 	settings$: Observable<Settings>;
-	clear(): void;
 }
-

@@ -19,4 +19,3 @@ describe("createBrowserServiceMock", () => {
 		expect(service.confirm("test")).toBe(true);
 	});
 });
-

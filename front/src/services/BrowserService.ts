@@ -5,4 +5,6 @@ export interface BrowserService {
 	toggleFullscreen(): void;
 	applyPullToRefresh(enabled: boolean): void;
 	confirm(message: string): boolean;
+	clearStorage(): void;
+	refreshPage(): void;
 }

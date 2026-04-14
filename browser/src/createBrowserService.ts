@@ -5,6 +5,8 @@ export function createBrowserService(): {
 	toggleFullscreen(): void;
 	applyPullToRefresh(enabled: boolean): void;
 	confirm(message: string): boolean;
+	clearStorage(): void;
+	refreshPage(): void;
 } {
 	
 	function getDevice(): DeviceType {
@@ -93,6 +95,21 @@ export function createBrowserService(): {
 			}
 			return window.confirm(message);
 		},
+
+		clearStorage(): void {
+			if (typeof window === "undefined") {
+				return;
+			}
+
+			window.localStorage.clear();
+		},
+
+		refreshPage(): void {
+			if (typeof window === "undefined") {
+				return;
+			}
+
+			window.location.reload();
+		},
 	};
 }
-

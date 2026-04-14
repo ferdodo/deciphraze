@@ -5,5 +5,4 @@ export interface ViewedAchievementsRepository {
 	getViewedAchievements(): ViewedAchievements;
 	saveViewedAchievement(viewedAchievements: ViewedAchievements): void;
 	viewedAchievements$: Observable<ViewedAchievements>;
-	clear(): void;
 }

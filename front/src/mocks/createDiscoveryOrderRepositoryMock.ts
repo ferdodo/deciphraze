@@ -19,16 +19,9 @@ export function createDiscoveryOrderRepositoryMock(): DiscoveryOrderRepository {
 		}
 	}
 
-	function clear(): void {
-		Object.keys(discoveryOrders).forEach(key => {
-			delete discoveryOrders[key];
-		});
-	}
-
 	return {
 		getDiscoveryOrder,
 		setDiscoveryOrder,
 		addLetterToDiscoveryOrder,
-		clear
 	};
 }

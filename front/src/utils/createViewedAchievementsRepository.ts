@@ -52,16 +52,9 @@ export function createViewedAchievementsRepository(storage: StorageLike): Viewed
 		viewedAchievementsSubject.next({ ...viewedAchievements });
 	}
 
-	function clear(): void {
-		viewedAchievements = { ...defaultViewedAchievements };
-		storage.removeItem(VIEWED_ACHIEVEMENTS_STORAGE_KEY);
-		viewedAchievementsSubject.next({ ...viewedAchievements });
-	}
-
 	return {
 		getViewedAchievements,
 		saveViewedAchievement,
 		viewedAchievements$: viewedAchievementsSubject.asObservable().pipe(share()),
-		clear
 	};
 }

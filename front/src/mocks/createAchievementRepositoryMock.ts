@@ -31,15 +31,9 @@ export function createAchievementRepositoryMock(): AchievementRepository {
 		}
 	}
 
-	function clear(): void {
-		achievements = defaultAchievements;
-		notifyListeners();
-	}
-
 	return {
 		loadAchievements,
 		saveAchievements,
 		subscribe,
-		clear,
 	};
 }

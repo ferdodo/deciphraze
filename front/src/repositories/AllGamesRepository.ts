@@ -5,5 +5,5 @@ export interface AllGamesRepository {
 	get(): AllGames;
 	subscribe(): Observable<AllGames>;
 	upsertByDay(day: string, data: AllGames["gameByDay"][string]): void;
-	clear(): void;
+	removeByDay(day: string): void;
 }

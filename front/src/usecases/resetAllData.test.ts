@@ -20,10 +20,18 @@ describe("resetAllData", () => {
 
 		// Créer un mock de browserService qui retourne false (annulation)
 		let confirmCalled = false;
+		let clearStorageCalled = false;
+		let refreshPageCalled = false;
 		const browserServiceMock = createBrowserServiceMock();
 		browserServiceMock.confirm = (): boolean => {
 			confirmCalled = true;
 			return false;
+		};
+		browserServiceMock.clearStorage = (): void => {
+			clearStorageCalled = true;
+		};
+		browserServiceMock.refreshPage = (): void => {
+			refreshPageCalled = true;
 		};
 		contextWithSettings.browserService = browserServiceMock;
 
@@ -82,6 +90,8 @@ describe("resetAllData", () => {
 
 		// Vérifier que confirm a été appelé
 		expect(confirmCalled).toBe(true);
+		expect(clearStorageCalled).toBe(false);
+		expect(refreshPageCalled).toBe(false);
 
 		// Vérifier que les données n'ont pas été réinitialisées
 		expect(contextWithSettings.allGamesRepository.get().gameByDay["2024-01-01"]).toBeDefined();
@@ -107,10 +117,18 @@ describe("resetAllData", () => {
 
 		// Créer un mock de browserService qui retourne true (confirmation)
 		let confirmCalled = false;
+		let clearStorageCalled = false;
+		let refreshPageCalled = false;
 		const browserServiceMock = createBrowserServiceMock();
 		browserServiceMock.confirm = (): boolean => {
 			confirmCalled = true;
 			return true;
+		};
+		browserServiceMock.clearStorage = (): void => {
+			clearStorageCalled = true;
+		};
+		browserServiceMock.refreshPage = (): void => {
+			refreshPageCalled = true;
 		};
 		contextWithSettings.browserService = browserServiceMock;
 
@@ -169,15 +187,8 @@ describe("resetAllData", () => {
 
 		// Vérifier que confirm a été appelé
 		expect(confirmCalled).toBe(true);
-
-		// Vérifier que toutes les données ont été réinitialisées
-		expect(Object.keys(contextWithSettings.allGamesRepository.get().gameByDay).length).toBe(0);
-		expect(Object.keys(contextWithSettings.gameHistoryRepository.getHistory()).length).toBe(0);
-		expect(contextWithSettings.achievementRepository.loadAchievements().achievements.firstGame.unlocked).toBe(false);
-		expect(contextWithSettings.discoveryOrderRepository.getDiscoveryOrder("2024-01-01").length).toBe(0);
-		expect(contextWithSettings.statisticsRepository.getStatistics().totalGames).toBe(0);
-		expect(contextWithSettings.associationHistoryRepository.getHistory("2024-01-01").length).toBe(0);
-		expect(contextWithSettings.settingsRepository.getSettings().pullToRefreshEnabled).toBe(false); // Valeur par défaut
+		expect(clearStorageCalled).toBe(true);
+		expect(refreshPageCalled).toBe(true);
 
 		cleanup();
 	});

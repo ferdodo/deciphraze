@@ -102,30 +102,6 @@ describe("createSettingsRepository", () => {
 		});
 	});
 
-	it("should clear settings and reset to defaults", () => {
-		const storage = createLocalStorageMock();
-		const repository = createSettingsRepository(storage);
-
-		// Set custom settings
-		repository.saveSettings({
-			pullToRefreshEnabled: false,
-			hideInstructions: true,
-			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
-			showGameDayDate: true,
-			textSize: 0,
-			commandTextSize: getDefaultTextSize(),
-		});
-
-		// Clear settings
-		repository.clear();
-		const settings = repository.getSettings();
-
-		expect(settings.pullToRefreshEnabled).toBe(false); // Default
-		expect(settings.hideInstructions).toBe(false); // Default
-		expect(storage.getItem("deciphraze_settings")).toBeNull();
-	});
-
 	it("should handle non-object parsed data", () => {
 		const storage = createLocalStorageMock();
 		storage.setItem("deciphraze_settings", '"just a string"');

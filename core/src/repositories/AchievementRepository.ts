@@ -4,5 +4,4 @@ export interface AchievementRepository {
 	loadAchievements(): AllAchievements;
 	saveAchievements(achievements: AllAchievements): void;
 	subscribe(callback: (achievements: AllAchievements) => void): () => void;
-	clear(): void;
 }

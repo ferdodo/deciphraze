@@ -1,18 +1,7 @@
 import type { GameContext } from "../contexts/GameContext";
 
 export const resetAllData = (context: GameContext): void => {
-	const {
-		browserService,
-		allGamesRepository,
-		gameHistoryRepository,
-		achievementRepository,
-		forcedDayRepository,
-		discoveryOrderRepository,
-		statisticsRepository,
-		associationHistoryRepository,
-		settingsRepository,
-		viewedAchievementsRepository,
-	} = context;
+	const { browserService } = context;
 
 	// Demander confirmation avant de réinitialiser
 	const confirmed = browserService.confirm(
@@ -31,14 +20,6 @@ export const resetAllData = (context: GameContext): void => {
 		return;
 	}
 
-	// Réinitialiser tous les repositories
-	allGamesRepository.clear();
-	gameHistoryRepository.clear();
-	achievementRepository.clear();
-	forcedDayRepository.clear();
-	discoveryOrderRepository.clear();
-	statisticsRepository.clear();
-	associationHistoryRepository.clear();
-	settingsRepository.clear();
-	viewedAchievementsRepository.clear();
+	browserService.clearStorage();
+	browserService.refreshPage();
 };

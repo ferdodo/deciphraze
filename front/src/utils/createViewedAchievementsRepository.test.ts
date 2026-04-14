@@ -44,31 +44,6 @@ describe("createViewedAchievementsRepository", () => {
 		expect(viewedAchievements).toEqual(storedAchievements);
 	});
 
-	it("should clear all achievements", () => {
-		const storage = createLocalStorageMock();
-		const repository = createViewedAchievementsRepository(storage);
-		const someAchievements: ViewedAchievements = {
-			firstGame: true,
-			streak5Days: true,
-			firstLetterA: false,
-			firstLetterE: false,
-			firstLetterY: false,
-			firstLetterQ: false,
-			words1000: false,
-			completeAlphabet: false,
-			paleographer: false,
-			doublet: false,
-		};
-
-		repository.saveViewedAchievement(someAchievements);
-		repository.clear();
-
-		const clearedAchievements = repository.getViewedAchievements();
-		expect(clearedAchievements.firstGame).toBe(false);
-		expect(clearedAchievements.streak5Days).toBe(false);
-		expect(storage.getItem("deciphraze_viewed_achievements")).toBeNull();
-	});
-
 	it("should handle corrupted storage data", () => {
 		const storage = createLocalStorageMock();
 		storage.setItem("deciphraze_viewed_achievements", "invalid json");

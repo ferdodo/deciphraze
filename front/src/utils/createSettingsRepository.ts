@@ -71,16 +71,9 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 		settingsSubject.next({ ...settings });
 	}
 
-	function clear(): void {
-		settings = defaultSettings;
-		storage.removeItem(SETTINGS_STORAGE_KEY);
-		settingsSubject.next({ ...settings });
-	}
-
 	return {
 		getSettings,
 		saveSettings,
 		settings$: settingsSubject.asObservable().pipe(share()),
-		clear
 	};
 }

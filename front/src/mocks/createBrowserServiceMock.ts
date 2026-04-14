@@ -15,5 +15,11 @@ export function createBrowserServiceMock(deviceType: DeviceType = "unknown"): Br
 		confirm(): boolean {
 			return true;
 		},
+		clearStorage(): void {
+			// Mock implementation
+		},
+		refreshPage(): void {
+			// Mock implementation
+		},
 	};
 }

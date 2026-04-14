@@ -11,7 +11,7 @@ describe("abandonGame", () => {
 					"2025-03-01": { letterSelection: {}, symbolSelection: {}, playerCipher: {} },
 				},
 			}),
-			clear: () => { throw new Error("Should not clear"); },
+			removeByDay: () => { throw new Error("Should not remove"); },
 			upsertByDay: () => { throw new Error("Should not upsert"); },
 		};
 
@@ -29,9 +29,7 @@ describe("abandonGame", () => {
 	});
 
 	it("should remove current game and keep others when confirmed", () => {
-		let clearCalled = false;
-		let upsertCalled = false;
-		const upsertedDays: string[] = [];
+		let removedDay: string | null = null;
 
 		const mockAllGamesRepository = {
 			get: () => ({
@@ -40,11 +38,10 @@ describe("abandonGame", () => {
 					"2025-03-01": { letterSelection: {}, symbolSelection: {}, playerCipher: {} },
 				},
 			}),
-			clear: () => { clearCalled = true; },
-			upsertByDay: (day: string) => { 
-				upsertCalled = true;
-				upsertedDays.push(day);
+			removeByDay: (day: string) => {
+				removedDay = day;
 			},
+			upsertByDay: () => {},
 		};
 
 		const mockBrowserService = {
@@ -58,8 +55,6 @@ describe("abandonGame", () => {
 
 		abandonGame(context);
 
-		expect(clearCalled).toBe(true);
-		expect(upsertCalled).toBe(true);
-		expect(upsertedDays).toContain("2025-03-01");
+		expect(removedDay).toBe("2025-02-28");
 	});
 });

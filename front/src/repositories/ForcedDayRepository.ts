@@ -5,5 +5,4 @@ export interface ForcedDayRepository {
 	forceVirtualDate(day: string): void;
 	removeForcedVirtualDate(): void;
 	observeForcedVirtualDate(): Observable<string | undefined>;
-	clear(): void;
 }

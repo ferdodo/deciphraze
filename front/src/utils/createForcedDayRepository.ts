@@ -21,15 +21,10 @@ export function createForcedDayRepository(): ForcedDayRepository {
 		return forcedVirtualDateSubject.asObservable();
 	}
 
-	function clear(): void {
-		removeForcedVirtualDate();
-	}
-
 	return {
 		getForcedVirtualDate,
 		forceVirtualDate,
 		removeForcedVirtualDate,
 		observeForcedVirtualDate,
-		clear,
 	};
 }

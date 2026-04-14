@@ -102,7 +102,7 @@ describe("createAllGamesRepository", () => {
 			subscription.unsubscribe();
 		});
 
-		it("should emit updated state when clear is called", async () => {
+		it("should emit updated state when removeByDay is called", async () => {
 			const storage = createLocalStorageMock();
 			const existingGames: AllGames = {
 				gameByDay: {
@@ -125,9 +125,9 @@ describe("createAllGamesRepository", () => {
 			// Wait for initial emission
 			await new Promise((resolve) => setTimeout(resolve, 10));
 
-			repository.clear();
+			repository.removeByDay("2025-01-01");
 
-			// Wait for clear emission
+			// Wait for removal emission
 			await new Promise((resolve) => setTimeout(resolve, 10));
 
 			expect(emissions.length).toBeGreaterThanOrEqual(2);

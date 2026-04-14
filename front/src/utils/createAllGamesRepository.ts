@@ -39,9 +39,23 @@ export function createAllGamesRepository(storage: StorageLike): AllGamesReposito
 		allGamesSubject.next({ ...allGames });
 	}
 
-	function clear(): void {
-		allGames = { gameByDay: {} };
-		storage.removeItem(ALL_GAMES_STORAGE_KEY);
+	function removeByDay(day: string): void {
+		if (!(day in allGames.gameByDay)) {
+			return;
+		}
+
+		const { [day]: _removedGame, ...remainingGames } = allGames.gameByDay;
+		allGames = {
+			...allGames,
+			gameByDay: remainingGames,
+		};
+
+		if (Object.keys(allGames.gameByDay).length === 0) {
+			storage.removeItem(ALL_GAMES_STORAGE_KEY);
+		} else {
+			storage.setItem(ALL_GAMES_STORAGE_KEY, JSON.stringify(allGames));
+		}
+
 		allGamesSubject.next({ ...allGames });
 	}
 
@@ -49,6 +63,6 @@ export function createAllGamesRepository(storage: StorageLike): AllGamesReposito
 		get,
 		subscribe,
 		upsertByDay,
-		clear
+		removeByDay,
 	};
 }

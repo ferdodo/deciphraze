@@ -30,17 +30,9 @@ export function createGameHistoryRepository(storage: StorageLike): GameHistoryRe
 		gameHistorySubject.next({ ...gameHistory });
 	}
 
-	function clear(): void {
-		gameHistory = {};
-		storage.removeItem(GAME_HISTORY_STORAGE_KEY);
-		gameHistorySubject.next({ ...gameHistory });
-	}
-
 	return {
 		getHistory,
 		addSession,
 		gameHistory$: gameHistorySubject.asObservable().pipe(share()),
-		clear
 	};
 }
-

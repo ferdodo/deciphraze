@@ -17,17 +17,9 @@ export function createGameHistoryRepositoryMock(): GameHistoryRepository {
 		gameHistorySubject.next({ ...gameHistory });
 	}
 
-	function clear(): void {
-		Object.keys(gameHistory).forEach(key => {
-			delete gameHistory[key];
-		});
-		gameHistorySubject.next({ ...gameHistory });
-	}
-
 	return {
 		getHistory,
 		addSession,
 		gameHistory$: gameHistorySubject.asObservable().pipe(share()),
-		clear,
 	};
 }
