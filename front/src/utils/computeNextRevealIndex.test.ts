@@ -2,10 +2,17 @@ import { describe, it, expect } from "vitest";
 import { computeNextRevealIndex } from "./computeNextRevealIndex";
 
 describe("computeNextRevealIndex", () => {
-	it("advances by 5 words from the start of the string", () => {
-		const input = "one two three four five six seven";
-		// "one two three four five" = 23 chars, next index = 24 (start of "six")
-		expect(computeNextRevealIndex(input, 0)).toBe(24);
+	it("reveals 100 words from the start of the string", () => {
+		const input = Array.from({ length: 101 }, () => "a").join(" ");
+		expect(computeNextRevealIndex(input, 0)).toBe(200);
 	});
 
+	it("reveals 100 words from the provided index", () => {
+		const prefix = Array.from({ length: 5 }, () => "abcdefghij").join(" ");
+		const suffix = Array.from({ length: 101 }, () => "a").join(" ");
+		const input = `${prefix} ${suffix}`;
+		const from = prefix.length + 1;
+
+		expect(computeNextRevealIndex(input, from)).toBe(input.length - 1);
+	});
 });

@@ -1,4 +1,4 @@
-const WORDS_PER_FRAME = 5;
+const WORDS_PER_FRAME = 100;
 
 export function computeNextRevealIndex(input: string, from: number): number {
 	const taken = input.slice(from).split(" ").slice(0, WORDS_PER_FRAME).join(" ");
