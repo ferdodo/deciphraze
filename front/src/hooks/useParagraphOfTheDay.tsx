@@ -1,14 +1,6 @@
-import { useMemo } from "react";
-import { useGameDay } from "./useGameDay";
-import { generateParagraph } from "../utils/generateParagraph";
+import { useContext } from "react";
+import { paragraphOfTheDayContext } from "../contexts/paragraphOfTheDayContext";
 
 export const useParagraphOfTheDay = (): string => {
-	const gameDay = useGameDay();
-	
-	const paragraphOfTheDay = useMemo(() => {
-		return generateParagraph(gameDay);
-	}, [gameDay]);
-	
-	return paragraphOfTheDay;
+	return useContext(paragraphOfTheDayContext);
 };
-
