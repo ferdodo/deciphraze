@@ -5,7 +5,7 @@ import styles from "./DeciAchievement.module.css";
 import { DeciText } from "./DeciText";
 
 interface Achievement {
-    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Synthèse" | "Qualifié" | "Scribe" | "Lettré" | "Paléographe" | "Vocaliste" | "Doublet";
+    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Qualifié" | "Scribe" | "Paléographe" | "Doublet";
     description: string;
     unlocked: boolean;
     progress?: {
@@ -68,8 +68,7 @@ export function DeciAchievement({
                                 </div>
                                 <div className={styles.progressText}>
                                     {achievement.progress.current}/{achievement.progress.target} {
-                                        achievement.name === "Scribe" ? "mots" :
-                                        achievement.name === "Lettré" ? "lettres" : ""
+                                        achievement.name === "Scribe" ? "mots" : ""
                                     }
                                 </div>
                             </div>

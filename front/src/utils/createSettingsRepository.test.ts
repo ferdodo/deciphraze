@@ -11,7 +11,6 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: true,
 			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
 			showGameDayDate: true,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
@@ -94,7 +93,6 @@ describe("createSettingsRepository", () => {
 				pullToRefreshEnabled: false,
 				hideInstructions: true,
 				showAssociationHistory: false,
-				showLetterAvailabilityForLettre: false,
 				showGameDayDate: false,
 				textSize: 0,
 				commandTextSize: getDefaultTextSize(),
@@ -124,57 +122,6 @@ describe("createSettingsRepository", () => {
 		expect(settings.pullToRefreshEnabled).toBe(false);
 		expect(settings.hideInstructions).toBe(false);
 		expect(settings.textSize).toBe(1.4);
-	});
-
-	it("should use showLetterAvailabilityForLettre: true when loaded from localStorage", () => {
-		const storage = createLocalStorageMock();
-		storage.setItem("deciphraze_settings", JSON.stringify({
-			pullToRefreshEnabled: false,
-			hideInstructions: false,
-			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: true,
-			showGameDayDate: false,
-			textSize: 1.4,
-			commandTextSize: 1.4,
-		}));
-
-		const repository = createSettingsRepository(storage);
-		const settings = repository.getSettings();
-
-		expect(settings.showLetterAvailabilityForLettre).toBe(true);
-	});
-
-	it("should use default false for invalid showLetterAvailabilityForLettre", () => {
-		const storage = createLocalStorageMock();
-		storage.setItem("deciphraze_settings", JSON.stringify({
-			pullToRefreshEnabled: false,
-			hideInstructions: false,
-			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: "not-a-boolean",
-			showGameDayDate: false,
-			textSize: 1.4,
-			commandTextSize: 1.4,
-		}));
-
-		const repository = createSettingsRepository(storage);
-		const settings = repository.getSettings();
-
-		expect(settings.showLetterAvailabilityForLettre).toBe(false);
-	});
-
-	it("should use default false for showAssociationHistory when field is missing", () => {
-		const storage = createLocalStorageMock();
-		storage.setItem("deciphraze_settings", JSON.stringify({
-			pullToRefreshEnabled: false,
-			hideInstructions: false,
-			textSize: 1.4,
-			commandTextSize: 1.4,
-		}));
-
-		const repository = createSettingsRepository(storage);
-		const settings = repository.getSettings();
-
-		expect(settings.showAssociationHistory).toBe(false);
 	});
 
 	it("should use default for commandTextSize when value is invalid", () => {
@@ -218,7 +165,6 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
 			showGameDayDate: true,
 			textSize: 1.4,
 			commandTextSize: 1.4,
@@ -236,7 +182,6 @@ describe("createSettingsRepository", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
 			showGameDayDate: "not-a-boolean",
 			textSize: 1.4,
 			commandTextSize: 1.4,

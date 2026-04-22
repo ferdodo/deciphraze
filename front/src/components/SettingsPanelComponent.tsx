@@ -28,9 +28,6 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
 		settingsRepository.getSettings().showAssociationHistory
 	);
-	const [showLetterAvailabilityForLettre, setShowLetterAvailabilityForLettre] = useState<boolean>(() =>
-		settingsRepository.getSettings().showLetterAvailabilityForLettre
-	);
 	const [showGameDayDate, setShowGameDayDate] = useState<boolean>(() =>
 		settingsRepository.getSettings().showGameDayDate
 	);
@@ -46,7 +43,6 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 			setIsPullToRefreshEnabled(settings.pullToRefreshEnabled);
 			setHideInstructions(settings.hideInstructions);
 			setShowAssociationHistory(settings.showAssociationHistory);
-			setShowLetterAvailabilityForLettre(settings.showLetterAvailabilityForLettre);
 			setShowGameDayDate(settings.showGameDayDate);
 			setTextSize(settings.textSize);
 			setCommandTextSize(settings.commandTextSize);
@@ -79,14 +75,6 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 		settingsRepository.saveSettings({
 			...currentSettings,
 			showAssociationHistory: !currentSettings.showAssociationHistory
-		});
-	};
-
-	const handleToggleShowLetterAvailabilityForLettre = (): void => {
-		const currentSettings = settingsRepository.getSettings();
-		settingsRepository.saveSettings({
-			...currentSettings,
-			showLetterAvailabilityForLettre: !currentSettings.showLetterAvailabilityForLettre
 		});
 	};
 
@@ -131,8 +119,6 @@ export function SettingsPanelComponent({ onBack }: SettingsPanelComponentProps):
 					isHideInstructionsEnabled={hideInstructions}
 					onToggleShowAssociationHistory={handleToggleShowAssociationHistory}
 					isShowAssociationHistoryEnabled={showAssociationHistory}
-					onToggleShowLetterAvailabilityForLettre={handleToggleShowLetterAvailabilityForLettre}
-					isShowLetterAvailabilityForLettreEnabled={showLetterAvailabilityForLettre}
 					onToggleShowGameDayDate={handleToggleShowGameDayDate}
 					isShowGameDayDateEnabled={showGameDayDate}
 					textSize={textSize}

@@ -6,7 +6,6 @@ import { calculateMaxStreak } from "./calculateMaxStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundInHistory } from "./isFirstLetterFoundInHistory";
 import { calculateTotalWordsFound } from "./calculateTotalWordsFound";
-import { hasFoundAllAlphabetLetters } from "./hasFoundAllAlphabetLetters";
 import { calculatePaleographerUnlocked } from "./calculatePaleographerUnlocked";
 import { hasStartingLetterDoubledInParagraph } from "./hasStartingLetterDoubledInParagraph";
 
@@ -35,7 +34,6 @@ export function calculateAchievements(
 		current: totalWordsFound,
 		target: 500 as const
 	};
-	const { unlocked: calculatedCompleteAlphabetUnlocked, progress: completeAlphabetProgress } = hasFoundAllAlphabetLetters(gameHistory);
 	
 	const calculatedPaleographerUnlocked = calculatePaleographerUnlocked(gameHistory, associationHistoryRepository);
 	const calculatedDoubletUnlocked = hasStartingLetterDoubledInParagraph(paragraphOfTheDay, discoveryOrder);
@@ -48,7 +46,6 @@ export function calculateAchievements(
 	const firstLetterYUnlocked = existingAchievements?.achievements.firstLetterY.unlocked || calculatedFirstLetterYUnlocked;
 	const firstLetterQUnlocked = existingAchievements?.achievements.firstLetterQ.unlocked || calculatedFirstLetterQUnlocked;
 	const words1000Unlocked = existingAchievements?.achievements.words1000.unlocked || calculatedWords1000Unlocked;
-	const completeAlphabetUnlocked = existingAchievements?.achievements.completeAlphabet.unlocked || calculatedCompleteAlphabetUnlocked;
 	const paleographerUnlocked = existingAchievements?.achievements.paleographer.unlocked || calculatedPaleographerUnlocked;
 	const doubletUnlocked = existingAchievements?.achievements.doublet.unlocked || calculatedDoubletUnlocked;
 
@@ -62,8 +59,6 @@ export function calculateAchievements(
 		firstLetterQUnlocked,
 		words1000Unlocked,
 		words1000Progress,
-		completeAlphabetUnlocked,
-		completeAlphabetProgress,
 		paleographerUnlocked,
 		doubletUnlocked
 	);

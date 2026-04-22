@@ -57,8 +57,6 @@ describe("resetAllData", () => {
 				false, // firstLetterQUnlocked
 				false, // words1000Unlocked
 				{ current: 0, target: 500 }, // words1000Progress
-				false, // completeAlphabetUnlocked
-				{ current: 0, target: 26 }, // completeAlphabetProgress
 				false, // paleographerUnlocked
 				false, // doubletUnlocked
 				"2024-01-01" // computedAtDate
@@ -79,7 +77,6 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
 			showGameDayDate: false,
 			textSize: 0,
 			commandTextSize: getDefaultTextSize(),
@@ -154,8 +151,6 @@ describe("resetAllData", () => {
 				false, // firstLetterQUnlocked
 				false, // words1000Unlocked
 				{ current: 0, target: 500 }, // words1000Progress
-				false, // completeAlphabetUnlocked
-				{ current: 0, target: 26 }, // completeAlphabetProgress
 				false, // paleographerUnlocked
 				false, // doubletUnlocked
 				"2024-01-01" // computedAtDate
@@ -176,7 +171,6 @@ describe("resetAllData", () => {
 			pullToRefreshEnabled: false,
 			hideInstructions: false,
 			showAssociationHistory: false,
-			showLetterAvailabilityForLettre: false,
 			showGameDayDate: false,
 			textSize: 0,
 			commandTextSize: 0,

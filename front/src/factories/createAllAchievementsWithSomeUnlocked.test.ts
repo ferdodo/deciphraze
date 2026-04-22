@@ -17,13 +17,11 @@ describe("createAllAchievementsWithSomeUnlocked", () => {
 		expect(achievements.achievements.firstLetterE.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		expect(achievements.achievements.words1000.unlocked).toBe(false);
-		expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
 		expect(achievements.achievements.paleographer.unlocked).toBe(false);
 		
 		// Test progress values for achievements in progress
 		expect(achievements.achievements.streak5Days.progress).toEqual({ current: 3, target: 3 });
 		expect(achievements.achievements.words1000.progress).toEqual({ current: 250, target: 500 });
-		expect(achievements.achievements.completeAlphabet.progress).toEqual({ current: 15, target: 26 });
 		
 		// Test that all achievements have required properties
 		expect(achievements.achievements.firstGame.name).toBeDefined();

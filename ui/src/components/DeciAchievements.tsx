@@ -50,15 +50,6 @@ interface AllAchievements {
 				target: 500;
 			};
 		};
-		completeAlphabet: {
-			name: "Lettré";
-			description: "Trouver toutes les lettres de l'alphabet";
-			unlocked: boolean;
-			progress: {
-				current: number;
-				target: 26;
-			};
-		};
 		paleographer: {
 			name: "Paléographe";
 			description: "Compléter une partie sans erreur d'association";
@@ -118,4 +109,3 @@ export function DeciAchievements({
 		</>
 	);
 }
-

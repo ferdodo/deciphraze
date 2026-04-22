@@ -35,11 +35,6 @@ export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
 				unlocked: false,
 				progress: { current: 250, target: 500 }
 			},
-			completeAlphabet: {
-				...defaultAchievements.achievements.completeAlphabet,
-				unlocked: false,
-				progress: { current: 15, target: 26 }
-			},
 			paleographer: {
 				...defaultAchievements.achievements.paleographer,
 				unlocked: false

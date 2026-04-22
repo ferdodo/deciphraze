@@ -17,7 +17,6 @@ describe("createViewedAchievementsRepository", () => {
 			firstLetterY: false,
 			firstLetterQ: false,
 			words1000: false,
-			completeAlphabet: false,
 			paleographer: false,
 			doublet: false,
 		});
@@ -33,7 +32,6 @@ describe("createViewedAchievementsRepository", () => {
 			firstLetterY: false,
 			firstLetterQ: false,
 			words1000: false,
-			completeAlphabet: false,
 			paleographer: false,
 			doublet: false,
 		};
@@ -77,7 +75,6 @@ describe("createViewedAchievementsRepository", () => {
 			firstLetterY: false,
 			firstLetterQ: false,
 			words1000: false,
-			completeAlphabet: false,
 			paleographer: false,
 			doublet: false,
 		};

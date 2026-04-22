@@ -17,7 +17,6 @@ import { useIsTodayGame } from "../hooks/useIsTodayGame";
 import { playTodayGame } from "../usecases/playTodayGame";
 import { abandonGame } from "../usecases/abandonGame";
 import { useAssociationHistory } from "../hooks/useAssociationHistory";
-import { useIsLetterAvailableForLettre } from "../hooks/useIsLetterAvailableForLettre";
 import { useGameDay } from "../hooks/useGameDay";
 import type { Settings } from "../entities/Settings";
 
@@ -59,21 +58,16 @@ export function MainNavComponent(): React.JSX.Element {
 	const [showAssociationHistory, setShowAssociationHistory] = useState<boolean>(() =>
 		settingsRepository.getSettings().showAssociationHistory
 	);
-	const [showLetterAvailabilityForLettre, setShowLetterAvailabilityForLettre] = useState<boolean>(() =>
-		settingsRepository.getSettings().showLetterAvailabilityForLettre
-	);
 	const [showGameDayDate, setShowGameDayDate] = useState<boolean>(() =>
 		settingsRepository.getSettings().showGameDayDate
 	);
 	const associationHistory = useAssociationHistory();
-	const isLetterAvailableForLettre = useIsLetterAvailableForLettre();
 	const gameDay = useGameDay();
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
 			setHideInstructions(settings.hideInstructions);
 			setShowAssociationHistory(settings.showAssociationHistory);
-			setShowLetterAvailabilityForLettre(settings.showLetterAvailabilityForLettre);
 			setShowGameDayDate(settings.showGameDayDate);
 		});
 		return () => subscription.unsubscribe();
@@ -93,8 +87,6 @@ export function MainNavComponent(): React.JSX.Element {
 			hideInstructions={hideInstructions}
 			showAssociationHistory={showAssociationHistory}
 			associationHistory={associationHistory}
-			showLetterAvailabilityForLettre={showLetterAvailabilityForLettre}
-			isLetterAvailableForLettre={isLetterAvailableForLettre}
 			showGameDayDate={showGameDayDate}
 			gameDay={gameDay}
 			hasNewAchievements={hasNewAchievements}

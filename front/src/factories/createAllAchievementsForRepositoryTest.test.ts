@@ -17,13 +17,11 @@ describe("createAllAchievementsForRepositoryTest", () => {
 		expect(achievements.achievements.firstLetterY.unlocked).toBe(false);
 		expect(achievements.achievements.firstLetterQ.unlocked).toBe(false);
 		expect(achievements.achievements.words1000.unlocked).toBe(false);
-		expect(achievements.achievements.completeAlphabet.unlocked).toBe(false);
 		expect(achievements.achievements.paleographer.unlocked).toBe(false);
 		
 		// Test progress values
 		expect(achievements.achievements.streak5Days.progress).toEqual({ current: 0, target: 3 });
 		expect(achievements.achievements.words1000.progress).toEqual({ current: 0, target: 500 });
-		expect(achievements.achievements.completeAlphabet.progress).toEqual({ current: 0, target: 26 });
 		
 		// Test that all achievements have required properties
 		expect(achievements.achievements.firstGame.name).toBeDefined();

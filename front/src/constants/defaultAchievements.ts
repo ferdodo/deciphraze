@@ -46,15 +46,6 @@ export const defaultAchievements: AllAchievements = {
 				target: 500
 			}
 		},
-		completeAlphabet: {
-			name: "Lettré",
-			description: "Trouver toutes les lettres de l'alphabet",
-			unlocked: false,
-			progress: {
-				current: 0,
-				target: 26
-			}
-		},
 		paleographer: {
 			name: "Paléographe",
 			description: "Compléter une partie sans erreur d'association",

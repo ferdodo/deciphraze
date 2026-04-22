@@ -11,7 +11,6 @@ const defaultSettings: Settings = {
 	pullToRefreshEnabled: false,
 	hideInstructions: false,
 	showAssociationHistory: false,
-	showLetterAvailabilityForLettre: false,
 	showGameDayDate: false,
 	textSize: getDefaultTextSize(),
 	commandTextSize: getDefaultTextSize(),
@@ -38,9 +37,6 @@ export function createSettingsRepository(storage: StorageLike): SettingsReposito
 					showAssociationHistory: typeof parsed.showAssociationHistory === "boolean"
 						? parsed.showAssociationHistory
 						: defaultSettings.showAssociationHistory,
-					showLetterAvailabilityForLettre: typeof parsed.showLetterAvailabilityForLettre === "boolean"
-						? parsed.showLetterAvailabilityForLettre
-						: defaultSettings.showLetterAvailabilityForLettre,
 					showGameDayDate: typeof parsed.showGameDayDate === "boolean"
 						? parsed.showGameDayDate
 						: defaultSettings.showGameDayDate,

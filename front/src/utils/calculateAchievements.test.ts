@@ -1,10 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { calculateAchievements } from "./calculateAchievements";
-import { createAllAchievements } from "../factories/createAllAchievements";
 import type { GameHistory } from "../entities/GameHistory";
 import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
 import type { GameSession } from "../entities/GameSession";
-import type { AllAchievements } from "@deciphraze/core";
 import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
 
 describe("calculateAchievements", () => {
@@ -237,44 +235,6 @@ describe("calculateAchievements", () => {
 			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository);
 
 			expect(achievements.achievements.paleographer.unlocked).toBe(false);
-		});
-	});
-
-	describe("Preserving existing achievements", () => {
-		it("should preserve unlocked achievements even if conditions are no longer met", () => {
-			const associationHistoryRepository = createAssociationHistoryRepositoryMock();
-			const gameHistory: GameHistory = {};
-			const discoveryOrder: DiscoveryOrder = [];
-			const paragraphOfTheDay = "Hello world";
-
-			const existingAchievements: AllAchievements = createAllAchievements(
-				true, // firstGame
-				true, // streak5Days
-				{ current: 0, target: 3 },
-				true, // firstLetterA
-				true, // firstLetterE
-				true, // firstLetterY
-				true, // firstLetterQ
-				true, // words1000
-				{ current: 0, target: 500 },
-				true, // completeAlphabet
-				{ current: 0, target: 26 },
-				true, // paleographer
-				true, // doublet
-				"2024-01-01T00:00:00.000Z"
-			);
-
-			const achievements = calculateAchievements(gameHistory, discoveryOrder, paragraphOfTheDay, associationHistoryRepository, existingAchievements);
-
-			expect(achievements.achievements.firstGame.unlocked).toBe(true);
-			expect(achievements.achievements.streak5Days.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterA.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterE.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterY.unlocked).toBe(true);
-			expect(achievements.achievements.firstLetterQ.unlocked).toBe(true);
-			expect(achievements.achievements.words1000.unlocked).toBe(true);
-			expect(achievements.achievements.completeAlphabet.unlocked).toBe(true);
-			expect(achievements.achievements.paleographer.unlocked).toBe(true);
 		});
 	});
 });

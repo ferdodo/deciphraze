@@ -51,15 +51,6 @@ const AllAchievementsSchema: z.ZodType<AllAchievements> = z.object({
 				target: z.literal(500)
 			})
 		}),
-		completeAlphabet: z.object({
-			name: z.literal("Lettré"),
-			description: z.literal("Trouver toutes les lettres de l'alphabet"),
-			unlocked: z.boolean(),
-			progress: z.object({
-				current: z.number(),
-				target: z.literal(26)
-			})
-		}),
 		paleographer: z.object({
 			name: z.literal("Paléographe"),
 			description: z.literal("Compléter une partie sans erreur d'association"),

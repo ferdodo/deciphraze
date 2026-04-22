@@ -15,7 +15,6 @@ describe("getNewAchievementIds", () => {
 			firstLetterY: true,
 			firstLetterQ: false,
 			words1000: false,
-			completeAlphabet: false,
 			paleographer: false,
 			doublet: false,
 		};

@@ -12,7 +12,6 @@ export const useAchievementsAsList = (): Array<AllAchievements["achievements"][k
 		achievements.achievements.firstLetterY,
 		achievements.achievements.firstLetterQ,
 		achievements.achievements.words1000,
-		achievements.achievements.completeAlphabet,
 		achievements.achievements.paleographer,
 		achievements.achievements.doublet,
 	], [achievements]);

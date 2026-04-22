@@ -35,11 +35,6 @@ export function createAllAchievementsForRepositoryTest(): AllAchievements {
 				unlocked: false,
 				progress: { current: 0, target: 500 }
 			},
-			completeAlphabet: {
-				...defaultAchievements.achievements.completeAlphabet,
-				unlocked: false,
-				progress: { current: 0, target: 26 }
-			},
 			paleographer: {
 				...defaultAchievements.achievements.paleographer,
 				unlocked: false
