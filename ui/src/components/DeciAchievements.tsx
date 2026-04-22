@@ -71,6 +71,16 @@ interface DeciAchievementsProps {
 	onMarkAllAsViewed?: () => void;
 }
 
+type AchievementOrPlatinum = {
+	name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Qualifié" | "Scribe" | "Paléographe" | "Doublet" | "Platine";
+	description: string;
+	unlocked: boolean;
+	progress?: {
+		current: number;
+		target: number;
+	};
+}
+
 export function DeciAchievements({
 	achievements,
 	unlockedCount,
@@ -79,17 +89,25 @@ export function DeciAchievements({
 	onMarkAllAsViewed,
 }: DeciAchievementsProps): React.ReactNode {
 	const newIdsSet = new Set(newAchievementIds);
+	const achievementsList = Object.entries(achievements.achievements);
+	const allAchievementsUnlocked = achievementsList.every(([, achievement]) => achievement.unlocked);
+
+	const platinumAchievement: AchievementOrPlatinum = {
+		name: "Platine",
+		description: "Débloquer tous les succès",
+		unlocked: allAchievementsUnlocked
+	};
 
 	return (
 		<>
 			<div style={{ textAlign: "center" }}>
 				<DeciText variant="primary">
-					{unlockedCount}/{Object.keys(achievements.achievements).length} succès débloqués
+					{allAchievementsUnlocked ? unlockedCount + 1 : unlockedCount}/{achievementsList.length + 1} succès débloqués
 				</DeciText>
 			</div>
 			<br />
 			<div className={styles.achievementsList}>
-				{Object.entries(achievements.achievements).map(([key, achievement]) => (
+				{achievementsList.map(([key, achievement]) => (
 					<DeciAchievement 
 						key={key} 
 						achievement={achievement} 
@@ -97,6 +115,13 @@ export function DeciAchievements({
 						isNew={newIdsSet.has(key)}
 					/>
 				))}
+				<DeciAchievement 
+					key="platinum"
+					achievement={platinumAchievement}
+					currentStreak={currentStreak}
+					isNew={newIdsSet.has("platinum")}
+					iconType="diamond"
+				/>
 			</div>
 			{newAchievementIds.length > 0 && onMarkAllAsViewed && (
 				<div slot="footer">

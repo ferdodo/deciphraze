@@ -1,29 +1,30 @@
 import padlock from '../assets/padlock.svg';
 import trophy from '../assets/trophy.svg';
+import diamond from '../assets/diamond.svg';
 import type { ReactNode } from "react";
 import styles from "./DeciAchievement.module.css";
 import { DeciText } from "./DeciText";
 
-interface Achievement {
-    name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Qualifié" | "Scribe" | "Paléographe" | "Doublet";
-    description: string;
-    unlocked: boolean;
-    progress?: {
-        current: number;
-        target: number;
-    };
-}
-
 interface DeciAchievementProps {
-    achievement: Achievement;
+    achievement: {
+        name: "Préambule" | "Momentum" | "Aperçu" | "Élémentaire" | "Mythique" | "Qualifié" | "Scribe" | "Paléographe" | "Doublet" | "Platine";
+        description: string;
+        unlocked: boolean;
+        progress?: {
+            current: number;
+            target: number;
+        };
+    };
     currentStreak: number;
     isNew?: boolean;
+    iconType?: "trophy" | "diamond";
 }
 
 export function DeciAchievement({
     achievement,
     currentStreak,
     isNew = false,
+    iconType = "trophy",
 }: DeciAchievementProps): ReactNode {
 
 	return  (
@@ -32,7 +33,15 @@ export function DeciAchievement({
             style={{ position: "relative" }}
         >
             <div className={styles.achievementIcon}>
-                {achievement.unlocked ? <img src={trophy} alt="Trophy" className={styles.trophyIcon} /> : <img src={padlock} alt="Padlock" className={styles.padlockIcon} />}
+                {achievement.unlocked ? (
+                    iconType === "diamond" ? (
+                        <img src={diamond} alt="Diamond" className={styles.trophyIcon} />
+                    ) : (
+                        <img src={trophy} alt="Trophy" className={styles.trophyIcon} />
+                    )
+                ) : (
+                    <img src={padlock} alt="Padlock" className={styles.padlockIcon} />
+                )}
             </div>
             <div className={styles.achievementContent}>
                 <div className={styles.achievementName}>

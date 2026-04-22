@@ -6,3 +6,4 @@
 *   **Police de titres** : Neuton par Brian Zick (OFL)
 *   **Icône cadenas** : [https://www.svgrepo.com/svg/262870/padlock-lock](https://www.svgrepo.com/svg/262870/padlock-lock) (CC0 License)
 *   **Icône trophée** : [https://www.svgrepo.com/svg/398519/trophy](https://www.svgrepo.com/svg/398519/trophy) (CC0 License)
+*   **Icône diamant** : [https://www.svgrepo.com/svg/113761/diamond](https://www.svgrepo.com/svg/113761/diamond) - Wedding Set (CC0 License)
