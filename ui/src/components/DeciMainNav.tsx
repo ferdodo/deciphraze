@@ -51,7 +51,7 @@ export function DeciMainNav({
 		<div className={styles.container}>
 			<crumbs-nav className={styles.nav}>
 				<span slot="title-1"><DeciText variant="command">Jouer</DeciText></span>
-				<crumbs-panel slot="content-1" panel-title="Deciphraze - beta.10" className={`${styles.panel} ${styles.panelContent1}`}>
+				<crumbs-panel slot="content-1" panel-title="Deciphraze - beta.11" className={`${styles.panel} ${styles.panelContent1}`}>
 					{!hideInstructions && (
 						<div style={{ paddingTop: "0.5rem", paddingBottom: "0.8rem" }}>
 							<DeciText variant="default">
