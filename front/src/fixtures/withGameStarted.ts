@@ -8,6 +8,8 @@ import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociati
 import { createStatisticsRepository } from "../utils/createStatisticsRepository";
 import { createSettingsRepository } from "../utils/createSettingsRepository";
 import { createViewedAchievementsRepository } from "../utils/createViewedAchievementsRepository";
+import { createChallengeRepository } from "../utils/createChallengeRepository";
+import { createChallengeCodesRepository } from "../utils/createChallengeCodesRepository";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
 import { createBrowserServiceMock } from "../mocks/createBrowserServiceMock";
@@ -28,6 +30,8 @@ export function withGameStarted(): [() => void, GameContextType] {
 		associationHistoryRepository: createAssociationHistoryRepositoryMock(),
 		settingsRepository: createSettingsRepository(storage),
 		viewedAchievementsRepository: createViewedAchievementsRepository(storage),
+		challengeRepository: createChallengeRepository(storage),
+		challengeCodesRepository: createChallengeCodesRepository(),
 		browserService: createBrowserServiceMock(),
 	};
 
