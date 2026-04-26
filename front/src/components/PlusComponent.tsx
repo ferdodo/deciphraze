@@ -7,10 +7,13 @@ import { StatisticsComponent } from "./StatisticsComponent";
 import { YesterdaySolutionComponent } from "./YesterdaySolutionComponent";
 import { DevelopmentPanelComponent } from "./DevelopmentPanelComponent";
 import { AboutComponent } from "./AboutComponent";
+import { ChallengeMenuComponent } from "./ChallengeMenuComponent";
+import { useIsPlatinumEarned } from "../hooks/useIsPlatinumEarned";
 import type { PlusView } from "../types/PlusView";
 
 export function PlusComponent(): React.JSX.Element {
 	const [plusView, setPlusView] = useState<PlusView>("main");
+	const isPlatinumEarned = useIsPlatinumEarned();
 
 	const handlePlusViewChange = (view: PlusView): void => {
 		setPlusView(view);
@@ -35,6 +38,8 @@ export function PlusComponent(): React.JSX.Element {
 			return <DevelopmentPanelComponent onBack={handleBack} />;
 		case "about":
 			return <AboutComponent onBack={handleBack} />;
+		case "challenge":
+			return <ChallengeMenuComponent isPlatinumEarned={isPlatinumEarned} />;
 	}
 }
 

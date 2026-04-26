@@ -15,3 +15,5 @@ export * from "./DeciPlusMenu";
 export * from "./DeciPlusView";
 export * from "./DeciYesterdaySolution";
 export * from "./DeciText";
+export * from "./DeciChallengeMenu";
+export * from "./DeciLetterDisplay";

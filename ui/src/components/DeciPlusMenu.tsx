@@ -8,6 +8,7 @@ interface DeciPlusMenuProps {
 	onDevelopmentClick: () => void;
 	onInstallClick: () => void;
 	onAboutClick: () => void;
+	onChallengeClick: () => void;
 	showDevelopmentPanelEntry: boolean;
 }
 
@@ -18,6 +19,7 @@ export function DeciPlusMenu({
 	onDevelopmentClick,
 	onInstallClick,
 	onAboutClick,
+	onChallengeClick,
 	showDevelopmentPanelEntry,
 }: DeciPlusMenuProps): React.JSX.Element {
 	return (
@@ -50,6 +52,13 @@ export function DeciPlusMenu({
 					role="button"
 				>
 					<DeciText variant="command">Solution d'hier</DeciText>
+				</crumbs-button>
+				<crumbs-button
+					title="Challenge"
+					onClick={onChallengeClick}
+					role="button"
+				>
+					<DeciText variant="command">Challenge 🏆</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="À propos"
