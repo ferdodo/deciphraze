@@ -58,7 +58,7 @@ export function DeciPlusMenu({
 					onClick={onChallengeClick}
 					role="button"
 				>
-					<DeciText variant="command">Challenge 🏆</DeciText>
+					<DeciText variant="command">Challenge</DeciText>
 				</crumbs-button>
 				<crumbs-button
 					title="À propos"

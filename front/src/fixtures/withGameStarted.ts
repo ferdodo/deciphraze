@@ -31,7 +31,7 @@ export function withGameStarted(): [() => void, GameContextType] {
 		settingsRepository: createSettingsRepository(storage),
 		viewedAchievementsRepository: createViewedAchievementsRepository(storage),
 		challengeRepository: createChallengeRepository(storage),
-		challengeCodesRepository: createChallengeCodesRepository(),
+		challengeCodesRepository: createChallengeCodesRepository(storage),
 		browserService: createBrowserServiceMock(),
 	};
 

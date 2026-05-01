@@ -22,6 +22,14 @@ export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentP
 		decrementDay(context);
 	};
 
+	const handleAddPlatinum = (): void => {
+		const achievements = context.achievementRepository.loadAchievements();
+		Object.values(achievements.achievements).forEach((achievement) => {
+			achievement.unlocked = true;
+		});
+		context.achievementRepository.saveAchievements(achievements);
+	};
+
 	if (!isDev()) {
 		return null;
 	}
@@ -34,6 +42,7 @@ export function DevelopmentPanelComponent({ onBack }: DevelopmentPanelComponentP
 					currentDay={currentDay}
 					onIncrementDay={handleIncrementDay}
 					onDecrementDay={handleDecrementDay}
+					onAddPlatinum={handleAddPlatinum}
 				/>
 			}
 			onBack={onBack}

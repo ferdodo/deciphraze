@@ -14,13 +14,15 @@ interface DeciChallengeMenuProps {
 	isLocked: boolean;
 	codeInput: string;
 	onCodeInputChange: (value: string) => void;
-	onGenerateCode: () => void;
+	onShowCode: () => void;
+	displayedCode: string | null;
 	onUnlockLetter: () => void;
 	wordInput: string;
 	onWordInputChange: (value: string) => void;
 	onSubmitWord: () => void;
 	codesRequiredPerLetter: number;
 	word: string;
+	isTodayGameCompleted: boolean;
 }
 
 export function DeciChallengeMenu({
@@ -35,13 +37,15 @@ export function DeciChallengeMenu({
 	isLocked,
 	codeInput,
 	onCodeInputChange,
-	onGenerateCode,
+	onShowCode,
+	displayedCode,
 	onUnlockLetter,
 	wordInput,
 	onWordInputChange,
 	onSubmitWord,
 	codesRequiredPerLetter,
 	word,
+	isTodayGameCompleted,
 }: DeciChallengeMenuProps): React.JSX.Element {
 	if (isLocked) {
 		return (
@@ -80,17 +84,25 @@ export function DeciChallengeMenu({
 				/>
 			</div>
 
-			{/* Generate Code Button */}
+			{/* Display Code Button */}
 			<div className={styles.section}>
-				<button
+				<crumbs-button
 					type="button"
-					onClick={onGenerateCode}
-					className={styles.buttonPrimary}
+					onClick={onShowCode}
+					role="button"
 				>
-					Générer Code du Jour
-				</button>
+					{isTodayGameCompleted ? "" : "🔒 "}Afficher Code du Jour
+				</crumbs-button>
+				{displayedCode && (
+					<div style={{ marginTop: "1rem", padding: "1rem", backgroundColor: "var(--color-background-secondary)", borderRadius: "0.5rem" }}>
+						<p style={{ margin: "0 0 0.5rem 0", fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>Code du jour:</p>
+						<code style={{ display: "block", margin: 0, fontFamily: "monospace", fontSize: "1.25rem", fontWeight: "bold", userSelect: "text", cursor: "text" }}>
+							{displayedCode}
+						</code>
+					</div>
+				)}
 				<p className={styles.hint}>
-					Complétez la partie du jour à ce niveau pour générer un code
+					Complétez la partie du jour à ce niveau pour afficher le code
 				</p>
 			</div>
 

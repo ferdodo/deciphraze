@@ -9,8 +9,23 @@ describe("createChallengeRepository", () => {
 
 		const challenge = repo.getChallenge();
 
-		expect(challenge.level).toBe(0);
+		expect(challenge.level).toBe(1);
 		expect(challenge.id).toBeDefined();
+	});
+
+
+
+	it("should generate unique IDs for new challenges", () => {
+		const storage1 = createLocalStorageMock();
+		const storage2 = createLocalStorageMock();
+
+		const repo1 = createChallengeRepository(storage1);
+		const repo2 = createChallengeRepository(storage2);
+
+		const challenge1 = repo1.getChallenge();
+		const challenge2 = repo2.getChallenge();
+
+		expect(challenge1.id).not.toBe(challenge2.id);
 	});
 
 	it("should persist and retrieve challenge state", () => {
@@ -39,6 +54,10 @@ describe("createChallengeRepository", () => {
 		expect(challenge.id).toBe("saved-player");
 	});
 
+
+
+
+
 	it("should notify observers when challenge is saved", () => {
 		const storage = createLocalStorageMock();
 		const repo = createChallengeRepository(storage);
@@ -55,6 +74,8 @@ describe("createChallengeRepository", () => {
 
 		unsubscribe();
 	});
+
+
 
 	it("should allow unsubscribing observers", () => {
 		const storage = createLocalStorageMock();
@@ -81,9 +102,37 @@ describe("createChallengeRepository", () => {
 		const repo = createChallengeRepository(storage);
 		const challenge = repo.getChallenge();
 
-		expect(challenge.level).toBe(0);
+		expect(challenge.level).toBe(1);
 		expect(challenge.id).toBeDefined();
 	});
 
+	it("should handle missing id in stored data", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_challenge", JSON.stringify({
+			level: 5
+		}));
+
+		const repo = createChallengeRepository(storage);
+		const challenge = repo.getChallenge();
+
+		expect(challenge.level).toBe(1);
+		expect(challenge.id).toBeDefined();
+	});
+
+	it("should handle missing level in stored data", () => {
+		const storage = createLocalStorageMock();
+		storage.setItem("deciphraze_challenge", JSON.stringify({
+			id: "player-1"
+		}));
+
+		const repo = createChallengeRepository(storage);
+		const challenge = repo.getChallenge();
+
+		expect(challenge.level).toBe(1);
+		expect(challenge.id).toBeDefined();
+	});
+
+
 });
+
 

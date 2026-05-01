@@ -11,7 +11,7 @@ function generateRandomId(): string {
 }
 
 const defaultChallenge = (playerId: string): Challenge => ({
-	level: 0,
+	level: 1,
 	id: playerId,
 });
 
@@ -22,6 +22,8 @@ export function createChallengeRepository(storage: StorageLike, playerId?: strin
 		const stored: string = storage.getItem(CHALLENGE_STORAGE_KEY) ?? "";
 		if (stored === "" || stored === "null") {
 			challenge = defaultChallenge(playerId ?? generateRandomId());
+			// Persist the newly created challenge
+			storage.setItem(CHALLENGE_STORAGE_KEY, JSON.stringify(challenge));
 		} else {
 			const parsed = JSON.parse(stored);
 			if (parsed && typeof parsed === "object" && typeof parsed.level === "number" && typeof parsed.id === "string") {
@@ -31,10 +33,14 @@ export function createChallengeRepository(storage: StorageLike, playerId?: strin
 				};
 			} else {
 				challenge = defaultChallenge(playerId ?? generateRandomId());
+				// Persist the newly created challenge
+				storage.setItem(CHALLENGE_STORAGE_KEY, JSON.stringify(challenge));
 			}
 		}
 	} catch (_error) {
 		challenge = defaultChallenge(playerId ?? generateRandomId());
+		// Persist the newly created challenge
+		storage.setItem(CHALLENGE_STORAGE_KEY, JSON.stringify(challenge));
 	}
 
 	const listeners: ((challenge: Challenge) => void)[] = [];

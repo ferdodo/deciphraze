@@ -1,10 +1,27 @@
 import type { ChallengeCodesRepository } from "../repositories/ChallengeCodesRepository";
 import type { ChallengeCodes } from "../entities/ChallengeCodes";
+import type { StorageLike } from "./StorageLike";
 
-export function createChallengeCodesRepository(): ChallengeCodesRepository {
-	let codes: ChallengeCodes = {
-		usedCodes: new Set(),
-	};
+const CHALLENGE_CODES_STORAGE_KEY = "deciphraze_challenge_codes";
+
+export function createChallengeCodesRepository(storage: StorageLike): ChallengeCodesRepository {
+	let codes: ChallengeCodes;
+
+	try {
+		const stored: string = storage.getItem(CHALLENGE_CODES_STORAGE_KEY) ?? "";
+		if (stored === "" || stored === "null") {
+			codes = { usedCodes: new Set() };
+		} else {
+			const parsed = JSON.parse(stored);
+			if (parsed && Array.isArray(parsed.usedCodes)) {
+				codes = { usedCodes: new Set(parsed.usedCodes) };
+			} else {
+				codes = { usedCodes: new Set() };
+			}
+		}
+	} catch (_error) {
+		codes = { usedCodes: new Set() };
+	}
 
 	const listeners: ((codes: ChallengeCodes) => void)[] = [];
 
@@ -18,6 +35,9 @@ export function createChallengeCodesRepository(): ChallengeCodesRepository {
 		codes = {
 			usedCodes: new Set(newCodes.usedCodes),
 		};
+		storage.setItem(CHALLENGE_CODES_STORAGE_KEY, JSON.stringify({
+			usedCodes: Array.from(codes.usedCodes),
+		}));
 		for (const listener of listeners) {
 			listener(getCodes());
 		}

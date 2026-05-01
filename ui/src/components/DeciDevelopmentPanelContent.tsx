@@ -4,12 +4,14 @@ interface DeciDevelopmentPanelContentProps {
 	currentDay: string;
 	onIncrementDay: () => void;
 	onDecrementDay: () => void;
+	onAddPlatinum: () => void;
 }
 
 export function DeciDevelopmentPanelContent({
 	currentDay,
 	onIncrementDay,
 	onDecrementDay,
+	onAddPlatinum,
 }: DeciDevelopmentPanelContentProps): React.JSX.Element {
 	return (
 		<div style={{ padding: "1rem" }}>
@@ -31,6 +33,16 @@ export function DeciDevelopmentPanelContent({
 					role="button"
 				>
 					Jour suivant →
+				</crumbs-button>
+			</div>
+			<br />
+			<div>
+				<crumbs-button
+					title="Ajouter le platine"
+					onClick={onAddPlatinum}
+					role="button"
+				>
+					✨ Ajouter Platine
 				</crumbs-button>
 			</div>
 		</div>

@@ -17,3 +17,4 @@ export * from "./DeciYesterdaySolution";
 export * from "./DeciText";
 export * from "./DeciChallengeMenu";
 export * from "./DeciLetterDisplay";
+export * from "./DeciLetterItem";

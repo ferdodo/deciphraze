@@ -39,7 +39,7 @@ export function PlusComponent(): React.JSX.Element {
 		case "about":
 			return <AboutComponent onBack={handleBack} />;
 		case "challenge":
-			return <ChallengeMenuComponent isPlatinumEarned={isPlatinumEarned} />;
+			return <ChallengeMenuComponent isPlatinumEarned={isPlatinumEarned} onBack={handleBack} />;
 	}
 }
 

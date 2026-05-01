@@ -1,4 +1,5 @@
 import type React from "react";
+import { DeciLetterItem } from "./DeciLetterItem";
 import styles from "./DeciLetterDisplay.module.css";
 
 interface DeciLetterDisplayProps {
@@ -36,23 +37,11 @@ export function DeciLetterDisplay({
 		<div className={styles.container}>
 			<div className={styles.lettersGrid}>
 				{word.split("").map((letter, index) => (
-					<div
+					<DeciLetterItem
 						key={`letter-${index}-${letter}`}
-						className={styles.letterItem}
-					>
-						<div className={styles.letterBox}>{letter.toUpperCase()}</div>
-						<div className={styles.progressBar}>
-							<div
-								className={styles.progressFill}
-								style={{
-									width: `${Math.round(letterPercentages[index])}%`,
-								}}
-							/>
-						</div>
-						<span className={styles.percentageText}>
-							{Math.round(letterPercentages[index])}%
-						</span>
-					</div>
+						letter={letter}
+						percentage={letterPercentages[index]}
+					/>
 				))}
 			</div>
 		</div>

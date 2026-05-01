@@ -45,7 +45,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			settingsRepository,
 			viewedAchievementsRepository: createViewedAchievementsRepository(storage),
 			challengeRepository: createChallengeRepository(storage),
-			challengeCodesRepository: createChallengeCodesRepository(),
+			challengeCodesRepository: createChallengeCodesRepository(storage),
 			browserService,
 		};
 	}, []);
