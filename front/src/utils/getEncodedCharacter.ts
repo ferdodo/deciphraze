@@ -1,4 +1,4 @@
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 
 const alphabet: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 

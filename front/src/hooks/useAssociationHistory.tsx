@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
 import { useCurrentDay } from "./useCurrentDay";
-import type { AssociationEntry } from "../entities/AssociationEntry";
+import type { AssociationEntry } from "@deciphraze/core";
 
 export const useAssociationHistory = (): AssociationEntry[] => {
 	const { allGamesRepository, associationHistoryRepository } = useGameContext();

@@ -1,5 +1,5 @@
-import { encodeChallengeCode } from "../utils/encodeChallengeCode";
-import type { GameContext } from "../contexts/GameContext";
+import { encodeChallengeCode } from "@deciphraze/core";
+import type { GameContext } from "@deciphraze/core";
 
 /**
  * Unlock a daily challenge code for a specific level.
@@ -36,7 +36,7 @@ export function unlockDailyChallengeCode(
 	}
 
 	// Generate code for the requested level
-	const code = encodeChallengeCode(playerId, realDay, level);
+	const code = encodeChallengeCode(playerId, realDay, level, gameContext.randomService);
 
 	// Update challenge state if this is a new level
 	if (level > currentChallenge.level) {

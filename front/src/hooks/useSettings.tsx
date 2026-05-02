@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import type { Settings } from "../entities/Settings";
+import type { Settings } from "@deciphraze/core";
 import { gameContext } from "../contexts/gameContext";
 
 export function useSettings(): Settings {

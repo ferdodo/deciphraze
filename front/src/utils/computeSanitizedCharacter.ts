@@ -1,6 +1,5 @@
 import { characterEquals } from "./characterEquals";
-import { normalizeWord } from "./normalizeWord";
-import type { PlayerCipher } from "../entities/PlayerCipher";
+import { normalizeWord, PlayerCipher } from "@deciphraze/core";
 import type { CellType } from "../types/CellType";
 
 export const computeSanitizedCharacter = (

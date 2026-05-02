@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 export const useViewedAchievements = (): ViewedAchievements => {
 	const { viewedAchievementsRepository } = useGameContext();

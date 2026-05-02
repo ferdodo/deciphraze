@@ -1,4 +1,4 @@
-import type { GameHistory } from "../entities/GameHistory";
+import type { GameHistory } from "@deciphraze/core";
 import { getLettersFoundFromHistoryEntry } from "./getLettersFoundFromHistoryEntry";
 
 export function* iterateStreaks(

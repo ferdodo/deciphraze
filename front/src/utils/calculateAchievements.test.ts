@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { calculateAchievements } from "./calculateAchievements";
-import type { GameHistory } from "../entities/GameHistory";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
-import type { GameSession } from "../entities/GameSession";
+import type { GameHistory } from "@deciphraze/core";
+import type { DiscoveryOrder } from "@deciphraze/core";
+import type { GameSession } from "@deciphraze/core";
 import { createAssociationHistoryRepositoryMock } from "../mocks/createAssociationHistoryRepositoryMock";
 
 describe("calculateAchievements", () => {

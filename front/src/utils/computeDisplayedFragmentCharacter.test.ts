@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { computeDisplayedFragmentCharacter } from "./computeDisplayedFragmentCharacter";
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 import { getEncodedCharacter } from "./getEncodedCharacter";
 import { createCipherMock } from "./createCipherMock";
 

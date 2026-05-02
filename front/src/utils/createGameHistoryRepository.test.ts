@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { firstValueFrom } from "rxjs";
 import { skip } from "rxjs/operators";
 import { createGameHistoryRepository } from "./createGameHistoryRepository";
-import type { GameSession } from "../entities/GameSession";
+import type { GameSession } from "@deciphraze/core";
 import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createGameHistoryRepository", () => {

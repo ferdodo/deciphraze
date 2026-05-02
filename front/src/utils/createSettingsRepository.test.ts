@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createSettingsRepository } from "./createSettingsRepository";
-import type { Settings } from "../entities/Settings";
+import type { Settings } from "@deciphraze/core";
 import { createLocalStorageMock } from "./createLocalStorageMock";
 import { getDefaultTextSize } from "./getDefaultTextSize";
 

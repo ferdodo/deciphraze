@@ -1,4 +1,4 @@
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 
 export const increaseTextSize = (context: GameContext): void => {
 	const { settingsRepository } = context;

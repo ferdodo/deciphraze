@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
 import { useCurrentDay } from "./useCurrentDay";
-import type { SymbolSelection } from "../entities/SymbolSelection";
+import type { SymbolSelection } from "@deciphraze/core";
 import { getSymbolSelectionFromAllGames } from "../utils/getSymbolSelectionFromAllGames";
 
 export const useSymbolSelection = (): SymbolSelection => {

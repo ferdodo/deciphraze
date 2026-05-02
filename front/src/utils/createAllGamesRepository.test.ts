@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createAllGamesRepository } from "./createAllGamesRepository";
 import type { StorageLike } from "./StorageLike";
-import type { AllGames } from "../entities/AllGames";
+import type { AllGames } from "@deciphraze/core";
 
 function createLocalStorageMock(): StorageLike {
 	let store: Record<string, string> = {};

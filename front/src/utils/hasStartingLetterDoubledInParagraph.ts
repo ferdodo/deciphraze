@@ -1,5 +1,5 @@
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
-import { normalizeWord } from "./normalizeWord";
+import type { DiscoveryOrder } from "@deciphraze/core";
+import { normalizeWord } from "@deciphraze/core";
 
 export function hasStartingLetterDoubledInParagraph(
 	paragraph: string,

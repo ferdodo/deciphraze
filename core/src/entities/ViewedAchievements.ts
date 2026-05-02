@@ -1,3 +1,3 @@
-import type { AllAchievements } from "@deciphraze/core";
+import type { AllAchievements } from "./AllAchievements";
 
 export type ViewedAchievements = Record<keyof AllAchievements["achievements"], boolean>;

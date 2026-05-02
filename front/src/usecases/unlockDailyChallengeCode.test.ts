@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { unlockDailyChallengeCode } from "./unlockDailyChallengeCode";
-import type { GameContext } from "../contexts/GameContext";
-import type { Challenge } from "../entities/Challenge";
+import { createRandomServiceMock } from "@deciphraze/core";
+import type { GameContext } from "@deciphraze/core";
+import type { Challenge } from "@deciphraze/core";
 
 describe("unlockDailyChallengeCode", () => {
 	const mockRealDay = "2026-04-25";
@@ -42,6 +43,7 @@ describe("unlockDailyChallengeCode", () => {
 			settingsRepository: { getSettings: () => ({}) },
 			viewedAchievementsRepository: { getViewedAchievements: () => ({}) },
 			allGamesRepository: { get: () => ({}) },
+			randomService: createRandomServiceMock(),
 			browserService: { hasClipboard: () => false },
 		} as unknown as GameContext;
 	}

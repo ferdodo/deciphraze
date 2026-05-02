@@ -1,6 +1,6 @@
 import { BehaviorSubject } from "rxjs";
-import type { AllGamesRepository } from "../repositories/AllGamesRepository";
-import type { AllGames } from "../entities/AllGames";
+import type { AllGamesRepository } from "@deciphraze/core";
+import type { AllGames } from "@deciphraze/core";
 
 export const createAllGamesRepositoryMock = (initialGames: AllGames = { gameByDay: {} }): AllGamesRepository => {
 	const allGamesSubject = new BehaviorSubject<AllGames>(initialGames);

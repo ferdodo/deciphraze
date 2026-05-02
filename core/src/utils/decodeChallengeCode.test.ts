@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { decodeChallengeCode } from "./decodeChallengeCode";
 import { encodeChallengeCode } from "./encodeChallengeCode";
+import { createRandomServiceMock } from "./createRandomServiceMock";
 
 describe("decodeChallengeCode", () => {
 	const playerId = "player-123";
@@ -8,8 +9,9 @@ describe("decodeChallengeCode", () => {
 	const level = 5;
 
 	it("should decode a valid code", () => {
-		const code = encodeChallengeCode(playerId, realDay, level);
-		const decoded = decodeChallengeCode(playerId, code);
+		const randomService = createRandomServiceMock();
+		const code = encodeChallengeCode(playerId, realDay, level, randomService);
+		const decoded = decodeChallengeCode(playerId, code, randomService);
 
 		expect(decoded.level).toBe(level);
 		expect(decoded.realDay).toBe(realDay);
@@ -17,23 +19,26 @@ describe("decodeChallengeCode", () => {
 	});
 
 	it("should reject invalid signature", () => {
-		const code = encodeChallengeCode(playerId, realDay, level);
-		const decoded = decodeChallengeCode("different-player", code);
+		const randomService = createRandomServiceMock();
+		const code = encodeChallengeCode(playerId, realDay, level, randomService);
+		const decoded = decodeChallengeCode("different-player", code, randomService);
 
 		expect(decoded.isValid).toBe(false);
 	});
 
 	it("should reject invalid code length", () => {
-		const decoded = decodeChallengeCode(playerId, "TOOSHORT");
+		const randomService = createRandomServiceMock();
+		const decoded = decodeChallengeCode(playerId, "TOOSHORT", randomService);
 		expect(decoded.isValid).toBe(false);
 	});
 
 	it("should work with all valid level range", () => {
-		for (let level = 1; level <= 10; level++) {
-			const code = encodeChallengeCode(playerId, realDay, level);
-			const decoded = decodeChallengeCode(playerId, code);
+		const randomService = createRandomServiceMock();
+		for (let testLevel = 1; testLevel <= 10; testLevel++) {
+			const code = encodeChallengeCode(playerId, realDay, testLevel, randomService);
+			const decoded = decodeChallengeCode(playerId, code, randomService);
 
-			expect(decoded.level).toBe(level);
+			expect(decoded.level).toBe(testLevel);
 			expect(decoded.isValid).toBe(true);
 		}
 	});
@@ -46,8 +51,9 @@ describe("decodeChallengeCode", () => {
 		];
 
 		testCases.forEach(({ playerId, realDay, level }) => {
-			const code = encodeChallengeCode(playerId, realDay, level);
-			const decoded = decodeChallengeCode(playerId, code);
+			const randomService = createRandomServiceMock();
+			const code = encodeChallengeCode(playerId, realDay, level, randomService);
+			const decoded = decodeChallengeCode(playerId, code, randomService);
 
 			expect(decoded.isValid).toBe(true);
 			expect(decoded.level).toBe(level);

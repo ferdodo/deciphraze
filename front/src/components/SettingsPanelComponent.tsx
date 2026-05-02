@@ -2,7 +2,7 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { DeciSettingsPanel, DeciPlusView } from "@deciphraze/ui";
 import { useGameContext } from "../hooks/useGameContext";
-import type { Settings } from "../entities/Settings";
+import type { Settings } from "@deciphraze/core";
 import { resetAllData } from "../usecases/resetAllData";
 import { increaseTextSize } from "../usecases/increaseTextSize";
 import { decreaseTextSize } from "../usecases/decreaseTextSize";

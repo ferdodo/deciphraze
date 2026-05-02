@@ -1,5 +1,5 @@
-import type { ChallengeCodesRepository } from "../repositories/ChallengeCodesRepository";
-import type { ChallengeCodes } from "../entities/ChallengeCodes";
+import type { ChallengeCodesRepository } from "@deciphraze/core";
+import type { ChallengeCodes } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 
 const CHALLENGE_CODES_STORAGE_KEY = "deciphraze_challenge_codes";

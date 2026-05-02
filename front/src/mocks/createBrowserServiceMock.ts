@@ -1,5 +1,4 @@
-import type { BrowserService } from "../services/BrowserService";
-import type { DeviceType } from "../services/DeviceType";
+import type { BrowserService, DeviceType } from "@deciphraze/core";
 
 export function createBrowserServiceMock(deviceType: DeviceType = "unknown"): BrowserService {
 	return {

@@ -1,7 +1,7 @@
 import { BehaviorSubject, combineLatest, map } from "rxjs";
 import type { TimeService } from "@deciphraze/core";
-import type { AllGamesRepository } from "../repositories/AllGamesRepository";
-import type { ForcedDayRepository } from "../repositories/ForcedDayRepository";
+import type { AllGamesRepository } from "@deciphraze/core";
+import type { ForcedDayRepository } from "@deciphraze/core";
 import { getCurrentDay } from "./getCurrentDay";
 import { observeCurrentDay } from "./observeCurrentDay";
 

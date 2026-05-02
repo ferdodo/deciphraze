@@ -1,6 +1,6 @@
-import type { GameSession } from "../entities/GameSession";
-import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
-import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
+import type { GameSession } from "@deciphraze/core";
+import type { DiscoveryOrderRepository } from "@deciphraze/core";
+import type { AssociationHistoryRepository } from "@deciphraze/core";
 import { countWordsInParagraph } from "./countWordsInParagraph";
 
 export function createGameSession(

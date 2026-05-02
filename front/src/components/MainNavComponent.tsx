@@ -18,7 +18,7 @@ import { playTodayGame } from "../usecases/playTodayGame";
 import { abandonGame } from "../usecases/abandonGame";
 import { useAssociationHistory } from "../hooks/useAssociationHistory";
 import { useGameDay } from "../hooks/useGameDay";
-import type { Settings } from "../entities/Settings";
+import type { Settings } from "@deciphraze/core";
 
 import type React from "react";
 

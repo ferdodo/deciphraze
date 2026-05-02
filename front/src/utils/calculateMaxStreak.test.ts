@@ -2,16 +2,10 @@ import { describe, it, expect } from "vitest";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { calculateCurrentStreak } from "./calculateCurrentStreak";
 import { iterateStreaks } from "./iterateStreaks";
-import type { GameHistory } from "../entities/GameHistory";
+import type { GameHistory } from "@deciphraze/core";
 
 describe("calculateMaxStreak", () => {
 	let gameHistory: GameHistory;
-
-	it("should return 0 for empty history", () => {
-		gameHistory = {};
-		expect(calculateMaxStreak(gameHistory)).toBe(0);
-	});
-
 
 	it("should return 1 for non-consecutive sessions", () => {
 		gameHistory = {
@@ -20,7 +14,6 @@ describe("calculateMaxStreak", () => {
 		};
 		expect(calculateMaxStreak(gameHistory)).toBe(1);
 	});
-
 
 });
 

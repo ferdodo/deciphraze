@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { getNewAchievementIds } from "./getNewAchievementIds";
 import { createAllAchievementsWithSomeUnlocked } from "../factories/createAllAchievementsWithSomeUnlocked";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 describe("getNewAchievementIds", () => {
 	it("should return achievement IDs for unlocked but not viewed achievements", () => {

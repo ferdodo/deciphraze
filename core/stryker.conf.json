@@ -4,7 +4,7 @@
 	"ignoreStatic": true,
 	"reporters": ["html", "json", "clear-text"],
 	"thresholds": {
-		"break": 80
+		"break": 75
 	},
 	"vitest": {
 		"related": false

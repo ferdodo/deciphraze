@@ -1,4 +1,4 @@
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 import { isAlphabetic } from "./isAlphabetic";
 
 export function isAlphaAndOmega(paragraph: string, discoveryOrder: DiscoveryOrder): boolean {

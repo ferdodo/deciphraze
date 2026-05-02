@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { ViewedAchievementsRepository } from "../repositories/ViewedAchievementsRepository";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievementsRepository } from "@deciphraze/core";
+import type { ViewedAchievements } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 
 const VIEWED_ACHIEVEMENTS_STORAGE_KEY = "deciphraze_viewed_achievements";

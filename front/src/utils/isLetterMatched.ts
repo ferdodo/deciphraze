@@ -1,7 +1,5 @@
 import { characterEquals } from "./characterEquals";
-import type { PlayerCipher } from "../entities/PlayerCipher";
-import type { LetterSelection } from "../entities/LetterSelection";
-import type { SymbolSelection } from "../entities/SymbolSelection";
+import type { PlayerCipher, LetterSelection, SymbolSelection } from "@deciphraze/core";
 
 export const isLetterMatched = (
 	character: string,

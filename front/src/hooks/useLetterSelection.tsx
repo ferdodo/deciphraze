@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
 import { useCurrentDay } from "./useCurrentDay";
-import type { LetterSelection } from "../entities/LetterSelection";
+import type { LetterSelection } from "@deciphraze/core";
 import { getLetterSelectionFromAllGames } from "../utils/getLetterSelectionFromAllGames";
 
 export const useLetterSelection = (): LetterSelection => {

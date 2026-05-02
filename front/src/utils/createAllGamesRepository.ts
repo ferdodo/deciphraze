@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { AllGamesRepository } from "../repositories/AllGamesRepository";
-import type { AllGames } from "../entities/AllGames";
+import type { AllGamesRepository } from "@deciphraze/core";
+import type { AllGames } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 import type { Observable } from "rxjs";
 

@@ -1,4 +1,4 @@
-import { ebook1 } from "../constants/ebook1";
+import { ebook1 } from "@deciphraze/core";
 import { generateRandomNumberFromDay } from "./generateRandomNumberFromDay";
 
 export function generateParagraph(date: string): string {

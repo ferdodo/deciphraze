@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { unlockChallengeLetter } from "./unlockChallengeLetter";
-import type { GameContext } from "../contexts/GameContext";
-import type { ChallengeCodes } from "../entities/ChallengeCodes";
+import type { GameContext } from "@deciphraze/core";
+import type { ChallengeCodes } from "@deciphraze/core";
 
 describe("unlockChallengeLetter", () => {
 	it("should add a code to the used codes", () => {

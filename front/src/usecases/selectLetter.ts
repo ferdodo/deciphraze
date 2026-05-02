@@ -1,9 +1,9 @@
-import { normalizeWord } from "../utils/normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 import { isAlphabetic } from "../utils/isAlphabetic";
 import { isWin } from "../utils/isWin";
 import { generateParagraph } from "../utils/generateParagraph";
 import { characterEquals } from "../utils/characterEquals";
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 import { getCurrentDay } from "../utils/getCurrentDay";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 

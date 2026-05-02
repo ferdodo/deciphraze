@@ -1,6 +1,5 @@
-import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
-import type { AssociationHistory } from "../entities/AssociationHistory";
-import type { AssociationEntry } from "../entities/AssociationEntry";
+import type { AssociationHistoryRepository, AssociationHistory } from "@deciphraze/core";
+import type { AssociationEntry } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 
 const ASSOCIATION_HISTORY_STORAGE_KEY = "deciphraze_association_history";

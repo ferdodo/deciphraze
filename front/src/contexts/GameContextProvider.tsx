@@ -12,6 +12,8 @@ import { createViewedAchievementsRepository } from "../utils/createViewedAchieve
 import { createForcedDayRepository } from "../utils/createForcedDayRepository";
 import { createChallengeRepository } from "../utils/createChallengeRepository";
 import { createChallengeCodesRepository } from "../utils/createChallengeCodesRepository";
+import { createChallengeContextRepository } from "../utils/createChallengeContextRepository";
+import { createRandomService } from "../utils/createRandomService";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { getDefaultStorage } from "../utils/getDefaultStorage";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
@@ -38,6 +40,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			gameHistoryRepository: createGameHistoryRepository(storage),
 			achievementRepository: createAllAchievementsV7Repository(),
 			timeService,
+			randomService: createRandomService(),
 			forcedDayRepository,
 			discoveryOrderRepository: createDiscoveryOrderRepository(storage),
 			statisticsRepository: createStatisticsRepository(storage),
@@ -46,6 +49,7 @@ export function GameContextProvider({ children }: GameContextProviderProps): Rea
 			viewedAchievementsRepository: createViewedAchievementsRepository(storage),
 			challengeRepository: createChallengeRepository(storage),
 			challengeCodesRepository: createChallengeCodesRepository(storage),
+			challengeContextRepository: createChallengeContextRepository(),
 			browserService,
 		};
 	}, []);

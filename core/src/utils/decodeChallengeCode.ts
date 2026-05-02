@@ -1,6 +1,6 @@
-import { createIntPRNG } from "./createIntPRNG";
 import { unobfuscateChallengeCode } from "./unobfuscateChallengeCode";
 import type { DecodedChallengeCode } from "../entities/DecodedChallengeCode";
+import type { RandomService } from "../services/RandomService";
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -9,9 +9,13 @@ const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
  * First unobfuscates the code, then validates signature using playerId.
  * Format: [levelChars(2)][dayChars(8)][signatureChars(4)] = 14 chars (before obfuscation)
  */
-export function decodeChallengeCode(playerId: string, code: string): DecodedChallengeCode {
+export function decodeChallengeCode(
+	playerId: string,
+	code: string,
+	randomService: RandomService
+): DecodedChallengeCode {
 	// First unobfuscate the code
-	const unobfuscated = unobfuscateChallengeCode(code);
+	const unobfuscated = unobfuscateChallengeCode(code, randomService);
 	if (!unobfuscated) {
 		return { level: 0, realDay: "", isValid: false };
 	}
@@ -36,7 +40,7 @@ export function decodeChallengeCode(playerId: string, code: string): DecodedChal
 
 		// Verify signature
 		const seed = `${playerId}:${levelStr}:${dayStr}`;
-		const randomInt = createIntPRNG(seed);
+		const randomInt = randomService.createIntPRNG(seed);
 
 		let expectedSignature = "";
 		for (let i = 0; i < 4; i++) {

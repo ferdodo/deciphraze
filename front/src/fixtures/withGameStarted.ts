@@ -10,6 +10,8 @@ import { createSettingsRepository } from "../utils/createSettingsRepository";
 import { createViewedAchievementsRepository } from "../utils/createViewedAchievementsRepository";
 import { createChallengeRepository } from "../utils/createChallengeRepository";
 import { createChallengeCodesRepository } from "../utils/createChallengeCodesRepository";
+import { createChallengeContextRepository } from "../utils/createChallengeContextRepository";
+import { createRandomService } from "../utils/createRandomService";
 import { initializeGameSideEffects } from "../utils/initializeGameSideEffects";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
 import { createBrowserServiceMock } from "../mocks/createBrowserServiceMock";
@@ -24,6 +26,7 @@ export function withGameStarted(): [() => void, GameContextType] {
 		gameHistoryRepository: createGameHistoryRepositoryMock(),
 		achievementRepository: createAchievementRepositoryMock(),
 		timeService,
+		randomService: createRandomService(),
 		forcedDayRepository,
 		discoveryOrderRepository: createDiscoveryOrderRepositoryMock(),
 		statisticsRepository: createStatisticsRepository(storage),
@@ -32,6 +35,7 @@ export function withGameStarted(): [() => void, GameContextType] {
 		viewedAchievementsRepository: createViewedAchievementsRepository(storage),
 		challengeRepository: createChallengeRepository(storage),
 		challengeCodesRepository: createChallengeCodesRepository(storage),
+		challengeContextRepository: createChallengeContextRepository(),
 		browserService: createBrowserServiceMock(),
 	};
 

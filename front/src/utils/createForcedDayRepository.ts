@@ -1,6 +1,6 @@
 import { BehaviorSubject } from "rxjs";
 import type { Observable } from "rxjs";
-import type { ForcedDayRepository } from "../repositories/ForcedDayRepository";
+import type { ForcedDayRepository } from "@deciphraze/core";
 
 export function createForcedDayRepository(): ForcedDayRepository {
 	const forcedVirtualDateSubject = new BehaviorSubject<string | undefined>(undefined);

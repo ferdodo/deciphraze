@@ -1,4 +1,4 @@
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 
 /**
  * Mark a code as used for the daily challenge letter.

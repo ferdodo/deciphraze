@@ -1,4 +1,4 @@
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 import { formatDate } from "../utils/formatDate";
 import { getCurrentDay } from "../utils/getCurrentDay";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";

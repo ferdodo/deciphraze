@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
 import { useCurrentDay } from "./useCurrentDay";
-import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { PlayerCipher } from "@deciphraze/core";
 import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";
 
 export const usePlayerCipher = (): PlayerCipher => {

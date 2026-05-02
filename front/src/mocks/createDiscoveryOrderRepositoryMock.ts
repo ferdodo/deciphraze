@@ -1,5 +1,5 @@
-import type { DiscoveryOrderRepository } from "../repositories/DiscoveryOrderRepository";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrderRepository } from "@deciphraze/core";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 export function createDiscoveryOrderRepositoryMock(): DiscoveryOrderRepository {
 	const discoveryOrders: Record<string, DiscoveryOrder> = {};

@@ -1,8 +1,7 @@
-import type { PlayerCipher } from "../entities/PlayerCipher";
-import type { GameHistory } from "../entities/GameHistory";
+import type { PlayerCipher, GameHistory } from "@deciphraze/core";
+import { normalizeWord } from "@deciphraze/core";
 import { characterEquals } from "./characterEquals";
 import { isAlphabetic } from "./isAlphabetic";
-import { normalizeWord } from "./normalizeWord";
 
 export const isWin = (
 	playerCipher: PlayerCipher,

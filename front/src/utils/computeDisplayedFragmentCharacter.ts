@@ -1,5 +1,5 @@
 import type { CellType } from "../types/CellType";
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 import { getEncodedCharacter } from "./getEncodedCharacter";
 import { isDev } from "./isDev";
 

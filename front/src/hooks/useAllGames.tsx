@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { AllGames } from "../entities/AllGames";
+import type { AllGames } from "@deciphraze/core";
 
 export const useAllGames = (): AllGames => {
 	const { allGamesRepository } = useGameContext();

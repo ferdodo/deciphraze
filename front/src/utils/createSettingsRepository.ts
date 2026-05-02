@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { SettingsRepository } from "../repositories/SettingsRepository";
-import type { Settings } from "../entities/Settings";
+import type { SettingsRepository } from "@deciphraze/core";
+import type { Settings } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 import { getDefaultTextSize } from "./getDefaultTextSize";
 

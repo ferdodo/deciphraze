@@ -1,4 +1,4 @@
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 
 export function getAlphabetLettersInText(text: string): string[] {
 	const normalized = normalizeWord(text).toUpperCase();

@@ -1,5 +1,5 @@
-import type { AllGames } from "../entities/AllGames";
-import type { SymbolSelection } from "../entities/SymbolSelection";
+import type { AllGames } from "@deciphraze/core";
+import type { SymbolSelection } from "@deciphraze/core";
 import { getCurrentGameDay } from "./getCurrentGameDay";
 
 export const getSymbolSelectionFromAllGames = (allGames: AllGames, currentDay: string): SymbolSelection => {

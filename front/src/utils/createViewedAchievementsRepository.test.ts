@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createViewedAchievementsRepository } from "./createViewedAchievementsRepository";
 import { createLocalStorageMock } from "./createLocalStorageMock";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 describe("createViewedAchievementsRepository", () => {
 	it("should return default viewed achievements when storage is empty", () => {

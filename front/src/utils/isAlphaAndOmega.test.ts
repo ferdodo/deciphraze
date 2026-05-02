@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { isAlphaAndOmega } from "./isAlphaAndOmega";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 describe("isAlphaAndOmega", () => {
 	it("should return false when paragraph has no letters", () => {

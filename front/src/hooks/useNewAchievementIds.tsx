@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useAchievements } from "./useAchievements";
 import { useViewedAchievements } from "./useViewedAchievements";
 import { getNewAchievementIds } from "../utils/getNewAchievementIds";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 export const useNewAchievementIds = (): (keyof ViewedAchievements)[] => {
 	const achievements = useAchievements();

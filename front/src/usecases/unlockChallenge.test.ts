@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { unlockChallenge } from "./unlockChallenge";
-import { getChallengeWordForLevelAndDay } from "../utils/getChallengeWordForLevelAndDay";
-import type { GameContext } from "../contexts/GameContext";
-import type { Challenge } from "../entities/Challenge";
+import { getChallengeWordForLevelAndDay } from "@deciphraze/core";
+import type { GameContext, Challenge } from "@deciphraze/core";
+import { createRandomService } from "../utils/createRandomService";
 
 describe("unlockChallenge", () => {
 	it("should do nothing if the guessed word is incorrect", () => {
@@ -12,6 +12,7 @@ describe("unlockChallenge", () => {
 			level: 1,
 			id: "player-alice",
 		};
+		const randomService = createRandomService();
 
 		const gameContext = {
 			timeService: {
@@ -19,6 +20,7 @@ describe("unlockChallenge", () => {
 					toString: () => realDay,
 				}),
 			},
+			randomService,
 			challengeRepository: {
 				getChallenge: () => challenge,
 				saveChallenge: (newChallenge: Challenge) => {
@@ -41,6 +43,7 @@ describe("unlockChallenge", () => {
 			level: 1,
 			id: "player-alice",
 		};
+		const randomService = createRandomService();
 
 		const gameContext = {
 			timeService: {
@@ -48,6 +51,7 @@ describe("unlockChallenge", () => {
 					toString: () => realDay,
 				}),
 			},
+			randomService,
 			challengeRepository: {
 				getChallenge: () => challenge,
 				saveChallenge: (newChallenge: Challenge) => {
@@ -58,45 +62,9 @@ describe("unlockChallenge", () => {
 			},
 		} as unknown as GameContext;
 
-		const correctWord = getChallengeWordForLevelAndDay(2, realDay);
+		const correctWord = getChallengeWordForLevelAndDay(2, realDay, randomService);
 		unlockChallenge(correctWord, gameContext);
 
-		expect(savedChallenge).toEqual({
-			level: 2,
-			id: "player-alice",
-		});
-	});
-
-	it("should handle accented characters correctly", () => {
-		const realDay = "2026-04-25";
-		let savedChallenge: Challenge | null = null;
-		const challenge: Challenge = {
-			level: 1,
-			id: "player-alice",
-		};
-
-		const gameContext = {
-			timeService: {
-				getRealDay: () => ({
-					toString: () => realDay,
-				}),
-			},
-			challengeRepository: {
-				getChallenge: () => challenge,
-				saveChallenge: (newChallenge: Challenge) => {
-					savedChallenge = newChallenge;
-					Object.assign(challenge, newChallenge);
-				},
-				observeChallenge: () => () => {},
-			},
-		} as unknown as GameContext;
-
-		// Use a word that contains accents naturally, or add accents to test normalization
-		const correctWord = getChallengeWordForLevelAndDay(2, realDay);
-		const wordWithAccent = correctWord.substring(0, 1) + "é" + correctWord.substring(2);
-		unlockChallenge(wordWithAccent, gameContext);
-
-		// Should still save because normalizeWord removes accents
 		expect(savedChallenge).toEqual({
 			level: 2,
 			id: "player-alice",

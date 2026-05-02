@@ -1,5 +1,5 @@
-import type { GameHistory } from "../entities/GameHistory";
-import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
+import type { GameHistory } from "@deciphraze/core";
+import type { AssociationHistoryRepository } from "@deciphraze/core";
 import { isLetterInParagraph } from "./isLetterInParagraph";
 import { generateParagraph } from "./generateParagraph";
 

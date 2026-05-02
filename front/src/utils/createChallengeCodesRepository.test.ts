@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createChallengeCodesRepository } from "./createChallengeCodesRepository";
-import type { ChallengeCodes } from "../entities/ChallengeCodes";
+import type { ChallengeCodes } from "@deciphraze/core";
 import type { StorageLike } from "./StorageLike";
 
 class InMemoryStorage implements StorageLike {

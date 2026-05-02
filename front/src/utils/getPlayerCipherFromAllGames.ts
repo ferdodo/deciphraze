@@ -1,5 +1,5 @@
-import type { AllGames } from "../entities/AllGames";
-import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { AllGames } from "@deciphraze/core";
+import type { PlayerCipher } from "@deciphraze/core";
 import { getCurrentGameDay } from "./getCurrentGameDay";
 
 export const getPlayerCipherFromAllGames = (allGames: AllGames, currentDay: string): PlayerCipher => {

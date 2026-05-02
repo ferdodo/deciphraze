@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { abandonGame } from "./abandonGame";
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 
 describe("abandonGame", () => {
 	it("should do nothing if user cancels confirmation", () => {

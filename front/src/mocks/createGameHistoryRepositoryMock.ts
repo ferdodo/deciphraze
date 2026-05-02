@@ -1,8 +1,8 @@
 import { BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
-import type { GameHistoryRepository } from "../repositories/GameHistoryRepository";
-import type { GameHistory } from "../entities/GameHistory";
-import type { GameSession } from "../entities/GameSession";
+import type { GameHistoryRepository } from "@deciphraze/core";
+import type { GameHistory } from "@deciphraze/core";
+import type { GameSession } from "@deciphraze/core";
 
 export function createGameHistoryRepositoryMock(): GameHistoryRepository {
 	const gameHistory: GameHistory = {};

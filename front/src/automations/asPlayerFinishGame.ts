@@ -1,4 +1,4 @@
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 import { isWin } from "../utils/isWin";
 import { generateParagraph } from "../utils/generateParagraph";
 import { asPlayerAssociateOneGoodLetter } from "./asPlayerAssociateOneGoodLetter";

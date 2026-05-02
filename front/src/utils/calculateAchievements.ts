@@ -1,7 +1,7 @@
-import type { GameHistory } from "../entities/GameHistory";
+import type { GameHistory } from "@deciphraze/core";
 import type { AllAchievements } from "@deciphraze/core";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
-import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
+import type { DiscoveryOrder } from "@deciphraze/core";
+import type { AssociationHistoryRepository } from "@deciphraze/core";
 import { calculateMaxStreak } from "./calculateMaxStreak";
 import { createAllAchievements } from "../factories/createAllAchievements";
 import { isFirstLetterFoundInHistory } from "./isFirstLetterFoundInHistory";

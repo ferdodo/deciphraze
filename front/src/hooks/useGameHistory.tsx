@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "./useGameContext";
-import type { GameHistory } from "../entities/GameHistory";
+import type { GameHistory } from "@deciphraze/core";
 
 export const useGameHistory = (): GameHistory => {
 	const { gameHistoryRepository } = useGameContext();

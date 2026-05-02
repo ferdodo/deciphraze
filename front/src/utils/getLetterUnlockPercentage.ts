@@ -1,6 +1,6 @@
-import { decodeChallengeCode } from "./decodeChallengeCode";
+import { decodeChallengeCode } from "@deciphraze/core";
 import { getLetterIndexFromCodeDay } from "./getLetterIndexFromCodeDay";
-import type { ChallengeCodes } from "../entities/ChallengeCodes";
+import type { ChallengeCodes, RandomService } from "@deciphraze/core";
 
 /**
  * Calculates the unlock percentage for a specific letter on a given day.
@@ -12,9 +12,10 @@ import type { ChallengeCodes } from "../entities/ChallengeCodes";
  *
  * @param playerId - The current player's ID for validating codes
  * @param usedCodes - The ChallengeCodes entity with used codes
- * @param realDay - Today's date as ISO string (YYYY-MM-DD) from timeService.getRealDay().toString()
+ * @param _realDay - Today's date as ISO string (YYYY-MM-DD) from timeService.getRealDay().toString()
  * @param level - The current challenge level (determines codes needed per letter)
  * @param letterIndex - The letter index we're calculating progress for (0-6)
+ * @param randomService - The RandomService for decoding challenge codes
  * @returns The unlock percentage (0-100)
  */
 export const getLetterUnlockPercentage = (
@@ -23,11 +24,12 @@ export const getLetterUnlockPercentage = (
 	_realDay: string,
 	level: number,
 	letterIndex: number,
+	randomService: RandomService,
 ): number => {
 	let codesUsedForThisLetter = 0;
 
 	for (const code of usedCodes.usedCodes) {
-		const decoded = decodeChallengeCode(playerId, code);
+		const decoded = decodeChallengeCode(playerId, code, randomService);
 		
 		if (decoded.isValid && decoded.level >= level) {
 			const codeLetterIndex = getLetterIndexFromCodeDay(decoded.realDay);

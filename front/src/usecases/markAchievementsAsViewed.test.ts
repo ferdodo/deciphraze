@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { markAchievementsAsViewed } from "./markAchievementsAsViewed";
 import { createViewedAchievementsRepository } from "../utils/createViewedAchievementsRepository";
 import { createLocalStorageMock } from "../utils/createLocalStorageMock";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 describe("markAchievementsAsViewed", () => {
 	it("should mark achievements as viewed", () => {

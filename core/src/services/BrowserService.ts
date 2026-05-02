@@ -1,4 +1,4 @@
-import type { DeviceType } from "./DeviceType";
+import type { DeviceType } from "../utils/DeviceType";
 
 export interface BrowserService {
 	getDevice(): DeviceType;

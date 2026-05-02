@@ -1,6 +1,5 @@
-import { getChallengeWordForLevelAndDay } from "../utils/getChallengeWordForLevelAndDay";
-import { normalizeWord } from "../utils/normalizeWord";
-import type { GameContext } from "../contexts/GameContext";
+import { getChallengeWordForLevelAndDay, normalizeWord } from "@deciphraze/core";
+import type { GameContext } from "@deciphraze/core";
 
 /**
  * Attempt to unlock the next challenge level by submitting a word.
@@ -19,7 +18,7 @@ export function unlockChallenge(
 	const nextLevel = currentChallenge.level + 1;
 
 	// Get the expected word for this level and day
-	const expectedWord = getChallengeWordForLevelAndDay(nextLevel, realDay);
+	const expectedWord = getChallengeWordForLevelAndDay(nextLevel, realDay, gameContext.randomService);
 
 	// Normalize both words for comparison
 	const normalizedGuess = normalizeWord(guessedWord).toLowerCase();

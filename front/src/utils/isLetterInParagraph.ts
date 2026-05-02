@@ -1,4 +1,4 @@
-import { normalizeWord } from "./normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 import { isAlphabetic } from "./isAlphabetic";
 
 export function isLetterInParagraph(letter: string, paragraph: string): boolean {

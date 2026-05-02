@@ -1,4 +1,4 @@
-import type { GameSession } from "../entities/GameSession";
+import type { GameSession } from "@deciphraze/core";
 
 // Fonction utilitaire pour extraire les lettres trouvées (gère la rétrocompatibilité)
 export function getLettersFoundFromHistoryEntry(entry: string[] | GameSession): string[] {

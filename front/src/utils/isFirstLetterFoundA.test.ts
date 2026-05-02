@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { isFirstLetterFoundA } from "./isFirstLetterFoundA";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 describe("isFirstLetterFoundA", () => {
 	it("should return false when discovery order is empty", () => {

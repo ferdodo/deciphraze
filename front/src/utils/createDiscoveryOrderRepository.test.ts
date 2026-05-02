@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createDiscoveryOrderRepository } from "./createDiscoveryOrderRepository";
 import { createLocalStorageMock } from "./createLocalStorageMock";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 describe("createDiscoveryOrderRepository", () => {
 	it("should return empty array when no discovery order exists for a date", () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createStatisticsRepository } from "./createStatisticsRepository";
-import type { Statistics } from "../entities/Statistics";
+import type { Statistics } from "@deciphraze/core";
 import { createLocalStorageMock } from "./createLocalStorageMock";
 
 describe("createStatisticsRepository", () => {

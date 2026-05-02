@@ -1,4 +1,4 @@
-import type { ForcedDayRepository } from "../repositories/ForcedDayRepository";
+import type { ForcedDayRepository } from "@deciphraze/core";
 import { createForcedDayRepository } from "../utils/createForcedDayRepository";
 
 export function createForcedDayRepositoryMock(): ForcedDayRepository {

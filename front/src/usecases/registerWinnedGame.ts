@@ -7,8 +7,8 @@ import { createGameSession } from "../utils/createGameSession";
 import { generateParagraph } from "../utils/generateParagraph";
 import { observeCurrentDay } from "../utils/observeCurrentDay";
 import { subscribePlayerCipher } from "../utils/subscribePlayerCipher";
-import type { PlayerCipher } from "../entities/PlayerCipher";
-import type { GameContext } from "../contexts/GameContext";
+import type { PlayerCipher } from "@deciphraze/core";
+import type { GameContext } from "@deciphraze/core";
 import { getCurrentGameDay } from "../utils/getCurrentGameDay";
 
 export function registerWinnedGame({

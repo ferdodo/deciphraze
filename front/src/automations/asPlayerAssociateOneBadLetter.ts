@@ -1,4 +1,4 @@
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 import { selectLetter } from "../usecases/selectLetter";
 import { selectSymbol } from "../usecases/selectSymbol";
 import { characterEquals } from "../utils/characterEquals";

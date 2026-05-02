@@ -1,4 +1,4 @@
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 const VOWELS: Set<string> = new Set(["A", "E", "I", "O", "U", "Y"]);
 
@@ -11,7 +11,7 @@ export function hasFoundAllVowelsInSequence(discoveryOrder: DiscoveryOrder): boo
 	for (let i = 0; i <= discoveryOrder.length - 6; i++) {
 		const sequence = discoveryOrder.slice(i, i + 6);
 		const vowelsInSequence = new Set(
-			sequence.map(letter => letter.toUpperCase()).filter(letter => VOWELS.has(letter))
+			sequence.map((letter: string) => letter.toUpperCase()).filter((letter: string) => VOWELS.has(letter))
 		);
 		
 		if (vowelsInSequence.size === 6) {

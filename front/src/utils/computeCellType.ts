@@ -1,6 +1,6 @@
 import { characterEquals } from "./characterEquals";
 import { isAlphabetic } from "./isAlphabetic";
-import type { PlayerCipher } from "../entities/PlayerCipher";
+import type { PlayerCipher } from "@deciphraze/core";
 import type { CellType } from "../types/CellType";
 
 export const computeCellType = (character: string, playerCipherMap: PlayerCipher, isWin: boolean): CellType => {

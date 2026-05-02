@@ -1,11 +1,10 @@
-import type { PlayerCipher } from "../entities/PlayerCipher";
-import type { LetterSelection } from "../entities/LetterSelection";
+import type { PlayerCipher, LetterSelection } from "@deciphraze/core";
 import { DeciSymbol } from "@deciphraze/ui";
 import { usePlayerCipher } from "../hooks/usePlayerCipher";
 import { useLetterSelection } from "../hooks/useLetterSelection";
 import { useWin } from "../hooks/useWin";
 import { selectSymbol } from "../usecases/selectSymbol";
-import { normalizeWord } from "../utils/normalizeWord";
+import { normalizeWord } from "@deciphraze/core";
 import { characterEquals } from "../utils/characterEquals";
 import { isSymbolMatched } from "../utils/isSymbolMatched";
 import { useSymbolSelection } from "../hooks/useSymbolSelection";

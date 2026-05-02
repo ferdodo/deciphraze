@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createBrowserServiceMock } from "./createBrowserServiceMock";
-import type { DeviceType } from "../services/DeviceType";
+import type { DeviceType } from "@deciphraze/core";
 
 describe("createBrowserServiceMock", () => {
 	it("should return a service with getDevice returning the specified device type", () => {

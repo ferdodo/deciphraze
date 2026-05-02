@@ -3,8 +3,8 @@ import { DeciChallengeMenu, DeciPlusView } from "@deciphraze/ui";
 import { useGameContext } from "../hooks/useGameContext";
 import { useRealTodayDate } from "../hooks/useRealTodayDate";
 import { useIsTodayGameCompleted } from "../hooks/useIsTodayGameCompleted";
-import { useTodayChallengeCode } from "../hooks/useTodayChallengeCode";
-import { getChallengeWordForLevelAndDay } from "../utils/getChallengeWordForLevelAndDay";
+import { useChallengeContext } from "../hooks/useChallengeContext";
+import { getChallengeWordForLevelAndDay, displayChallengeCode } from "@deciphraze/core";
 import { getLetterUnlockPercentage } from "../utils/getLetterUnlockPercentage";
 import { unlockChallengeLetter } from "../usecases/unlockChallengeLetter";
 import { unlockChallenge } from "../usecases/unlockChallenge";
@@ -23,11 +23,10 @@ export function ChallengeMenuComponent({
 	const { challengeRepository, challengeCodesRepository } = gameContext;
 	const realTodayDate = useRealTodayDate();
 	const isTodayGameCompleted = useIsTodayGameCompleted();
-	const todayChallengeCode = useTodayChallengeCode();
+	const challengeContext = useChallengeContext();
 
 	const [codeInput, setCodeInput] = useState("");
 	const [wordInput, setWordInput] = useState("");
-	const [displayedCode, setDisplayedCode] = useState<string | null>(null);
 	const [challenge, setChallenge] = useState(
 		challengeRepository.getChallenge(),
 	);
@@ -53,15 +52,15 @@ export function ChallengeMenuComponent({
 		};
 	}, [challengeRepository, challengeCodesRepository]);
 
-	const word = getChallengeWordForLevelAndDay(challenge.level, realTodayDate);
+	const word = getChallengeWordForLevelAndDay(challenge.level, realTodayDate, gameContext.randomService);
 
 	// Calculate percentages for each of the 7 letters
 	const letterPercentages = Array.from({ length: 7 }, (_, index) => {
-		return getLetterUnlockPercentage(challenge.id, codes, realTodayDate, challenge.level, index);
+		return getLetterUnlockPercentage(challenge.id, codes, realTodayDate, challenge.level, index, gameContext.randomService);
 	});
 
 	const handleShowCode = (): void => {
-		setDisplayedCode(todayChallengeCode);
+		displayChallengeCode(gameContext);
 	};
 
 	const handleUnlockLetter = (): void => {
@@ -90,7 +89,7 @@ export function ChallengeMenuComponent({
 					codeInput={codeInput}
 					onCodeInputChange={setCodeInput}
 					onShowCode={handleShowCode}
-					displayedCode={displayedCode}
+					displayedCode={challengeContext.code}
 					onUnlockLetter={handleUnlockLetter}
 					wordInput={wordInput}
 					onWordInputChange={setWordInput}

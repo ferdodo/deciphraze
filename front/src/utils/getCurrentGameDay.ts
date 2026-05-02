@@ -1,4 +1,4 @@
-import type { AllGames } from "../entities/AllGames";
+import type { AllGames } from "@deciphraze/core";
 
 export const getCurrentGameDay = (allGames: AllGames, currentDay: string): string => {
 	const days = Object.keys(allGames.gameByDay);

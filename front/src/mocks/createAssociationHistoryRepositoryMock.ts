@@ -1,5 +1,5 @@
-import type { AssociationHistoryRepository } from "../repositories/AssociationHistoryRepository";
-import type { AssociationEntry } from "../entities/AssociationEntry";
+import type { AssociationHistoryRepository } from "@deciphraze/core";
+import type { AssociationEntry } from "@deciphraze/core";
 
 export function createAssociationHistoryRepositoryMock(): AssociationHistoryRepository {
 	const history: Record<string, AssociationEntry[]> = {};

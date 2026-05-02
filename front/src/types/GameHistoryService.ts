@@ -1,5 +1,5 @@
 import type { Observable } from "rxjs";
-import type { GameSession } from "../entities/GameSession";
+import type { GameSession } from "@deciphraze/core";
 
 export interface GameHistoryService {
 	getGameHistory(): GameSession[];

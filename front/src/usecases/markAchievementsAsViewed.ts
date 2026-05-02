@@ -1,5 +1,5 @@
-import type { ViewedAchievementsRepository } from "../repositories/ViewedAchievementsRepository";
-import type { ViewedAchievements } from "../entities/ViewedAchievements";
+import type { ViewedAchievementsRepository } from "@deciphraze/core";
+import type { ViewedAchievements } from "@deciphraze/core";
 
 export function markAchievementsAsViewed(
 	achievementIds: (keyof ViewedAchievements)[],

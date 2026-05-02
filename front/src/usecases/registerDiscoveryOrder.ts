@@ -1,6 +1,6 @@
 import type { Subscription } from "rxjs";
 import { map } from "rxjs/operators";
-import type { GameContext } from "../contexts/GameContext";
+import type { GameContext } from "@deciphraze/core";
 import { characterEquals } from "../utils/characterEquals";
 import { getCurrentDay } from "../utils/getCurrentDay";
 import { getPlayerCipherFromAllGames } from "../utils/getPlayerCipherFromAllGames";

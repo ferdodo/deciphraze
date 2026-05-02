@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { hasFoundAllVowelsInSequence } from "./hasFoundAllVowelsInSequence";
-import type { DiscoveryOrder } from "../entities/DiscoveryOrder";
+import type { DiscoveryOrder } from "@deciphraze/core";
 
 describe("hasFoundAllVowelsInSequence", () => {
 	it("should return false if less than 6 letters discovered", () => {
