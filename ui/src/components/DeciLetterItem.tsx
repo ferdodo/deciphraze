@@ -13,20 +13,16 @@ export function DeciLetterItem({ letter, percentage }: DeciLetterItemProps): Rea
 
 	return (
 		<div className={styles.letterItem}>
-			<div className={styles.letterBox}>
+			<div 
+				className={styles.letterBox}
+				style={{
+					background: isUnlocked 
+						? 'linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.16))'
+						: `linear-gradient(to top, rgba(131, 173, 255, 0.51) ${Math.round(safePercentage)}%, #ccc0 ${Math.round(safePercentage)}%), linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.16))`
+				}}
+			>
 				{isUnlocked ? letter.toUpperCase() : <img src={padlock} alt="Locked" className={styles.lockedIcon} />}
 			</div>
-			<div className={styles.progressBar}>
-				<div
-					className={styles.progressFill}
-					style={{
-						width: `${Math.round(safePercentage)}%`,
-					}}
-				/>
-			</div>
-			<span className={styles.percentageText}>
-				{Math.round(safePercentage)}%
-			</span>
 		</div>
 	);
 }

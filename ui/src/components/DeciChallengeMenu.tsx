@@ -87,13 +87,15 @@ export function DeciChallengeMenu({
 
 			{/* Display Code Button */}
 			<div className={styles.section}>
-				<crumbs-button
-					type="button"
-					onClick={onShowCode}
-					role="button"
-				>
-					{isTodayGameCompleted ? "" : <><img src={padlock} alt="Locked" className={styles.lockedButton} /> </>}Afficher Code du Jour
-				</crumbs-button>
+				{!displayedCode && (
+					<crumbs-button
+						type="button"
+						onClick={onShowCode}
+						role="button"
+					>
+						{isTodayGameCompleted ? "" : <><img src={padlock} alt="Locked" className={styles.lockedButton} /> </>}Afficher Code du Jour
+					</crumbs-button>
+				)}
 				{displayedCode && (
 					<div style={{ marginTop: "1rem", padding: "1rem", backgroundColor: "var(--color-background-secondary)", borderRadius: "0.5rem" }}>
 						<p style={{ margin: "0 0 0.5rem 0", fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>Code du jour:</p>
@@ -102,9 +104,11 @@ export function DeciChallengeMenu({
 						</code>
 					</div>
 				)}
-				<p className={styles.hint}>
-					Complétez la partie du jour à ce niveau pour afficher le code
-				</p>
+				{!displayedCode && (
+					<p className={styles.hint}>
+						Complétez la partie du jour à ce niveau pour afficher le code
+					</p>
+				)}
 			</div>
 
 			{/* Unlock Letter */}
