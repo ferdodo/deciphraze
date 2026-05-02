@@ -132,3 +132,19 @@
 .buttonSecondary:hover {
 	background: var(--color-border);
 }
+
+.lockedTitle {
+	height: 1.5rem;
+	width: 1.5rem;
+	margin-right: 0.5rem;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.lockedButton {
+	height: 1rem;
+	width: 1rem;
+	margin-right: 0.25rem;
+	vertical-align: middle;
+	display: inline-block;
+}

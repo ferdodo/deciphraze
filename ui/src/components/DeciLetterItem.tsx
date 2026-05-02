@@ -1,4 +1,5 @@
 import type React from "react";
+import padlock from '../assets/padlock.svg';
 import styles from "./DeciLetterItem.module.css";
 
 interface DeciLetterItemProps {
@@ -13,7 +14,7 @@ export function DeciLetterItem({ letter, percentage }: DeciLetterItemProps): Rea
 	return (
 		<div className={styles.letterItem}>
 			<div className={styles.letterBox}>
-				{isUnlocked ? letter.toUpperCase() : "🔒"}
+				{isUnlocked ? letter.toUpperCase() : <img src={padlock} alt="Locked" className={styles.lockedIcon} />}
 			</div>
 			<div className={styles.progressBar}>
 				<div

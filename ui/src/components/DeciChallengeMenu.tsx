@@ -1,4 +1,5 @@
 import type React from "react";
+import padlock from '../assets/padlock.svg';
 import { DeciLetterDisplay } from "./DeciLetterDisplay";
 import styles from "./DeciChallengeMenu.module.css";
 
@@ -51,7 +52,7 @@ export function DeciChallengeMenu({
 		return (
 			<div className={styles.container}>
 				<div className={styles.lockedMessage}>
-					<h2>Challenge Mode 🔒</h2>
+					<h2><img src={padlock} alt="Locked" className={styles.lockedTitle} /> Challenge Mode</h2>
 					<p>
 						Débloquez tous les succès pour accéder au Challenge Mode. Une fois
 						le Platine obtenu, vous pourrez trouver des mots de 7 lettres en
@@ -91,7 +92,7 @@ export function DeciChallengeMenu({
 					onClick={onShowCode}
 					role="button"
 				>
-					{isTodayGameCompleted ? "" : "🔒 "}Afficher Code du Jour
+					{isTodayGameCompleted ? "" : <><img src={padlock} alt="Locked" className={styles.lockedButton} /> </>}Afficher Code du Jour
 				</crumbs-button>
 				{displayedCode && (
 					<div style={{ marginTop: "1rem", padding: "1rem", backgroundColor: "var(--color-background-secondary)", borderRadius: "0.5rem" }}>
