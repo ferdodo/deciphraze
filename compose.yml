@@ -1,12 +1,7 @@
 services:
-  design-system:
-    build: design-system
-
   ui:
     build:
       context: ui
-      additional_contexts:
-        deciphraze-design-system: service:design-system
 
   browser:
     build: browser
@@ -34,7 +29,6 @@ services:
         deciphraze-core: service:core
         deciphraze-persistance: service:persistance
         deciphraze-git: service:git
-        deciphraze-design-system: service:design-system
     develop:
       watch:
         - action: sync
@@ -65,7 +59,6 @@ services:
         deciphraze-core: service:core
         deciphraze-persistance: service:persistance
         deciphraze-git: service:git
-        deciphraze-design-system: service:design-system
       dockerfile: stryker.Dockerfile
     ports:
       - "1112:1112"

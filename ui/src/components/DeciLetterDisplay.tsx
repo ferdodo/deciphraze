@@ -33,14 +33,20 @@ export function DeciLetterDisplay({
 		letter7Percentage,
 	];
 
+	const letters = word.split("").map((letter, index) => ({
+		key: `${word}-${index}`,
+		letter,
+		percentage: letterPercentages[index],
+	}));
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.lettersGrid}>
-				{word.split("").map((letter, index) => (
+				{letters.map(({ key, letter, percentage }) => (
 					<DeciLetterItem
-						key={`letter-${index}-${letter}`}
+						key={key}
 						letter={letter}
-						percentage={letterPercentages[index]}
+						percentage={percentage}
 					/>
 				))}
 			</div>

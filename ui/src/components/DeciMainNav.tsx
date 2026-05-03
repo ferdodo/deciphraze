@@ -47,6 +47,11 @@ export function DeciMainNav({
 	onPlayTodayGame,
 	onAbandon,
 }: DeciMainNavProps): React.JSX.Element {
+	const associationHistoryWithKeys = associationHistory.map((entry, index) => ({
+		key: `${entry.letter}-${entry.symbol}-${index}`,
+		...entry,
+	}));
+
 	return (
 		<div className={styles.container}>
 			<crumbs-nav className={styles.nav}>
@@ -73,9 +78,9 @@ export function DeciMainNav({
 						<div style={{ paddingBottom: "0.8rem" }}>
 							<DeciText variant="muted">Associations effectuées :</DeciText>
 							<div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginTop: "0.3rem" }}>
-								{associationHistory.map((entry, index) => (
+								{associationHistoryWithKeys.map(({ key, letter }) => (
 									<span
-										key={`${entry.letter}-${index}`}
+										key={key}
 										style={{
 											display: "inline-flex",
 											alignItems: "center",
@@ -84,7 +89,7 @@ export function DeciMainNav({
 											background: "rgba(128,128,128,0.12)",
 										}}
 									>
-										<DeciText variant="command">{entry.letter}</DeciText>
+										<DeciText variant="command">{letter}</DeciText>
 									</span>
 								))}
 							</div>

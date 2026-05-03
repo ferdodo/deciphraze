@@ -16,4 +16,3 @@ verify persistance
 verify ui
 verify front
 verify browser
-verify design-system
