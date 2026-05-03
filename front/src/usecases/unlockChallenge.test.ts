@@ -29,6 +29,9 @@ describe("unlockChallenge", () => {
 				},
 				observeChallenge: () => () => {},
 			},
+			browserService: {
+				confirm: () => false,
+			},
 		} as unknown as GameContext;
 
 		unlockChallenge("wrong", gameContext);
@@ -60,9 +63,12 @@ describe("unlockChallenge", () => {
 				},
 				observeChallenge: () => () => {},
 			},
+			browserService: {
+				confirm: () => false,
+			},
 		} as unknown as GameContext;
 
-		const correctWord = getChallengeWordForLevelAndDay(2, realDay, randomService);
+		const correctWord = getChallengeWordForLevelAndDay(1, realDay, randomService);
 		unlockChallenge(correctWord, gameContext);
 
 		expect(savedChallenge).toEqual({

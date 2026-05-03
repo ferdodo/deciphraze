@@ -70,6 +70,7 @@ export function ChallengeMenuComponent({
 
 	const handleSubmitWord = (): void => {
 		unlockChallenge(wordInput, gameContext);
+		setWordInput("");
 	};
 
 	return (
