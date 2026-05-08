@@ -70,6 +70,7 @@ export function DeciChallengeMenu({
 	return (
 		<div>
 			<DeciText variant="sectionTitle">Niveau {levelBadge}</DeciText>
+			<DeciText>Déverrouillez les lettres pour trouver le mot de la semaine</DeciText>
 			<DeciText variant="muted">À ce niveau, chaque lettre nécessite {codesRequiredPerLetter} code(s)</DeciText>
 
 			<DeciLetterDisplay
