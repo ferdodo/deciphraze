@@ -23,7 +23,7 @@ export function DeciPlusMenu({
 	showDevelopmentPanelEntry,
 }: DeciPlusMenuProps): React.JSX.Element {
 	return (
-		<crumbs-panel>
+		<crumbs-panel style={{ height: "100%" }}>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<crumbs-button
 					title="Installation"

@@ -20,6 +20,7 @@ interface DeciChallengeMenuProps {
 	onShowCode: () => void;
 	displayedCode: string | null;
 	onUnlockLetter: () => void;
+	isTodayLetterUnlocked: boolean;
 	wordInput: string;
 	onWordInputChange: (value: string) => void;
 	onSubmitWord: () => void;
@@ -43,6 +44,7 @@ export function DeciChallengeMenu({
 	onShowCode,
 	displayedCode,
 	onUnlockLetter,
+	isTodayLetterUnlocked,
 	wordInput,
 	onWordInputChange,
 	onSubmitWord,
@@ -81,43 +83,53 @@ export function DeciChallengeMenu({
 				letter7Percentage={letter7Percentage}
 			/>
 
-			<div style={{display: "grid", placeContent: "center", padding: "2rem"}}>
-				{!displayedCode && isTodayGameCompleted && (
-					<crumbs-button
-						type="button"
-						onClick={onShowCode}
-						role="button"
-					>
-						Afficher Code du Jour
-					</crumbs-button>
-				)}
-				{displayedCode && (
-					<div style={{ marginTop: "1rem", padding: "1rem" }}>
-						<DeciText> Code du jour: </DeciText>
-						<code style={{ display: "block", margin: 0, fontFamily: "monospace", fontSize: "1.25rem", fontWeight: "bold", userSelect: "text", cursor: "text" }}>
-							{displayedCode}
-						</code>
-					</div>
-				)}
-				{!displayedCode && !isTodayGameCompleted && (
-					<DeciText variant="muted">Complétez la partie du jour à ce niveau pour afficher un code</DeciText>
-				)}
-			</div>
+			{!isTodayLetterUnlocked && (
+				<div style={{display: "grid", placeContent: "center", padding: "2rem"}}>
+					{!displayedCode && isTodayGameCompleted && (
+						<crumbs-button
+							type="button"
+							onClick={onShowCode}
+							role="button"
+						>
+							Afficher Code du Jour
+						</crumbs-button>
+					)}
+					{displayedCode && (
+						<div style={{ marginTop: "1rem", padding: "1rem" }}>
+							<DeciText> Code du jour: </DeciText>
+							<code style={{ display: "block", margin: 0, fontFamily: "monospace", fontSize: "1.25rem", fontWeight: "bold", userSelect: "text", cursor: "text" }}>
+								{displayedCode}
+							</code>
+						</div>
+					)}
+					{!displayedCode && !isTodayGameCompleted && (
+						<DeciText variant="muted">Complétez la partie du jour à ce niveau pour afficher un code</DeciText>
+					)}
+				</div>
+			)}
 
-			<div className={styles.inputGroup}>
-				<crumbs-input
-					value={codeInput}
-					oninput={(e: CrumbsInputChangeEvent) => {
-						onCodeInputChange(e.originalTarget.value)
-					}}
-					placeholder="Collez le code généré"
-				/>
-				<crumbs-button
-					onClick={onUnlockLetter}
-				>
-					Déverrouiller une lettre
-				</crumbs-button>
-			</div>
+			{!isTodayLetterUnlocked && (
+				<div className={styles.inputGroup}>
+					<crumbs-input
+						value={codeInput}
+						oninput={(e: CrumbsInputChangeEvent) => {
+							onCodeInputChange(e.originalTarget.value)
+						}}
+						placeholder="Collez le code généré"
+					/>
+					<crumbs-button
+						onClick={onUnlockLetter}
+					>
+						Déverrouiller une lettre
+					</crumbs-button>
+				</div>
+			)}
+
+			{isTodayLetterUnlocked && (
+				<div style={{ textAlign: "center", marginBottom: "1rem" }}>
+					<DeciText variant="muted">Lettre du jour déverrouillée !</DeciText>
+				</div>
+			)}
 			<div className={styles.inputGroup}>
 				<crumbs-input
 					value={wordInput}

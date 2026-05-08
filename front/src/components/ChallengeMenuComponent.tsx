@@ -6,6 +6,7 @@ import { useIsTodayGameCompleted } from "../hooks/useIsTodayGameCompleted";
 import { useChallengeContext } from "../hooks/useChallengeContext";
 import { getChallengeWordForLevelAndDay, displayChallengeCode } from "@deciphraze/core";
 import { getLetterUnlockPercentage } from "../utils/getLetterUnlockPercentage";
+import { getLetterIndexFromCodeDay } from "../utils/getLetterIndexFromCodeDay";
 import { unlockChallengeLetter } from "../usecases/unlockChallengeLetter";
 import { unlockChallenge } from "../usecases/unlockChallenge";
 import type React from "react";
@@ -59,6 +60,10 @@ export function ChallengeMenuComponent({
 		return getLetterUnlockPercentage(challenge.id, codes, realTodayDate, challenge.level, index, gameContext.randomService);
 	});
 
+	// Check if today's letter is already unlocked
+	const todayLetterIndex = getLetterIndexFromCodeDay(realTodayDate);
+	const isTodayLetterUnlocked = letterPercentages[todayLetterIndex] === 100;
+
 	const handleShowCode = (): void => {
 		displayChallengeCode(gameContext);	
 	};
@@ -92,6 +97,7 @@ export function ChallengeMenuComponent({
 					onShowCode={handleShowCode}
 					displayedCode={challengeContext.code}
 					onUnlockLetter={handleUnlockLetter}
+					isTodayLetterUnlocked={isTodayLetterUnlocked}
 					wordInput={wordInput}
 					onWordInputChange={setWordInput}
 					onSubmitWord={handleSubmitWord}
