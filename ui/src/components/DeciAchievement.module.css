@@ -1,9 +1,8 @@
 .achievement {
 	display: flex;
 	align-items: center;
-	gap: 0.75rem;
+	gap: 1.1rem;
 	padding: 0.75rem;
-	transition: all 0.2s ease;
 }
 
 .achievement[role="button"] {
@@ -66,11 +65,11 @@
 }
 
 .padlockIcon {
-    width: 1.5rem;
-    height: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
 }
 
 .trophyIcon {
-    width: 1.5rem;
-    height: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
 }

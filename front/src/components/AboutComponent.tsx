@@ -10,10 +10,7 @@ export function AboutComponent({ onBack }: AboutComponentProps): React.JSX.Eleme
 		<DeciPlusView
 			title="À propos"
 			content={
-				<div style={{ padding: "1rem" }}>
-
-
-
+				<div>
 					<div style={{ marginBottom: "2rem" }}>
 						<DeciText variant="sectionTitle">
 							Bugs & Support

@@ -27,6 +27,10 @@ declare module "react" {
 				React.HTMLAttributes<HTMLElement>,
 				HTMLElement
 			>;
+			"crumbs-input": React.DetailedHTMLProps<
+				React.InputHTMLAttributes<HTMLInputElement>,
+				HTMLInputElement
+			>;
 		}
 	}
 }

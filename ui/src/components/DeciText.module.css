@@ -41,9 +41,9 @@
 	font-size: calc(1.1rem * var(--deci-ui-text-size, 1));
 	font-weight: 500;
 	letter-spacing: 0.025rem;
-	margin-bottom: 0.3rem;
-	/*color: #666;*/
 	font-family: "Neuton", serif;
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .text_command {
