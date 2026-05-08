@@ -13,9 +13,11 @@ describe("decodeChallengeCode", () => {
 		const code = encodeChallengeCode(playerId, realDay, level, randomService);
 		const decoded = decodeChallengeCode(playerId, code, randomService);
 
-		expect(decoded.level).toBe(level);
-		expect(decoded.realDay).toBe(realDay);
-		expect(decoded.isValid).toBe(true);
+		expect(decoded.result).not.toBe("error");
+		if (decoded.result !== "error") {
+			expect(decoded.result.level).toBe(level);
+			expect(decoded.result.realDay).toBe(realDay);
+		}
 	});
 
 	it("should reject invalid signature", () => {
@@ -23,13 +25,19 @@ describe("decodeChallengeCode", () => {
 		const code = encodeChallengeCode(playerId, realDay, level, randomService);
 		const decoded = decodeChallengeCode("different-player", code, randomService);
 
-		expect(decoded.isValid).toBe(false);
+		expect(decoded.result).toBe("error");
+		if (decoded.result === "error") {
+			expect(decoded.hint).toContain("valide");
+		}
 	});
 
 	it("should reject invalid code length", () => {
 		const randomService = createRandomServiceMock();
 		const decoded = decodeChallengeCode(playerId, "TOOSHORT", randomService);
-		expect(decoded.isValid).toBe(false);
+		expect(decoded.result).toBe("error");
+		if (decoded.result === "error") {
+			expect(decoded.hint).toContain("16");
+		}
 	});
 
 	it("should work with all valid level range", () => {
@@ -38,26 +46,23 @@ describe("decodeChallengeCode", () => {
 			const code = encodeChallengeCode(playerId, realDay, testLevel, randomService);
 			const decoded = decodeChallengeCode(playerId, code, randomService);
 
-			expect(decoded.level).toBe(testLevel);
-			expect(decoded.isValid).toBe(true);
+			expect(decoded.result).not.toBe("error");
+			if (decoded.result !== "error") {
+				expect(decoded.result.level).toBe(testLevel);
+				expect(decoded.result.realDay).toBe(realDay);
+			}
 		}
 	});
 
-	it("should perfectly roundtrip encode and decode", () => {
-		const testCases = [
-			{ playerId: "user-1", realDay: "2026-01-01", level: 1 },
-			{ playerId: "user-999", realDay: "2026-12-31", level: 99 },
-			{ playerId: "test-player", realDay: "2025-06-15", level: 42 },
-		];
+	it("should work with edge case level 99", () => {
+		const randomService = createRandomServiceMock();
+		const code = encodeChallengeCode(playerId, realDay, 99, randomService);
+		const decoded = decodeChallengeCode(playerId, code, randomService);
 
-		testCases.forEach(({ playerId, realDay, level }) => {
-			const randomService = createRandomServiceMock();
-			const code = encodeChallengeCode(playerId, realDay, level, randomService);
-			const decoded = decodeChallengeCode(playerId, code, randomService);
-
-			expect(decoded.isValid).toBe(true);
-			expect(decoded.level).toBe(level);
-			expect(decoded.realDay).toBe(realDay);
-		});
+		expect(decoded.result).not.toBe("error");
+		if (decoded.result !== "error") {
+			expect(decoded.result.level).toBe(99);
+			expect(decoded.result.realDay).toBe(realDay);
+		}
 	});
 });

@@ -1,5 +1,4 @@
-export type DecodedChallengeCode = {
-	level: number;
-	realDay: string;
-	isValid: boolean;
-};
+export type DecodedChallengeCode = 
+	| { result: { level: number; realDay: string } }
+	| { result: "error"; hint: string };
+

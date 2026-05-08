@@ -1,17 +1,18 @@
+import type { UnobfuscateResult } from "./UnobfuscateResult";
 import type { RandomService } from "../services/RandomService";
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 /**
  * Unobfuscate a challenge code by reversing the deterministic permutation.
- * Returns the original 14-character code, or null if the code is invalid.
+ * Returns the original 14-character code, or an error with hint if invalid.
  */
 export function unobfuscateChallengeCode(
 	obfuscatedCode: string,
 	randomService: RandomService
-): string | null {
+): UnobfuscateResult {
 	if (obfuscatedCode.length !== 16) {
-		return null;
+		return { result: "error", hint: "Le code doit contenir exactement 16 caractères" };
 	}
 
 	try {
@@ -51,11 +52,11 @@ export function unobfuscateChallengeCode(
 		}
 
 		if (checksum !== expectedChecksum) {
-			return null;
+			return { result: "error", hint: "Ce code n'est pas valide ou a été altéré" };
 		}
 
-		return original;
+		return { result: { code: original } };
 	} catch {
-		return null;
+		return { result: "error", hint: "Le code contient des caractères invalides ou un format incorrect" };
 	}
 }

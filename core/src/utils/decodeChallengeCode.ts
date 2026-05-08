@@ -15,10 +15,12 @@ export function decodeChallengeCode(
 	randomService: RandomService
 ): DecodedChallengeCode {
 	// First unobfuscate the code
-	const unobfuscated = unobfuscateChallengeCode(code, randomService);
-	if (!unobfuscated) {
-		return { level: 0, realDay: "", isValid: false };
+	const unobfuscateResult = unobfuscateChallengeCode(code, randomService);
+	if (unobfuscateResult.result === "error") {
+		return { result: "error", hint: unobfuscateResult.hint };
 	}
+
+	const unobfuscated = unobfuscateResult.result.code;
 
 	try {
 		// Extract parts from unobfuscated code
@@ -29,12 +31,12 @@ export function decodeChallengeCode(
 		// Parse level
 		const level = parseInt(levelStr, 10);
 		if (level < 1 || level > 99) {
-			return { level: 0, realDay: "", isValid: false };
+			return { result: "error", hint: "Le niveau n'est pas valide" };
 		}
 
 		// Parse day (reconstruct YYYY-MM-DD format)
 		if (dayStr.length !== 8) {
-			return { level: 0, realDay: "", isValid: false };
+			return { result: "error", hint: "La date n'est pas valide" };
 		}
 		const realDay = `${dayStr.substring(0, 4)}-${dayStr.substring(4, 6)}-${dayStr.substring(6, 8)}`;
 
@@ -48,10 +50,12 @@ export function decodeChallengeCode(
 			expectedSignature += CHARSET[index];
 		}
 
-		const isValid = signature === expectedSignature;
+		if (signature !== expectedSignature) {
+			return { result: "error", hint: "Ce code n'est pas valide ou a été altéré" };
+		}
 
-		return { level, realDay, isValid };
+		return { result: { level, realDay } };
 	} catch {
-		return { level: 0, realDay: "", isValid: false };
+		return { result: "error", hint: "Erreur lors du décodage du code" };
 	}
 }

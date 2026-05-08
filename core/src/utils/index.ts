@@ -3,6 +3,7 @@ export * from "./createRandomServiceMock";
 export * from "./obfuscateChallengeCode";
 export * from "./encodeChallengeCode";
 export * from "./unobfuscateChallengeCode";
+export * from "./UnobfuscateResult";
 export * from "./decodeChallengeCode";
 export * from "./getChallengeWordForLevelAndDay";
 export * from "./normalizeWord";
