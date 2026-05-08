@@ -1,4 +1,5 @@
 import type React from "react";
+import type { CrumbsInputChangeEvent } from "../types";
 import padlock from '../assets/padlock.svg';
 import { DeciLetterDisplay } from "./DeciLetterDisplay";
 import styles from "./DeciChallengeMenu.module.css";
@@ -67,6 +68,7 @@ export function DeciChallengeMenu({
 	return (
 		<div>
 			<DeciText variant="sectionTitle">Niveau {levelBadge}</DeciText>
+			<DeciText variant="muted">À ce niveau, chaque lettre nécessite {codesRequiredPerLetter} code(s)</DeciText>
 
 			<DeciLetterDisplay
 				word={word}
@@ -79,54 +81,53 @@ export function DeciChallengeMenu({
 				letter7Percentage={letter7Percentage}
 			/>
 
-			{!displayedCode && isTodayGameCompleted && (
-				<crumbs-button
-					type="button"
-					onClick={onShowCode}
-					role="button"
-				>
-					Afficher Code du Jour
-				</crumbs-button>
-			)}
-			{displayedCode && (
-				<div style={{ marginTop: "1rem", padding: "1rem" }}>
-					<DeciText> Code du jour: </DeciText>
-					<code style={{ display: "block", margin: 0, fontFamily: "monospace", fontSize: "1.25rem", fontWeight: "bold", userSelect: "text", cursor: "text" }}>
-						{displayedCode}
-					</code>
-				</div>
-			)}
-			{!displayedCode && !isTodayGameCompleted && (
-				<DeciText variant="muted">Complétez la partie du jour à ce niveau pour afficher un code</DeciText>
-			)}
+			<div style={{display: "grid", placeContent: "center", padding: "2rem"}}>
+				{!displayedCode && isTodayGameCompleted && (
+					<crumbs-button
+						type="button"
+						onClick={onShowCode}
+						role="button"
+					>
+						Afficher Code du Jour
+					</crumbs-button>
+				)}
+				{displayedCode && (
+					<div style={{ marginTop: "1rem", padding: "1rem" }}>
+						<DeciText> Code du jour: </DeciText>
+						<code style={{ display: "block", margin: 0, fontFamily: "monospace", fontSize: "1.25rem", fontWeight: "bold", userSelect: "text", cursor: "text" }}>
+							{displayedCode}
+						</code>
+					</div>
+				)}
+				{!displayedCode && !isTodayGameCompleted && (
+					<DeciText variant="muted">Complétez la partie du jour à ce niveau pour afficher un code</DeciText>
+				)}
+			</div>
 
-			<DeciText variant="sectionTitle">Déverrouiller une lettre:</DeciText>
 			<div className={styles.inputGroup}>
 				<crumbs-input
 					value={codeInput}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						onCodeInputChange(e.target.value)
-					}
+					oninput={(e: CrumbsInputChangeEvent) => {
+						onCodeInputChange(e.originalTarget.value)
+					}}
 					placeholder="Collez le code généré"
 				/>
 				<crumbs-button
 					onClick={onUnlockLetter}
 				>
-					Valider
+					Déverrouiller une lettre
 				</crumbs-button>
 			</div>
-			<DeciText variant="muted">À ce niveau, chaque lettre nécessite {codesRequiredPerLetter} code(s)</DeciText>
-
-			<DeciText variant="sectionTitle">Trouvez le mot de 7 lettres:</DeciText>
 			<div className={styles.inputGroup}>
 				<crumbs-input
 					value={wordInput}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						onWordInputChange(e.target.value.toUpperCase())
-					}
+					oninput={(e: CrumbsInputChangeEvent) => {
+						onWordInputChange(e.originalTarget.value.toUpperCase())
+					}}
+					placeholder="Mot mystère de sept lettres"
 				/>
 				<crumbs-button onClick={onSubmitWord} >
-					Soumettre
+					Soumettre une réponse
 				</crumbs-button>
 			</div>
 		</div>

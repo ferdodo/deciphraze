@@ -1,4 +1,5 @@
 import "react";
+import type { CrumbsInputChangeEvent } from "./CrumbsInputChangeEvent";
 
 declare module "react" {
 	namespace JSX {
@@ -28,7 +29,9 @@ declare module "react" {
 				HTMLElement
 			>;
 			"crumbs-input": React.DetailedHTMLProps<
-				React.InputHTMLAttributes<HTMLInputElement>,
+				React.InputHTMLAttributes<HTMLInputElement> & {
+					oninput?: (e: CrumbsInputChangeEvent) => void;
+				},
 				HTMLInputElement
 			>;
 		}
