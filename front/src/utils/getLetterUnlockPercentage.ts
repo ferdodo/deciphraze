@@ -1,12 +1,13 @@
 import { decodeChallengeCode } from "@deciphraze/core";
 import { getLetterIndexFromCodeDay } from "./getLetterIndexFromCodeDay";
 import { areDayInSameWeek } from "./areDayInSameWeek";
+import { getCodesRequiredPerLetter } from "./getCodesRequiredPerLetter";
 import type { ChallengeCodes, RandomService } from "@deciphraze/core";
 
 /**
  * Calculates the unlock percentage for a specific letter on a given day.
  *
- * At level N, you need N codes to unlock one letter.
+ * Every 3 levels, one additional code is required (levels 1-3: 1 code, 4-6: 2 codes, etc).
  * Codes from level N or higher count towards the unlock.
  * The letter index is determined by the day of the week of the code.
  * Only codes from the current week are counted.
@@ -46,7 +47,7 @@ export const getLetterUnlockPercentage = (
 		}
 	}
 
-	const codesRequiredPerLetter = level;
+	const codesRequiredPerLetter = getCodesRequiredPerLetter(level);
 	const percentage = (codesUsedForThisLetter / codesRequiredPerLetter) * 100;
 
 	return Math.min(percentage, 100);

@@ -24,11 +24,11 @@ describe("getLetterUnlockPercentage", () => {
 		expect(percentage).toBe(100);
 	});
 
-	it("should return 50% when 1 valid code used at level 2", () => {
+	it("should return 50% when 1 valid code used at level 4", () => {
 		const randomService = createRandomServiceMock();
-		const code = encodeChallengeCode(playerId, mondayDate, 2, randomService);
+		const code = encodeChallengeCode(playerId, mondayDate, 4, randomService);
 		const codes: ChallengeCodes = { usedCodes: new Set([code]) };
-		const percentage = getLetterUnlockPercentage(playerId, codes, mondayDate, 2, 0, randomService);
+		const percentage = getLetterUnlockPercentage(playerId, codes, mondayDate, 4, 0, randomService);
 		expect(percentage).toBe(50);
 	});
 

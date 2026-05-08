@@ -7,6 +7,7 @@ import { useChallengeContext } from "../hooks/useChallengeContext";
 import { getChallengeWordForLevelAndDay, displayChallengeCode } from "@deciphraze/core";
 import { getLetterUnlockPercentage } from "../utils/getLetterUnlockPercentage";
 import { getLetterIndexFromCodeDay } from "../utils/getLetterIndexFromCodeDay";
+import { getCodesRequiredPerLetter } from "../utils/getCodesRequiredPerLetter";
 import { unlockChallengeLetter } from "../usecases/unlockChallengeLetter";
 import { unlockChallenge } from "../usecases/unlockChallenge";
 import type React from "react";
@@ -101,7 +102,7 @@ export function ChallengeMenuComponent({
 					wordInput={wordInput}
 					onWordInputChange={setWordInput}
 					onSubmitWord={handleSubmitWord}
-					codesRequiredPerLetter={challenge.level}
+					codesRequiredPerLetter={getCodesRequiredPerLetter(challenge.level)}
 					word={word}
 					isTodayGameCompleted={isTodayGameCompleted}
 				/>
