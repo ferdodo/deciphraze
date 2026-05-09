@@ -137,7 +137,7 @@ export function DeciChallengeMenu({
 					oninput={(e: CrumbsInputChangeEvent) => {
 						onWordInputChange(e.originalTarget.value.toUpperCase())
 					}}
-					placeholder="Mot mystère de sept lettres"
+					placeholder="Mot de la semaine"
 				/>
 				<crumbs-button onClick={onSubmitWord} >
 					Soumettre une réponse

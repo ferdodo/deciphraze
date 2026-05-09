@@ -82,62 +82,66 @@ export function DeciSettingsPanel({ onToggleFullscreen, onTogglePullToRefresh, i
 				<DeciText variant="sectionTitle">
 					Comportement
 				</DeciText>
-				<DeciText variant="muted">
-					Permet de rafraîchir la page en tirant vers le bas depuis le haut de l'écran, uniquement sur mobile.
-				</DeciText>
-				<crumbs-button
-					title={isPullToRefreshEnabled ? "Désactiver le pull-to-refresh" : "Activer le pull-to-refresh"}
-					onClick={onTogglePullToRefresh}
-					role="button"
-				>
-					<DeciText variant="command">
-						{isPullToRefreshEnabled ? "Pull-to-refresh activé" : "Pull-to-refresh désactivé"}
-					</DeciText>
-				</crumbs-button>
+				<div style={{ marginTop: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
+					<div style={{ flex: 1, width: "min-content" }}>
+						<DeciText variant="command">
+							Pull-to-refresh
+						</DeciText>
+						<DeciText variant="muted">
+							Permet de rafraîchir la page en tirant vers le bas depuis le haut de l'écran, uniquement sur mobile.
+						</DeciText>
+					</div>
+					<crumbs-switch
+						checked={isPullToRefreshEnabled}
+						onChange={onTogglePullToRefresh}
+					/>
+				</div>
 			</div>
 			<div style={{ marginTop: "2rem" }}>
 				<DeciText variant="sectionTitle">
 					Jeu
 				</DeciText>
-				<DeciText variant="muted">
-					Cache les instructions du jeu.
-				</DeciText>
-				<crumbs-button
-					title={isHideInstructionsEnabled ? "Afficher les instructions" : "Cacher les instructions"}
-					onClick={onToggleHideInstructions}
-					role="button"
-				>
-					<DeciText variant="command">
-						{isHideInstructionsEnabled ? "Instructions cachées" : "Instructions visibles"}
-					</DeciText>
-				</crumbs-button>
-				<div style={{ marginTop: "1.5rem" }}>
-					<DeciText variant="muted">
-						Affiche l'historique des associations de la partie actuelle sous les instructions.
-					</DeciText>
-					<crumbs-button
-						title={isShowAssociationHistoryEnabled ? "Cacher l'historique des associations" : "Afficher l'historique des associations"}
-						onClick={onToggleShowAssociationHistory}
-						role="button"
-					>
+				<div style={{ marginTop: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
+					<div style={{ flex: 1 }}>
 						<DeciText variant="command">
-							{isShowAssociationHistoryEnabled ? "Historique visible" : "Historique caché"}
+							Cacher les instructions
 						</DeciText>
-					</crumbs-button>
+						<DeciText variant="muted">
+							Libérez de l'espace sur l'écran si vous les connaissez déjà.
+						</DeciText>
+					</div>
+					<crumbs-switch
+						checked={isHideInstructionsEnabled}
+						onChange={onToggleHideInstructions}
+					/>
 				</div>
-				<div style={{ marginTop: "1.5rem" }}>
-					<DeciText variant="muted">
-						Affiche la date de la partie actuellement jouée.
-					</DeciText>
-					<crumbs-button
-						title={isShowGameDayDateEnabled ? "Cacher la date de la partie" : "Afficher la date de la partie"}
-						onClick={onToggleShowGameDayDate}
-						role="button"
-					>
+				<div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
+					<div style={{ flex: 1 }}>
 						<DeciText variant="command">
-							{isShowGameDayDateEnabled ? "Date de la partie visible" : "Date de la partie cachée"}
+							Afficher l'historique des associations
 						</DeciText>
-					</crumbs-button>
+						<DeciText variant="muted">
+							Pour savoir dans quel ordre vous avez associé les lettres de la partie actuelle.
+						</DeciText>
+					</div>
+					<crumbs-switch
+						checked={isShowAssociationHistoryEnabled}
+						onChange={onToggleShowAssociationHistory}
+					/>
+				</div>
+				<div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
+					<div style={{ flex: 1 }}>
+						<DeciText variant="command">
+							Afficher la date de la partie
+						</DeciText>
+						<DeciText variant="muted">
+							Affiche la date de la partie actuellement jouée.
+						</DeciText>
+					</div>
+					<crumbs-switch
+						checked={isShowGameDayDateEnabled}
+						onChange={onToggleShowGameDayDate}
+					/>
 				</div>
 			</div>
 			<div style={{ marginTop: "2rem" }}>

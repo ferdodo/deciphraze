@@ -7,6 +7,7 @@ export function createBrowserService(): {
 	confirm(message: string): boolean;
 	clearStorage(): void;
 	refreshPage(): void;
+	clipboardCopy(text: string): boolean;
 } {
 	
 	function getDevice(): DeviceType {
@@ -110,6 +111,22 @@ export function createBrowserService(): {
 			}
 
 			window.location.reload();
+		},
+
+		clipboardCopy(text: string): boolean {
+			if (typeof document === "undefined") {
+				return false;
+			}
+
+			const textarea = document.createElement("textarea");
+			textarea.value = text;
+			textarea.style.position = "fixed";
+			textarea.style.opacity = "0";
+			document.body.appendChild(textarea);
+			textarea.select();
+			const success = document.execCommand("copy");
+			document.body.removeChild(textarea);
+			return success;
 		},
 	};
 }

@@ -1,6 +1,7 @@
+import type { BrowserService } from "@deciphraze/core";
 import { createShareMessage } from "./createShareMessage";
 
-export const share = (matchCount: number): void => {
+export const share = (matchCount: number, browserService: BrowserService): void => {
 	const text = createShareMessage(matchCount);
-	navigator.clipboard.writeText(text);
+	browserService.clipboardCopy(text);
 };

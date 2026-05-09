@@ -7,7 +7,7 @@ describe("createShareMessage", () => {
 
 		expect(message).toContain("Deciphraze");
 		expect(message).toContain("5 associations de lettres");
-		expect(message).toContain("https://ferdodo.github.io/deciphraze");
+		expect(message).toContain("https://deciphraze.fr");
 	});
 
 	it("should include date in correct format", () => {

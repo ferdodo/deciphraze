@@ -20,5 +20,8 @@ export function createBrowserServiceMock(deviceType: DeviceType = "unknown"): Br
 		refreshPage(): void {
 			// Mock implementation
 		},
+		clipboardCopy(): boolean {
+			return true;
+		},
 	};
 }

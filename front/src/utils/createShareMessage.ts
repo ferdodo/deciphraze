@@ -6,6 +6,6 @@ export const createShareMessage = (matchCount: number): string => {
 	const formattedDate = `${year}/${month}/${day}`;
 	let text = `Deciphraze ${formattedDate} - Puzzle réussi avec ${matchCount} associations de lettres.`;
 
-	text += `\n\nhttps://ferdodo.github.io/deciphraze`;
+	text += `\n\nhttps://deciphraze.fr`;
 	return text;
 };

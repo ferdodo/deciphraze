@@ -34,6 +34,14 @@ declare module "react" {
 				},
 				HTMLInputElement
 			>;
+			"crumbs-switch": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement> & {
+					checked?: boolean;
+					disabled?: boolean;
+					onChange?: (e: React.ChangeEvent<HTMLElement>) => void;
+				},
+				HTMLElement
+			>;
 		}
 	}
 }

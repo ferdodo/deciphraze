@@ -7,4 +7,5 @@ export interface BrowserService {
 	confirm(message: string): boolean;
 	clearStorage(): void;
 	refreshPage(): void;
+	clipboardCopy(text: string): boolean;
 }

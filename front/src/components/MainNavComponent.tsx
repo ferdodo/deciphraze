@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DeciMainNav } from "@deciphraze/ui";
+import { getBrowserService } from "@deciphraze/browser";
 import { ParagraphComponent } from "./ParagraphComponent";
 import { AlphabetComponent } from "./AlphabetComponent";
 import { SymbolsComponent } from "./SymbolsComponent";
@@ -40,7 +41,8 @@ export function MainNavComponent(): React.JSX.Element {
 	const context = useGameContext();
 
 	const handleShare = (): void => {
-		share(matchCount);
+		const browserService = getBrowserService();
+		share(matchCount, browserService);
 	};
 
 	const handlePlayTodayGame = (): void => {
