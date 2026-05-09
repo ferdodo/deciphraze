@@ -66,7 +66,8 @@ export function ChallengeMenuComponent({
 	const isTodayLetterUnlocked = letterPercentages[todayLetterIndex] === 100;
 
 	const handleShowCode = (): void => {
-		displayChallengeCode(gameContext);	
+		const code = displayChallengeCode(gameContext);
+		setCodeInput(code || codeInput);
 	};
 
 	const handleUnlockLetter = (): void => {
@@ -93,7 +94,7 @@ export function ChallengeMenuComponent({
 					letter6Percentage={letterPercentages[5]}
 					letter7Percentage={letterPercentages[6]}
 					isLocked={!isPlatinumEarned}
-					codeInput={codeInput || challengeContext.code || ""}
+					codeInput={codeInput}
 					onCodeInputChange={setCodeInput}
 					onShowCode={handleShowCode}
 					displayedCode={challengeContext.code}
