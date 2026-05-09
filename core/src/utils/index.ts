@@ -8,3 +8,4 @@ export * from "./decodeChallengeCode";
 export * from "./getChallengeWordForLevelAndDay";
 export * from "./normalizeWord";
 export * from "./DeviceType";
+export * from "./getISOWeek";

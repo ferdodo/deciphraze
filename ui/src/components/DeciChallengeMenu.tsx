@@ -104,7 +104,7 @@ export function DeciChallengeMenu({
 						</div>
 					)}
 					{!displayedCode && !isTodayGameCompleted && (
-						<DeciText variant="muted">Complétez la partie du jour à ce niveau pour afficher un code</DeciText>
+						<DeciText variant="muted">Complétez la partie du jour pour afficher un code</DeciText>
 					)}
 				</div>
 			)}
