@@ -19,6 +19,6 @@
 		"vite": "^7.1.9"
 	},
 	"dependencies": {
-		"crumbs-design-system": "^1.6.0"
+		"crumbs-design-system": "^1.7.0"
 	}
 }
