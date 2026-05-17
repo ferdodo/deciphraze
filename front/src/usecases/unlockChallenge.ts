@@ -27,7 +27,7 @@ export function unlockChallenge(
 
 	// Check if word is correct
 	if (normalizedGuess !== normalizedExpected) {
-		gameContext.browserService.confirm("Ce n'est pas le bon mot");
+		gameContext.browserService.confirm(`Ce n'est pas le bon mot (${normalizedGuess}!=${normalizedExpected})`);
 		return;
 	}
 

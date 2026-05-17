@@ -45,8 +45,6 @@ services:
           path: ./browser
         - action: rebuild
           path: ./persistance
-        - action: rebuild
-          path: ./design-system
     ports:
       - "1111:1111"
 
