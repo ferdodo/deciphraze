@@ -1,9 +1,9 @@
 import type React from "react";
-import type { CrumbsInputChangeEvent } from "../types";
 import padlock from '../assets/padlock.svg';
 import { DeciLetterDisplay } from "./DeciLetterDisplay";
 import styles from "./DeciChallengeMenu.module.css";
 import { DeciText } from "./DeciText";
+import { DeciVirtualKeyboard } from "./DeciVirtualKeyboard";
 
 interface DeciChallengeMenuProps {
 	levelBadge: number;
@@ -15,8 +15,6 @@ interface DeciChallengeMenuProps {
 	letter6Percentage: number;
 	letter7Percentage: number;
 	isLocked: boolean;
-	codeInput: string;
-	onCodeInputChange: (value: string) => void;
 	onShowCode: () => void;
 	displayedCode: string | null;
 	onUnlockLetter: () => void;
@@ -39,8 +37,6 @@ export function DeciChallengeMenu({
 	letter6Percentage,
 	letter7Percentage,
 	isLocked,
-	codeInput,
-	onCodeInputChange,
 	onShowCode,
 	displayedCode,
 	onUnlockLetter,
@@ -109,40 +105,17 @@ export function DeciChallengeMenu({
 				</div>
 			)}
 
-			{!isTodayLetterUnlocked && (
-				<div className={styles.inputGroup}>
-					<crumbs-input
-						value={codeInput}
-						oninput={(e: CrumbsInputChangeEvent) => {
-							onCodeInputChange(e.originalTarget.value)
-						}}
-						placeholder="Collez le code généré"
-					/>
-					<crumbs-button
-						onClick={onUnlockLetter}
-					>
-						Déverrouiller une lettre
-					</crumbs-button>
-				</div>
-			)}
-
 			{isTodayLetterUnlocked && (
 				<div style={{ textAlign: "center", marginBottom: "1rem" }}>
 					<DeciText variant="muted">Lettre du jour déverrouillée !</DeciText>
 				</div>
 			)}
-			<div className={styles.inputGroup}>
-				<crumbs-input
-					value={wordInput}
-					oninput={(e: CrumbsInputChangeEvent) => {
-						onWordInputChange(e.originalTarget.value.toUpperCase())
-					}}
-					placeholder="Mot de la semaine"
-				/>
-				<crumbs-button onClick={onSubmitWord} >
-					Soumettre une réponse
-				</crumbs-button>
-			</div>
+			<DeciVirtualKeyboard
+				value={wordInput}
+				onKeyboardInput={onWordInputChange}
+				onKeyboardSubmit={onSubmitWord}
+				onKeyboardCodeSubmit={onUnlockLetter}
+			/>
 		</div>
 	);
 }

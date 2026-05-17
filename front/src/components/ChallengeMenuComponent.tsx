@@ -27,7 +27,6 @@ export function ChallengeMenuComponent({
 	const isTodayGameCompleted = useIsTodayGameCompleted();
 	const challengeContext = useChallengeContext();
 
-	const [codeInput, setCodeInput] = useState("");
 	const [wordInput, setWordInput] = useState("");
 	const [challenge, setChallenge] = useState(
 		challengeRepository.getChallenge(),
@@ -67,12 +66,12 @@ export function ChallengeMenuComponent({
 
 	const handleShowCode = (): void => {
 		const code = displayChallengeCode(gameContext);
-		setCodeInput(code || codeInput);
+		setWordInput(code || wordInput);
 	};
 
 	const handleUnlockLetter = (): void => {
-		unlockChallengeLetter(codeInput, gameContext);
-		setCodeInput("");
+		unlockChallengeLetter(wordInput, gameContext);
+		setWordInput("");
 	};
 
 	const handleSubmitWord = (): void => {
@@ -94,8 +93,6 @@ export function ChallengeMenuComponent({
 					letter6Percentage={letterPercentages[5]}
 					letter7Percentage={letterPercentages[6]}
 					isLocked={!isPlatinumEarned}
-					codeInput={codeInput}
-					onCodeInputChange={setCodeInput}
 					onShowCode={handleShowCode}
 					displayedCode={challengeContext.code}
 					onUnlockLetter={handleUnlockLetter}

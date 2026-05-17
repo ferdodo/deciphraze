@@ -18,3 +18,4 @@ export * from "./DeciText";
 export * from "./DeciChallengeMenu";
 export * from "./DeciLetterDisplay";
 export * from "./DeciLetterItem";
+export * from "./DeciVirtualKeyboard";
