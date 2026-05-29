@@ -11,14 +11,15 @@ export function unobfuscateChallengeCode(
 	obfuscatedCode: string,
 	randomService: RandomService
 ): UnobfuscateResult {
-	if (obfuscatedCode.length !== 16) {
+	const normalizedCode = obfuscatedCode.toUpperCase();
+	if (normalizedCode.length !== 16) {
 		return { result: "error", hint: "Le code doit contenir exactement 16 caractères" };
 	}
 
 	try {
 		// Extract the original code and checksum
-		const shuffled = obfuscatedCode.substring(0, 14);
-		const checksum = obfuscatedCode.substring(14, 16);
+		const shuffled = normalizedCode.substring(0, 14);
+		const checksum = normalizedCode.substring(14, 16);
 
 		// Recreate the same permutation indices
 		const randomInt = randomService.createIntPRNG("challenge-obfuscate");
