@@ -18,6 +18,7 @@
 .achievementsList {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min-content, 25rem));
+	grid-auto-rows: 1fr;
 	justify-content: center;
 	gap: 1rem;
 	align-items: start;
