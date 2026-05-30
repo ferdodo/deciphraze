@@ -6,14 +6,12 @@ interface DeciVirtualKeyboardProps {
 	value: string;
 	onKeyboardInput: (char: string) => void;
 	onKeyboardSubmit: () => void;
-	onKeyboardCodeSubmit: () => void;
 }
 
 export function DeciVirtualKeyboard({
 	value,
 	onKeyboardInput,
-	onKeyboardSubmit,
-	onKeyboardCodeSubmit
+	onKeyboardSubmit
 }: DeciVirtualKeyboardProps): React.JSX.Element {
 	const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
 
@@ -51,17 +49,10 @@ export function DeciVirtualKeyboard({
 					</DeciText>
 				</crumbs-button>
 				<crumbs-button
-					onClick={() => onKeyboardCodeSubmit()}
-					type="button">
-					<DeciText variant="command">
-						Entrer un code
-					</DeciText>
-				</crumbs-button>
-				<crumbs-button
 					onClick={() => onKeyboardSubmit()}
 					type="button">
 					<DeciText variant="command">
-						Soumetre une réponse
+						Soumettre
 					</DeciText>
 				</crumbs-button>
 			</div>

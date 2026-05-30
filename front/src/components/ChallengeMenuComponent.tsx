@@ -8,8 +8,7 @@ import { getChallengeWordForLevelAndDay, displayChallengeCode } from "@deciphraz
 import { getLetterUnlockPercentage } from "../utils/getLetterUnlockPercentage";
 import { getLetterIndexFromCodeDay } from "../utils/getLetterIndexFromCodeDay";
 import { getCodesRequiredPerLetter } from "../utils/getCodesRequiredPerLetter";
-import { unlockChallengeLetter } from "../usecases/unlockChallengeLetter";
-import { unlockChallenge } from "../usecases/unlockChallenge";
+import { inputChallenge } from "../usecases/inputChallenge";
 import type React from "react";
 
 interface ChallengeMenuComponentProps {
@@ -69,13 +68,8 @@ export function ChallengeMenuComponent({
 		setWordInput(code || wordInput);
 	};
 
-	const handleUnlockLetter = (): void => {
-		unlockChallengeLetter(wordInput, gameContext);
-		setWordInput("");
-	};
-
-	const handleSubmitWord = (): void => {
-		unlockChallenge(wordInput, gameContext);
+	const handleInputChallenge = (): void => {
+		inputChallenge(wordInput, gameContext);
 		setWordInput("");
 	};
 
@@ -95,11 +89,10 @@ export function ChallengeMenuComponent({
 					isLocked={!isPlatinumEarned}
 					onShowCode={handleShowCode}
 					displayedCode={challengeContext.code}
-					onUnlockLetter={handleUnlockLetter}
 					isTodayLetterUnlocked={isTodayLetterUnlocked}
 					wordInput={wordInput}
 					onWordInputChange={setWordInput}
-					onSubmitWord={handleSubmitWord}
+					onSubmitWord={handleInputChallenge}
 					codesRequiredPerLetter={getCodesRequiredPerLetter(challenge.level)}
 					word={word}
 					isTodayGameCompleted={isTodayGameCompleted}

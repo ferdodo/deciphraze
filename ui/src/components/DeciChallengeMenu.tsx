@@ -17,7 +17,6 @@ interface DeciChallengeMenuProps {
 	isLocked: boolean;
 	onShowCode: () => void;
 	displayedCode: string | null;
-	onUnlockLetter: () => void;
 	isTodayLetterUnlocked: boolean;
 	wordInput: string;
 	onWordInputChange: (value: string) => void;
@@ -39,7 +38,6 @@ export function DeciChallengeMenu({
 	isLocked,
 	onShowCode,
 	displayedCode,
-	onUnlockLetter,
 	isTodayLetterUnlocked,
 	wordInput,
 	onWordInputChange,
@@ -114,7 +112,6 @@ export function DeciChallengeMenu({
 				value={wordInput}
 				onKeyboardInput={onWordInputChange}
 				onKeyboardSubmit={onSubmitWord}
-				onKeyboardCodeSubmit={onUnlockLetter}
 			/>
 		</div>
 	);
