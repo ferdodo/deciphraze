@@ -36,7 +36,7 @@ services:
           target: /deciphraze/front/src
         - action: sync
           path: ./front/index.html
-          target: /deciphraze/front
+          target: /deciphraze/front/index.html
         - action: rebuild
           path: ./front/package.json
         - action: rebuild
