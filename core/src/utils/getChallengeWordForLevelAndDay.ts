@@ -9,6 +9,5 @@ export function getChallengeWordForLevelAndDay(level: number, realDay: string, r
 	const words = getSevenLetterWords();
 	const randomInt = randomService.createIntPRNG(seed);
 	const index = randomInt(0, words.length - 1);
-	console.log("getChallengeWordForLevelAndDay", words[index])
 	return words[index];
 }
