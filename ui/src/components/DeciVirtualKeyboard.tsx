@@ -39,15 +39,17 @@ export function DeciVirtualKeyboard({
 						</DeciText>
 					</button>
 				))}
+				<button
+					className={styles.key}
+					onClick={onErase}
+					type="button"
+				>
+					<DeciText variant="command">
+						⌫
+					</DeciText>
+				</button>
 			</div>
 			<div className={styles.controls}>
-				<crumbs-button
-					onClick={onErase}
-					type="button">
-					<DeciText variant="command">
-						Effacer
-					</DeciText>
-				</crumbs-button>
 				<crumbs-button
 					onClick={() => onKeyboardSubmit()}
 					type="button">
