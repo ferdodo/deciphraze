@@ -23,10 +23,10 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install
-          npm run build
+          npm install --prefix core && npm install --prefix persistance && npm install --prefix browser && npm install --prefix ui && npm install --prefix front
+          npm run --prefix browser build  && npm run --prefix ui build && npm run --prefix front build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: public
+          folder: front/dist
