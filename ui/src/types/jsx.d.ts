@@ -1,0 +1,48 @@
+import "react";
+import type { CrumbsInputChangeEvent } from "./CrumbsInputChangeEvent";
+
+declare module "react" {
+	namespace JSX {
+		interface IntrinsicElements {
+			"crumbs-panel": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			>;
+			"crumbs-h1": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLHeadingElement>,
+				HTMLHeadingElement
+			>;
+			"crumbs-p": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLParagraphElement>,
+				HTMLParagraphElement
+			>;
+			"crumbs-button": React.DetailedHTMLProps<
+				React.ButtonHTMLAttributes<HTMLButtonElement>,
+				HTMLButtonElement
+			>;
+			"crumbs-nav": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			>;
+			"crumbs-new-content-indicator": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			>;
+			"crumbs-input": React.DetailedHTMLProps<
+				React.InputHTMLAttributes<HTMLInputElement> & {
+					oninput?: (e: CrumbsInputChangeEvent) => void;
+				},
+				HTMLInputElement
+			>;
+			"crumbs-switch": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement> & {
+					checked?: boolean;
+					disabled?: boolean;
+					onChange?: (e: React.ChangeEvent<HTMLElement>) => void;
+				},
+				HTMLElement
+			>;
+		}
+	}
+}
+

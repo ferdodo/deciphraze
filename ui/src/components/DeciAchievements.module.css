@@ -1,0 +1,31 @@
+.achievementsContainer {
+	margin-top: 2rem;
+	padding: 1rem;
+	border-radius: 8px;
+	width: calc(100vw - 7.5rem);
+	max-width: max(54rem, 80vw);
+	min-width: min-content;
+}
+
+.achievementsCounter {
+	text-align: center;
+	font-size: 1rem;
+	color: #b8860b;
+	margin-top: 1rem;
+	font-weight: bold;
+}
+
+.achievementsList {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min-content, 25rem));
+	grid-auto-rows: 1fr;
+	justify-content: center;
+	gap: 1rem;
+	align-items: start;
+	min-width: 60vw;
+}
+
+.markAllViewedContainer {
+	margin-top: 1.5rem;
+	text-align: center;
+}

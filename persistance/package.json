@@ -1,0 +1,16 @@
+{
+  "name": "@deciphraze/persistance",
+  "version": "1.0.0",
+  "description": "Persistance layer for Deciphraze",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "verify": "node ./scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
+    "exportcase": "^1.2.5",
+    "tasuku": "^2.3.0",
+    "typescript": "^5.9.3"
+  }
+}

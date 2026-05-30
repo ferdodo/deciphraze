@@ -1,0 +1,67 @@
+import { describe, it, expect } from "vitest";
+import { calculateMaxStreak } from "./calculateMaxStreak";
+import { calculateCurrentStreak } from "./calculateCurrentStreak";
+import { iterateStreaks } from "./iterateStreaks";
+import type { GameHistory } from "@deciphraze/core";
+
+describe("calculateMaxStreak", () => {
+	let gameHistory: GameHistory;
+
+	it("should return 1 for non-consecutive sessions", () => {
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-17": ["B"]
+		};
+		expect(calculateMaxStreak(gameHistory)).toBe(1);
+	});
+
+});
+
+describe("calculateCurrentStreak", () => {
+	let gameHistory: GameHistory;
+
+	it("should return 1 for single session on the same day", () => {
+		gameHistory = { "2024-01-15": ["A"] };
+		expect(calculateCurrentStreak(gameHistory, "2024-01-15")).toBe(1);
+	});
+
+	it("should return 2 for 2 consecutive days when current day is the last", () => {
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-16": ["B"]
+		};
+		expect(calculateCurrentStreak(gameHistory, "2024-01-16")).toBe(2);
+	});
+
+	it("should return 0 when last session is more than 1 day ago", () => {
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-16": ["B"]
+		};
+		expect(calculateCurrentStreak(gameHistory, "2024-01-18")).toBe(0);
+	});
+
+	it("should return streak when last session is yesterday", () => {
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-16": ["B"]
+		};
+		expect(calculateCurrentStreak(gameHistory, "2024-01-17")).toBe(2);
+	});
+
+});
+
+describe("iterateStreaks", () => {
+	let gameHistory: GameHistory;
+
+
+	it("should yield 1,1 for 2 non-consecutive days", () => {
+		gameHistory = {
+			"2024-01-15": ["A"],
+			"2024-01-17": ["B"]
+		};
+		const streaks = [...iterateStreaks(gameHistory)];
+		expect(streaks).toEqual([1, 1]);
+	});
+
+});

@@ -1,0 +1,24 @@
+{
+	"name": "@deciphraze/ui",
+	"version": "1.0.0",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "vite build && tsc --emitDeclarationOnly --noCheck",
+		"verify": "node ./scripts/verify.mjs"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.13",
+		"@types/react": "^19.2.10",
+		"@types/react-dom": "^19.2.3",
+		"exportcase": "^1.2.5",
+		"react": "^19.2.4",
+		"react-dom": "^19.2.4",
+		"tasuku": "^2.0.7",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.9"
+	},
+	"dependencies": {
+		"crumbs-design-system": "^1.8.0"
+	}
+}

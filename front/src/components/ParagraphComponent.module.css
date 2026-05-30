@@ -1,0 +1,20 @@
+.word {
+	display: inline-block;
+	margin-right: 0.9rem;
+}
+
+@keyframes skeletonPulse {
+	0%, 100% { background: rgba(128, 128, 128, 0.25); }
+	50% { background: rgba(128, 128, 128, 0.15); }
+}
+
+.skeleton {
+	display: inline-block;
+	margin-right: 0.9rem;
+	height: 21px;
+	margin-bottom: 12px;
+	border-radius: 3px;
+	background: rgba(128, 128, 128, 0.25);
+	vertical-align: middle;
+	animation: skeletonPulse 2.2s ease-in-out infinite;
+}

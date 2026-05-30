@@ -1,0 +1,62 @@
+services:
+  ui:
+    build:
+      context: ui
+
+  browser:
+    build: browser
+
+  persistance:
+    build: persistance
+
+  core:
+    build:
+      context: core
+      additional_contexts:
+        deciphraze-git: service:git
+
+  git:
+    build:
+      context: .
+      dockerfile: git.Dockerfile
+
+  front:
+    build:
+      context: front
+      additional_contexts:
+        deciphraze-ui: service:ui
+        deciphraze-browser: service:browser
+        deciphraze-core: service:core
+        deciphraze-persistance: service:persistance
+        deciphraze-git: service:git
+    develop:
+      watch:
+        - action: sync
+          path: ./front/src
+          target: /deciphraze/front/src
+        - action: sync
+          path: ./front/index.html
+          target: /deciphraze/front/index.html
+        - action: rebuild
+          path: ./front/package.json
+        - action: rebuild
+          path: ./ui
+        - action: rebuild
+          path: ./browser
+        - action: rebuild
+          path: ./persistance
+    ports:
+      - "1111:1111"
+
+  stryker:
+    build:
+      context: front
+      additional_contexts:
+        deciphraze-ui: service:ui
+        deciphraze-browser: service:browser
+        deciphraze-core: service:core
+        deciphraze-persistance: service:persistance
+        deciphraze-git: service:git
+      dockerfile: stryker.Dockerfile
+    ports:
+      - "1112:1112"

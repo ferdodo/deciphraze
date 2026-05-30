@@ -1,0 +1,54 @@
+import { DeciPlusMenu } from "@deciphraze/ui";
+import { isDev } from "../utils/isDev";
+import type { PlusView } from "../types/PlusView";
+
+interface PlusMenuComponentProps {
+	onViewChange: (view: PlusView) => void;
+}
+
+import type React from "react";
+
+export function PlusMenuComponent({
+	onViewChange,
+}: PlusMenuComponentProps): React.JSX.Element {
+	const handleParametersClick = (): void => {
+		onViewChange("settings");
+	};
+
+	const handleStatisticsClick = (): void => {
+		onViewChange("statistics");
+	};
+
+	const handleYesterdayClick = (): void => {
+		onViewChange("yesterday");
+	};
+
+	const handleDevelopmentClick = (): void => {
+		onViewChange("development");
+	};
+
+	const handleInstallClick = (): void => {
+		onViewChange("install");
+	};
+
+	const handleAboutClick = (): void => {
+		onViewChange("about");
+	};
+
+	const handleChallengeClick = (): void => {
+		onViewChange("challenge");
+	};
+
+	return (
+		<DeciPlusMenu
+			onParametersClick={handleParametersClick}
+			onStatisticsClick={handleStatisticsClick}
+			onYesterdayClick={handleYesterdayClick}
+			onDevelopmentClick={handleDevelopmentClick}
+			onInstallClick={handleInstallClick}
+			onAboutClick={handleAboutClick}
+			onChallengeClick={handleChallengeClick}
+			showDevelopmentPanelEntry={isDev()}
+		/>
+	);
+}

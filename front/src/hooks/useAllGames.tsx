@@ -1,0 +1,18 @@
+import { useState, useEffect } from "react";
+import { useGameContext } from "./useGameContext";
+import type { AllGames } from "@deciphraze/core";
+
+export const useAllGames = (): AllGames => {
+	const { allGamesRepository } = useGameContext();
+	const [allGames, setAllGames] = useState<AllGames>(() => allGamesRepository.get());
+
+	useEffect(() => {
+		const subscription = allGamesRepository.subscribe().subscribe(() => {
+			setAllGames(allGamesRepository.get());
+		});
+
+		return () => subscription.unsubscribe();
+	}, [allGamesRepository]);
+
+	return allGames;
+};

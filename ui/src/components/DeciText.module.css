@@ -1,0 +1,70 @@
+@font-face {
+	font-family: "Yrsa";
+	src: url("../assets/Yrsa/static/Yrsa-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Yrsa";
+	src: url("../assets/Yrsa/static/Yrsa-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Neuton";
+	src: url("../assets/Neuton/Neuton-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "GlipervelzOrigy";
+	src: url("../assets/GlipervelzOrigy/GlipervelzOrigy.ttf") format("truetype");
+}
+
+.text {
+	margin: 0;
+	font-size: calc(0.85rem * var(--deci-ui-text-size, 1));
+	line-height: 1.4;
+	font-family: "Yrsa", serif;
+}
+
+/* Variants utilisés */
+.text_muted {
+	font-weight: 400;
+	color: #888;
+}
+
+.text_sectionTitle {
+	font-size: calc(1.1rem * var(--deci-ui-text-size, 1));
+	font-weight: 500;
+	letter-spacing: 0.025rem;
+	font-family: "Neuton", serif;
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.text_command {
+	color: black;
+}
+
+.text_primary {
+	font-weight: 500;
+	color: #b8860b;
+	font-size: calc(1.1rem * var(--deci-ui-text-size, 1));
+}
+
+
+
+
+@media screen and (min-width: 800px) {
+	.text {
+		/*font-size: 1.4rem;*/
+	}
+
+	.text_sectionTitle {
+		/*font-size: 1.7rem;*/
+	}
+}

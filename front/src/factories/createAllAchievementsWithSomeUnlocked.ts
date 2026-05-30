@@ -1,0 +1,48 @@
+import type { AllAchievements } from "@deciphraze/core";
+import { defaultAchievements } from "../constants/defaultAchievements";
+
+export function createAllAchievementsWithSomeUnlocked(): AllAchievements {
+	return {
+		computedAtDate: "2023-01-01",
+		achievements: {
+			firstGame: {
+				...defaultAchievements.achievements.firstGame,
+				unlocked: true
+			},
+			streak5Days: {
+				...defaultAchievements.achievements.streak5Days,
+				unlocked: false,
+				progress: { current: 3, target: 3 }
+			},
+			firstLetterA: {
+				...defaultAchievements.achievements.firstLetterA,
+				unlocked: true
+			},
+			firstLetterE: {
+				...defaultAchievements.achievements.firstLetterE,
+				unlocked: false
+			},
+			firstLetterY: {
+				...defaultAchievements.achievements.firstLetterY,
+				unlocked: true
+			},
+			firstLetterQ: {
+				...defaultAchievements.achievements.firstLetterQ,
+				unlocked: false
+			},
+			words1000: {
+				...defaultAchievements.achievements.words1000,
+				unlocked: false,
+				progress: { current: 250, target: 500 }
+			},
+			paleographer: {
+				...defaultAchievements.achievements.paleographer,
+				unlocked: false
+			},
+			doublet: {
+				...defaultAchievements.achievements.doublet,
+				unlocked: false
+			}
+		},
+	};
+}
