@@ -52,9 +52,7 @@ export function DeciChallengeMenu({
 				<div className={styles.lockedMessage}>
 					<h2><img src={padlock} alt="Locked" className={styles.lockedTitle} /> Challenge</h2>
 					<p>
-						Débloquez tous les succès pour accéder au Challenge Mode. Une fois
-						le Platine obtenu, vous pourrez trouver des mots de 7 lettres en
-						progressant niveau après niveau.
+						Débloquez tous les succès pour accéder au Challenge.
 					</p>
 				</div>
 			</div>
