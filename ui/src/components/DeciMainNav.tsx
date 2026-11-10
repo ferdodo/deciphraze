@@ -1,6 +1,8 @@
 import type React from "react";
 import styles from "./DeciMainNav.module.css";
 import { DeciText } from "./DeciText";
+import { DeciScrollHint } from "./DeciScrollHint";
+import { DeciAssociationHint } from "./DeciAssociationHint";
 
 type AssociationEntry = {
 	letter: string;
@@ -27,6 +29,10 @@ interface DeciMainNavProps {
 	isTodayGame: boolean;
 	onPlayTodayGame: () => void;
 	onAbandon: () => void;
+	scrollHintVisible: boolean;
+	scrollHintEndRef: React.RefObject<HTMLDivElement | null>;
+	onScrollHintClick: () => void;
+	associationHintVisible: boolean;
 }
 
 export function DeciMainNav({
@@ -46,6 +52,10 @@ export function DeciMainNav({
 	isTodayGame,
 	onPlayTodayGame,
 	onAbandon,
+	scrollHintVisible,
+	scrollHintEndRef,
+	onScrollHintClick,
+	associationHintVisible,
 }: DeciMainNavProps): React.JSX.Element {
 	const associationHistoryWithKeys = associationHistory.map((entry, index) => ({
 		key: `${entry.letter}-${entry.symbol}-${index}`,
@@ -103,15 +113,17 @@ export function DeciMainNav({
 							<br />
 							<br />
 
-							<div>
-								{Alphabet}
-							</div>
+							<DeciAssociationHint visible={associationHintVisible}>
+								<div>
+									{Alphabet}
+								</div>
 
-							<br />
+								<br />
 
-							<div>
-								{Symbols}
-							</div>
+								<div>
+									{Symbols}
+								</div>
+							</DeciAssociationHint>
 
 							{!isTodayGame && (
 								<>
@@ -164,6 +176,12 @@ export function DeciMainNav({
 							</crumbs-p>
 						</div>
 					)}
+
+					<DeciScrollHint
+						visible={scrollHintVisible}
+						endRef={scrollHintEndRef}
+						onClick={onScrollHintClick}
+					/>
 				</crumbs-panel>
 
 				<div slot="title-2" style={{ display: "inline-block", position: "relative", lineHeight: "0" }}>

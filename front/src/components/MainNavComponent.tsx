@@ -19,6 +19,8 @@ import { playTodayGame } from "../usecases/playTodayGame";
 import { abandonGame } from "../usecases/abandonGame";
 import { useAssociationHistory } from "../hooks/useAssociationHistory";
 import { useGameDay } from "../hooks/useGameDay";
+import { useScrollHint } from "../hooks/useScrollHint";
+import { useAssociationHint } from "../hooks/useAssociationHint";
 import type { Settings } from "@deciphraze/core";
 
 import type React from "react";
@@ -65,6 +67,8 @@ export function MainNavComponent(): React.JSX.Element {
 	);
 	const associationHistory = useAssociationHistory();
 	const gameDay = useGameDay();
+	const { scrollHintVisible, scrollHintEndRef, onScrollHintClick } = useScrollHint();
+	const associationHintVisible = useAssociationHint(associationHistory);
 
 	useEffect(() => {
 		const subscription = settingsRepository.settings$.subscribe((settings: Settings) => {
@@ -95,6 +99,10 @@ export function MainNavComponent(): React.JSX.Element {
 			isTodayGame={isTodayGame}
 			onPlayTodayGame={handlePlayTodayGame}
 			onAbandon={handleAbandonGame}
+			scrollHintVisible={scrollHintVisible}
+			scrollHintEndRef={scrollHintEndRef}
+			onScrollHintClick={onScrollHintClick}
+			associationHintVisible={associationHintVisible}
 		/>
 	);
 }

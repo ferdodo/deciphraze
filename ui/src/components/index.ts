@@ -19,3 +19,5 @@ export * from "./DeciChallengeMenu";
 export * from "./DeciLetterDisplay";
 export * from "./DeciLetterItem";
 export * from "./DeciVirtualKeyboard";
+export * from "./DeciScrollHint";
+export * from "./DeciAssociationHint";

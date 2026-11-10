@@ -1,0 +1,51 @@
+@keyframes scrollHintAppear {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes scrollHintBounce {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(0.25rem); }
+}
+
+/* Ancre collée en bas de la zone visible, sans occuper de place dans le contenu */
+.anchor {
+	position: sticky;
+	bottom: 0rem;
+	height: 0;
+	display: flex;
+	justify-content: center;
+	z-index: 1;
+}
+
+.button {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 3rem;
+	height: 3rem;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.85);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+	color: black;
+	cursor: pointer;
+	animation:
+		scrollHintAppear 0.5s ease-out 0.8s both,
+		scrollHintBounce 1.6s ease-in-out 1.3s infinite;
+}
+
+.chevron {
+	display: inline-block;
+	transform: rotate(90deg);
+	font-family: sans-serif;
+	font-size: 1.8rem;
+	line-height: 1;
+}
+
+.end {
+	height: 1px;
+}
